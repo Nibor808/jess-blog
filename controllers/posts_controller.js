@@ -32,7 +32,7 @@ module.exports = PostController = {
       'Posts.title as postTitle',
       'Posts.content as postContent')
       .then(data => {
-        if(!data.length > 0) {
+        if(!data.length) {
           res.status(422).send({ error: 'Post does not exist' });
           return;
         }else {
