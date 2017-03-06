@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const postRoutes = require('./routes/post_routes');
 const userRoutes = require('./routes/user_routes');
+const passport = require('passport');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(morgan('dev'));
 app.get('/', (req, res) => {
   res.send({ post: 'data' });
 });
+
 postRoutes(app);
 userRoutes(app);
 

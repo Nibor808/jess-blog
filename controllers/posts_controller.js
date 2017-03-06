@@ -30,7 +30,8 @@ module.exports = PostController = {
     .select(
       'Posts.id as postId',
       'Posts.title as postTitle',
-      'Posts.content as postContent')
+      'Posts.content as postContent',
+      'Posts.createdAt as postDate')
       .then(data => {
         if(!data.length) {
           res.status(422).send({ error: 'Post does not exist' });
@@ -40,6 +41,7 @@ module.exports = PostController = {
             post.postId = item.postId;
             post.postTitle = item.postTitle;
             post.postContent = item.postContent;
+            post.createdAt = item.postDate;
           });
 
           // get comments
@@ -117,7 +119,7 @@ module.exports = PostController = {
       });
   },
 
-  //delete a post and it's comments
+  // delete a post and it's comments
   deletePost(req, res) {
     // first delete comments
     knex('Comments').where('post_id', req.params.id).del()
@@ -132,5 +134,35 @@ module.exports = PostController = {
           res.send({ ok: 'Post deleted.' });
         }
       });
+  },
+
+  // save comments
+  saveComment(req, res) {
+    if(!req.body.content) {
+      res.status(422).send({ error: 'You must have some content in your comment.' });
+    }
+
+    // for testing remove later
+    if(!req.body.post_id || !req.body.user_id) {
+      res.send({ error: 'Missing data'});
+    }
+
+    knex('Comments').insert({
+      post_id: req.body.post_id,
+      user_id: req.body.user_id,
+      title: req.body.title,
+      content: req.body.content,
+      createdAt: new Date()
+    })
+    .then(data => {
+      if(!data[0] > 0) {
+        res.status(422).send({ error: 'Comment was not saved.' });
+      }else {
+        res.send({ ok: 'Comment saved.' });
+      }
+    })
+    .catch(err => {
+      res.status(422).send({ error: 'Could not save the comment.'});
+    })
   }
 };
