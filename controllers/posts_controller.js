@@ -13,8 +13,7 @@ module.exports = PostController = {
         }
       })
       .catch(err => {
-        console.log(err);
-        res.status(422).send({ error: 'Could not get posts' });
+        res.status(422).send({ error: err });
       });
   },
 
@@ -31,6 +30,8 @@ module.exports = PostController = {
       'Posts.id as postId',
       'Posts.title as postTitle',
       'Posts.content as postContent',
+      'Posts.category as postCategory',
+      'Posts.keywords as postKeywords',
       'Posts.createdAt as postDate')
       .then(data => {
         if(!data.length) {
@@ -41,6 +42,8 @@ module.exports = PostController = {
             post.postId = item.postId;
             post.postTitle = item.postTitle;
             post.postContent = item.postContent;
+            post.postCategory = item.postCategory;
+            post.keywords = item.postKeywords;
             post.createdAt = item.postDate;
           });
 
@@ -50,8 +53,9 @@ module.exports = PostController = {
           .select(
             'Comments.title as commentTitle',
             'Comments.content as commentContent',
+            'Comments.createdAt as commentCreatedAt',
             'Users.username as username'
-          )
+          ).orderBy('createdAt', 'desc')
           .then(data => {
             data.forEach((item) => {
               comments.push(item);
@@ -60,14 +64,12 @@ module.exports = PostController = {
             res.send({ ok: post });
           })
           .catch(err=> {
-            console.log(err);
-            res.status(422).send({ error: 'Could not get comments or users' });
+            res.status(422).send({ error: err });
           });
         }
       })
       .catch(err => {
-        console.log(err);
-        res.status(422).send({ error: 'Could not get post' });
+        res.status(422).send({ error: err });
       });
   },
 
@@ -84,7 +86,6 @@ module.exports = PostController = {
       createdAt: new Date()
     })
       .then(data => {
-        console.log(data)
         if(!data[0] > 0) {
           res.status(422).send({ error: 'Post was not saved' });
           return;
@@ -93,8 +94,7 @@ module.exports = PostController = {
         }
       })
       .catch(err => {
-        console.log(err);
-        res.status(422).send({ error: 'Post was not saved' });
+        res.status(422).send({ error: err });
         return;
       })
   },
@@ -111,10 +111,14 @@ module.exports = PostController = {
       content: req.body.content
     })
       .then(data => {
-        res.send({ ok: 'Post updated' });
+        if (!data == 1) {
+          res.status(422).send({ error: 'Posts does not exist.' });
+        }else {
+          res.send({ ok: 'Post updated' });
+        }
       })
       .catch(err => {
-        res.status(422).send({ error: 'Post could not be updated' });
+        res.status(422).send({ error: err });
         return;
       });
   },
@@ -133,7 +137,10 @@ module.exports = PostController = {
         }else {
           res.send({ ok: 'Post deleted.' });
         }
-      });
+      })
+      .catch(err => {
+        res.status(422).send({ error: err });
+      })
   },
 
   // save comments
@@ -142,7 +149,7 @@ module.exports = PostController = {
       res.status(422).send({ error: 'You must have some content in your comment.' });
     }
 
-    // for testing remove later
+    // for testing remove if block later
     if(!req.body.post_id || !req.body.user_id) {
       res.send({ error: 'Missing data'});
     }
@@ -162,7 +169,22 @@ module.exports = PostController = {
       }
     })
     .catch(err => {
-      res.status(422).send({ error: 'Could not save the comment.'});
+      res.status(422).send({ error: err });
     })
+  },
+
+  // delete a comment
+  deleteComment(id) {
+    knex('Comments').where('id', req.params.id).del()
+      .then(data => {
+        if(!data == 1) {
+          res.status(422).send({ error: 'Comment does not exist.' });
+        }else {
+          res.send({ ok: 'Comment deleted.' });
+        }
+      })
+      .catch(err => {
+        res.status(422).send({ error: err });
+      });
   }
 };

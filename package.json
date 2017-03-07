@@ -4,7 +4,6 @@
   "description": "Jess' Blog",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "latestmig": "knex migrate:latest --knexfile config/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile config/knexfile.js",
     "dev": "npm run latestmig && nodemon app.js"

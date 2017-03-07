@@ -13,6 +13,8 @@ exports.seed = function(knex) {
           ipsum dolor sit amet, consectetur adipisicing elit. Sunt corporis mollitia, magnam, quod aperiam
           sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
           facere? Maiores, debitis.`,
+          category: 'Rocking Things',
+          keywords: 'rocking, thing',
           createdAt: new Date()
         },
         {
@@ -23,6 +25,8 @@ exports.seed = function(knex) {
           ipsum dolor sit amet, consectetur adipisicing elit. Sunt corporis mollitia, magnam, quod aperiam
           sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
           facere? Maiores, debitis.`,
+          category: 'Not Great Things',
+          keywords: 'not, great, thing',
           createdAt: new Date()
         },
         {
@@ -33,6 +37,8 @@ exports.seed = function(knex) {
           ipsum dolor sit amet, consectetur adipisicing elit. Sunt corporis mollitia, magnam, quod aperiam
           sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
           facere? Maiores, debitis.`,
+          category: 'Mediocre Things',
+          keywords: 'mediocre, thing',
           createdAt: new Date()
         },
       ]);

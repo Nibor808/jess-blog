@@ -23,7 +23,7 @@ module.exports = UsersController = {
         }
       })
       .catch(err => {
-        res.status(422).send({ error: 'Could not get users.'});
+        res.status(422).send({ error: err });
       });
   },
 
@@ -39,7 +39,7 @@ module.exports = UsersController = {
         }
       })
       .catch(err => {
-        res.status(422).send({ error: 'Could not get user' });
+        res.status(422).send({ error: err });
       });
   },
 
@@ -100,7 +100,7 @@ module.exports = UsersController = {
         }
       })
       .catch(err => {
-        res.status(422).send({ error: 'User not deleted.' });
+        res.status(422).send({ error: err });
       });
   },
 
@@ -120,20 +120,20 @@ module.exports = UsersController = {
     }
 
     sendMail(mailData)
-      .then(() => {
+      .then((result) => {
         knex('Users').where('email', req.body.email).update({
           passResetToken
         })
-        .then(data => {
-          if (!data == 1) {
-            res.status(422).send({ error: 'User with this email not found.' });
-          }else {
-            res.send({ ok: 'Email sent.' });
-          }
-        })
+          .then(data => {
+            if (!data == 1) {
+              res.status(422).send({ error: 'User with this email not found.' });
+            }else {
+              res.send({ ok: 'Email sent.' });
+            }
+          })
       })
-      .catch(err => {
-        res.status(422).send({ error: 'Email could not be sent. Check that the info provided was correct.' });
+      .catch((err) => {
+        res.status(422).send({ error: err });
       });
   },
 
