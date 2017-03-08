@@ -4,9 +4,9 @@
   "description": "Jess' Blog",
   "main": "app.js",
   "scripts": {
-    "latestmig": "knex migrate:latest --knexfile config/knexfile.js",
+    "latest_migration": "knex migrate:latest --knexfile config/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile config/knexfile.js",
-    "dev": "npm run latestmig && nodemon app.js"
+    "dev": "npm run latest_migration && nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "express": "^4.14.1",
     "jwt-simple": "^0.5.1",
     "knex": "^0.12.7",
+    "moment": "^2.17.1",
     "mysql": "^2.13.0",
     "nodemailer": "^3.1.4",
     "passport": "^0.3.2",

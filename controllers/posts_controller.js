@@ -1,4 +1,5 @@
 const knex = require('../utils/db');
+const moment = require('moment');
 
 module.exports = PostController = {
 
@@ -9,6 +10,9 @@ module.exports = PostController = {
         if(!data.length) {
           res.status(422).send({ error: 'No posts to get' });
         }else {
+          data.forEach((item) => {
+            item.createdAt = moment(item.createdAt).toString();
+          });
           res.send({ ok: data });
         }
       })
@@ -17,12 +21,14 @@ module.exports = PostController = {
       });
   },
 
-  // get a post and it's corresponding comments as an object
+  // get a post and it's corresponding comments and images as an object
   // comments added as an array
+  // images added as an array
   // return the post object
   getPost(req, res) {
     const post = {};
     const comments = [];
+    const images = [];
 
     //get post
     knex('Posts').where('Posts.id', req.params.id)
@@ -44,7 +50,7 @@ module.exports = PostController = {
             post.postContent = item.postContent;
             post.postCategory = item.postCategory;
             post.keywords = item.postKeywords;
-            post.createdAt = item.postDate;
+            post.createdAt = moment(item.postDate).toString();
           });
 
           // get comments
@@ -55,13 +61,26 @@ module.exports = PostController = {
             'Comments.content as commentContent',
             'Comments.createdAt as commentCreatedAt',
             'Users.username as username'
-          ).orderBy('createdAt', 'desc')
+          ).orderBy('createdAt', 'asc')
           .then(data => {
             data.forEach((item) => {
+              item.commentCreatedAt = moment(item.commentCreatedAt).toString();
               comments.push(item);
             });
             post.comments = comments;
-            res.send({ ok: post });
+
+            // get images
+            knex('Images').where('post_id', req.params.id).select()
+              .then(data => {
+                data.forEach((item) => {
+                  images.push(item);
+                });
+                post.images = images;
+                res.send({ ok: post });
+              })
+              .catch(err => {
+                res.status(422).send({ error: err });
+              });
           })
           .catch(err=> {
             res.status(422).send({ error: err });
@@ -83,18 +102,35 @@ module.exports = PostController = {
     knex('Posts').insert({
       title: req.body.title,
       content: req.body.content,
-      createdAt: new Date()
+      category: req.body.category,
+      keywords: req.body.keywords,
+      createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
     })
       .then(data => {
         if(!data[0] > 0) {
           res.status(422).send({ error: 'Post was not saved' });
           return;
         }else {
-          res.send({ ok: 'Post was saved' });
+          knex('Images').insert({
+            post_id: data[0],
+            file: req.body.imgFile
+          })
+          .then(data => {
+            if(!data[0] > 0) {
+              res.status(422).send({ error: 'Images could not be saved.' });
+              return;
+            }else {
+              res.send({ ok: 'Post was saved' });
+            }
+          })
+          .catch(err => {
+            res.status(422).send({ Imgerror: err });
+            return;
+          });
         }
       })
       .catch(err => {
-        res.status(422).send({ error: err });
+        res.status(422).send({ Posterror: err });
         return;
       })
   },
@@ -123,10 +159,12 @@ module.exports = PostController = {
       });
   },
 
-  // delete a post and it's comments
+  // delete a post, it's comments and images
   deletePost(req, res) {
     // first delete comments
-    knex('Comments').where('post_id', req.params.id).del()
+    knex('Comments').where('post_id', req.params.id).del();
+    // then delete images
+    knex('Images').where('post_id', req.params.id).del();
 
     // then delete post
     knex('Posts').where('id', req.params.id).del()
@@ -159,7 +197,7 @@ module.exports = PostController = {
       user_id: req.body.user_id,
       title: req.body.title,
       content: req.body.content,
-      createdAt: new Date()
+      createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
     })
     .then(data => {
       if(!data[0] > 0) {

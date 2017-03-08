@@ -55,6 +55,7 @@ module.exports = UsersController = {
       return;
     }
 
+    // hash password before saving
     bcrypt.hash(req.body.password, null, null, (err, hash) => {
         if(err) {
           return err;
@@ -83,7 +84,7 @@ module.exports = UsersController = {
 
   // sign in user
   signinUser(req, res) {
-    res.send({ token: tokenForUser(req.userId) });
+    res.send({ token: tokenForUser(req.user[0].id) });
   },
 
   // delete user
