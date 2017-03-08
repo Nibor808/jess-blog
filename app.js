@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const postRoutes = require('./routes/post_routes');
 const userRoutes = require('./routes/user_routes');
+const reviewRoutes = require('./routes/review_routes');
 const passport = require('passport');
 
 const app = express();
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 
 postRoutes(app);
 userRoutes(app);
+reviewRoutes(app);
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);

@@ -124,27 +124,25 @@ module.exports = PostController = {
             }
           })
           .catch(err => {
-            res.status(422).send({ Imgerror: err });
+            res.status(422).send({ error: err });
             return;
           });
         }
       })
       .catch(err => {
-        res.status(422).send({ Posterror: err });
+        res.status(422).send({ error: err });
         return;
       })
   },
 
   //update a post
   updatePost(req, res) {
-    if(!req.body.title || !req.body.content) {
-      res.status(422).send({ error: 'All posts require a title and some content' });
-      return;
-    }
 
     knex('Posts').where('id', req.params.id).update({
       title: req.body.title,
-      content: req.body.content
+      content: req.body.content,
+      category: req.body.category,
+      keywords: req.body.keywords
     })
       .then(data => {
         if (!data == 1) {

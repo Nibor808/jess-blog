@@ -74,6 +74,28 @@ function seedPosts() {
     });
 };
 
+const spec_data = JSON.stringify({
+            "Screen_Size": "27 inches",
+            "Resolution": "3840 x 2160",
+            "Aspect_Ratio": "16:9",
+            "Video_Inputs": "HDMI, MHL, DisplayPort, mini DisplayPort",
+            "USB_Ports": "5",
+            "Screen_Brightness": "cd/m^2 cd/m^2",
+            "Pixel_Response_Time": "6 milliseconds",
+            "Rated_Contrast_Ratio": "1000:1",
+            "Pixel_Refresh_Rate": "60Hz",
+            "Built_In_Speakers": "Yes",
+            "Stand_Height": "Yes",
+            "Stand_Tilt": "Yes",
+            "Stand_Swivel": "Yes",
+            "Weight": "25.7 lb",
+            "Height": "24.2 inches",
+            "Width": "28.9 inches",
+            "Depth": "9.4 inches",
+            "Warranty_Parts": "36 months",
+            "Warranty_Labor": "36 months"
+          });
+
 function seedReviews() {
   console.log('Seeding reviews...');
   return knex('Reviews').del()
@@ -89,6 +111,9 @@ function seedReviews() {
           facere? Maiores, debitis.`,
           category: 'monitors',
           keywords: 'monitor',
+          pros: 'inexpensive, good resolution, nice view angles',
+          cons: 'wobbly base, color saturation lacking, controls hard to work',
+          specs: spec_data,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
@@ -101,6 +126,9 @@ function seedReviews() {
           facere? Maiores, debitis.`,
           category: 'monitors',
           keywords: 'monitor',
+          pros: 'just awesome, great resolution, perfect view angles',
+          cons: 'wobbly base, controls are annoying',
+          specs: spec_data,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         }
       ]);
