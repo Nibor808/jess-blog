@@ -132,7 +132,7 @@ module.exports = PostController = {
       .catch(err => {
         res.status(422).send({ error: err });
         return;
-      })
+      });
   },
 
   //update a post
@@ -176,7 +176,7 @@ module.exports = PostController = {
       })
       .catch(err => {
         res.status(422).send({ error: err });
-      })
+      });
   },
 
   // save comments
@@ -206,11 +206,11 @@ module.exports = PostController = {
     })
     .catch(err => {
       res.status(422).send({ error: err });
-    })
+    });
   },
 
   // delete a comment
-  deleteComment(id) {
+  deleteComment(req, res) {
     knex('Comments').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {

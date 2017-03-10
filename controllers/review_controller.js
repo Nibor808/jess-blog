@@ -140,7 +140,7 @@ module.exports = ReviewController = {
       .catch(err => {
         res.status(422).send({ error: err });
         return;
-      })
+      });
   },
 
   //update a review
@@ -186,7 +186,7 @@ module.exports = ReviewController = {
       })
       .catch(err => {
         res.status(422).send({ error: err });
-      })
+      });
   },
 
   // save comments
@@ -216,11 +216,11 @@ module.exports = ReviewController = {
     })
     .catch(err => {
       res.status(422).send({ error: err });
-    })
+    });
   },
 
   // delete a comment
-  deleteComment(id) {
+  deleteComment(req, res) {
     knex('Comments').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {
@@ -233,4 +233,4 @@ module.exports = ReviewController = {
         res.status(422).send({ error: err });
       });
   }
-}
+};

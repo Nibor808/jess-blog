@@ -11,4 +11,4 @@ module.exports = function(app) {
   app.post('/deletepost/:id', PostsController.deletePost);
   app.post('/savecomment', requireAuth, PostsController.saveComment);
   app.post('/deletecomment/:id', PostsController.deleteComment);
-}
+};

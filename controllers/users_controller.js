@@ -46,7 +46,7 @@ module.exports = UsersController = {
   // sign up new user
   signupUser(req, res) {
     if(!req.body.username || !req.body.email || !req.body.password || !req.body.passConfirm) {
-      res.status(422).send({ error: 'Please fill out all fields.' })
+      res.status(422).send({ error: 'Please fill out all fields.' });
       return;
     }
 
@@ -57,29 +57,29 @@ module.exports = UsersController = {
 
     // hash password before saving
     bcrypt.hash(req.body.password, null, null, (err, hash) => {
-        if(err) {
-          return err;
-        }else {
-          req.body.password = hash;
+      if(err) {
+        return err;
+      }else {
+        req.body.password = hash;
 
-          knex('Users').insert({
-            email: req.body.email,
-            password: req.body.password,
-            username: req.body.username
-          })
-          .then(data => {
-            if(!data[0] > 0) {
-              res.status(422).send({ error: 'User was not saved.' });
-              return;
-            }else {
-              res.send({ token: tokenForUser(data[0]) });
-            }
-          })
-          .catch(err => {
-            res.status(422).send({ error: 'Email or Username already in use.' });
-          })
-        }
-      })
+        knex('Users').insert({
+          email: req.body.email,
+          password: req.body.password,
+          username: req.body.username
+        })
+        .then(data => {
+          if(!data[0] > 0) {
+            res.status(422).send({ error: 'User was not saved.' });
+            return;
+          }else {
+            res.send({ token: tokenForUser(data[0]) });
+          }
+        })
+        .catch(() => {
+          res.status(422).send({ error: 'Email or Username already in use.' });
+        });
+      }
+    });
   },
 
   // sign in user
@@ -118,10 +118,10 @@ module.exports = UsersController = {
       to: req.body.email,
       subject: 'Password Reset',
       html: `Follow this link to <a href=${ROOT_URL}/passreset/${passResetToken}/${req.body.email}>reset your password</a>.`
-    }
+    };
 
     sendMail(mailData)
-      .then((result) => {
+      .then(() => {
         knex('Users').where('email', req.body.email).update({
           passResetToken
         })
@@ -131,7 +131,7 @@ module.exports = UsersController = {
             }else {
               res.send({ ok: 'Email sent.' });
             }
-          })
+          });
       })
       .catch((err) => {
         res.status(422).send({ error: err });
@@ -148,7 +148,7 @@ module.exports = UsersController = {
         }else if (req.params.token !== data.passResetToken){
           res.status(422).send({ error: 'Link expired.' });
         }else {
-          res.send({ ok: 'Redirect.' })
+          res.send({ ok: 'Redirect.' });
           knex('Users').where('email', req.params.user).update('passResetToken', null);
         }
       });

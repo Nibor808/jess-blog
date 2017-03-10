@@ -11,4 +11,4 @@ module.exports = function(app) {
   app.post('/deletereview/:id', ReviewController.deleteReview);
   app.post('/savecomment', requireAuth, ReviewController.saveComment);
   app.post('/deletecomment/:id', ReviewController.deleteComment);
-}
+};
