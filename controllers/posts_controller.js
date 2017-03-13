@@ -57,6 +57,7 @@ module.exports = PostController = {
           knex('Comments').where('Comments.post_id', req.params.id)
           .join('Users', 'Comments.user_id', '=', 'Users.id')
           .select(
+            'Comments.id as commentId',
             'Comments.title as commentTitle',
             'Comments.content as commentContent',
             'Comments.createdAt as commentCreatedAt',

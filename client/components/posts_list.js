@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getAllPosts } from '../actions/index';
+import { getAllPosts } from '../actions/post_actions';
+import { Link } from 'react-router';
+import { formatDate } from '../../utils/date_format';
 
 class PostsList extends Component {
-    static propTypes = {
-    all: PropTypes.array,
+  static propTypes = {
+    allPosts: PropTypes.array,
     getAllPosts: PropTypes.func
   }
 
@@ -13,31 +15,31 @@ class PostsList extends Component {
   }
 
   renderPosts(postData) {
-    const title = postData.title;
-
+    const content = postData.content.substring(0, 250);
+    const postDate = formatDate(postData.createdAt);
     return (
-      <li
-      key={postData.id}
-      className='list-group-item'>
-      {title}
-      </li>
+      <div
+        key={postData.id}
+        className='post_item'>
+        <Link className='posts_link' to={`post/${postData.id}`}><h2>{postData.title}</h2></Link>
+        <small>{postDate}</small>
+        <p className='post_content'>{content}...</p>
+      </div>
     )
   }
 
   render() {
     return (
-      <ul
-      className='list-group'>
-      <li className='list-group-item'><h2>Recent Posts</h2></li>
-      {this.props.all.map(this.renderPosts)}
-      </ul>
+      <div className='col-md-8'>
+        {this.props.allPosts.map(this.renderPosts)}
+      </div>
     );
   }
 }
 
 function mapStateToProps({ posts }) {
   return {
-    all: posts.all
+    allPosts: posts.allPosts
   };
 }
 

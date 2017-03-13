@@ -49,13 +49,13 @@ module.exports = ReviewController = {
         }else {
           data.map(item => {
             review.reviewId = item.reviewId;
-            review.title = item.reviewTitle;
-            review.content = item.reviewContent;
+            review.reviewTitle = item.reviewTitle;
+            review.reviewContent = item.reviewContent;
             review.pros = item.reviewPros;
             review.cons = item.reviewCons;
             review.category = item.reviewCategory;
             review.keywords = item.reviewKeywords;
-            review.specs = item.reviewSpecs;
+            review.specs = JSON.parse(item.reviewSpecs);
             review.createdAt = moment(item.reviewDate).toString();
           });
 
@@ -63,6 +63,7 @@ module.exports = ReviewController = {
           knex('Comments').where('Comments.review_id', req.params.id)
           .join('Users', 'Comments.user_id', '=', 'Users.id')
           .select(
+            'Comments.id as commentId',
             'Comments.title as commentTitle',
             'Comments.content as commentContent',
             'Comments.createdAt as commentCreatedAt',

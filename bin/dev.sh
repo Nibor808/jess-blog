@@ -16,6 +16,6 @@ LINT_CMD="esw \
   --watch"
 
 echo $DEV_SERVER_CMD
-parallelshell "$DEV_SERVER_CMD" "$CLEAN_CMD" "$WEBPACK_CMD" "$LINT_CMD"
+parallelshell "$CLEAN_CMD" "$DEV_SERVER_CMD" "$WEBPACK_CMD" "$LINT_CMD"
 
 exit 0

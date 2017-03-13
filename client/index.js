@@ -8,6 +8,8 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/app';
 import Landing from './components/landing';
+import Post from './components/post';
+import Review from './components/review';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -18,6 +20,8 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={Landing} />
+        <Route path='/post/:id' component={Post} />
+        <Route path='/review/:id' component={Review} />
       </Route>
     </Router>
   </Provider>

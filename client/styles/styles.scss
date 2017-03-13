@@ -9,7 +9,45 @@ body {
   overflow-y: hidden;
 }
 
-.title-text {
-  margin-bottom: 50px;
-  color: #fff;
+.navbar,
+ul.list-group,
+li.list-group-item,
+.post_item,
+.comment_item,
+.review_item {
+  background-color: $white;
+  border-radius: 0;
+}
+
+.navbar,
+.logo {
+  margin-bottom: 40px;
+}
+
+.col-md-8 {
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+.col-md-4 {
+  padding-right: 0;
+}
+
+.container {
+  margin-top: 40px;
+}
+
+.logo {
+  color: $white;
+}
+
+.post_item,
+.comment_item,
+.review_item {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.comments_list {
+  list-style: none;
 }
