@@ -6,7 +6,6 @@ html,
 body {
   height: 100%;
   background: linear-gradient($bg-top 40%, $bg-mid 40%, $bg-mid 60%, $bg-bottom 60%, $bg-bottom 100%);
-  overflow-y: hidden;
 }
 
 .navbar,
@@ -14,9 +13,32 @@ ul.list-group,
 li.list-group-item,
 .post_item,
 .comment_item,
-.review_item {
+.review_item,
+.signin_form,
+.signup_form {
   background-color: $white;
-  border-radius: 0;
+  border-radius: 3px;
+}
+
+.signin_form,
+.signup_form {
+  padding: 20px;
+}
+
+.signout_div {
+  margin-top: 9px;
+
+  .signout_btn {
+    margin-left: 10px;
+  }
+}
+
+.comments_section {
+  background: $white;
+
+  .comment_login {
+    margin-top: 20px;
+  }
 }
 
 .navbar,
@@ -49,5 +71,12 @@ li.list-group-item,
 }
 
 .comments_list {
+  list-style: none;
+}
+
+.specs_list {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
   list-style: none;
 }

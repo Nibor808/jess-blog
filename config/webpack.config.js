@@ -10,7 +10,8 @@ const VENDOR_LIBS = [
   'react-dom',
   'redux-form',
   'redux-thunk',
-  'jquery'
+  'jquery',
+  'lodash'
 ];
 
 module.exports = {

@@ -45,13 +45,8 @@ module.exports = UsersController = {
 
   // sign up new user
   signupUser(req, res) {
-    if(!req.body.username || !req.body.email || !req.body.password || !req.body.passConfirm) {
+    if(!req.body.username || !req.body.email || !req.body.password) {
       res.status(422).send({ error: 'Please fill out all fields.' });
-      return;
-    }
-
-    if(req.body.password !== req.body.passConfirm) {
-      res.status(422).send({ error: 'Your passwords must match.' });
       return;
     }
 
@@ -61,9 +56,10 @@ module.exports = UsersController = {
         return err;
       }else {
         req.body.password = hash;
+        const email = req.body.email.toLowerCase();
 
         knex('Users').insert({
-          email: req.body.email,
+          email,
           password: req.body.password,
           username: req.body.username
         })
@@ -72,7 +68,7 @@ module.exports = UsersController = {
             res.status(422).send({ error: 'User was not saved.' });
             return;
           }else {
-            res.send({ token: tokenForUser(data[0]) });
+            res.send({ token: tokenForUser(data[0]), username: req.body.username });
           }
         })
         .catch(() => {
@@ -84,7 +80,10 @@ module.exports = UsersController = {
 
   // sign in user
   signinUser(req, res) {
-    res.send({ token: tokenForUser(req.user[0].id) });
+    knex('Users').where('email', req.body.email).select('username')
+      .then(data => {
+        res.send({ token: tokenForUser(req.user[0].id), username: data[0].username });
+      })
   },
 
   // delete user

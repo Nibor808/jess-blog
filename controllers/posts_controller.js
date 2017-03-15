@@ -181,7 +181,7 @@ module.exports = PostController = {
   },
 
   // save comments
-  saveComment(req, res) {
+  savePostComment(req, res) {
     if(!req.body.content) {
       res.status(422).send({ error: 'You must have some content in your comment.' });
     }
@@ -211,7 +211,7 @@ module.exports = PostController = {
   },
 
   // delete a comment
-  deleteComment(req, res) {
+  deletePostComment(req, res) {
     knex('Comments').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {

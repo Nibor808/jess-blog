@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { signoutUser } from '../actions/user_actions';
 
-export default class Header extends Component {
+class Header extends Component {
+
+  renderNavRight() {
+    const user = localStorage.getItem('user');
+    if (this.props.authenticated) {
+      return (
+        <div className='signout_div'>
+          signed in as: {user ? user: this.props.user}
+          <button className='btn btn-default signout_btn' onClick={this.props.signoutUser}>sign out</button>
+        </div>
+      );
+    }else {
+      return (
+        <li>
+          <Link to='/signup'>create a user</Link>
+        </li>
+        );
+    }
+  }
 
   render() {
     return (
@@ -21,9 +42,21 @@ export default class Header extends Component {
               <li><a href='!#'>Reviews</a></li>
               <li><a href='!#'>Q&A</a></li>
             </ul>
+            <div className='nav navbar-nav navbar-right'>
+              {this.renderNavRight()}
+            </div>
           </div>
         </div>
       </nav>
     );
   }
 }
+
+function mapStateToProps({ auth }) {
+  return {
+    authenticated: auth.authenticated,
+    user: auth.user
+  }
+}
+
+export default connect(mapStateToProps, { signoutUser })(Header);

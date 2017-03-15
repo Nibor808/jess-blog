@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { getPost } from '../actions/post_actions';
 import { formatDate } from '../../utils/date_format';
 import { renderComments } from './comments';
@@ -15,6 +17,18 @@ class Post extends Component {
 
   componentWillMount() {
     this.props.getPost(this.props.params.id);
+  }
+
+  renderSignin() {
+    if (!this.props.authenticated) {
+      return (
+        <div className='col-md-6'>
+          <Link to='/signin' className='pull-right comment_login'>
+            <button className='btn btn-default'>sign in to comment</button>
+          </Link>
+        </div>
+      );
+    }
   }
 
   render() {
@@ -33,17 +47,25 @@ class Post extends Component {
           <small>posted: {postDate}</small>
           <p>{this.props.post.postContent}</p>
         </div>
-        <ul className='col-md-6 comments_list'>
-          {this.props.post.comments.map(comment => renderComments(comment))}
-        </ul>
+        <div className='comments_section col-md-6'>
+          <div className='row'>
+            <div className='col-md-6'><h3>Comments:</h3></div>
+            {this.renderSignin()}
+          </div>
+          <a>Add Comment</a>
+          <ul className='comments_list'>
+            {this.props.post.comments.map(comment => renderComments(comment))}
+          </ul>
+        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, auth }) {
   return {
-    post: posts.post
+    post: posts.post,
+    authenticated: auth.authenticated
   };
 }
 

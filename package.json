@@ -6,7 +6,8 @@
   "scripts": {
     "latest_migration": "knex migrate:latest --knexfile config/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile config/knexfile.js",
-    "dev": "./bin/dev.sh"
+    "dev": "./bin/dev.sh",
+    "lint": "esw --config config/.eslintrc.json --cache --quiet --color --watch"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "jquery": "^3.1.1",
     "jwt-simple": "^0.5.1",
     "knex": "^0.12.7",
+    "lodash": "^4.17.4",
     "moment": "^2.17.1",
     "mysql": "^2.13.0",
     "node-sass": "^4.5.0",

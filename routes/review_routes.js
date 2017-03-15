@@ -9,6 +9,6 @@ module.exports = function(app) {
   app.post('/savereview', ReviewController.saveReview);
   app.post('/updatereview/:id', ReviewController.updateReview);
   app.post('/deletereview/:id', ReviewController.deleteReview);
-  app.post('/savecomment', requireAuth, ReviewController.saveComment);
-  app.post('/deletecomment/:id', ReviewController.deleteComment);
+  app.post('/savereviewcomment', requireAuth, ReviewController.saveReviewComment);
+  app.post('/deletereviewcomment/:id', ReviewController.deleteReviewComment);
 };

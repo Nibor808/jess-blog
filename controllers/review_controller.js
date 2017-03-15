@@ -191,7 +191,7 @@ module.exports = ReviewController = {
   },
 
   // save comments
-  saveComment(req, res) {
+  saveReviewComment(req, res) {
     if(!req.body.content) {
       res.status(422).send({ error: 'You must have some content in your comment.' });
     }
@@ -221,7 +221,7 @@ module.exports = ReviewController = {
   },
 
   // delete a comment
-  deleteComment(req, res) {
+  deleteReviewComment(req, res) {
     knex('Comments').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {
