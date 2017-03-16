@@ -26,6 +26,14 @@ class Review extends Component {
           </Link>
         </div>
       );
+    }else {
+      return (
+        <div className='col-md-6'>
+          <Link to='/addcomment' className='pull-right comment_login'>
+            <button className='btn btn-default'>add a comment</button>
+          </Link>
+        </div>
+      );
     }
   }
 
@@ -75,7 +83,6 @@ class Review extends Component {
             <div className='col-md-6'><h3>Comments:</h3></div>
             {this.renderSignin()}
           </div>
-          <a>Add Comment</a>
           <ul className='comments_list'>
             {this.props.review.comments.map(comment => renderComments(comment))}
           </ul>

@@ -3,30 +3,11 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signupUser } from '../../actions/user_actions';
 
-// const FIELDS = {
-//   email: {
-//     label: 'Email:',
-//     type: 'email',
-//     errorTxt: 'Please enter an email'
-//   },
-//   username: {
-//     label: 'Username:',
-//     type: 'text',
-//     errorTxt: 'Please enter a username'
-//   },
-//   password: {
-//     label: 'Password:',
-//     type: 'password',
-//     errorTxt: 'Please enter an password'
-//   },
-//   passwordConfirm: {
-//     label: 'Confirm Password:',
-//     type: 'password',
-//     errorTxt: 'Please confirm your password'
-//   }
-// };
-
 class Signup extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
   static propTypes = {
     signupUser: PropTypes.func,
@@ -34,8 +15,8 @@ class Signup extends Component {
     handleSubmit: PropTypes.func
   }
 
-  handleFormSubmit(formProps) {
-    this.props.signupUser(formProps);
+  handleFormSubmit(values) {
+    this.props.signupUser(values);
   }
 
   renderAlert() {
@@ -47,6 +28,7 @@ class Signup extends Component {
       )
     }
   }
+
   renderField({ input, label, type, meta: { touched, error } }) {
     return (
       <div className='form-group'>
@@ -68,32 +50,11 @@ class Signup extends Component {
         <Field name='password' type='password' component={this.renderField.bind(this)} label='Password:' />
         <Field name='passwordConfirm' type='password' component={this.renderField.bind(this)} label='Confirm Password:' />
         {this.renderAlert()}
-        <button className='btn btn-primary' type='submit' disabled={submitting}>sign up</button>
+        <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>back</button>
+        <button className='btn btn-default pull-right' type='submit' disabled={submitting}>sign up</button>
       </form>
     );
   }
-
-  // renderFields({ input, label, type, meta: { touched, error } }) {
-  //   return (
-  //     <div key={fieldConfig.label} className={`form-group ${field.touched && field.invalid ? 'has-danger': ''}`}>
-  //       <label>{fieldConfig.label}</label>
-  //       <Field name={field} type={fieldConfig.type} component='input' className='form-control' />
-  //       <small className='error'>{field.touched ? field.error : ''}</small>
-  //     </div>
-  //   );
-  // }
-
-//   render() {
-//     const { handleSubmit } = this.props;
-
-//     return (
-//      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signup_form col-md-3'>
-//       {map(FIELDS, this.renderFields.bind(this))}
-//       {this.renderAlert()}
-//       <button className='btn btn-primary' type='submit'>sign up</button>
-//      </form>
-//     );
-//   }
 }
 
 function validate(values) {

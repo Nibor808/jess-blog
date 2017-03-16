@@ -5,4 +5,6 @@ export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_REVIEW = 'GET_REVIEW';
+export const SAVE_COMMENT = 'SAVE_COMMENT';
+export const RESET_COMMENT_STATE = 'RESET_COMMENT_STATE';
 export const ERROR = 'ERROR';

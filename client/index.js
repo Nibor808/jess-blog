@@ -12,6 +12,8 @@ import Post from './components/post';
 import Review from './components/review';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
+import AddComment from './components/addComment';
+import requireAuth from './components/auth/requireAuth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
@@ -33,6 +35,7 @@ ReactDOM.render(
         <Route path='/review/:id' component={Review} />
         <Route path='/signup' component={Signup} />
         <Route path='/signin' component={Signin} />
+        <Route path='/addcomment' component={requireAuth(AddComment)} />
       </Route>
     </Router>
   </Provider>

@@ -197,27 +197,35 @@ module.exports = ReviewController = {
     }
 
     // for testing remove if block later
-    if(!req.body.review_id || !req.body.user_id) {
+    if(!req.body.id || !req.body.user) {
       res.send({ error: 'Missing data'});
     }
 
-    knex('Comments').insert({
-      review_id: req.body.review_id,
-      user_id: req.body.user_id,
-      title: req.body.title,
-      content: req.body.content,
-      createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
-    })
-    .then(data => {
-      if(!data[0] > 0) {
-        res.status(422).send({ error: 'Comment was not saved.' });
-      }else {
-        res.send({ ok: 'Comment saved.' });
-      }
-    })
-    .catch(err => {
-      res.status(422).send({ error: err });
-    });
+    //get user
+    knex('Users').where('username', req.body.user).select('id')
+      .then(data => {
+        //save comment
+        knex('Comments').insert({
+          review_id: req.body.id,
+          user_id: data[0].id,
+          title: req.body.title,
+          content: req.body.content,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        })
+        .then(data => {
+          if(!data[0] > 0) {
+            res.status(422).send({ error: 'Comment was not saved.' });
+          }else {
+            res.send({ ok: 'Comment saved.' });
+          }
+        })
+        .catch(err => {
+          res.status(422).send({ error: err });
+        });
+      })
+      .catch(err => {
+        res.status(422).send({ error: err });
+      });
   },
 
   // delete a comment

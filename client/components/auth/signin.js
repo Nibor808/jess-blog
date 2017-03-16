@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { signinUser } from '../../actions/user_actions';
 
 class Signin extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
   handleFormSubmit({ email, password }) {
     this.props.signinUser({ email, password });
@@ -19,11 +22,7 @@ class Signin extends Component {
       );
     }
     if (this.props.authenticated) {
-      return (
-        <div className='alert alert-success'>
-          <p>You are signed in. Click "back" to add a comment.</p>
-        </div>
-      );
+      this.context.router.goBack();
     }
   }
 
@@ -42,8 +41,8 @@ class Signin extends Component {
             <Field name='password' component='input' type='password' className='form-control' />
           </div>
           {this.renderAlert()}
-          <button type='submit' className='btn btn-default'>sign in</button>
-          <button type='button' className='btn btn-default pull-right' onClick={browserHistory.goBack}>back</button>
+          <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>back</button>
+          <button type='submit' className='btn btn-default pull-right'>sign in</button>
         </form>
       </div>
     );

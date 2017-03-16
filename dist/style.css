@@ -5826,12 +5826,14 @@ li.list-group-item,
 .comment_item,
 .review_item,
 .signin_form,
-.signup_form {
+.signup_form,
+.comment_form {
   background-color: white;
   border-radius: 3px; }
 
 .signin_form,
-.signup_form {
+.signup_form,
+.comment_form {
   padding: 20px; }
 
 .signout_div {

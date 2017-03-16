@@ -26,7 +26,7 @@ const LocalLogin = new LocalStrategy({ usernameField: 'email' }, function(email,
     });
 });
 
-// create JWT strategy for navigation after signing up
+// create JWT strategy for navigation
 const JWTOpts = {
   jwtFromRequest: ExtractJWT.fromHeader('authorization'),
   secretOrKey: JWT_SECRET
