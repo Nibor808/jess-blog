@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { signoutUser } from '../actions/user_actions';
 
 class Header extends Component {
+
+  static propTypes = {
+    authenticated: PropTypes.bool,
+    user: PropTypes.string,
+    signoutUser: PropTypes.func
+  }
 
   renderNavRight() {
     const user = localStorage.getItem('user');
@@ -14,12 +20,6 @@ class Header extends Component {
           <button className='btn btn-default signout_btn' onClick={this.props.signoutUser}>sign out</button>
         </div>
       );
-    }else {
-      return (
-        <li>
-          <Link to='/signup'>create a user</Link>
-        </li>
-        );
     }
   }
 

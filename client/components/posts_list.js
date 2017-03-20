@@ -30,7 +30,7 @@ class PostsList extends Component {
 
   render() {
     return (
-      <div className='col-md-8'>
+      <div className='col-md-8 post_list_item'>
         {this.props.allPosts.map(this.renderPosts)}
       </div>
     );

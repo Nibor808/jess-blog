@@ -6,7 +6,10 @@
   "scripts": {
     "latest_migration": "knex migrate:latest --knexfile config/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile config/knexfile.js",
-    "dev": "./bin/dev.sh",
+    "build:client": "./bin/dev.sh",
+    "build:server": "webpack --config webpack.server.config.js",
+    "build": "npm run build:client && npm run build:server",
+    "start": "npm run build && nodemon server.bundle.js",
     "lint": "esw --config config/.eslintrc.json --cache --quiet --color --watch"
   },
   "repository": {
@@ -67,6 +70,7 @@
     "morgan": "^1.8.1",
     "parallelshell": "^2.0.0",
     "rimraf": "^2.6.1",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-node-externals": "^1.5.4"
   }
 }

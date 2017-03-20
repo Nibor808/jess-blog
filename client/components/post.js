@@ -12,7 +12,12 @@ class Post extends Component {
     getPost: PropTypes.func,
     post: PropTypes.object,
     params: PropTypes.object,
-    id: PropTypes.number
+    id: PropTypes.number,
+    authenticated: PropTypes.bool
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
   }
 
   componentWillMount() {
@@ -23,7 +28,7 @@ class Post extends Component {
     if (!this.props.authenticated) {
       return (
         <div className='col-md-6'>
-          <Link to='/signin' className='pull-right comment_login'>
+          <Link to='/signin_post' className='pull-right comment_login'>
             <button className='btn btn-default'>sign in to comment</button>
           </Link>
         </div>
@@ -31,8 +36,21 @@ class Post extends Component {
     }else {
       return (
         <div className='col-md-6'>
-          <Link to='/addcomment' className='pull-right comment_login'>
+          <Link to='/addcomment_post' className='pull-right comment_login'>
             <button className='btn btn-default'>add a comment</button>
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  renderSignup() {
+    if (!this.props.authenticated) {
+      return (
+        <div className='signup_prompt text-center'>
+          <h3>Not already part of the converstation?</h3>
+          <Link to='/signup_post'>
+            <button type='button' className='btn btn-primary'>sign up</button>
           </Link>
         </div>
       );
@@ -64,15 +82,20 @@ class Post extends Component {
             {this.props.post.comments.map(comment => renderComments(comment))}
           </ul>
         </div>
+        <div className='col-md-5 col-md-offset-1 auth_children'>
+          {this.props.children}
+          {this.renderSignup()}
+        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ posts, auth }) {
+function mapStateToProps({ posts, auth, comments }) {
   return {
     post: posts.post,
-    authenticated: auth.authenticated
+    authenticated: auth.authenticated,
+    didSave: comments.commentSaved
   };
 }
 

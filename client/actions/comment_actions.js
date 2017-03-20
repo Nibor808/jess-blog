@@ -16,10 +16,10 @@ export function saveComment({ id, isReview, isPost, user, title, content }) {
             type: RESET_COMMENT_STATE
           });
         })
-        .catch(error => {
+        .catch(({ response }) => {
           dispatch({
             type: ERROR,
-            payload: error
+            payload: response.data.error
           })
         });
     }
@@ -38,10 +38,10 @@ export function saveComment({ id, isReview, isPost, user, title, content }) {
             type: RESET_COMMENT_STATE
           });
         })
-        .catch(error => {
+        .catch(({ response }) => {
           dispatch({
             type: ERROR,
-            payload: error
+            payload: response.data.error
           })
         });
     }

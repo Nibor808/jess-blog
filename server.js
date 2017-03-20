@@ -18,7 +18,6 @@ postRoutes(app);
 userRoutes(app);
 reviewRoutes(app);
 
-
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
 });

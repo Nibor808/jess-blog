@@ -9,7 +9,7 @@ function tokenForUser(userId) {
   return JWT.encode({ sub: userId, iat: timestamp }, JWT_SECRET);
 }
 
-module.exports = UsersController = {
+module.exports = {
 
   // get all users
   getUsers(req, res) {

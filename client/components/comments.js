@@ -11,6 +11,7 @@ export function renderComments(commentData) {
       <h4>{commentData.commentTitle}</h4>
       <p>{commentData.commentContent}</p>
       <small>posted: {commentDate} by: {commentData.username}</small>
+      <hr />
     </li>
   );
 }

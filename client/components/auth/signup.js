@@ -3,7 +3,27 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signupUser } from '../../actions/user_actions';
 
+const renderField = ({ input, label, type, meta: { touched, error } }) => {
+  return (
+    <div className='form-group'>
+      <label>{label}</label>
+      <div>
+        <input {...input} type={type} className='form-control' />
+        {touched && error ? <span className='text-danger'>{error}</span>: ''}
+      </div>
+    </div>
+  );
+}
+
 class Signup extends Component {
+
+  static propTypes = {
+    input: PropTypes.element,
+    label: PropTypes.string,
+    type: PropTypes.string,
+    meta: PropTypes.object,
+    submitting: PropTypes.bool
+  }
 
   static contextTypes = {
     router: PropTypes.object
@@ -29,28 +49,16 @@ class Signup extends Component {
     }
   }
 
-  renderField({ input, label, type, meta: { touched, error } }) {
-    return (
-      <div className='form-group'>
-        <label>{label}</label>
-        <div>
-          <input {...input} type={type} className='form-control' />
-          {touched && error ? <span>{error}</span>: ''}
-        </div>
-      </div>
-    );
-  }
-
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signup_form col-md-3'>
-        <Field name='email' type='email' component={this.renderField.bind(this)} label='Email:' />
-        <Field name='username' type='text' component={this.renderField.bind(this)} label='Username:' />
-        <Field name='password' type='password' component={this.renderField.bind(this)} label='Password:' />
-        <Field name='passwordConfirm' type='password' component={this.renderField.bind(this)} label='Confirm Password:' />
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signup_form'>
+        <Field name='email' type='email' component={renderField} label='Email:' />
+        <Field name='username' type='text' component={renderField} label='Username:' />
+        <Field name='password' type='password' component={renderField} label='Password:' />
+        <Field name='passwordConfirm' type='password' component={renderField} label='Confirm Password:' />
         {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>back</button>
+        <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>cancel</button>
         <button className='btn btn-default pull-right' type='submit' disabled={submitting}>sign up</button>
       </form>
     );
@@ -88,7 +96,7 @@ function mapStateToProps({ auth }) {
 }
 
 Signup = reduxForm({
-  form: 'signup',
+  form: 'sign up',
   validate
 })(Signup);
 

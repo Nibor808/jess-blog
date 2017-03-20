@@ -5819,42 +5819,58 @@ body {
   height: 100%;
   background: linear-gradient(#2d435b 40%, #244848 40%, #244848 60%, #54607a 60%, #54607a 100%); }
 
+textarea {
+  resize: vertical; }
+
+.row {
+  margin: 0; }
+
 .navbar,
 ul.list-group,
 li.list-group-item,
 .post_item,
-.comment_item,
+.comments_section,
 .review_item,
 .signin_form,
 .signup_form,
-.comment_form {
+.comment_form,
+.signup_prompt {
   background-color: white;
   border-radius: 3px; }
 
 .signin_form,
 .signup_form,
-.comment_form {
+.comment_form,
+.signup_prompt {
   padding: 20px; }
+
+.signin_div,
+.signup_prompt,
+.signup_form {
+  margin-left: 20px; }
 
 .signout_div {
   margin-top: 9px; }
   .signout_div .signout_btn {
     margin-left: 10px; }
 
-.comments_section {
-  background: white; }
-  .comments_section .comment_login {
-    margin-top: 20px; }
+.signin_div,
+.signup_form {
+  margin-bottom: 20px; }
+
+.comment_login {
+  margin-top: 20px; }
 
 .navbar,
 .logo {
   margin-bottom: 40px; }
 
-.col-md-8 {
+.post_list_item {
   padding-left: 0;
   padding-right: 20px; }
 
-.col-md-4 {
+.review_list,
+.auth_children {
   padding-right: 0; }
 
 .container {
@@ -5864,13 +5880,14 @@ li.list-group-item,
   color: white; }
 
 .post_item,
-.comment_item,
 .review_item {
   padding: 20px;
   margin-bottom: 20px; }
 
 .comments_list {
   list-style: none; }
+  .comments_list .comment_item {
+    padding: 0 20px 0 20px; }
 
 .specs_list {
   columns: 2;

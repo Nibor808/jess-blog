@@ -3,7 +3,36 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { saveComment } from '../actions/comment_actions';
 
+const renderField = ({ input, label, type, textarea, meta: { touched, error } }) => {
+  const textareaType = <textarea {...input} type={type} className='form-control' />
+  const inputType = <input {...input} type={type} className='form-control' />
+
+  return (
+    <div className='form-group'>
+      <label>{label}</label>
+      <div>
+        {textarea ? textareaType: inputType}
+        {touched && error ? <span className='text-danger'>{error}</span>: ''}
+      </div>
+    </div>
+  );
+}
+
 class AddComment extends Component {
+
+  static propTypes = {
+    input: PropTypes.element,
+    label: PropTypes.string,
+    type: PropTypes.string,
+    meta: PropTypes.object,
+    post_id: PropTypes.number,
+    saveComment: PropTypes.func,
+    errorMessage: PropTypes.string,
+    didSave: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+    submitting: PropTypes.bool,
+    review_id: PropTypes.number
+  }
 
   static contextTypes = {
     router: PropTypes.object
@@ -33,29 +62,18 @@ class AddComment extends Component {
         </div>
       );
     }
-    if (this.props.didSave) {
-      this.context.router.goBack();
-    }
-  }
-
-  renderField({ input, label, type, meta: { touched, error } }) {
-    return (
-      <div className='form-group'>
-        <label>{label}</label>
-        <div>
-          <input {...input} type={type} className='form-control' />
-          {touched && error ? <span>{error}</span>: ''}
-        </div>
-      </div>
-    );
   }
 
   render() {
+    if (this.props.didSave) {
+      this.context.router.goBack();
+    }
+
     const { handleSubmit, submitting } = this.props;
     return(
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='col-md-6 comment_form'>
-        <Field name='title' type='text' component={this.renderField.bind(this)} label='Title:(optional)' />
-        <Field name='content' type='textarea' component={this.renderField.bind(this)} label='Comment:' />
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='comment_form'>
+        <Field name='title' type='text' component={renderField} label='Title: (optional)' />
+        <Field name='content' type='textarea' component={renderField} label='Comment:' textarea={true}/>
         {this.renderAlert()}
         <button className='btn btn-default' type='button' onClick={this.context.router.goBack}>cancel</button>
         <button className='btn btn-default pull-right' type='submit' disabled={submitting}>add comment</button>
@@ -91,7 +109,7 @@ function mapStateToProps({ posts, reviews, comments }) {
 }
 
 AddComment = reduxForm({
-  form: 'addComment',
+  form: 'add comment',
   validate
 })(AddComment);
 

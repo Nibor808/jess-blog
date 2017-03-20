@@ -1,9 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { signinUser } from '../../actions/user_actions';
 
 class Signin extends Component {
+
+  static propTypes = {
+    signinUser: PropTypes.func,
+    errorMessage: PropTypes.string,
+    authenticated: PropTypes.bool,
+    handleSubmit: PropTypes.func
+  }
 
   static contextTypes = {
     router: PropTypes.object
@@ -30,23 +38,25 @@ class Signin extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className='col-md-3 signin_form'>
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <div className='form-group'>
-            <label htmlFor='email'>Email</label>
-            <Field name='email' component='input' type='email' className='form-control'/>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='password'>Password:</label>
-            <Field name='password' component='input' type='password' className='form-control' />
-          </div>
-          {this.renderAlert()}
-          <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>back</button>
-          <button type='submit' className='btn btn-default pull-right'>sign in</button>
-        </form>
+      <div className='signin_div'>
+        <div className='row'>
+          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signin_form'>
+            <div className='form-group'>
+              <label htmlFor='email'>Email</label>
+              <Field name='email' component='input' type='email' className='form-control'/>
+            </div>
+            <div className='form-group'>
+              <label htmlFor='password'>Password:</label>
+              <Field name='password' component='input' type='password' className='form-control' />
+            </div>
+            {this.renderAlert()}
+            <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>cancel</button>
+            <button type='submit' className='btn btn-default pull-right'>sign in</button>
+          </form>
+        </div>
       </div>
     );
-  };
+  }
 }
 
 function mapStateToProps({ auth }) {
@@ -57,7 +67,7 @@ function mapStateToProps({ auth }) {
 }
 
 Signin = reduxForm({
-  form: 'signin'
+  form: 'sign in'
 })(Signin);
 
 export default connect(mapStateToProps, { signinUser })(Signin);

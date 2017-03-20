@@ -1,7 +1,7 @@
 const knex = require('../utils/db');
 const moment = require('moment');
 
-module.exports = ReviewController = {
+module.exports = {
 
   //get all reviews
   getAllReviews(req, res) {

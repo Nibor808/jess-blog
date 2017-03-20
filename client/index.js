@@ -31,11 +31,16 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={Landing} />
-        <Route path='/post/:id' component={Post} />
-        <Route path='/review/:id' component={Review} />
-        <Route path='/signup' component={Signup} />
-        <Route path='/signin' component={Signin} />
-        <Route path='/addcomment' component={requireAuth(AddComment)} />
+        <Route path='/post/:id' component={Post}>
+          <Route path='/signin_post' component={Signin} />
+          <Route path='/signup_post' component={Signup} />
+          <Route path='/addcomment_post' component={requireAuth(AddComment)} />
+        </Route>
+        <Route path='/review/:id' component={Review}>
+          <Route path='/signin_review' component={Signin} />
+          <Route path='/signup_review' component={Signup} />
+          <Route path='/addcomment_review' component={requireAuth(AddComment)} />
+        </Route>
       </Route>
     </Router>
   </Provider>

@@ -30,7 +30,7 @@ class ReviewList extends Component {
   render() {
     return (
       <ul
-      className='list-group col-md-4'>
+      className='list-group col-md-4 review_list'>
         <li className='list-group-item'><h2>Recent Reviews</h2></li>
         {this.props.allReviews.map(this.renderReview)}
       </ul>

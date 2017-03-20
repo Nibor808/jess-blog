@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 export default function(ComposedComponent) {
   class Authentication extends Component {
 
+    static propTypes ={
+      authenticated: PropTypes.bool
+    }
+
     static contextTypes = {
       router: PropTypes.object
     }
@@ -15,7 +19,6 @@ export default function(ComposedComponent) {
     }
 
     componentWillUpdate() {
-      console.log('next', this.props.authenticated)
       if (!nextProps.authenticated) {
         this.context.router.goBack();
       }

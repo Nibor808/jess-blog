@@ -1,7 +1,7 @@
 const knex = require('../utils/db');
 const moment = require('moment');
 
-module.exports = PostController = {
+module.exports = {
 
   //get all posts
   getAllPosts(req, res) {
@@ -12,7 +12,7 @@ module.exports = PostController = {
         }else {
           data.forEach((item) => {
             item.createdAt = moment(item.createdAt).toString();
-          });
+          })
           res.send({ ok: data });
         }
       })
@@ -182,12 +182,11 @@ module.exports = PostController = {
 
   // save comments
   savePostComment(req, res) {
-    console.log(req.body)
     if(!req.body.content) {
       res.status(422).send({ error: 'You must have some content in your comment.' });
+      return;
     }
 
-    // for testing remove if block later
     if(!req.body.id || !req.body.user) {
       res.send({ error: 'Missing data'});
     }

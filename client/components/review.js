@@ -10,7 +10,8 @@ class Review extends Component {
     getReview: PropTypes.func,
     params: PropTypes.object,
     id: PropTypes.number,
-    review: PropTypes.object
+    review: PropTypes.object,
+    authenticated: PropTypes.bool
   }
 
   componentWillMount() {
@@ -21,7 +22,7 @@ class Review extends Component {
     if (!this.props.authenticated) {
       return (
         <div className='col-md-6'>
-          <Link to='/signin' className='pull-right comment_login'>
+          <Link to='/signin_review' className='pull-right comment_login'>
             <button className='btn btn-default'>sign in to comment</button>
           </Link>
         </div>
@@ -29,7 +30,7 @@ class Review extends Component {
     }else {
       return (
         <div className='col-md-6'>
-          <Link to='/addcomment' className='pull-right comment_login'>
+          <Link to='/addcomment_review' className='pull-right comment_login'>
             <button className='btn btn-default'>add a comment</button>
           </Link>
         </div>
@@ -37,6 +38,18 @@ class Review extends Component {
     }
   }
 
+  renderSignup() {
+    if (!this.props.authenticated) {
+      return (
+        <div className='signup_prompt text-center'>
+          <h3>Not already part of the converstation?</h3>
+          <Link to='/signup_review'>
+            <button type='button' className='btn btn-primary'>sign up</button>
+          </Link>
+        </div>
+      );
+    }
+  }
 
   renderSpecs(specs) {
     const specsList = [];
@@ -44,15 +57,15 @@ class Review extends Component {
     for (let item in specs) {
       if (specs.hasOwnProperty(item)) {
         const formattedItem = item.replace(new RegExp('_', 'g'), ' ');
-        specsList.push(`${formattedItem}: ${specs[item]}`)
+        specsList.push(`${formattedItem}: ${specs[item]}`);
       }
     }
-    return specsList.map((spec, index) => <li key={index}>{spec}</li>)
+    return specsList.map((spec, index) => <li key={index}>{spec}</li>);
   }
 
   render() {
     if (!this.props.review) {
-      return <div>Loading...</div>
+      return <div>Loading...</div>;
     }
     const reviewDate = formatDate(this.props.review.createdAt);
     return (
@@ -86,6 +99,10 @@ class Review extends Component {
           <ul className='comments_list'>
             {this.props.review.comments.map(comment => renderComments(comment))}
           </ul>
+        </div>
+        <div className='col-md-4'>
+          {this.props.children}
+          {this.renderSignup()}
         </div>
       </div>
     );

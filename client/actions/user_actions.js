@@ -12,7 +12,7 @@ export function signupUser({ email, password, username }) {
         });
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', response.data.username);
-        browserHistory.push('/');
+        browserHistory.goBack();
       })
       .catch(({ response }) => {
         dispatch(authError(response.data.error))
@@ -24,7 +24,7 @@ export function signinUser({ email, password }) {
   return function(dispatch) {
     axios.post('/signin', { email, password })
       .then(response => {
-       dispatch({
+        dispatch({
           type: AUTH_USER,
           payload: response.data.username
         });
