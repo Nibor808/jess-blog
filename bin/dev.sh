@@ -2,13 +2,13 @@
 
 export NODE_ENV=development
 
-DEV_SERVER_CMD="nodemon server.js"
+knex migrate:latest --knexfile config/knexfile.js
 
 CLEAN_CMD="rimraf dist"
 
 WEBPACK_CMD="webpack --config config/webpack.config.js"
 
-echo $DEV_SERVER_CMD
-parallelshell "$CLEAN_CMD" "$DEV_SERVER_CMD" "$WEBPACK_CMD"
+echo $WEBPACK_CMD
+parallelshell "$CLEAN_CMD" "$WEBPACK_CMD"
 
 exit 0

@@ -6,9 +6,10 @@
   "scripts": {
     "latest_migration": "knex migrate:latest --knexfile config/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile config/knexfile.js",
+    "dev": "./bin/dev.sh && nodemon server.js",
     "build:client": "./bin/dev.sh",
     "build:server": "webpack --config webpack.server.config.js",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:server && npm run build:client",
     "start": "npm run build && nodemon server.bundle.js",
     "lint": "esw --config config/.eslintrc.json --cache --quiet --color --watch"
   },
@@ -31,6 +32,7 @@
     "cors": "^2.8.1",
     "css-loader": "^0.26.4",
     "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
     "file-loader": "^0.10.1",
     "jquery": "^3.1.1",
     "jwt-simple": "^0.5.1",
