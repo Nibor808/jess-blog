@@ -12,11 +12,11 @@ class Header extends Component {
   }
 
   renderNavRight() {
-    //const user = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
     if (this.props.authenticated) {
       return (
         <div className='signout_div'>
-
+          signed in as: { user ? user: this.props.user }
           <button className='btn btn-default signout_btn' onClick={this.props.signoutUser}>sign out</button>
         </div>
       );

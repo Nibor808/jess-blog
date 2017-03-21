@@ -4525,11 +4525,13 @@ var Header = function (_Component) {
   _createClass(Header, [{
     key: 'renderNavRight',
     value: function renderNavRight() {
-      //const user = localStorage.getItem('user');
+      var user = localStorage.getItem('user');
       if (this.props.authenticated) {
         return _react2.default.createElement(
           'div',
           { className: 'signout_div' },
+          'signed in as: ',
+          user ? user : this.props.user,
           _react2.default.createElement(
             'button',
             { className: 'btn btn-default signout_btn', onClick: this.props.signoutUser },
