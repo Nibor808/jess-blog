@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { GET_POSTS, GET_POST, ERROR } from './types';
+import { ROOT_URL } from '../config/config.json';
 
 export function getAllPosts() {
   return function(dispatch) {
-    axios.get('/posts')
+    axios.get(`${ROOT_URL}/posts`)
       .then(response => {
         dispatch({
           type: GET_POSTS,
@@ -21,7 +22,7 @@ export function getAllPosts() {
 
 export function getPost(id) {
   return function(dispatch) {
-    axios.get(`/post/${id}`)
+    axios.get(`${ROOT_URL}/post/${id}`)
       .then(response => {
         dispatch({
           type: GET_POST,

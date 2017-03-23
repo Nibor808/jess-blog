@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getAllPosts } from '../actions/post_actions';
 import { Link } from 'react-router';
-import { formatDate } from '../../utils/date_format';
+import { formatDate } from '../utils/date_format';
 
 class PostsList extends Component {
   static propTypes = {

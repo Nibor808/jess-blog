@@ -15,7 +15,7 @@ const VENDOR_LIBS = [
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, '../client/index.js'),
+    main: path.join(__dirname, '../index.js'),
     vendor: VENDOR_LIBS
   },
   output: {
@@ -40,7 +40,7 @@ module.exports = {
         })
       },
       {
-        test: /\.json/,
+        test: /\.json$/,
         use: 'json-loader'
       },
       {
@@ -58,7 +58,7 @@ module.exports = {
     }),
     new ETPlugin('style.css'),
     new HTMLPlugin({
-      template: './client/index.html'
+      template: './index.html'
     }),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',

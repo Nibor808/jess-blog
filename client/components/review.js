@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { formatDate } from '../../utils/date_format';
+import { formatDate } from '../utils/date_format';
 import { getReview } from '../actions/review_actions';
 import { renderComments } from './comments';
 import { Link } from 'react-router';

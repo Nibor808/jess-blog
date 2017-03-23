@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types';
+import { ROOT_URL } from '../config/config.json';
 
 export function signupUser({ email, password, username }) {
   return function(dispatch) {
-    axios.post('/signup', { email, password, username })
+    axios.post(`${ROOT_URL}/signup`, { email, password, username })
       .then((response) => {
         dispatch({
           type: AUTH_USER,
@@ -22,7 +23,7 @@ export function signupUser({ email, password, username }) {
 
 export function signinUser({ email, password }) {
   return function(dispatch) {
-    axios.post('/signin', { email, password })
+    axios.post(`${ROOT_URL}/signin`, { email, password })
       .then(response => {
         dispatch({
           type: AUTH_USER,

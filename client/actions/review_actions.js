@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { GET_REVIEWS, GET_REVIEW, ERROR } from './types';
+import { ROOT_URL } from '../config/config.json';
 
 export function getAllReviews() {
   return function(dispatch) {
-    axios.get('/reviews')
+    axios.get(`${ROOT_URL}/reviews`)
       .then(response => {
         dispatch({
           type: GET_REVIEWS,
@@ -21,7 +22,7 @@ export function getAllReviews() {
 
 export function getReview(id) {
   return function(dispatch) {
-    axios.get(`/review/${id}`)
+    axios.get(`${ROOT_URL}/review/${id}`)
       .then(response => {
         dispatch({
           type: GET_REVIEW,

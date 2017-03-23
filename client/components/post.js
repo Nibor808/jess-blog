@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { getPost } from '../actions/post_actions';
-import { formatDate } from '../../utils/date_format';
+import { formatDate } from '../utils/date_format';
 import { renderComments } from './comments';
 
 class Post extends Component {
