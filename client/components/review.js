@@ -18,6 +18,12 @@ class Review extends Component {
     this.props.getReview(this.props.params.id);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.didSave !== this.props.didSave) {
+      this.props.getReview(this.props.review.reviewId);
+    }
+  }
+
   renderSignin() {
     if (!this.props.authenticated) {
       return (
@@ -100,7 +106,7 @@ class Review extends Component {
             {this.props.review.comments.map(comment => renderComments(comment))}
           </ul>
         </div>
-        <div className='col-md-4'>
+        <div className='col-md-5 col-md-offset-1 auth_children'>
           {this.props.children}
           {this.renderSignup()}
         </div>
@@ -109,10 +115,11 @@ class Review extends Component {
   }
 }
 
-function mapStateToProps({ reviews, auth }) {
+function mapStateToProps({ reviews, auth, comments }) {
   return {
     review: reviews.review,
-    authenticated: auth.authenticated
+    authenticated: auth.authenticated,
+    didSave: comments.commentSaved
   };
 }
 

@@ -24,6 +24,12 @@ class Post extends Component {
     this.props.getPost(this.props.params.id);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.didSave !== this.props.didSave) {
+      this.props.getPost(this.props.post.postId);
+    }
+  }
+
   renderSignin() {
     if (!this.props.authenticated) {
       return (

@@ -65,8 +65,9 @@ class AddComment extends Component {
   }
 
   render() {
+    // not the place for this but not sure where to put it
     if (this.props.didSave) {
-      this.context.router.goBack();
+      this.context.router.goBack()
     }
 
     const { handleSubmit, submitting } = this.props;
