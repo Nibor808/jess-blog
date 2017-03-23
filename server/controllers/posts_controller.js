@@ -198,8 +198,8 @@ module.exports = {
         knex('Comments').insert({
           post_id: req.body.id,
           user_id: data[0].id,
-          title: req.body.title,
-          content: req.body.content,
+          title: req.body.title.trim(),
+          content: req.body.content.trim(),
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         })
         .then(data => {
