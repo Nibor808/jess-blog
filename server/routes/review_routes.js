@@ -1,7 +1,4 @@
 const ReviewController = require('../controllers/review_controller');
-const passport = require('passport');
-
-const requireAuth = passport.authenticate('jwt', { session: false });
 
 module.exports = function(app) {
   app.get('/reviews', ReviewController.getAllReviews);
@@ -9,6 +6,4 @@ module.exports = function(app) {
   app.post('/savereview', ReviewController.saveReview);
   app.post('/updatereview/:id', ReviewController.updateReview);
   app.post('/deletereview/:id', ReviewController.deleteReview);
-  app.post('/savereviewcomment', requireAuth, ReviewController.saveReviewComment);
-  app.post('/deletereviewcomment/:id', ReviewController.deleteReviewComment);
 };

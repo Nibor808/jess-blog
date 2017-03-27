@@ -29,10 +29,10 @@ export function getPost(id) {
           payload: response.data.ok
         });
       })
-      .catch(error => {
+      .catch(({ response }) => {
         dispatch({
           type: ERROR,
-          payload: error
+          payload: response.data.error
         });
       });
   };

@@ -21,71 +21,17 @@ module.exports = {
       });
   },
 
-  // get a post and it's corresponding comments and images as an object
-  // comments added as an array
-  // images added as an array
-  // return the post object
+  // get a post
   getPost(req, res) {
-    const post = {};
-    const comments = [];
-    const images = [];
-
-    //get post
-    knex('Posts').where('Posts.id', req.params.id)
-    .select(
-      'Posts.id as postId',
-      'Posts.title as postTitle',
-      'Posts.content as postContent',
-      'Posts.category as postCategory',
-      'Posts.keywords as postKeywords',
-      'Posts.createdAt as postDate')
+    knex('Posts').where('id', req.params.id)
+    .select()
       .then(data => {
         if(!data.length) {
           res.status(422).send({ error: 'Post does not exist' });
           return;
         }else {
-          data.map(item => {
-            post.postId = item.postId;
-            post.postTitle = item.postTitle;
-            post.postContent = item.postContent;
-            post.postCategory = item.postCategory;
-            post.keywords = item.postKeywords;
-            post.createdAt = moment(item.postDate).toString();
-          });
-
-          // get comments
-          knex('Comments').where('Comments.post_id', req.params.id)
-          .join('Users', 'Comments.user_id', '=', 'Users.id')
-          .select(
-            'Comments.id as commentId',
-            'Comments.title as commentTitle',
-            'Comments.content as commentContent',
-            'Comments.createdAt as commentCreatedAt',
-            'Users.username as username'
-          ).orderBy('createdAt', 'asc')
-          .then(data => {
-            data.forEach((item) => {
-              item.commentCreatedAt = moment(item.commentCreatedAt).toString();
-              comments.push(item);
-            });
-            post.comments = comments;
-
-            // get images
-            knex('Images').where('post_id', req.params.id).select()
-              .then(data => {
-                data.forEach((item) => {
-                  images.push(item);
-                });
-                post.images = images;
-                res.send({ ok: post });
-              })
-              .catch(err => {
-                res.status(422).send({ error: err });
-              });
-          })
-          .catch(err=> {
-            res.status(422).send({ error: err });
-          });
+          data[0].createdAt = moment(data[0].createdAt).toString();
+          res.send({ ok: data[0] });
         }
       })
       .catch(err => {
@@ -173,59 +119,6 @@ module.exports = {
           return;
         }else {
           res.send({ ok: 'Post deleted.' });
-        }
-      })
-      .catch(err => {
-        res.status(422).send({ error: err });
-      });
-  },
-
-  // save comments
-  savePostComment(req, res) {
-    if(!req.body.content) {
-      res.status(422).send({ error: 'You must have some content in your comment.' });
-      return;
-    }
-
-    if(!req.body.id || !req.body.user) {
-      res.send({ error: 'Missing data'});
-    }
-
-    //get user_id
-    knex('Users').where('username', req.body.user).select('id')
-      .then(data => {
-        // save comment
-        knex('Comments').insert({
-          post_id: req.body.id,
-          user_id: data[0].id,
-          title: req.body.title.trim(),
-          content: req.body.content.trim(),
-          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
-        })
-        .then(data => {
-          if(!data[0] > 0) {
-            res.status(422).send({ error: 'Comment was not saved.' });
-          }else {
-            res.send({ ok: 'Comment saved.' });
-          }
-        })
-        .catch(err => {
-          res.status(422).send({ error: err });
-        });
-      })
-      .catch(err => {
-        res.status(422).send({ error: err });
-      });
-  },
-
-  // delete a comment
-  deletePostComment(req, res) {
-    knex('Comments').where('id', req.params.id).del()
-      .then(data => {
-        if(!data == 1) {
-          res.status(422).send({ error: 'Comment does not exist.' });
-        }else {
-          res.send({ ok: 'Comment deleted.' });
         }
       })
       .catch(err => {

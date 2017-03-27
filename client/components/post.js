@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { getPost } from '../actions/post_actions';
+import  { getComments } from '../actions/comment_actions';
 import { formatDate } from '../utils/date_format';
 import { renderComments } from './comments';
 
@@ -22,11 +23,12 @@ class Post extends Component {
 
   componentWillMount() {
     this.props.getPost(this.props.params.id);
+    this.props.getComments('post_id', this.props.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave !== this.props.didSave) {
-      this.props.getPost(this.props.post.postId);
+    if (nextProps.didSave) {
+      this.props.getComments('post_id', this.props.post.id);
     }
   }
 
@@ -64,7 +66,7 @@ class Post extends Component {
   }
 
   render() {
-    if (!this.props.post) {
+    if (!this.props.post || !this.props.commentArray) {
       return <div>Loading...</div>
     }
 
@@ -73,11 +75,11 @@ class Post extends Component {
     return (
       <div>
         <div
-        key={this.props.post.postId}
+        key={this.props.post.id}
         className='post_item'>
-          <h1>{this.props.post.postTitle}</h1>
+          <h1>{this.props.post.title}</h1>
           <small>posted: {postDate}</small>
-          <p>{this.props.post.postContent}</p>
+          <p>{this.props.post.content}</p>
         </div>
         <div className='comments_section col-md-6'>
           <div className='row'>
@@ -85,7 +87,7 @@ class Post extends Component {
             {this.renderSignin()}
           </div>
           <ul className='comments_list'>
-            {this.props.post.comments.map(comment => renderComments(comment))}
+            {this.props.commentArray.map(comment => renderComments(comment))}
           </ul>
         </div>
         <div className='col-md-5 col-md-offset-1 auth_children'>
@@ -101,8 +103,9 @@ function mapStateToProps({ posts, auth, comments }) {
   return {
     post: posts.post,
     authenticated: auth.authenticated,
-    didSave: comments.commentSaved
+    didSave: comments.commentSaved,
+    commentArray: comments.commentArray
   };
 }
 
-export default connect(mapStateToProps, { getPost })(Post);
+export default connect(mapStateToProps, { getPost, getComments })(Post);

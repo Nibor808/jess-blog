@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { formatDate } from '../utils/date_format';
 import { getReview } from '../actions/review_actions';
+import { getComments } from '../actions/comment_actions';
 import { renderComments } from './comments';
 import { Link } from 'react-router';
 
@@ -16,11 +17,12 @@ class Review extends Component {
 
   componentWillMount() {
     this.props.getReview(this.props.params.id);
+    this.props.getComments('review_id', this.props.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave !== this.props.didSave) {
-      this.props.getReview(this.props.review.reviewId);
+    if (nextProps.didSave) {
+      this.props.getComments('review_id', this.props.review.id);
     }
   }
 
@@ -70,28 +72,28 @@ class Review extends Component {
   }
 
   render() {
-    if (!this.props.review) {
+    if (!this.props.review || !this.props.commentArray) {
       return <div>Loading...</div>;
     }
     const reviewDate = formatDate(this.props.review.createdAt);
     return (
       <div>
         <div
-        key={this.props.review.reviewId}
+        key={this.props.review.id}
         className='review_item col-md-12'>
-          <h1>{this.props.review.reviewTitle}</h1>
+          <h1>{this.props.review.title}</h1>
           <small>posted: {reviewDate}</small>
           <div className='row'>
-            <div className='col-md-6'>
+            <div className='col-md-6 pros'>
               <h3>Pros</h3>
               <p>{this.props.review.pros}</p>
             </div>
-            <div className='col-md-6'>
+            <div className='col-md-6 cons'>
               <h3>Cons</h3>
               <p>{this.props.review.cons}</p>
             </div>
           </div>
-          <p>{this.props.review.reviewContent}</p>
+          <p>{this.props.review.content}</p>
           <h3>Specs</h3>
           <ul className='col-md-12 specs_list'>
             {this.renderSpecs(this.props.review.specs)}
@@ -103,7 +105,7 @@ class Review extends Component {
             {this.renderSignin()}
           </div>
           <ul className='comments_list'>
-            {this.props.review.comments.map(comment => renderComments(comment))}
+            {this.props.commentArray.map(comment => renderComments(comment))}
           </ul>
         </div>
         <div className='col-md-5 col-md-offset-1 auth_children'>
@@ -119,8 +121,9 @@ function mapStateToProps({ reviews, auth, comments }) {
   return {
     review: reviews.review,
     authenticated: auth.authenticated,
-    didSave: comments.commentSaved
+    didSave: comments.commentSaved,
+    commentArray: comments.commentArray
   };
 }
 
-export default connect(mapStateToProps, { getReview })(Review);
+export default connect(mapStateToProps, { getReview, getComments })(Review);

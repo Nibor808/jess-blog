@@ -5,9 +5,7 @@
   "main": "app.js",
   "scripts": {
     "rimraf": "rimraf dist",
-    "webpack:prod": "webpack --config config/webpack.config.js",
-    "webpack:dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "client": "NODE_ENV=development npm run rimraf && npm run webpack:prod",
+    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "lint": "esw --config config/.eslintrc.json --cache --quiet --color --watch"
   },
   "repository": {

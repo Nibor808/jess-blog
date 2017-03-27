@@ -40,17 +40,14 @@ class AddComment extends Component {
 
   handleFormSubmit({ title, content }) {
     const user = localStorage.getItem('user');
-
     if (this.props.post_id === undefined) {
-      const id = this.props.review_id;
-      const isReview = true;
-      const isPost = false;
-      this.props.saveComment({ id, isReview, isPost, user, title, content });
+      const idtype = 'review_id';
+      const typeid = this.props.review_id
+      this.props.saveComment({ idtype, typeid, user, title, content });
     }else {
-      const id = this.props.post_id;
-      const isPost = true;
-      const isReview = false;
-      this.props.saveComment({ id, isReview, isPost, user, title, content });
+      const idtype = 'post_id';
+      const typeid = this.props.post_id
+      this.props.saveComment({ idtype, typeid, user, title, content });
     }
   }
 
@@ -94,14 +91,14 @@ function validate(values) {
 function mapStateToProps({ posts, reviews, comments }) {
   if (posts.post) {
     return {
-      post_id: posts.post.postId,
+      post_id: posts.post.id,
       didSave: comments.commentSaved,
       errorMessage: comments.error
     }
   }
   if(reviews.review) {
     return {
-      review_id: reviews.review.reviewId,
+      review_id: reviews.review.id,
       didSave: comments.commentSaved,
       errorMessage: comments.error
     }

@@ -7,10 +7,10 @@ const bodyParser = require('body-parser');
 const postRoutes = require('./routes/post_routes');
 const userRoutes = require('./routes/user_routes');
 const reviewRoutes = require('./routes/review_routes');
+const commentRoutes = require('./routes/comments_routes');
 
 const app = express();
 
-// app.use(express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('short'));
@@ -19,6 +19,7 @@ app.use(cors());
 postRoutes(app);
 userRoutes(app);
 reviewRoutes(app);
+commentRoutes(app);
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
