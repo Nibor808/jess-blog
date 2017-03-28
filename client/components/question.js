@@ -1,35 +1,29 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { getPost } from '../actions/post_actions';
-import  { getComments } from '../actions/comment_actions';
-import { getImages } from '../actions/image_actions';
-import { formatDate } from '../utils/date_format';
+import { getQuestion } from '../actions/question_actions';
+import { getComments } from '../actions/comment_actions';
 import { renderComments } from './comments_list';
+import { formatDate } from '../utils/date_format';
 
-class Post extends Component {
+class Question extends Component {
 
   static propTypes = {
-    getPost: PropTypes.func,
-    post: PropTypes.object,
-    params: PropTypes.object,
-    id: PropTypes.number,
-    authenticated: PropTypes.bool
-  }
-
-  static contextTypes = {
-    router: PropTypes.object
+    question: PropTypes.object,
+    authenticated: PropTypes.bool,
+    commentArray: PropTypes.array,
+    didSave: PropTypes.bool,
+    getQuestion: PropTypes.func
   }
 
   componentWillMount() {
-    this.props.getPost(this.props.params.id);
-    this.props.getComments('post_id', this.props.params.id);
-    this.props.getImages('post_id', this.props.params.id)
+    this.props.getQuestion(this.props.params.id);
+    this.props.getComments('question_id', this.props.params.id)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didSave) {
-      this.props.getComments('post_id', this.props.post.id);
+      this.props.getComments('question_id', this.props.question.id);
     }
   }
 
@@ -37,7 +31,7 @@ class Post extends Component {
     if (!this.props.authenticated) {
       return (
         <div className='col-md-6'>
-          <Link to='/signin_post' className='pull-right login'>
+          <Link to='/signin_question' className='pull-right login'>
             <button className='btn btn-default'>sign in to comment</button>
           </Link>
         </div>
@@ -45,7 +39,7 @@ class Post extends Component {
     }else {
       return (
         <div className='col-md-6'>
-          <Link to='/addcomment_post' className='pull-right login'>
+          <Link to='/addcomment_question' className='pull-right login'>
             <button className='btn btn-default'>add a comment</button>
           </Link>
         </div>
@@ -58,7 +52,7 @@ class Post extends Component {
       return (
         <div className='signup_prompt text-center'>
           <h3>Not already part of the converstation?</h3>
-          <Link to='/signup_post'>
+          <Link to='/signup_question'>
             <button type='button' className='btn btn-primary'>sign up</button>
           </Link>
         </div>
@@ -66,23 +60,34 @@ class Post extends Component {
     }
   }
 
+  renderAnswer() {
+    if (this.props.question.answer) {
+      return (
+        <div>
+          <h3>Answer:</h3>
+          <p>{this.props.question.answer}</p>
+        </div>
+      )
+    }
+    return <div></div>
+  }
+
   render() {
-    if (!this.props.post || !this.props.commentArray || !this.props.imageArray) {
+    if (!this.props.question || !this.props.commentArray) {
       return <div>Loading...</div>
     }
 
-    const postDate = formatDate(this.props.post.createdAt);
-    const src = `http://localhost:8080/images/${this.props.imageArray[0].file}`;
+    const questionDate = formatDate(this.props.question.createdAt);
 
     return (
       <div>
         <div
-        key={this.props.post.id}
-        className='post_item'>
-          <h1>{this.props.post.title}</h1>
-          <small>posted: {postDate}</small>
-          <p>{this.props.post.content}</p>
-          <img src={src} height='400px' width='400px' />
+        key={this.props.question.id}
+        className='question_item'>
+          <h1>{this.props.question.title}</h1>
+          <small>posted: {questionDate}</small>
+          <p>{this.props.question.content}</p>
+          {this.renderAnswer()}
         </div>
         <div className='comments_section col-md-6'>
           <div className='row'>
@@ -102,14 +107,13 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps({ posts, auth, comments, images }) {
+function mapStateToProps({ questions, auth, comments }) {
   return {
-    post: posts.post,
+    question: questions.question,
     authenticated: auth.authenticated,
-    didSave: comments.commentSaved,
     commentArray: comments.commentArray,
-    imageArray: images.imageArray
-  };
+    didSave: comments.commentSaved
+  }
 }
 
-export default connect(mapStateToProps, { getPost, getComments, getImages })(Post);
+export default connect(mapStateToProps, { getQuestion, getComments })(Question);

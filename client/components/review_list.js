@@ -5,35 +5,34 @@ import { Link } from 'react-router';
 import { formatDate } from '../utils/date_format';
 
 class ReviewList extends Component {
-
   static propTypes = {
-    getAllReviews: PropTypes.func,
-    allReviews: PropTypes.array
+    allReviews: PropTypes.array,
+    getAllReviews: PropTypes.func
   }
 
   componentWillMount() {
     this.props.getAllReviews();
   }
 
-  renderReview(reviewData) {
+  renderReviews(reviewData) {
+    const content = reviewData.content.substring(0, 250);
     const reviewDate = formatDate(reviewData.createdAt);
     return (
-      <li
-      key={reviewData.id}
-      className='list-group-item'>
-        <Link className='review_link' to={`/review/${reviewData.id}`}>{reviewData.title}</Link>
-        <small className='pull-right'>{reviewDate}</small>
-      </li>
-    );
+      <div
+        key={reviewData.id}
+        className='review_item'>
+        <Link className='review_link' to={`review/${reviewData.id}`}><h2>{reviewData.title}</h2></Link>
+        <small>{reviewDate}</small>
+        <p className='review_content'>{content}...</p>
+      </div>
+    )
   }
 
   render() {
     return (
-      <ul
-      className='list-group col-md-4 review_list'>
-        <li className='list-group-item'><h2>Recent Reviews</h2></li>
-        {this.props.allReviews.map(this.renderReview)}
-      </ul>
+      <div className='col-md-8 review_list'>
+        {this.props.allReviews.map(this.renderReviews)}
+      </div>
     );
   }
 }

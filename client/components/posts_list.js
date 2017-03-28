@@ -17,20 +17,25 @@ class PostsList extends Component {
   renderPosts(postData) {
     const content = postData.content.substring(0, 250);
     const postDate = formatDate(postData.createdAt);
+
     return (
       <div
         key={postData.id}
         className='post_item'>
-        <Link className='posts_link' to={`post/${postData.id}`}><h2>{postData.title}</h2></Link>
-        <small>{postDate}</small>
-        <p className='post_content'>{content}...</p>
-      </div>
+          <Link className='posts_link' to={`post/${postData.id}`}><h2>{postData.title}</h2></Link>
+          <small>{postDate}</small>
+          <p className='post_content'>{content}...</p>
+        </div>
     )
   }
 
   render() {
+    if (!this.props.allPosts) {
+      return <div>Loading...</div>
+    }
+
     return (
-      <div className='col-md-8 post_list_item'>
+      <div className='col-md-8 post_list'>
         {this.props.allPosts.map(this.renderPosts)}
       </div>
     );

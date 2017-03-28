@@ -22,10 +22,12 @@ li.list-group-item,
 .post_item,
 .comments_section,
 .review_item,
+.question_item,
 .signin_form,
 .signup_form,
 .comment_form,
-.signup_prompt {
+.signup_prompt,
+.page_header_content {
   background-color: $white;
   border-radius: 3px;
 }
@@ -37,12 +39,6 @@ li.list-group-item,
   padding: 20px;
 }
 
-.signin_div,
-.signup_prompt,
-.signup_form {
-  margin-left: 20px;
-}
-
 .signout_div {
   margin-top: 9px;
 
@@ -52,11 +48,12 @@ li.list-group-item,
 }
 
 .signin_div,
-.signup_form {
+.signup_form,
+.signup_prompt {
   margin-bottom: 20px;
 }
 
-.comment_login {
+.login {
   margin-top: 20px;
 }
 
@@ -66,14 +63,17 @@ li.list-group-item,
   margin-bottom: 40px;
 }
 
-.post_list_item {
+.post_list,
+.review_list,
+.question_list {
   padding-left: 0;
-  padding-right: 20px;
 }
 
-.review_list,
+.review_sidebar,
+.post_sidebar,
 .auth_children {
   padding-right: 0;
+  padding-left: 0;
 }
 
 .container {
@@ -85,7 +85,8 @@ li.list-group-item,
 }
 
 .post_item,
-.review_item {
+.review_item,
+.question_item {
   padding: 20px;
   margin-bottom: 20px;
 }
@@ -103,4 +104,22 @@ li.list-group-item,
   -webkit-columns: 2;
   -moz-columns: 2;
   list-style: none;
+}
+
+.proscons,
+.date {
+  margin-bottom: 40px;
+}
+
+.page_header{
+  padding-left: 0;
+
+  .page_header_content {
+    margin-bottom: 30px;
+    padding: 17px;
+
+    .page_header_title {
+      padding: 0;
+    }
+  }
 }

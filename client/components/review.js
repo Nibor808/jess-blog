@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { formatDate } from '../utils/date_format';
 import { getReview } from '../actions/review_actions';
 import { getComments } from '../actions/comment_actions';
-import { renderComments } from './comments';
+import { getImages } from '../actions/image_actions';
+import { renderComments } from './comments_list';
 import { Link } from 'react-router';
 
 class Review extends Component {
@@ -18,6 +19,7 @@ class Review extends Component {
   componentWillMount() {
     this.props.getReview(this.props.params.id);
     this.props.getComments('review_id', this.props.params.id);
+    this.props.getImages('review_id', this.props.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,7 +32,7 @@ class Review extends Component {
     if (!this.props.authenticated) {
       return (
         <div className='col-md-6'>
-          <Link to='/signin_review' className='pull-right comment_login'>
+          <Link to='/signin_review' className='pull-right login'>
             <button className='btn btn-default'>sign in to comment</button>
           </Link>
         </div>
@@ -38,7 +40,7 @@ class Review extends Component {
     }else {
       return (
         <div className='col-md-6'>
-          <Link to='/addcomment_review' className='pull-right comment_login'>
+          <Link to='/addcomment_review' className='pull-right login'>
             <button className='btn btn-default'>add a comment</button>
           </Link>
         </div>
@@ -72,23 +74,33 @@ class Review extends Component {
   }
 
   render() {
-    if (!this.props.review || !this.props.commentArray) {
+    if (!this.props.review || !this.props.commentArray || !this.props.imageArray) {
       return <div>Loading...</div>;
     }
+
     const reviewDate = formatDate(this.props.review.createdAt);
+    const src = `http://localhost:8080/images/${this.props.imageArray[0].file}`;
+
     return (
       <div>
         <div
         key={this.props.review.id}
         className='review_item col-md-12'>
-          <h1>{this.props.review.title}</h1>
-          <small>posted: {reviewDate}</small>
           <div className='row'>
-            <div className='col-md-6 pros'>
+            <h1>{this.props.review.title}</h1>
+          </div>
+          <div className='row date'>
+            <small>posted: {reviewDate}</small>
+          </div>
+          <div className='row'>
+            <img src={src} height='400px' width='400px' />
+          </div>
+          <div className='row proscons'>
+            <div className='col-md-6'>
               <h3>Pros</h3>
               <p>{this.props.review.pros}</p>
             </div>
-            <div className='col-md-6 cons'>
+            <div className='col-md-6'>
               <h3>Cons</h3>
               <p>{this.props.review.cons}</p>
             </div>
@@ -117,13 +129,14 @@ class Review extends Component {
   }
 }
 
-function mapStateToProps({ reviews, auth, comments }) {
+function mapStateToProps({ reviews, auth, comments, images }) {
   return {
     review: reviews.review,
     authenticated: auth.authenticated,
     didSave: comments.commentSaved,
-    commentArray: comments.commentArray
+    commentArray: comments.commentArray,
+    imageArray: images.imageArray
   };
 }
 
-export default connect(mapStateToProps, { getReview, getComments })(Review);
+export default connect(mapStateToProps, { getReview, getComments, getImages })(Review);

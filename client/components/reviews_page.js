@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import PostList from './posts_list';
 import ReviewList from './review_list';
+import PostSidebar from './post_sidebar';
 
-export default class Landing extends Component {
+export default class ReviewsPage extends Component {
 
   render() {
     return (
-      <div className='landing_main'>
-        <PostList />
+      <div>
         <ReviewList />
+        <PostSidebar />
       </div>
     );
   }

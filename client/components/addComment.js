@@ -31,7 +31,8 @@ class AddComment extends Component {
     didSave: PropTypes.bool,
     handleSubmit: PropTypes.func,
     submitting: PropTypes.bool,
-    review_id: PropTypes.number
+    review_id: PropTypes.number,
+    question_id: PropTypes.number
   }
 
   static contextTypes = {
@@ -40,13 +41,20 @@ class AddComment extends Component {
 
   handleFormSubmit({ title, content }) {
     const user = localStorage.getItem('user');
-    if (this.props.post_id === undefined) {
+    if (this.props.post_id === undefined && this.props.question_id === undefined) {
+      // it's a review
       const idtype = 'review_id';
       const typeid = this.props.review_id
       this.props.saveComment({ idtype, typeid, user, title, content });
-    }else {
+    }else if (this.props.review_id === undefined && this.props.question_id === undefined) {
+      // it's a post
       const idtype = 'post_id';
       const typeid = this.props.post_id
+      this.props.saveComment({ idtype, typeid, user, title, content });
+    }else {
+      // it's a question
+      const idtype = 'question_id';
+      const typeid = this.props.question_id;
       this.props.saveComment({ idtype, typeid, user, title, content });
     }
   }
@@ -88,7 +96,7 @@ function validate(values) {
   }
 }
 
-function mapStateToProps({ posts, reviews, comments }) {
+function mapStateToProps({ posts, reviews, questions, comments }) {
   if (posts.post) {
     return {
       post_id: posts.post.id,
@@ -96,14 +104,20 @@ function mapStateToProps({ posts, reviews, comments }) {
       errorMessage: comments.error
     }
   }
-  if(reviews.review) {
+  if (reviews.review) {
     return {
       review_id: reviews.review.id,
       didSave: comments.commentSaved,
       errorMessage: comments.error
     }
   }
-
+  if (questions.question) {
+    return {
+      question_id: questions.question.id,
+      didSave: comments.commentSaved,
+      errorMessage: questions.error
+    }
+  }
 }
 
 AddComment = reduxForm({

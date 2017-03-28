@@ -37,6 +37,18 @@ exports.up = function(knex) {
     })
     .then(function() {
       return knex.schema
+        .createTableIfNotExists('Questions', function(table) {
+          table.increments('id').primary();
+          table.string('title').notNull();
+          table.text('content').notNull();
+          table.string('answer').nullable();
+          table.string('category').notNull();
+          table.string('keywords').notNull();
+          table.dateTime('createdAt').notNull();
+        });
+    })
+    .then(function() {
+      return knex.schema
         .createTableIfNotExists('Comments', function(table) {
           table.increments('id').primary();
           table.integer('post_id').unsigned();
@@ -45,6 +57,9 @@ exports.up = function(knex) {
           table.foreign('user_id').references('id').inTable('Users').onDelete('CASCADE');
           table.integer('review_id').unsigned();
           table.foreign('review_id').references('id').inTable('Reviews').onDelete('CASCADE');
+          table.integer('question_id').unsigned();
+          table.foreign('question_id').references('id').inTable('Questions').onDelete('CASCADE');
+          table.integer('parent_comment_id').nullable();
           table.string('title').nullable();
           table.text('content').notNull();
           table.dateTime('createdAt').notNull();

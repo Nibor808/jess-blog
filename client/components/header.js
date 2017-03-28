@@ -38,9 +38,9 @@ class Header extends Component {
 
           <div className='collapse navbar-collapse' id='main-nav'>
             <ul className='nav navbar-nav'>
-              <li><a href='/'>Home</a></li>
-              <li><a href='!#'>Reviews</a></li>
-              <li><a href='!#'>Q&A</a></li>
+              <li><a href='/'>Posts</a></li>
+              <li><a href='/reviews'>Reviews</a></li>
+              <li><a href='/questions'>Q&A</a></li>
             </ul>
             <div className='nav navbar-nav navbar-right'>
               {this.renderNavRight()}

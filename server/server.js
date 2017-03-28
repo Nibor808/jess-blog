@@ -8,6 +8,8 @@ const postRoutes = require('./routes/post_routes');
 const userRoutes = require('./routes/user_routes');
 const reviewRoutes = require('./routes/review_routes');
 const commentRoutes = require('./routes/comments_routes');
+const imageRoutes = require('./routes/image_routes');
+const questionRoutes = require('./routes/question_routes');
 
 const app = express();
 
@@ -20,6 +22,8 @@ postRoutes(app);
 userRoutes(app);
 reviewRoutes(app);
 commentRoutes(app);
+imageRoutes(app);
+questionRoutes(app);
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);

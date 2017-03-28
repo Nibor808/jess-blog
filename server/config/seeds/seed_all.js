@@ -7,6 +7,9 @@ exports.seed = function(knex, Promise) {
       return seedPosts()
     })
     .then(function() {
+      return seedQuestions()
+    })
+    .then(function() {
       return seedReviews()
     })
     .then(function() {
@@ -68,6 +71,54 @@ function seedPosts() {
           facere? Maiores, debitis.`,
           category: 'cpus',
           keywords: 'cpu',
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+      ]);
+    });
+};
+
+function seedQuestions() {
+  console.log('Seeding questions...');
+  return knex('Questions').del()
+    .then(function () {
+      return knex('Questions').insert([
+        {
+          title: 'What\'s the best gaming monitor under $200?',
+          content: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Dolorum sapiente inventore repellendus explicabo dolore consequatur nesciunt ex repellat corrupti
+          laudantium. Ad fuga, voluptas ducimus libero, exercitationem sunt temporibus voluptate vel! Lorem
+          ipsum dolor sit amet, consectetur adipisicing elit. Sunt corporis mollitia, magnam, quod aperiam
+          sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
+          facere? Maiores, debitis.`,
+          answer: 'The blah blah blah monitor is the best',
+          category: 'monitors',
+          keywords: 'monitor, gaming monitor, best, under 200',
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'Should I but a mac or pc?',
+          content: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Dolorum sapiente inventore repellendus explicabo dolore consequatur nesciunt ex repellat corrupti
+          laudantium. Ad fuga, voluptas ducimus libero, exercitationem sunt temporibus voluptate vel! Lorem
+          ipsum dolor sit amet, consectetur adipisicing elit. Sunt corporis mollitia, magnam, quod aperiam
+          sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
+          facere? Maiores, debitis.`,
+          answer: 'Definitely get the mac...',
+          category: 'computers',
+          keywords: 'mac, pc, compare, windows',
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'Is the Microsoft wireless 850 quiet?',
+          content: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Dolorum sapiente inventore repellendus explicabo dolore consequatur nesciunt ex repellat corrupti
+          laudantium. Ad fuga, voluptas ducimus libero, exercitationem sunt temporibus voluptate vel! Lorem
+          ipsum dolor sit amet, consectetur adipisicing elit. Sunt corporis mollitia, magnam, quod aperiam
+          sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
+          facere? Maiores, debitis.`,
+          answer: 'Depending on your definition of quiet. Yes it is.',
+          category: 'keybords',
+          keywords: 'keyboard, quiet',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
       ]);
@@ -209,6 +260,76 @@ function seedComments() {
           review_id: 2,
           user_id: 3,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'What a strange question',
+          content: 'This seems like a strange question.',
+          question_id: 1,
+          user_id: 1,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'Acer 5000',
+          content: 'The Acer 5000 has been my go to monitor for years.',
+          question_id: 1,
+          user_id: 2,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'PC all the way!!!!',
+          content: 'PC\'s are obviously the best for everything.',
+          question_id: 2,
+          user_id: 3,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'Mac FTW!',
+          content: 'Once you go mac you will never go back.',
+          question_id: 2,
+          user_id: 1,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'Not really sure.',
+          content: 'It depends on what you are goin gto use it for.',
+          question_id: 2,
+          user_id: 2,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'I disagree.',
+          content: 'I got one of these and it sounds like a herd of elephants walking in the room.',
+          question_id: 3,
+          user_id: 1,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'I disagree.',
+          content: 'This is not such a great comment',
+          parent_comment_id: 1,
+          user_id: 1,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'Your crazy!!',
+          content: 'Still a great comment.',
+          parent_comment_id: 1,
+          user_id: 1,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'Hmm...',
+          content: 'I thought it was a pretty good review.',
+          parent_comment_id: 7,
+          user_id: 1,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          title: 'Meh.',
+          content: 'It\'s ok I guess',
+          parent_comment_id: 1,
+          user_id: 1,
+          createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         }
       ]);
     });
@@ -221,19 +342,23 @@ function seedImages() {
       return knex('Images').insert([
         {
           post_id: 1,
-          file: 'img1.jpg'
+          file: 'monitor1.png'
         },
         {
           review_id: 1,
-          file: 'img4.png'
+          file: 'monitor2.png'
         },
         {
           post_id: 2,
-          file: 'img6.jpg'
+          file: 'monitor3.png'
         },
         {
           review_id: 2,
-          file: 'img8.jpg'
+          file: 'monitor1.png'
+        },
+        {
+          post_id: 3,
+          file: 'monitor2.png'
         }
       ]);
     });

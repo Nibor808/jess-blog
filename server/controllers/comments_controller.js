@@ -1,7 +1,7 @@
 const knex = require('../utils/db');
 const moment = require('moment');
 
-module.exports = CommentsController = {
+module.exports = {
 
   //get all comments for a post, review or as a reply
   getComments(req, res) {
