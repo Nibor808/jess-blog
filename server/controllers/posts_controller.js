@@ -7,7 +7,7 @@ module.exports = {
   getAllPosts(req, res) {
     knex('Posts').select()
       .then(data => {
-        if(!data.length) {
+        if(!data.length > 0) {
           res.status(204).send({ error: 'No posts to get' });
         }else {
           data.forEach((item) => {
@@ -26,7 +26,7 @@ module.exports = {
     knex('Posts').where('id', req.params.id)
     .select()
       .then(data => {
-        if(!data.length) {
+        if(!data.length > 0) {
           res.status(204).send({ error: 'Post does not exist' });
           return;
         }else {

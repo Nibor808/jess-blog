@@ -15,7 +15,7 @@ module.exports = {
   getUsers(req, res) {
     knex('Users').select()
       .then(data => {
-        if(!data.length) {
+        if(!data.length > 0) {
           res.status(204).send({ error: 'No users no get.'});
           return;
         }else {
@@ -31,7 +31,7 @@ module.exports = {
   getUser(req, res) {
     knex('Users').where('id', req.params.id).select()
       .then(data => {
-        if(!data.length) {
+        if(!data.length > 0) {
           res.status(204).send({ error: 'No such user.' });
           return;
         }else {

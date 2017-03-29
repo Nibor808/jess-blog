@@ -35,15 +35,29 @@ module.exports = {
   },
 
   saveQuestion(req, res) {
-    if (!req.body.title || !req.body.content) {
-      res.status(422).send({ error: 'Your question must have a title and some content.' })
+    if (!req.body.title || !req.body.content || !req.body.category) {
+      res.status(422).send({ error: 'Your question must have a title, a category and some content.' })
       return;
     }
+    const keywords = req.body.keywordArray.join()
 
     knex('Questions').insert({
       title: req.body.title,
       content: req.body.content,
       answer: null,
+      category: req.body.category,
+      keywords,
+      createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
     })
+    .then(data => {
+      if (!data[0] > 0) {
+        res.status(422).send({ error: 'Question not saved' })
+      }else {
+        res.send({ ok: 'Question was saved' })
+      }
+    })
+    .catch(err => {
+      res.status(422).send({ error: err })
+    });
   }
 }

@@ -17,6 +17,7 @@ import Question from './components/question/question';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import AddComment from './components/comment/addComment';
+import AskQuestion from './components/question/ask_question';
 import requireAuth from './components/auth/requireAuth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
@@ -39,7 +40,7 @@ ReactDOM.render(
         <Route path='/questions' component={QuestionPage}>
           <Route path='/signin_question_page' component={Signin} />
           <Route path='/signup_question_page' component={Signup} />
-          <Route path='/askquestion' component={requireAuth(AddComment)} />
+          <Route path='/askquestion' component={requireAuth(AskQuestion)} />
         </Route>
         <Route path='/post/:id' component={Post}>
           <Route path='/signin_post' component={Signin} />

@@ -12,4 +12,6 @@ export const GET_IMAGES = 'GET_IMAGES';
 export const GET_ALL_IMAGES = 'GET_ALL_IMAGES';
 export const GET_ALL_QUESTIONS = 'GET_ALL_QUESTIONS';
 export const GET_QUESTION = 'GET_QUESTION';
+export const SAVE_QUESTION = 'SAVE_QUESTION';
+export const RESET_QUESTION_STATE = 'RESET_QUESTION_STATE';
 export const ERROR = 'ERROR';

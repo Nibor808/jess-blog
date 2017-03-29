@@ -7,7 +7,7 @@ module.exports = {
   getAllReviews(req, res) {
     knex('Reviews').select()
       .then(data => {
-        if(!data.length) {
+        if(!data.length > 0) {
           res.status(204).send({ error: 'No reviews to get' });
         }else {
           data.forEach((item) => {
@@ -26,7 +26,7 @@ module.exports = {
     knex('Reviews').where('id', req.params.id)
     .select()
       .then(data => {
-        if(!data.length) {
+        if(!data.length > 0) {
           res.status(204).send({ error: 'Review does not exist' });
           return;
         }else {

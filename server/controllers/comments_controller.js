@@ -17,7 +17,7 @@ module.exports = {
       'Users.username as username'
     ).orderBy('createdAt', 'asc')
     .then(data => {
-      if (!data.length) {
+      if (!data.length > 0) {
         res.status(204).send({ error: 'No comments' })
       }else {
         data.forEach((item) => {

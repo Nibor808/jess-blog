@@ -62,6 +62,18 @@ class Post extends Component {
     }
   }
 
+  hasComments() {
+    if (!this.props.commentArray) {
+      return <p className='col-md-6'>Be the first to comment.</p>
+    }else {
+      return (
+        <ul className='comments_list'>
+          {this.props.commentArray.map(comment => renderComments(comment))}
+        </ul>
+      )
+    }
+  }
+
   render() {
     if (!this.props.post || !this.props.commentArray || !this.props.imageArray) {
       return <div>Loading...</div>
@@ -85,9 +97,7 @@ class Post extends Component {
             <div className='col-md-6'><h3>Comments:</h3></div>
             {this.renderSignin()}
           </div>
-          <ul className='comments_list'>
-            {this.props.commentArray.map(comment => renderComments(comment))}
-          </ul>
+          {this.hasComments()}
         </div>
         <div className='col-md-5 col-md-offset-1 auth_children'>
           {this.props.children}

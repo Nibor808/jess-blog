@@ -14,9 +14,20 @@ class QuestionList extends Component {
     this.props.getAllQuestions()
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.didSave) {
+      this.props.getAllQuestions()
+    }
+  }
+
   renderQuestions(questionData) {
-    const content = questionData.content.substring(0, 250);
     const questionDate = formatDate(questionData.createdAt);
+    let content;
+    if (questionData.content.length > 250) {
+      content = questionData.content.substring(0, 250) + '...';
+    }else {
+      content = questionData.content;
+    }
 
     return (
       <div
@@ -24,7 +35,7 @@ class QuestionList extends Component {
         className='question_item'>
         <Link className='question_link' to={`question/${questionData.id}`}><h2>{questionData.title}</h2></Link>
         <small>{questionDate}</small>
-        <p className='question_content'>{content}...</p>
+        <p className='question_content'>{content}</p>
       </div>
     );
   }
@@ -40,7 +51,8 @@ class QuestionList extends Component {
 
 function mapStateToProps({ questions }) {
   return {
-    allQuestions: questions.allQuestions
+    allQuestions: questions.allQuestions,
+    didSave: questions.questionSaved
   };
 }
 
