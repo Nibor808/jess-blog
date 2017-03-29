@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { getQuestion } from '../actions/question_actions';
-import { getComments } from '../actions/comment_actions';
-import { renderComments } from './comments_list';
-import { formatDate } from '../utils/date_format';
+import { getQuestion } from '../../actions/question_actions';
+import { getComments } from '../../actions/comment_actions';
+import { renderComments } from '../comment/comments_list';
+import { formatDate } from '../../utils/date_format';
 
 class Question extends Component {
 

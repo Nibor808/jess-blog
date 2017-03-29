@@ -38,23 +38,19 @@ class Signin extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className='signin_div'>
-        <div className='row'>
-          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signin_form'>
-            <div className='form-group'>
-              <label htmlFor='email'>Email</label>
-              <Field name='email' component='input' type='email' className='form-control'/>
-            </div>
-            <div className='form-group'>
-              <label htmlFor='password'>Password:</label>
-              <Field name='password' component='input' type='password' className='form-control' />
-            </div>
-            {this.renderAlert()}
-            <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>cancel</button>
-            <button type='submit' className='btn btn-default pull-right'>sign in</button>
-          </form>
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signin_form'>
+        <div className='form-group'>
+          <label htmlFor='email'>Email</label>
+          <Field name='email' component='input' type='email' className='form-control'/>
         </div>
-      </div>
+        <div className='form-group'>
+          <label htmlFor='password'>Password:</label>
+          <Field name='password' component='input' type='password' className='form-control' />
+        </div>
+        {this.renderAlert()}
+        <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>cancel</button>
+        <button type='submit' className='btn btn-default pull-right'>sign in</button>
+      </form>
     );
   }
 }

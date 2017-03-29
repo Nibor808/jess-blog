@@ -17,11 +17,15 @@ module.exports = {
       'Users.username as username'
     ).orderBy('createdAt', 'asc')
     .then(data => {
-      data.forEach((item) => {
-        item.commentCreatedAt = moment(item.commentCreatedAt).toString();
-        comments.push(item);
-      })
-      res.send({ ok: comments });
+      if (!data.length) {
+        res.status(204).send({ error: 'No comments' })
+      }else {
+        data.forEach((item) => {
+          item.commentCreatedAt = moment(item.commentCreatedAt).toString();
+          comments.push(item);
+        })
+        res.send({ ok: comments });
+      }
     })
     .catch(err => {
       res.status(422).send({ error: 'Could not get coments' })
@@ -70,7 +74,7 @@ module.exports = {
     knex('Comments').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {
-          res.status(422).send({ error: 'Comment does not exist.' });
+          res.status(204).send({ error: 'Comment does not exist.' });
         }else {
           res.send({ ok: 'Comment deleted.' });
         }

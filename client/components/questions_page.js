@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import QuestionList from './question_list';
-import PostSidebar from './post_sidebar';
-import ReviewSidebar from './review_sidebar';
+import QuestionList from './question/question_list';
+import PostSidebar from './post/post_sidebar';
+import ReviewSidebar from './review/review_sidebar';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -42,7 +42,7 @@ class QuestionsPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className='col-md-12 question_page'>
         <div className='col-md-8 page_header'>
           <div className='page_header_content'>
             <div className='row'>
@@ -54,12 +54,12 @@ class QuestionsPage extends Component {
               <p>Sign in and I will try to get to it as soon as possible.</p>
             </div>
           </div>
+          <QuestionList />
         </div>
         <div className='col-md-4 auth_children'>
           {this.props.children}
           {this.renderSignup()}
         </div>
-        <QuestionList />
         <PostSidebar />
         <ReviewSidebar />
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDate } from '../utils/date_format';
+import { formatDate } from '../../utils/date_format';
 
 export function renderComments(commentData) {
   const commentDate = formatDate(commentData.commentCreatedAt);

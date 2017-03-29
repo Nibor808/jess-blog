@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getAllQuestions } from '../actions/question_actions';
 import { Link } from 'react-router';
-import { formatDate } from '../utils/date_format';
+import { getAllQuestions } from '../../actions/question_actions';
+import { formatDate } from '../../utils/date_format';
 
 class QuestionList extends Component {
   static propTypes = {
@@ -31,7 +31,7 @@ class QuestionList extends Component {
 
   render() {
     return (
-      <div className='col-md-8 question_list'>
+      <div className='question_list'>
         {this.props.allQuestions.map(this.renderQuestions)}
       </div>
     );

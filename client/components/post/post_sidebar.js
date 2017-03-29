@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getAllPosts } from '../actions/post_actions';
 import { Link } from 'react-router';
-import { formatDate } from '../utils/date_format';
+import { getAllPosts } from '../../actions/post_actions';
+import { formatDate } from '../../utils/date_format';
 
 class PostSidebar extends Component {
 
@@ -15,7 +15,7 @@ class PostSidebar extends Component {
     this.props.getAllPosts();
   }
 
-  renderPostlist(postData) {
+  renderPostList(postData) {
     const postDate = formatDate(postData.createdAt);
     if (postData.title.length > 20) {
       postData.title = postData.title.substring(0, 20) + '...';
@@ -35,7 +35,7 @@ class PostSidebar extends Component {
       <ul
       className='list-group col-md-4 post_sidebar'>
         <li className='list-group-item'><h2>Recent Posts</h2></li>
-        {this.props.allPosts.map(this.renderPostlist)}
+        {this.props.allPosts.map(this.renderPostList)}
       </ul>
     );
   }

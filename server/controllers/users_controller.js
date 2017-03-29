@@ -16,7 +16,7 @@ module.exports = {
     knex('Users').select()
       .then(data => {
         if(!data.length) {
-          res.status(422).send({ error: 'No users no get.'});
+          res.status(204).send({ error: 'No users no get.'});
           return;
         }else {
           res.send({ ok: data });
@@ -32,7 +32,7 @@ module.exports = {
     knex('Users').where('id', req.params.id).select()
       .then(data => {
         if(!data.length) {
-          res.status(422).send({ error: 'No such user.' });
+          res.status(204).send({ error: 'No such user.' });
           return;
         }else {
           res.send({ ok: data });
@@ -59,9 +59,9 @@ module.exports = {
         const email = req.body.email.toLowerCase();
 
         knex('Users').insert({
-          email,
-          password: req.body.password,
-          username: req.body.username
+          email: req.body.email.trim(),
+          password: req.body.password.trim(),
+          username: req.body.username.trim()
         })
         .then(data => {
           if(!data[0] > 0) {
@@ -94,7 +94,7 @@ module.exports = {
     knex('Users').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {
-          res.status(422).send({ error: 'User doesn\'t exist.' });
+          res.status(204).send({ error: 'User doesn\'t exist.' });
         }else {
           res.send({ ok: 'User deleted.' });
         }
@@ -126,7 +126,7 @@ module.exports = {
         })
           .then(data => {
             if (!data == 1) {
-              res.status(422).send({ error: 'User with this email not found.' });
+              res.status(204).send({ error: 'User with this email not found.' });
             }else {
               res.send({ ok: 'Email sent.' });
             }
@@ -143,7 +143,7 @@ module.exports = {
     knex('Users').where('email', req.params.user).select()
       .then(data => {
         if (!data.length) {
-          res.status(422).send({ error: 'User not found.' });
+          res.status(204).send({ error: 'User not found.' });
         }else if (req.params.token !== data.passResetToken){
           res.status(422).send({ error: 'Link expired.' });
         }else {

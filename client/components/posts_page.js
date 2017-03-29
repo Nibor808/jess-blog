@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import PostList from './posts_list';
-import ReviewSidebar from './review_sidebar';
+import PostList from './post/posts_list';
+import ReviewSidebar from './review/review_sidebar';
+import QuestionSideBar from './question/question_sidebar';
 
 export default class PostsPage extends Component {
   render() {
@@ -8,6 +9,7 @@ export default class PostsPage extends Component {
       <div>
         <PostList />
         <ReviewSidebar />
+        <QuestionSideBar />
       </div>
     );
   }

@@ -6,7 +6,7 @@ module.exports = {
     knex('Questions').select()
     .then(data => {
       if (!data.length > 0) {
-        res.status(422).send({ error: 'No questions' })
+        res.status(204).send({ error: 'No questions' })
       }else {
         data.forEach(item => {
           item.createdAt = moment(item.createdAt).toString()
@@ -23,7 +23,7 @@ module.exports = {
     knex('Questions').where('id', req.params.id).select()
     .then(data => {
       if (!data.length > 0) {
-        res.status(422).send({ error: 'Question does not exist' })
+        res.status(204).send({ error: 'Question does not exist' })
       }else {
         data[0].createdAt = moment(data[0].createdAt).toString();
         res.send({ ok: data[0] })

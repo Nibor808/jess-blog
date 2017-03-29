@@ -8,7 +8,7 @@ module.exports = {
     knex('Reviews').select()
       .then(data => {
         if(!data.length) {
-          res.status(422).send({ error: 'No reviews to get' });
+          res.status(204).send({ error: 'No reviews to get' });
         }else {
           data.forEach((item) => {
             item.createdAt = moment(item.createdAt).toString();
@@ -27,7 +27,7 @@ module.exports = {
     .select()
       .then(data => {
         if(!data.length) {
-          res.status(422).send({ error: 'Review does not exist' });
+          res.status(204).send({ error: 'Review does not exist' });
           return;
         }else {
           data[0].createdAt = moment(data[0].createdAt).toString();
@@ -48,12 +48,12 @@ module.exports = {
     }
 
     knex('Reviews').insert({
-      title: req.body.title,
-      content: req.body.content,
-      pros: req.body.pros,
-      cons: req.body.cons,
-      category: req.body.category,
-      keywords: req.body.keywords,
+      title: req.body.title.trim(),
+      content: req.body.content.trim(),
+      pros: req.body.pros.trim(),
+      cons: req.body.cons.trim(),
+      category: req.body.category.trim(),
+      keywords: req.body.keywords.trim(),
       createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
     })
       .then(data => {
@@ -89,16 +89,16 @@ module.exports = {
   updateReview(req, res) {
 
     knex('Reviews').where('id', req.params.id).update({
-      title: req.body.title,
-      content: req.body.content,
-      pros: req.body.pros,
-      cons: req.body.cons,
-      category: req.body.category,
-      keywords: req.body.keywords
+      title: req.body.title.trim(),
+      content: req.body.content.trim(),
+      pros: req.body.pros.trim(),
+      cons: req.body.cons.trim(),
+      category: req.body.category.trim(),
+      keywords: req.body.keywords.trim()
     })
       .then(data => {
         if (!data == 1) {
-          res.status(422).send({ error: 'Review does not exist.' });
+          res.status(204).send({ error: 'Review does not exist.' });
         }else {
           res.send({ ok: 'Review updated' });
         }
@@ -120,7 +120,7 @@ module.exports = {
     knex('Review').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {
-          res.status(422).send({ error: 'Review does not exist.'});
+          res.status(204).send({ error: 'Review does not exist.'});
           return;
         }else {
           res.send({ ok: 'Review deleted.' });

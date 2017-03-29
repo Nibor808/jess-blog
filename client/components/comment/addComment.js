@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { saveComment } from '../actions/comment_actions';
+import { saveComment } from '../../actions/comment_actions';
 
 const renderField = ({ input, label, type, textarea, meta: { touched, error } }) => {
   const textareaType = <textarea {...input} type={type} className='form-control' />
@@ -39,6 +39,12 @@ class AddComment extends Component {
     router: PropTypes.object
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.didSave) {
+      this.context.router.goBack()
+    }
+  }
+
   handleFormSubmit({ title, content }) {
     const user = localStorage.getItem('user');
     if (this.props.post_id === undefined && this.props.question_id === undefined) {
@@ -70,11 +76,6 @@ class AddComment extends Component {
   }
 
   render() {
-    // not the place for this but not sure where to put it
-    if (this.props.didSave) {
-      this.context.router.goBack()
-    }
-
     const { handleSubmit, submitting } = this.props;
     return(
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='comment_form'>

@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 const renderField = ({ input, label, type, textarea, meta: { touched, error } }) => {
+
   const textareaType = <textarea {...input} type={type} className='form-control' />
   const inputType = <input {...input} type={type} className='form-control' />
   const selectType = <select {...input} type={type} className='form-control'>
@@ -28,6 +29,12 @@ class AskQuestion extends Component {
     router: PropTypes.object
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.didSave) {
+      this.context.router.goBack()
+    }
+  }
+
   renderAlert() {
     if (this.props.errorMessage) {
       return (
@@ -38,17 +45,19 @@ class AskQuestion extends Component {
     }
   }
 
-  handleFormSubmit({ title, content, category }) {
+  handleFormSubmit({ title, content, category, keywords }) {
 
   }
 
   render() {
-    // not the place for this but not sure where to put it
-    if (this.props.didSave) {
-      this.context.router.goBack()
-    }
-
+    // build the form here, forget rendering it separately
     const { handleSubmit, submitting } = this.props;
+
+    return (
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='question_form'>
+
+      </form>
+    )
     return(
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='question_form'>
         <Field name='title' type='text' component={renderField} label='Title:' />

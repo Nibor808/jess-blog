@@ -7,7 +7,7 @@ module.exports = {
     knex('Images').where(req.params.idtype, req.params.typeid).select()
     .then(data => {
       if (!data.length) {
-        res.status(422).send({ error: 'No matching images' })
+        res.status(204).send({ error: 'No matching images' })
       }else {
         data.forEach(item => {
           images.push(item);
@@ -24,7 +24,7 @@ module.exports = {
     knex('Images').whereNot(req.params.idtype, null)
     .then(data => {
       if (!data.length) {
-        res.status(422).send({ error: 'No images' })
+        res.status(204).send({ error: 'No images' })
       }else {
         res.send({ ok: data })
       }

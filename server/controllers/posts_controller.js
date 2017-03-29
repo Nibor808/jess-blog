@@ -8,7 +8,7 @@ module.exports = {
     knex('Posts').select()
       .then(data => {
         if(!data.length) {
-          res.status(422).send({ error: 'No posts to get' });
+          res.status(204).send({ error: 'No posts to get' });
         }else {
           data.forEach((item) => {
             item.createdAt = moment(item.createdAt).toString();
@@ -27,7 +27,7 @@ module.exports = {
     .select()
       .then(data => {
         if(!data.length) {
-          res.status(422).send({ error: 'Post does not exist' });
+          res.status(204).send({ error: 'Post does not exist' });
           return;
         }else {
           data[0].createdAt = moment(data[0].createdAt).toString();
@@ -47,10 +47,10 @@ module.exports = {
     }
 
     knex('Posts').insert({
-      title: req.body.title,
-      content: req.body.content,
-      category: req.body.category,
-      keywords: req.body.keywords,
+      title: req.body.title.trim(),
+      content: req.body.content.trim(),
+      category: req.body.category.trim(),
+      keywords: req.body.keywords.trim(),
       createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
     })
       .then(data => {
@@ -86,14 +86,14 @@ module.exports = {
   updatePost(req, res) {
 
     knex('Posts').where('id', req.params.id).update({
-      title: req.body.title,
-      content: req.body.content,
-      category: req.body.category,
-      keywords: req.body.keywords
+      title: req.body.title.trim(),
+      content: req.body.content.trim(),
+      category: req.body.category.trim(),
+      keywords: req.body.keywords.trim()
     })
       .then(data => {
         if (!data == 1) {
-          res.status(422).send({ error: 'Posts does not exist.' });
+          res.status(204).send({ error: 'Posts does not exist.' });
         }else {
           res.send({ ok: 'Post updated' });
         }
@@ -115,7 +115,7 @@ module.exports = {
     knex('Posts').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {
-          res.status(422).send({ error: 'Post does not exist.'});
+          res.status(204).send({ error: 'Post does not exist.'});
           return;
         }else {
           res.send({ ok: 'Post deleted.' });

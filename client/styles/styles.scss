@@ -47,10 +47,10 @@ li.list-group-item,
   }
 }
 
-.signin_div,
+.signin_form,
 .signup_form,
 .signup_prompt {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .login {
@@ -71,7 +71,9 @@ li.list-group-item,
 
 .review_sidebar,
 .post_sidebar,
-.auth_children {
+.auth_children,
+.question_page,
+.question_sidebar {
   padding-right: 0;
   padding-left: 0;
 }

@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { getPost } from '../actions/post_actions';
-import  { getComments } from '../actions/comment_actions';
-import { getImages } from '../actions/image_actions';
-import { formatDate } from '../utils/date_format';
-import { renderComments } from './comments_list';
+import { getPost } from '../../actions/post_actions';
+import  { getComments } from '../../actions/comment_actions';
+import { getImages } from '../../actions/image_actions';
+import { formatDate } from '../../utils/date_format';
+import { renderComments } from '../comment/comments_list';
 
 class Post extends Component {
 
@@ -15,10 +15,6 @@ class Post extends Component {
     params: PropTypes.object,
     id: PropTypes.number,
     authenticated: PropTypes.bool
-  }
-
-  static contextTypes = {
-    router: PropTypes.object
   }
 
   componentWillMount() {
