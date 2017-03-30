@@ -3,7 +3,7 @@ const moment = require('moment');
 
 module.exports = {
 
-  //get all comments for a post, review or as a reply
+  //get all comments for a post, review or question
   getComments(req, res) {
     const comments = [];
 
@@ -14,6 +14,10 @@ module.exports = {
       'Comments.title as commentTitle',
       'Comments.content as commentContent',
       'Comments.createdAt as commentCreatedAt',
+      'Comments.post_id as commentPostId',
+      'Comments.review_id as commentReviewId',
+      'Comments.question_id as commentQuestionId',
+      'Comments.parent_comment_id as parentCommentId',
       'Users.username as username'
     ).orderBy('createdAt', 'asc')
     .then(data => {
@@ -29,6 +33,21 @@ module.exports = {
     })
     .catch(err => {
       res.status(422).send({ error: 'Could not get coments' })
+    });
+  },
+
+  // get a comment for editing
+  getAComment(req, res) {
+    knex('Comments').where('id', req.params.id).select()
+    .then(data => {
+      if (!data.length > 0) {
+        res.status(204).send({ error: 'Comment not found' })
+      }else {
+        res.send({ ok: data[0] })
+      }
+    })
+    .catch(err => {
+      res.status(422).send({ error: 'Could not get comment' })
     });
   },
 
@@ -82,6 +101,29 @@ module.exports = {
       .catch(err => {
         res.status(422).send({ error: err });
       });
+  },
+
+  // edit comment
+  updateComment(req, res) {
+    if (!req.body.content) {
+      res.status(422).send({ error: 'You must have some content in your comment.' });
+      return;
+    }
+
+    knex('Comments').where('id', req.params.id).update({
+      title: req.body.title,
+      content: req.body.content
+    })
+    .then(data => {
+      if (!data == 1) {
+        res.status(204).send({ error: 'Comment could not be found' })
+      }else {
+        res.send({ ok: 'Comment updated' })
+      }
+    })
+    .catch(err => {
+      res.status(422).send({ error: err })
+    });
   }
 }
 

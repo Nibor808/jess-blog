@@ -84,7 +84,6 @@ module.exports = {
 
   //update a post
   updatePost(req, res) {
-
     knex('Posts').where('id', req.params.id).update({
       title: req.body.title.trim(),
       content: req.body.content.trim(),

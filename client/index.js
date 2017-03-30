@@ -16,7 +16,8 @@ import Review from './components/review/review';
 import Question from './components/question/question';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
-import AddComment from './components/comment/addComment';
+import AddComment from './components/comment/add_comment';
+import EditComment from './components/comment/edit_comment';
 import AskQuestion from './components/question/ask_question';
 import requireAuth from './components/auth/requireAuth';
 import reducers from './reducers';
@@ -46,16 +47,19 @@ ReactDOM.render(
           <Route path='/signin_post' component={Signin} />
           <Route path='/signup_post' component={Signup} />
           <Route path='/addcomment_post' component={requireAuth(AddComment)} />
+          <Route path='/editcomment_post/:id' component={EditComment} />
         </Route>
         <Route path='/review/:id' component={Review}>
           <Route path='/signin_review' component={Signin} />
           <Route path='/signup_review' component={Signup} />
           <Route path='/addcomment_review' component={requireAuth(AddComment)} />
+          <Route path='/editcomment_review/:id' component={EditComment} />
         </Route>
         <Route path='/question/:id' component={Question}>
           <Route path='/signin_question' component={Signin} />
           <Route path='/signup_question' component={Signup} />
           <Route path='/addcomment_question' component={requireAuth(AddComment)} />
+          <Route path='/editcomment_question/:id' component={EditComment} />
         </Route>
       </Route>
     </Router>

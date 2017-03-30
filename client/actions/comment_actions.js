@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE, ERROR } from './types';
+import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE, GET_A_COMMENT, ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function saveComment({ idtype, typeid, user, title, content }) {
@@ -20,7 +20,7 @@ export function saveComment({ idtype, typeid, user, title, content }) {
         dispatch({
           type: ERROR,
           payload: response.data.error
-        })
+        });
       });
   }
 }
@@ -40,5 +40,45 @@ export function getComments(idtype, typeid) {
         payload: err
       });
     });
+  }
+}
+
+export function getAComment(id) {
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/getacomment/${id}`)
+    .then(response => {
+      dispatch({
+        type: GET_A_COMMENT,
+        payload: response.data.ok
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: ERROR,
+        payload: err
+      });
+    });
+  }
+}
+
+export function updateComment({ id, title, content }) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/editcomment/${id}`, { title, content })
+    .then(response => {
+        dispatch({
+          type: SAVE_COMMENT
+        });
+      })
+      .then(() => {
+        dispatch({
+          type: RESET_COMMENT_STATE
+        });
+      })
+      .catch(({ response }) => {
+        dispatch({
+          type: ERROR,
+          payload: response.data.error
+        });
+      });
   }
 }
