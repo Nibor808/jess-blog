@@ -6,10 +6,6 @@ import { saveComment } from '../../actions/comment_actions';
 class AddComment extends Component {
 
   static propTypes = {
-    input: PropTypes.element,
-    label: PropTypes.string,
-    type: PropTypes.string,
-    meta: PropTypes.object,
     post_id: PropTypes.number,
     saveComment: PropTypes.func,
     errorMessage: PropTypes.string,
@@ -82,7 +78,6 @@ class AddComment extends Component {
 
 function mapStateToProps({ posts, reviews, questions, comments }) {
   if (posts.post) {
-    console.log('here',comments)
     return {
       post_id: posts.post.id,
       didSave: comments.commentSaved,

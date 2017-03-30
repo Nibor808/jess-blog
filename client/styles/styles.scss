@@ -99,12 +99,13 @@ li.list-group-item,
   margin-bottom: 20px;
 }
 
-.comments_list {
+.comments_list,
+.reply_list {
   list-style: none;
+}
 
-  .comment_item {
-    padding: 0 20px 0 20px;
-  }
+.comment_item {
+  padding: 10px;
 }
 
 .specs_list {
@@ -132,6 +133,7 @@ li.list-group-item,
   }
 }
 
-.checkbox_label {
+.checkbox_label,
+.edit_link {
   margin-right: 5px;
 }

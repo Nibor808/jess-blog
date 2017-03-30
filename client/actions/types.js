@@ -7,6 +7,7 @@ export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_REVIEW = 'GET_REVIEW';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const GET_A_COMMENT = 'GET_A_COMMENT';
+export const GET_COMMENT_REPLIES = 'GET_COMMENT_REPLIES';
 export const SAVE_COMMENT = 'SAVE_COMMENT';
 export const RESET_COMMENT_STATE = 'RESET_COMMENT_STATE';
 export const GET_IMAGES = 'GET_IMAGES';

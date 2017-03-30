@@ -2,34 +2,83 @@ import React from 'react';
 import { Link } from 'react-router';
 import { formatDate } from '../../utils/date_format';
 
-export function renderComments(commentData) {
-  const commentDate = formatDate(commentData.commentCreatedAt);
-  const user = localStorage.getItem('user');
-  let type;
-  if (commentData.commentPostId !== null) {
-    type = 'post'
-  }else if (commentData.commentReviewId !== null) {
-    type = 'review'
-  }else {
-    type = 'question'
-  }
-  let editDiv;
-  if (user) {
-    editDiv = <small><Link to={`/replytocomment/${commentData.commentId}`}>reply</Link></small>
-  }
-  if (user && user === commentData.username) {
-    editDiv = <small><Link to={`/editcomment_${type}/${commentData.commentId}`}>edit</Link> <Link to={`/replytocomment/${commentData.commentId}`}>reply</Link></small>
-  }
+export function renderComments(commentArray, repliesArray) {
+  const listElement = [];
+  let replyList = [];
 
-  return (
-    <li
-    key={commentData.commentId}
-    className='comment_item'>
-      <h4>{commentData.commentTitle}</h4>
-      <p>{commentData.commentContent}</p>
-      <small>posted: {commentDate} by: {commentData.username}</small>
-      <p className='pull-right'>{editDiv}</p>
-      <hr />
-    </li>
-  );
+  commentArray.map(comment => {
+    const commentDate = formatDate(comment.commentCreatedAt);
+    const user = localStorage.getItem('user');
+    let type;
+
+    if (comment.commentPostId !== null) {
+      type = 'post'
+    }else if (comment.commentReviewId !== null) {
+      type = 'review'
+    }else {
+      type = 'question'
+    }
+    let editDiv;
+    if (user) {
+      editDiv = <small><Link to={`/replytocomment/${comment.commentId}`}>reply</Link></small>
+    }
+    if (user && user === comment.username) {
+      editDiv = <small>
+                  <Link to={`/editcomment_${type}/${comment.commentId}`} className='edit_link'>edit</Link>
+                  <Link to={`/replytocomment/${comment.commentId}`}>reply</Link>
+                </small>
+    }
+
+
+    repliesArray.map(reply => {
+      const replyDate = formatDate(reply.commentCreatedAt);
+      const user = localStorage.getItem('user');
+      let type;
+
+      if (comment.commentPostId !== null) {
+        type = 'post'
+      }else if (comment.commentReviewId !== null) {
+        type = 'review'
+      }else {
+        type = 'question'
+      }
+      let editDiv;
+
+      if (user && user === reply.username) {
+        editDiv = <small>
+                    <Link to={`/editcomment_${type}/${reply.commentId}`} className='edit_link'>edit</Link>
+                  </small>
+      }
+
+      if (reply.parentCommentId === comment.commentId) {
+        replyList.push(<li
+                      key={Math.random()}>
+                        <h4>{reply.commentTitle}</h4>
+                        <p>{reply.commentContent}</p>
+                        <small>posted: {replyDate} by: {reply.username}</small>
+                        <p className='pull-right'>{editDiv}</p>
+                        <hr />
+                      </li>
+                      )
+      }
+    });
+
+    listElement.push(
+                  <li
+                  key={comment.commentId}
+                  className='comment_item'>
+                    <h4>{comment.commentTitle}</h4>
+                    <p>{comment.commentContent}</p>
+                    <small>posted: {commentDate} by: {comment.username}</small>
+                    <p className='pull-right'>{editDiv}</p>
+                    <hr />
+                    <ul className='reply_list'>
+                      {replyList}
+                    </ul>
+                  </li>
+    )
+    replyList = [];
+  });
+
+  return listElement;
 }

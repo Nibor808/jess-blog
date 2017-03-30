@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getPost } from '../../actions/post_actions';
-import  { getComments } from '../../actions/comment_actions';
+import  { getComments, getCommentReplies } from '../../actions/comment_actions';
 import { getImages } from '../../actions/image_actions';
 import { formatDate } from '../../utils/date_format';
 import { renderComments } from '../comment/comments_list';
@@ -20,12 +20,14 @@ class Post extends Component {
   componentWillMount() {
     this.props.getPost(this.props.params.id);
     this.props.getComments('post_id', this.props.params.id);
+    this.props.getCommentReplies('parent_comment_id');
     this.props.getImages('post_id', this.props.params.id)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didSave) {
       this.props.getComments('post_id', this.props.post.id);
+      this.props.getCommentReplies('parent_comment_id');
     }
   }
 
@@ -68,14 +70,14 @@ class Post extends Component {
     }else {
       return (
         <ul className='comments_list'>
-          {this.props.commentArray.map(comment => renderComments(comment))}
+          {renderComments(this.props.commentArray, this.props.repliesArray)}
         </ul>
       )
     }
   }
 
   render() {
-    if (!this.props.post || !this.props.commentArray || !this.props.imageArray) {
+    if (!this.props.post || !this.props.commentArray || !this.props.imageArray || !this.props.repliesArray) {
       return <div>Loading...</div>
     }
 
@@ -114,8 +116,9 @@ function mapStateToProps({ posts, auth, comments, images }) {
     authenticated: auth.authenticated,
     didSave: comments.commentSaved,
     commentArray: comments.commentArray,
+    repliesArray: comments.repliesArray,
     imageArray: images.imageArray
   };
 }
 
-export default connect(mapStateToProps, { getPost, getComments, getImages })(Post);
+export default connect(mapStateToProps, { getPost, getComments, getImages, getCommentReplies })(Post);

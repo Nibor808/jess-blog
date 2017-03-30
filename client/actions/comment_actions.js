@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE, GET_A_COMMENT, ERROR } from './types';
+import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE, GET_A_COMMENT, GET_COMMENT_REPLIES, ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function saveComment({ idtype, typeid, user, title, content }) {
@@ -31,6 +31,24 @@ export function getComments(idtype, typeid) {
     .then(response =>{
       dispatch({
         type: GET_COMMENTS,
+        payload: response.data.ok
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ERROR,
+        payload: err
+      });
+    });
+  }
+}
+
+export function getCommentReplies(idtype) {
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/getcomments/${idtype}/null`)
+    .then(response =>{
+      dispatch({
+        type: GET_COMMENT_REPLIES,
         payload: response.data.ok
       });
     })

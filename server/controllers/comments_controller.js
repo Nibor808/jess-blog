@@ -7,7 +7,13 @@ module.exports = {
   getComments(req, res) {
     const comments = [];
 
-    knex('Comments').where(req.params.idtype, req.params.typeid)
+    knex('Comments').modify(queryBuilder => {
+      if (req.params.typeid === 'null') {
+        queryBuilder.whereNot(req.params.idtype, null)
+      }else {
+        queryBuilder.where(req.params.idtype, req.params.typeid)
+      }
+    })
     .join('Users', 'Comments.user_id', '=', 'Users.id')
     .select(
       'Comments.id as commentId',
