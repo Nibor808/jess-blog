@@ -29,39 +29,40 @@ export function renderComments(commentArray, repliesArray) {
                 </small>
     }
 
+    if (repliesArray) {
+      repliesArray.map(reply => {
+        const replyDate = formatDate(reply.commentCreatedAt);
+        const user = localStorage.getItem('user');
+        let type;
 
-    repliesArray.map(reply => {
-      const replyDate = formatDate(reply.commentCreatedAt);
-      const user = localStorage.getItem('user');
-      let type;
+        if (comment.commentPostId !== null) {
+          type = 'post'
+        }else if (comment.commentReviewId !== null) {
+          type = 'review'
+        }else {
+          type = 'question'
+        }
+        let editDiv;
 
-      if (comment.commentPostId !== null) {
-        type = 'post'
-      }else if (comment.commentReviewId !== null) {
-        type = 'review'
-      }else {
-        type = 'question'
-      }
-      let editDiv;
+        if (user && user === reply.username) {
+          editDiv = <small>
+                      <Link to={`/editcomment_${type}/${reply.commentId}`} className='edit_link'>edit</Link>
+                    </small>
+        }
 
-      if (user && user === reply.username) {
-        editDiv = <small>
-                    <Link to={`/editcomment_${type}/${reply.commentId}`} className='edit_link'>edit</Link>
-                  </small>
-      }
-
-      if (reply.parentCommentId === comment.commentId) {
-        replyList.push(<li
-                      key={Math.random()}>
-                        <h4>{reply.commentTitle}</h4>
-                        <p>{reply.commentContent}</p>
-                        <small>posted: {replyDate} by: {reply.username}</small>
-                        <p className='pull-right'>{editDiv}</p>
-                        <hr />
-                      </li>
-                      )
-      }
-    });
+        if (reply.parentCommentId === comment.commentId) {
+          replyList.push(<li
+                        key={Math.random()}>
+                          <h4>{reply.commentTitle}</h4>
+                          <p>{reply.commentContent}</p>
+                          <small>posted: {replyDate} by: {reply.username}</small>
+                          <p className='pull-right'>{editDiv}</p>
+                          <hr />
+                        </li>
+                        )
+        }
+      });
+    }
 
     listElement.push(
                   <li

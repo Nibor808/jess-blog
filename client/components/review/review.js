@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { formatDate } from '../../utils/date_format';
 import { getReview } from '../../actions/review_actions';
-import { getComments } from '../../actions/comment_actions';
+import { getComments, getCommentReplies } from '../../actions/comment_actions';
 import { getImages } from '../../actions/image_actions';
 import { renderComments } from '../comment/comments_list';
 
@@ -19,12 +19,14 @@ class Review extends Component {
   componentWillMount() {
     this.props.getReview(this.props.params.id);
     this.props.getComments('review_id', this.props.params.id);
+    this.props.getCommentReplies('parent_comment_id');
     this.props.getImages('review_id', this.props.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didSave) {
       this.props.getComments('review_id', this.props.review.id);
+      this.props.getCommentReplies('parent_comment_id');
     }
   }
 
@@ -79,7 +81,7 @@ class Review extends Component {
     }else {
       return (
         <ul className='comments_list'>
-          {this.props.commentArray.map(comment => renderComments(comment))}
+          {renderComments(this.props.commentArray, this.props.repliesArray)}
         </ul>
       )
     }
@@ -145,8 +147,9 @@ function mapStateToProps({ reviews, auth, comments, images }) {
     authenticated: auth.authenticated,
     didSave: comments.commentSaved,
     commentArray: comments.commentArray,
+    repliesArray: comments.repliesArray,
     imageArray: images.imageArray
   };
 }
 
-export default connect(mapStateToProps, { getReview, getComments, getImages })(Review);
+export default connect(mapStateToProps, { getReview, getComments, getImages, getCommentReplies })(Review);

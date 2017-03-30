@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getQuestion } from '../../actions/question_actions';
-import { getComments } from '../../actions/comment_actions';
+import { getComments, getCommentReplies } from '../../actions/comment_actions';
 import { renderComments } from '../comment/comments_list';
 import { formatDate } from '../../utils/date_format';
 
@@ -18,12 +18,14 @@ class Question extends Component {
 
   componentWillMount() {
     this.props.getQuestion(this.props.params.id);
-    this.props.getComments('question_id', this.props.params.id)
+    this.props.getComments('question_id', this.props.params.id);
+    this.props.getCommentReplies('parent_comment_id');
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didSave) {
       this.props.getComments('question_id', this.props.question.id);
+      this.props.getCommentReplies('parent_comment_id');
     }
   }
 
@@ -78,7 +80,7 @@ class Question extends Component {
     }else {
       return (
         <ul className='comments_list'>
-          {this.props.commentArray.map(comment => renderComments(comment))}
+           {renderComments(this.props.commentArray, this.props.repliesArray)}
         </ul>
       )
     }
@@ -122,8 +124,9 @@ function mapStateToProps({ questions, auth, comments }) {
     question: questions.question,
     authenticated: auth.authenticated,
     commentArray: comments.commentArray,
+    repliesArray: comments.repliesArray,
     didSave: comments.commentSaved
   }
 }
 
-export default connect(mapStateToProps, { getQuestion, getComments })(Question);
+export default connect(mapStateToProps, { getQuestion, getComments, getCommentReplies })(Question);
