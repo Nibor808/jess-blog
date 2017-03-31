@@ -3,11 +3,16 @@ $fa-font-path: '../node_modules/font-awesome/fonts';
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import '../node_modules/font-awesome/scss/font-awesome';
 @import './colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Dosis|Pavanam');
 
 html,
 body {
   height: 100%;
-  background: linear-gradient($bg-top 40%, $bg-mid 40%, $bg-mid 60%, $bg-bottom 60%, $bg-bottom 100%);
+  background: -webkit-linear-gradient($bg-top 40%, $bg-mid 40%, $bg-mid 60%, $bg-bottom 60%, $bg-bottom 100%);
+  background: -moz-linear-gradient($bg-top 40%, $bg-mid 40%, $bg-mid 60%, $bg-bottom 60%, $bg-bottom 100%);
+  background: -o-linear-gradient($bg-top 40%, $bg-mid 40%, $bg-mid 60%, $bg-bottom 60%, $bg-bottom 100%);
+  background: linear-gradient($bg-top 40%, $bg-mid 40%, $bg-mid 60%, $bg-bottom 60%, $bg-bottom 100%);;
+  font-family: 'Pavanam', sans-serif;
 }
 
 textarea {
@@ -21,7 +26,6 @@ textarea {
 .container {
   margin-top: 40px;
 }
-
 .navbar,
 ul.list-group,
 li.list-group-item,
@@ -41,13 +45,19 @@ li.list-group-item,
   border-radius: 3px;
 }
 
-.navbar,
-.logo {
+ul > li {
+  background-color: $white;
+}
+
+.navbar {
   margin-bottom: 40px;
 }
 
 .navbar-default {
-  border: 0;
+
+  &:hover {
+    border-bottom: 0;
+  }
 
   .navbar-collapse {
     padding: 0;
@@ -68,7 +78,11 @@ li.list-group-item,
         color: $nav-link;
         padding: 20px 40px 20px 40px;
 
-        &:hover {
+        &:hover,
+        &.active,
+        &:focus,
+        &.active:focus,
+        &.active:focus {
           color: $green;
         }
       }
@@ -111,12 +125,18 @@ li.list-group-item,
   padding-left: 0;
 }
 
+.auth_children {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .side_bar {
   padding-right: 0;
   padding-left: 0;
 
   ul > li:first-of-type {
     background-color: $green;
+    padding: 5px 25px 5px 25px;;
     border: 0;
   }
 
@@ -183,8 +203,17 @@ hr.color_bar {
   border: none;
   height: 5px;
   margin: 0 0 30px 0;
- background: linearGradient(to right, $green 25%, $red 25%, $red 50%, $yellow 50%, $yellow 75%, $blue 75%, $blue 100%);
- background: -webkit-linear-gradient(left, $green 25%, $red 25%, $red 50%, $yellow 50%, $yellow 75%, $blue 75%, $blue 100%)
+  background: -webkit-linear-gradient(left, $green 25%, $red 25%, $red 50%, $yellow 50%, $yellow 75%, $blue 75%, $blue 100%);
+  background: -moz-linear-gradient(left, $green 25%, $red 25%, $red 50%, $yellow 50%, $yellow 75%, $blue 75%, $blue 100%);
+  background: -o-linear-gradient(left, $green 25%, $red 25%, $red 50%, $yellow 50%, $yellow 75%, $blue 75%, $blue 100%);
+  background: linear-gradient(to right, $green 25%, $red 25%, $red 50%, $yellow 50%, $yellow 75%, $blue 75%, $blue 100%);
+}
+
+h1,
+h2:not(.list-title),
+h4,
+h5 {
+  color: $title;
 }
 
 h3 {
@@ -204,15 +233,18 @@ a {
   }
 }
 
-.btn-default {
+.btn {
   color: $font-color;
   border: none;
 
   &:hover,
   &.active,
-  &:focus {
+  &:active,
+  &.active:focus,
+  &.active.focus, {
     color: $green;
-    background: $white;
-    outline: none;
+    background: $white !important;
+    outline: none !important;
+    box-shadow: none;
   }
 }

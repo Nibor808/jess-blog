@@ -10,7 +10,7 @@ export default class PostsPage extends Component {
         <div className='col-md-8 page_list'>
           <div className='page_header_content'>
             <div className='row'>
-              <div className='col-md-8 page_header_title'><h2>Posts</h2></div>
+              <div className='col-md-8 page_header_title'><h1>Posts</h1></div>
             </div>
             <div className='row'>
               <p>Yay posts are awesome and you should read them all?</p>

@@ -33,7 +33,7 @@ class QuestionList extends Component {
       <div
         key={questionData.id}
         className='question_item'>
-        <Link className='question_link' to={`question/${questionData.id}`}><h2>{questionData.title}</h2></Link>
+        <Link className='question_link' to={`question/${questionData.id}`}><h2 className='list-title'>{questionData.title}</h2></Link>
         <small>{questionDate}</small>
         <p className='question_content'>{content}</p>
       </div>

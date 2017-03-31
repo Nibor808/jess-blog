@@ -70,7 +70,7 @@ class Question extends Component {
     if (this.props.question.answer) {
       return (
         <div>
-          <h3>Answer:</h3>
+          <h2>Answer:</h2>
           <p>{this.props.question.answer}</p>
         </div>
       )
@@ -92,7 +92,7 @@ class Question extends Component {
 
   render() {
     if (!this.props.question) {
-      return <div>Loading...</div>
+      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>
     }
 
     const questionDate = formatDate(this.props.question.createdAt);

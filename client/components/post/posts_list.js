@@ -22,7 +22,7 @@ class PostsList extends Component {
       <div
         key={postData.id}
         className='post_item'>
-          <Link className='posts_link' to={`post/${postData.id}`}><h2>{postData.title}</h2></Link>
+          <Link className='posts_link' to={`post/${postData.id}`}><h2 className='list-title'>{postData.title}</h2></Link>
           <small>{postDate}</small>
           <p className='post_content'>{content}...</p>
         </div>

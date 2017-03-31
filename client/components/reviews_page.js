@@ -11,7 +11,7 @@ export default class ReviewsPage extends Component {
         <div className='col-md-8 page_list'>
           <div className='page_header_content'>
             <div className='row'>
-              <div className='col-md-8 page_header_title'><h2>Reviews</h2></div>
+              <div className='col-md-8 page_header_title'><h1>Reviews</h1></div>
             </div>
             <div className='row'>
               <p>Yay reviews are awsome and you should read them all?</p>

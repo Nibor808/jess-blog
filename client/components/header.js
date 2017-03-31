@@ -38,24 +38,24 @@ class Header extends Component {
         <div className='collapse navbar-collapse' id='main-nav'>
           <ul className='nav navbar-nav'>
             <li>
-              <a href='/'>
+              <Link to='/'>
               <i className='fa fa-home fa-2x' aria-hidden='true'></i>Posts
-              </a>
+              </Link>
             </li>
             <li>
-              <a href='/reviews'>
+              <Link to='/reviews'>
               <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>Reviews
-              </a>
+              </Link>
             </li>
             <li>
-              <a href='/questions'>
+              <Link to='/questions'>
               <i className='fa fa-question fa-2x' aria-hidden='true'></i>Q&A
-              </a>
+              </Link>
             </li>
             <li>
-              <a href='/'>
+              <Link to='/'>
               <i className='fa fa-female fa-2x' aria-hidden='true'></i>About Me
-              </a>
+              </Link>
             </li>
           </ul>
           <div className='nav navbar-nav navbar-right'>

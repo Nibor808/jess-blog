@@ -31,7 +31,7 @@ class QuestionsPage extends Component {
     if (!this.props.authenticated) {
       return (
         <div className='signup_prompt text-center'>
-          <h3>Not already part of the converstation?</h3>
+          <h2>Not already part of the converstation?</h2>
           <Link to='/signup_question_page'>
             <button type='button' className='btn btn-primary'>sign up</button>
           </Link>
@@ -46,7 +46,7 @@ class QuestionsPage extends Component {
         <div className='col-md-8 page_list'>
           <div className='page_header_content'>
             <div className='row'>
-              <div className='col-md-8 page_header_title'><h2>Q&A</h2></div>
+              <div className='col-md-8 page_header_title'><h1>Q&A</h1></div>
               <div className='col-md-4 page_header_title'>{this.renderSignin()}</div>
             </div>
             <div className='row'>

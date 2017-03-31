@@ -21,7 +21,7 @@ class ReviewList extends Component {
       <div
         key={reviewData.id}
         className='review_item'>
-        <Link className='review_link' to={`review/${reviewData.id}`}><h2>{reviewData.title}</h2></Link>
+        <Link className='review_link' to={`review/${reviewData.id}`}><h2 className='list-title'>{reviewData.title}</h2></Link>
         <small>{reviewDate}</small>
         <p className='review_content'>{content}...</p>
       </div>
