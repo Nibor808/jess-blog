@@ -16,9 +16,9 @@ class QuestionSidebar extends Component {
   }
 
   renderQuestionList(questionData) {
-    const questionDate = formatDate(questionData.createdAt);
-    if (questionData.title.length > 20) {
-      questionData.title = questionData.title.substring(0, 20) + '...';
+    const questionDate = formatDate(questionData.createdAt).substring(0, 15);
+    if (questionData.title.length > 25) {
+      questionData.title = questionData.title.substring(0, 25) + '...';
     }
     return (
       <li
@@ -33,8 +33,8 @@ class QuestionSidebar extends Component {
   render() {
     return (
       <ul
-      className='list-group col-md-4 question_sidebar'>
-        <li className='list-group-item'><h2>Recent Questions</h2></li>
+      className='list-group'>
+        <li className='list-group-item'><h3>Recent Questions</h3></li>
         {this.props.allQuestions.map(this.renderQuestionList)}
       </ul>
     );

@@ -11,6 +11,7 @@ export function renderComments(commentArray, repliesArray) {
     const user = localStorage.getItem('user');
     let type;
 
+    // set the type for the edit link
     if (comment.commentPostId !== null) {
       type = 'post'
     }else if (comment.commentReviewId !== null) {
@@ -18,6 +19,7 @@ export function renderComments(commentArray, repliesArray) {
     }else {
       type = 'question'
     }
+    // signed in user can edit or reply to their comments and reply to others comments
     let editDiv;
     if (user) {
       editDiv = <small><Link to={`/replytocomment/${comment.commentId}`}>reply</Link></small>
@@ -29,6 +31,7 @@ export function renderComments(commentArray, repliesArray) {
                 </small>
     }
 
+    // map over replies and attach each to it's parent comment
     if (repliesArray) {
       repliesArray.map(reply => {
         const replyDate = formatDate(reply.commentCreatedAt);
@@ -64,6 +67,7 @@ export function renderComments(commentArray, repliesArray) {
       });
     }
 
+    // build comment
     listElement.push(
                   <li
                   key={comment.commentId}

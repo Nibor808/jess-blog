@@ -35,7 +35,7 @@ class PostsList extends Component {
     }
 
     return (
-      <div className='col-md-8 post_list'>
+      <div className='post_list'>
         {this.props.allPosts.map(this.renderPosts)}
       </div>
     );

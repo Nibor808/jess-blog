@@ -42,8 +42,8 @@ class QuestionsPage extends Component {
 
   render() {
     return (
-      <div className='col-md-12 question_page'>
-        <div className='col-md-8 page_header'>
+      <div className='col-md-12 page'>
+        <div className='col-md-8 page_list'>
           <div className='page_header_content'>
             <div className='row'>
               <div className='col-md-8 page_header_title'><h2>Q&A</h2></div>
@@ -54,14 +54,17 @@ class QuestionsPage extends Component {
               <p>Sign in and I will try to get to it as soon as possible.</p>
             </div>
           </div>
+          <hr className='color_bar' />
           <QuestionList />
         </div>
         <div className='col-md-4 auth_children'>
           {this.props.children}
           {this.renderSignup()}
         </div>
-        <PostSidebar />
-        <ReviewSidebar />
+        <div className='col-md-4 side_bar'>
+          <PostSidebar />
+          <ReviewSidebar />
+        </div>
       </div>
     );
   }

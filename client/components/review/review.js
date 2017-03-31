@@ -40,13 +40,17 @@ class Review extends Component {
         </div>
       );
     }else {
-      return (
-        <div className='col-md-6'>
-          <Link to='/addcomment_review' className='pull-right login'>
-            <button className='btn btn-default'>add a comment</button>
-          </Link>
-        </div>
-      );
+      if (this.props.children === null) {
+        return (
+          <div className='col-md-6'>
+            <Link to='/addcomment_review' className='pull-right login'>
+              <button className='btn btn-default'>add a comment</button>
+            </Link>
+          </div>
+        );
+      }else {
+        return <div className='col-md-6'></div>
+      }
     }
   }
 
@@ -54,7 +58,7 @@ class Review extends Component {
     if (!this.props.authenticated) {
       return (
         <div className='signup_prompt text-center'>
-          <h3>Not already part of the converstation?</h3>
+          <h2>Not already part of the converstation?</h2>
           <Link to='/signup_review'>
             <button type='button' className='btn btn-primary'>sign up</button>
           </Link>
@@ -89,7 +93,7 @@ class Review extends Component {
 
   render() {
     if (!this.props.review || !this.props.commentArray || !this.props.imageArray) {
-      return <div>Loading...</div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
     }
 
     const reviewDate = formatDate(this.props.review.createdAt);
@@ -127,7 +131,7 @@ class Review extends Component {
         </div>
         <div className='comments_section col-md-6'>
           <div className='row'>
-            <div className='col-md-6'><h3>Comments:</h3></div>
+            <div className='col-md-6'><h2>Comments:</h2></div>
             {this.renderSignin()}
           </div>
           {this.hasComments()}

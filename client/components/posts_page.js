@@ -5,11 +5,24 @@ import QuestionSideBar from './question/question_sidebar';
 
 export default class PostsPage extends Component {
   render() {
-    return (
-      <div>
-        <PostList />
-        <ReviewSidebar />
-        <QuestionSideBar />
+      return (
+      <div className='col-md-12 page'>
+        <div className='col-md-8 page_list'>
+          <div className='page_header_content'>
+            <div className='row'>
+              <div className='col-md-8 page_header_title'><h2>Posts</h2></div>
+            </div>
+            <div className='row'>
+              <p>Yay posts are awesome and you should read them all?</p>
+            </div>
+          </div>
+          <hr className='color_bar' />
+          <PostList />
+        </div>
+        <div className='col-md-4 side_bar'>
+          <ReviewSidebar />
+          <QuestionSideBar />
+        </div>
       </div>
     );
   }

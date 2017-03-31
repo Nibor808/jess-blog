@@ -30,7 +30,7 @@ class ReviewList extends Component {
 
   render() {
     return (
-      <div className='col-md-8 review_list'>
+      <div className='review_list'>
         {this.props.allReviews.map(this.renderReviews)}
       </div>
     );

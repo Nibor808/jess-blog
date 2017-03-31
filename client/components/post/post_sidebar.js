@@ -16,9 +16,9 @@ class PostSidebar extends Component {
   }
 
   renderPostList(postData) {
-    const postDate = formatDate(postData.createdAt);
-    if (postData.title.length > 20) {
-      postData.title = postData.title.substring(0, 20) + '...';
+    const postDate = formatDate(postData.createdAt).substring(0, 15);
+    if (postData.title.length > 25) {
+      postData.title = postData.title.substring(0, 25) + '...';
     }
     return (
       <li
@@ -33,8 +33,8 @@ class PostSidebar extends Component {
   render() {
     return (
       <ul
-      className='list-group col-md-4 post_sidebar'>
-        <li className='list-group-item'><h2>Recent Posts</h2></li>
+      className='list-group'>
+        <li className='list-group-item'><h3>Recent Posts</h3></li>
         {this.props.allPosts.map(this.renderPostList)}
       </ul>
     );

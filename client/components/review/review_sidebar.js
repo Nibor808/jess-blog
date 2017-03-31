@@ -16,9 +16,9 @@ class ReviewSidebar extends Component {
   }
 
   renderReview(reviewData) {
-    const reviewDate = formatDate(reviewData.createdAt);
-    if (reviewData.title.length > 20) {
-      reviewData.title = reviewData.title.substring(0, 20) + '...';
+    const reviewDate = formatDate(reviewData.createdAt).substring(0, 15);
+    if (reviewData.title.length > 25) {
+      reviewData.title = reviewData.title.substring(0, 25) + '...';
     }
     return (
       <li
@@ -33,8 +33,8 @@ class ReviewSidebar extends Component {
   render() {
     return (
       <ul
-      className='list-group col-md-4 review_sidebar'>
-        <li className='list-group-item'><h2>Recent Reviews</h2></li>
+      className='list-group'>
+        <li className='list-group-item'><h3>Recent Reviews</h3></li>
         {this.props.allReviews.map(this.renderReview)}
       </ul>
     );

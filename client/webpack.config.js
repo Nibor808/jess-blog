@@ -23,7 +23,11 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!sass-loader'
-      }
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|woff|ttf|eot|svg)/,
+        loader: 'file-loader?url-loader?limit=8192'
+      },
     ]
   },
   resolve: {
