@@ -27,7 +27,7 @@ export function renderComments(commentArray, repliesArray) {
     if (user && user === comment.username) {
       editDiv = <small>
                   <Link to={`/editcomment_${type}/${comment.commentId}`} className='edit_link'>edit</Link>
-                  <Link to={`/replytocomment/${comment.commentId}`}>reply</Link>
+                  <Link to={`/replytocomment_${type}/${comment.commentId}`}>reply</Link>
                 </small>
     }
 

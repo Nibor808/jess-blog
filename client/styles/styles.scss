@@ -3,7 +3,7 @@ $fa-font-path: '../node_modules/font-awesome/fonts';
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import '../node_modules/font-awesome/scss/font-awesome';
 @import './colors.scss';
-@import url('https://fonts.googleapis.com/css?family=Dosis|Pavanam');
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Bungee+Hairline|Nova+Mono|Pavanam|Revalia|Stint+Ultra+Expanded|Wallpoet');
 
 html,
 body {
@@ -26,12 +26,24 @@ textarea {
 .container {
   margin-top: 40px;
 }
+
+p {
+  font-size: 16px;
+}
+
+// .logo {
+//   font-family: 'Wallpoet', sans-serif;
+// }
+
 .navbar,
 ul.list-group,
 li.list-group-item,
+.post,
 .post_item,
 .comments_section,
+.review,
 .review_item,
+.question,
 .question_item,
 .signin_form,
 .signup_form,
@@ -85,13 +97,18 @@ ul > li {
         &.active:focus {
           color: $green;
         }
+
+        span:first-of-type {
+          margin-top: 10px;
+        }
+
       }
     }
   }
 }
 
 .signout_div {
-  padding: 28px 40px 27px 0;
+  padding: 30px 40px 30px 0;
 
   .signout_btn {
     margin-left: 10px;
@@ -142,6 +159,10 @@ ul > li {
 
   ul > li {
     padding: 15px 25px 15px 25px;
+
+    img {
+      margin-right: 10px;
+    }
   }
 }
 
@@ -165,11 +186,37 @@ ul > li {
   }
 }
 
+.post,
+.review,
+.question,
 .post_item,
 .review_item,
 .question_item {
-  padding: 20px;
   margin-bottom: 20px;
+}
+
+.post,
+.review,
+.question,
+.list_info,
+.question_item {
+  padding: 20px;
+}
+
+.post,
+.review,
+.question {
+  small {
+    margin-bottom: 20px;
+  }
+}
+
+.list_img {
+  padding: 5px;
+}
+
+.cover_img {
+  padding: 0;
 }
 
 .comments_list,
@@ -188,8 +235,12 @@ ul > li {
   list-style: none;
 }
 
-.proscons,
 .date {
+  margin-bottom: 40px;
+  display: inline-block;
+}
+
+.proscons {
   margin-bottom: 40px;
 }
 
@@ -211,13 +262,15 @@ hr.color_bar {
 
 h1,
 h2:not(.list-title),
+h3,
 h4,
 h5 {
   color: $title;
 }
 
-h3 {
+.list_group_title {
   color: $white;
+  text-shadow: 1px 1px 1px $font-color;
 }
 
 .logo {

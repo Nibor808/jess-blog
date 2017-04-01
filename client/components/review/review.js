@@ -6,6 +6,8 @@ import { getReview } from '../../actions/review_actions';
 import { getComments, getCommentReplies } from '../../actions/comment_actions';
 import { getImages } from '../../actions/image_actions';
 import { renderComments } from '../comment/comments_list';
+import { renderSignin } from '../auth/render_signin';
+import { renderSignup } from '../auth/renderSignup';
 
 class Review extends Component {
   static propTypes = {
@@ -27,43 +29,6 @@ class Review extends Component {
     if (nextProps.didSave) {
       this.props.getComments('review_id', this.props.review.id);
       this.props.getCommentReplies('parent_comment_id');
-    }
-  }
-
-  renderSignin() {
-    if (!this.props.authenticated) {
-      return (
-        <div className='col-md-6'>
-          <Link to='/signin_review' className='pull-right login'>
-            <button className='btn btn-default'>sign in to comment</button>
-          </Link>
-        </div>
-      );
-    }else {
-      if (this.props.children === null) {
-        return (
-          <div className='col-md-6'>
-            <Link to='/addcomment_review' className='pull-right login'>
-              <button className='btn btn-default'>add a comment</button>
-            </Link>
-          </div>
-        );
-      }else {
-        return <div className='col-md-6'></div>
-      }
-    }
-  }
-
-  renderSignup() {
-    if (!this.props.authenticated) {
-      return (
-        <div className='signup_prompt text-center'>
-          <h2>Not already part of the converstation?</h2>
-          <Link to='/signup_review'>
-            <button type='button' className='btn btn-primary'>sign up</button>
-          </Link>
-        </div>
-      );
     }
   }
 
@@ -97,13 +62,12 @@ class Review extends Component {
     }
 
     const reviewDate = formatDate(this.props.review.createdAt);
-    const src = `http://localhost:8080/images/${this.props.imageArray[0].file}`;
 
     return (
       <div>
         <div
         key={this.props.review.id}
-        className='review_item col-md-12'>
+        className='review col-md-12'>
           <div className='row'>
             <h1>{this.props.review.title}</h1>
           </div>
@@ -111,7 +75,7 @@ class Review extends Component {
             <small>posted: {reviewDate}</small>
           </div>
           <div className='row'>
-            <img src={src} height='400px' width='400px' />
+            <img src={`../../images/${this.props.imageArray[0].file}`} height='400px' width='400px' />
           </div>
           <div className='row proscons'>
             <div className='col-md-6'>
@@ -132,13 +96,13 @@ class Review extends Component {
         <div className='comments_section col-md-6'>
           <div className='row'>
             <div className='col-md-6'><h2>Comments:</h2></div>
-            {this.renderSignin()}
+            {renderSignin(this.props.authenticated, this.props.children, 'review')}
           </div>
           {this.hasComments()}
         </div>
         <div className='col-md-5 col-md-offset-1 auth_children'>
           {this.props.children}
-          {this.renderSignup()}
+          {renderSignup(this.props.authenticated, 'review')}
         </div>
       </div>
     );

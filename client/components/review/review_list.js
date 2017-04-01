@@ -20,10 +20,15 @@ class ReviewList extends Component {
     return (
       <div
         key={reviewData.id}
-        className='review_item'>
-        <Link className='review_link' to={`review/${reviewData.id}`}><h2 className='list-title'>{reviewData.title}</h2></Link>
-        <small>{reviewDate}</small>
-        <p className='review_content'>{content}...</p>
+        className='review_item row'>
+        <div className='list_img col-md-4'>
+          <img src={`../../images/${reviewData.cover_img}`} height='220px' width='220px'/>
+        </div>
+        <div className='col-md-8 list_info'>
+          <Link className='review_link' to={`review/${reviewData.id}`}><h2 className='list-title'>{reviewData.title}</h2></Link>
+          <small>{reviewDate}</small>
+          <p className='review_content'>{content}...</p>
+        </div>
       </div>
     )
   }

@@ -47,6 +47,7 @@ function seedPosts() {
           facere? Maiores, debitis.`,
           category: 'monitors',
           keywords: 'monitor',
+          cover_img: 'monitor1.png',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
@@ -59,6 +60,7 @@ function seedPosts() {
           facere? Maiores, debitis.`,
           category: 'keyboards',
           keywords: 'keyboard',
+          cover_img: 'keyboard.png',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
@@ -71,6 +73,7 @@ function seedPosts() {
           facere? Maiores, debitis.`,
           category: 'cpus',
           keywords: 'cpu',
+          cover_img: 'cpu.gif',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
       ]);
@@ -165,6 +168,7 @@ function seedReviews() {
           pros: 'inexpensive, good resolution, nice view angles',
           cons: 'wobbly base, color saturation lacking, controls hard to work',
           specs: spec_data,
+          cover_img: 'monitor1.png',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
@@ -180,6 +184,7 @@ function seedReviews() {
           pros: 'just awesome, great resolution, perfect view angles',
           cons: 'wobbly base, controls are annoying',
           specs: spec_data,
+          cover_img: 'monitor2.png',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         }
       ]);

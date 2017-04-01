@@ -34,7 +34,7 @@ class QuestionSidebar extends Component {
     return (
       <ul
       className='list-group'>
-        <li className='list-group-item'><h3>Recent Questions</h3></li>
+        <li className='list-group-item'><h3 className='list_group_title'>Recent Questions</h3></li>
         {this.props.allQuestions.map(this.renderQuestionList)}
       </ul>
     );

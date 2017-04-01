@@ -21,10 +21,15 @@ class PostsList extends Component {
     return (
       <div
         key={postData.id}
-        className='post_item'>
-          <Link className='posts_link' to={`post/${postData.id}`}><h2 className='list-title'>{postData.title}</h2></Link>
-          <small>{postDate}</small>
-          <p className='post_content'>{content}...</p>
+        className='post_item row'>
+          <div className='list_img col-md-4'>
+            <img src={`../../images/${postData.cover_img}`} height='220px' width='220px'/>
+          </div>
+          <div className='col-md-8 list_info'>
+            <Link className='posts_link' to={`post/${postData.id}`}><h2 className='list-title'>{postData.title}</h2></Link>
+            <small>{postDate}</small>
+            <p className='post_content'>{content}...</p>
+          </div>
         </div>
     )
   }

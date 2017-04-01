@@ -24,6 +24,7 @@ class PostSidebar extends Component {
       <li
       key={postData.id}
       className='list-group-item'>
+        <img src={`../../images/${postData.cover_img}`} height='40px' width='40px'/>
         <Link className='post_link' to={`/post/${postData.id}`}>{postData.title}</Link>
         <small className='pull-right'>{postDate}</small>
       </li>
@@ -34,7 +35,7 @@ class PostSidebar extends Component {
     return (
       <ul
       className='list-group'>
-        <li className='list-group-item'><h3>Recent Posts</h3></li>
+        <li className='list-group-item'><h3 className='list_group_title'>Recent Posts</h3></li>
         {this.props.allPosts.map(this.renderPostList)}
       </ul>
     );

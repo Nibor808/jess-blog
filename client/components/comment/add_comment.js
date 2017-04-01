@@ -30,15 +30,15 @@ class AddComment extends Component {
     const user = localStorage.getItem('user');
     let idtype;
     let typeid;
-    if (this.props.post_id === undefined && this.props.question_id === undefined) {
+    if (this.props.route.path === '/addcomment_review') {
       // it's a review
       idtype = 'review_id';
       typeid = this.props.review_id
-    }else if (this.props.review_id === undefined && this.props.question_id === undefined) {
+    }else if (this.props.route.path === '/addcomment_post') {
       // it's a post
       idtype = 'post_id';
       typeid = this.props.post_id
-    }else {
+    }else if (this.props.route.path === '/addcomment_question'){
       // it's a question
       idtype = 'question_id';
       typeid = this.props.question_id;
@@ -58,6 +58,8 @@ class AddComment extends Component {
 
   render() {
     const { handleSubmit, submitting } = this.props;
+    console.log('this', this)
+    console.log(this.props.route.path)
     return(
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='comment_form'>
         <div className='form-group'>

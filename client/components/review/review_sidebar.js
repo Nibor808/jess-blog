@@ -24,6 +24,7 @@ class ReviewSidebar extends Component {
       <li
       key={reviewData.id}
       className='list-group-item'>
+      <img src={`../../images/${reviewData.cover_img}`} height='40px' width='40px'/>
         <Link className='review_link' to={`/review/${reviewData.id}`}>{reviewData.title}</Link>
         <small className='pull-right'>{reviewDate}</small>
       </li>
@@ -34,7 +35,7 @@ class ReviewSidebar extends Component {
     return (
       <ul
       className='list-group'>
-        <li className='list-group-item'><h3>Recent Reviews</h3></li>
+        <li className='list-group-item'><h3 className='list_group_title'>Recent Reviews</h3></li>
         {this.props.allReviews.map(this.renderReview)}
       </ul>
     );

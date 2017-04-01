@@ -39,22 +39,26 @@ class Header extends Component {
           <ul className='nav navbar-nav'>
             <li>
               <Link to='/'>
-              <i className='fa fa-home fa-2x' aria-hidden='true'></i>Posts
+              <i className='fa fa-clipboard fa-2x' aria-hidden='true'></i>
+              <span>Posts</span>
               </Link>
             </li>
             <li>
               <Link to='/reviews'>
-              <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>Reviews
+              <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>
+              <span>Reviews</span>
               </Link>
             </li>
             <li>
               <Link to='/questions'>
-              <i className='fa fa-question fa-2x' aria-hidden='true'></i>Q&A
+              <i className='fa fa-question fa-2x' aria-hidden='true'></i>
+                <span>Q&A</span>
               </Link>
             </li>
             <li>
               <Link to='/'>
-              <i className='fa fa-female fa-2x' aria-hidden='true'></i>About Me
+              <i className='fa fa-female fa-2x' aria-hidden='true'></i>
+              <span>About Me</span>
               </Link>
             </li>
           </ul>

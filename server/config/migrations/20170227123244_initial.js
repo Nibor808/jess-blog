@@ -18,6 +18,7 @@ exports.up = function(knex) {
           table.text('content').notNull();
           table.string('category').notNull();
           table.string('keywords').notNull();
+          table.string('cover_img').nullable();
           table.dateTime('createdAt').notNull();
         });
     })
@@ -32,6 +33,7 @@ exports.up = function(knex) {
           table.string('pros').nullable();
           table.string('cons').nullable();
           table.json('specs').nullable();
+          table.string('cover_img').nullable();
           table.dateTime('createdAt').notNull();
         });
     })
@@ -44,6 +46,7 @@ exports.up = function(knex) {
           table.string('answer').nullable();
           table.string('category').notNull();
           table.string('keywords').notNull();
+          table.string('cover_img').nullable();
           table.dateTime('createdAt').notNull();
         });
     })

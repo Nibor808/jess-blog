@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "knex:migrate": "knex migrate:latest --knexfile config/knexfile.js",
+    "knex:seed": "knex seed:run --knexfile config/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile config/knexfile.js",
     "server": "NODE_ENV=development && npm run knex:migrate && nodemon server.js",
     "lint": "esw --config config/.eslintrc.json --cache --quiet --color --watch"
