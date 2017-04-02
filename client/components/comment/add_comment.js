@@ -58,8 +58,7 @@ class AddComment extends Component {
 
   render() {
     const { handleSubmit, submitting } = this.props;
-    console.log('this', this)
-    console.log(this.props.route.path)
+
     return(
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='comment_form'>
         <div className='form-group'>
