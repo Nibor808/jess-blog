@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { saveQuestion } from '../../actions/question_actions';
+import { saveArticle } from '../../actions/article_actions';
 
 class AskQuestion extends Component {
 
@@ -27,12 +27,13 @@ class AskQuestion extends Component {
 
   handleFormSubmit({ title, content, category, keywords }) {
     const keywordArray = [];
+    const type = 3;
     for (let key in keywords) {
       if (keywords.hasOwnProperty(key)) {
         keywordArray.push(key);
       }
     }
-    this.props.saveQuestion({ title, content, category, keywordArray });
+    this.props.saveArticle({ type, title, content, category, keywordArray });
   }
 
   render() {
@@ -84,10 +85,10 @@ class AskQuestion extends Component {
   }
 }
 
-function mapStateToProps({ questions }) {
+function mapStateToProps({ article }) {
   return {
-    didSave: questions.questionSaved,
-    errorMessage: questions.error
+    didSave: article.articleSaved,
+    errorMessage: article.error
   }
 }
 
@@ -95,4 +96,4 @@ AskQuestion = reduxForm({
   form: 'question'
 })(AskQuestion);
 
-export default connect(mapStateToProps, { saveQuestion })(AskQuestion);
+export default connect(mapStateToProps, { saveArticle })(AskQuestion);

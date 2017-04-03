@@ -27,9 +27,9 @@ class AddCommentReply extends Component {
 
   handleFormSubmit({ title, content }) {
     const user = localStorage.getItem('user');
-    const idtype = 'parent_comment_id';
-    const typeid = this.props.params.id;
-    this.props.saveComment({ idtype, typeid, user, title, content })
+    const type = 'parent_comment_id';
+    const id = this.props.params.id;
+    this.props.saveComment({ type, id, user, title, content })
   }
 
   render() {
@@ -52,9 +52,9 @@ class AddCommentReply extends Component {
   }
 }
 
-function mapStateToProps({ comments }) {
+function mapStateToProps({ comment }) {
   return {
-    didSave: comments.commentSaved
+    didSave: comment.commentSaved
   }
 }
 

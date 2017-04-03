@@ -8,22 +8,20 @@ module.exports = {
     const comments = [];
 
     knex('Comments').modify(queryBuilder => {
-      if (req.params.typeid === 'null') {
-        queryBuilder.whereNot(req.params.idtype, null)
+      if (req.params.id === 'null') {
+        queryBuilder.whereNot(req.params.type, null)
       }else {
-        queryBuilder.where(req.params.idtype, req.params.typeid)
+        queryBuilder.where(req.params.type, req.params.id)
       }
     })
     .join('Users', 'Comments.user_id', '=', 'Users.id')
     .select(
-      'Comments.id as commentId',
-      'Comments.title as commentTitle',
-      'Comments.content as commentContent',
-      'Comments.createdAt as commentCreatedAt',
-      'Comments.post_id as commentPostId',
-      'Comments.review_id as commentReviewId',
-      'Comments.question_id as commentQuestionId',
-      'Comments.parent_comment_id as parentCommentId',
+      'Comments.id',
+      'Comments.title',
+      'Comments.content',
+      'Comments.createdAt',
+      'Comments.article_id',
+      'Comments.parent_comment_id',
       'Users.username as username'
     ).orderBy('createdAt', 'asc')
     .then(data => {
@@ -31,7 +29,7 @@ module.exports = {
         res.status(204).send({ error: 'No comments' })
       }else {
         data.forEach((item) => {
-          item.commentCreatedAt = moment(item.commentCreatedAt).toString();
+          item.createdAt = moment(item.createdAt).toString();
           comments.push(item);
         })
         res.send({ ok: comments });
@@ -74,7 +72,7 @@ module.exports = {
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         };
 
-        insertObj[req.params.idtype] = req.params.typeid;
+        insertObj[req.body.type] = req.body.id;
 
         // save comment
         knex('Comments').insert( insertObj )

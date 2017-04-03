@@ -11,7 +11,7 @@ class QuestionsPage extends Component {
     if (!this.props.authenticated) {
       return (
         <div>
-          <Link to='/signin_question_page' className='pull-right login'>
+          <Link to='/signin_question' className='pull-right login'>
             <button className='btn btn-default'>sign in to ask a question</button>
           </Link>
         </div>
@@ -32,8 +32,8 @@ class QuestionsPage extends Component {
       return (
         <div className='signup_prompt text-center'>
           <h2>Not already part of the converstation?</h2>
-          <Link to='/signup_question_page'>
-            <button type='button' className='btn btn-primary'>sign up</button>
+          <Link to='/signup_question'>
+            <button type='button' className='btn btn-default'>sign up</button>
           </Link>
         </div>
       );

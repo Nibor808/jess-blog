@@ -3,7 +3,7 @@ import PostList from './post/posts_list';
 import ReviewSidebar from './review/review_sidebar';
 import QuestionSideBar from './question/question_sidebar';
 
-export default class PostsPage extends Component {
+export default class PostPage extends Component {
   render() {
       return (
       <div className='col-md-12 page'>

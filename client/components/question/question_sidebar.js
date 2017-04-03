@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { getAllQuestions } from '../../actions/question_actions';
+import { getArticles } from '../../actions/article_actions';
+// import { getAllQuestions } from '../../actions/question_actions';
 import { formatDate } from '../../utils/date_format';
 
 class QuestionSidebar extends Component {
@@ -12,7 +13,7 @@ class QuestionSidebar extends Component {
   }
 
   componentWillMount() {
-    this.props.getAllQuestions();
+    this.props.getArticles(3);
   }
 
   renderQuestionList(questionData) {
@@ -24,13 +25,17 @@ class QuestionSidebar extends Component {
       <li
       key={questionData.id}
       className='list-group-item'>
-        <Link className='question_link' to={`/question/${questionData.id}`}>{questionData.title}</Link>
+        <Link className='question_link' to={`/article/${questionData.id}`}>{questionData.title}</Link>
         <small className='pull-right'>{questionDate}</small>
       </li>
     );
   }
 
   render() {
+    if (!this.props.allQuestions) {
+      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+    }
+
     return (
       <ul
       className='list-group'>
@@ -41,10 +46,10 @@ class QuestionSidebar extends Component {
   }
 }
 
-function mapStateToProps({ questions }) {
+function mapStateToProps({ article }) {
   return {
-    allQuestions: questions.allQuestions
+    allQuestions: article.allQuestions
   };
 }
 
-export default connect(mapStateToProps, { getAllQuestions })(QuestionSidebar);
+export default connect(mapStateToProps, { getArticles })(QuestionSidebar);

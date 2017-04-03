@@ -38,6 +38,8 @@ p {
 .navbar,
 ul.list-group,
 li.list-group-item,
+.article_item,
+.article,
 .post,
 .post_item,
 .comments_section,
@@ -138,7 +140,8 @@ ul > li {
 
 .post_list,
 .review_list,
-.question_list {
+.question_list,
+.article_list {
   padding-left: 0;
 }
 
@@ -189,15 +192,18 @@ ul > li {
 .post,
 .review,
 .question,
+.article,
 .post_item,
 .review_item,
-.question_item {
+.question_item ,
+.article_item {
   margin-bottom: 20px;
 }
 
 .post,
 .review,
 .question,
+.article,
 .list_info,
 .question_item {
   padding: 20px;
@@ -205,7 +211,8 @@ ul > li {
 
 .post,
 .review,
-.question {
+.question,
+.article {
   small {
     margin-bottom: 20px;
   }
@@ -268,7 +275,8 @@ h5 {
   color: $title;
 }
 
-.list_group_title {
+.list_group_title,
+.fa-spinner {
   color: $white;
   text-shadow: 1px 1px 1px $font-color;
 }

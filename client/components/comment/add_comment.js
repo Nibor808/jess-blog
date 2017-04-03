@@ -6,14 +6,12 @@ import { saveComment } from '../../actions/comment_actions';
 class AddComment extends Component {
 
   static propTypes = {
-    post_id: PropTypes.number,
+    article_id: PropTypes.number,
     saveComment: PropTypes.func,
     errorMessage: PropTypes.string,
     didSave: PropTypes.bool,
     handleSubmit: PropTypes.func,
-    submitting: PropTypes.bool,
-    review_id: PropTypes.number,
-    question_id: PropTypes.number
+    submitting: PropTypes.bool
   }
 
   static contextTypes = {
@@ -28,22 +26,9 @@ class AddComment extends Component {
 
   handleFormSubmit({ title, content }) {
     const user = localStorage.getItem('user');
-    let idtype;
-    let typeid;
-    if (this.props.route.path === '/addcomment_review') {
-      // it's a review
-      idtype = 'review_id';
-      typeid = this.props.review_id
-    }else if (this.props.route.path === '/addcomment_post') {
-      // it's a post
-      idtype = 'post_id';
-      typeid = this.props.post_id
-    }else if (this.props.route.path === '/addcomment_question'){
-      // it's a question
-      idtype = 'question_id';
-      typeid = this.props.question_id;
-    }
-     this.props.saveComment({ idtype, typeid, user, title, content });
+    const type = 'article_id';
+    const id = this.props.article_id;
+    this.props.saveComment({ type, id, user, title, content });
   }
 
   renderAlert() {
@@ -77,28 +62,12 @@ class AddComment extends Component {
   }
 }
 
-function mapStateToProps({ posts, reviews, questions, comments }) {
-  if (posts.post) {
+function mapStateToProps({ article, comment }) {
     return {
-      post_id: posts.post.id,
-      didSave: comments.commentSaved,
-      errorMessage: comments.error
+      article_id: article.article.id,
+      didSave: comment.commentSaved,
+      errorMessage: comment.error
     }
-  }
-  if (reviews.review) {
-    return {
-      review_id: reviews.review.id,
-      didSave: comments.commentSaved,
-      errorMessage: comments.error
-    }
-  }
-  if (questions.question) {
-    return {
-      question_id: questions.question.id,
-      didSave: comments.commentSaved,
-      errorMessage: comments.error
-    }
-  }
 }
 
 AddComment = reduxForm({

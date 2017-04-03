@@ -2,10 +2,10 @@ import axios from 'axios';
 import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE, GET_A_COMMENT, GET_COMMENT_REPLIES, ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
-export function saveComment({ idtype, typeid, user, title, content }) {
+export function saveComment({ type, id, user, title, content }) {
   return function(dispatch) {
     axios.defaults.headers['authorization'] = localStorage.getItem('token');
-    axios.post(`${ROOT_URL}/savecomment/${idtype}/${typeid}`, { user, title, content })
+    axios.post(`${ROOT_URL}/savecomment`, {type, id, user, title, content })
       .then(response => {
         dispatch({
           type: SAVE_COMMENT
@@ -25,9 +25,9 @@ export function saveComment({ idtype, typeid, user, title, content }) {
   }
 }
 
-export function getComments(idtype, typeid) {
+export function getComments(type, id) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/getcomments/${idtype}/${typeid}`)
+    axios.get(`${ROOT_URL}/comments/${type}/${id}`)
     .then(response =>{
       dispatch({
         type: GET_COMMENTS,
@@ -43,9 +43,9 @@ export function getComments(idtype, typeid) {
   }
 }
 
-export function getCommentReplies(idtype) {
+export function getCommentReplies(type, id) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/getcomments/${idtype}/null`)
+    axios.get(`${ROOT_URL}/comments/${type}/${id}`)
     .then(response =>{
       dispatch({
         type: GET_COMMENT_REPLIES,
@@ -63,7 +63,7 @@ export function getCommentReplies(idtype) {
 
 export function getAComment(id) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/getacomment/${id}`)
+    axios.get(`${ROOT_URL}/editcomment/${id}`)
     .then(response => {
       dispatch({
         type: GET_A_COMMENT,
@@ -81,7 +81,7 @@ export function getAComment(id) {
 
 export function updateComment({ id, title, content }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/editcomment/${id}`, { title, content })
+    axios.post(`${ROOT_URL}/updatecomment/${id}`, { title, content })
     .then(response => {
         dispatch({
           type: SAVE_COMMENT

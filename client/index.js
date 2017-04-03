@@ -8,12 +8,9 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/app';
 import PostsPage from './components/posts_page';
-import ReviewPage from './components/reviews_page';
-import QuestionPage from './components/questions_page';
-import QuestionList from './components/question/question_list';
-import Post from './components/post/post';
-import Review from './components/review/review';
-import Question from './components/question/question';
+import ReviewsPage from './components/reviews_page';
+import QuestionsPage from './components/questions_page';
+import Article from './components/article/article';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import AddComment from './components/comment/add_comment';
@@ -33,38 +30,28 @@ if (token) {
   store.dispatch({ type: AUTH_USER });
 }
 
+const childRoutes = [
+  <Route path='/signin' component={Signin} />,
+  <Route path='/signup' component={Signup} />,
+  <Route path='/addcomment' component={requireAuth(AddComment)} />,
+  <Route path='/editcomment/:id' component={EditComment} />,
+  <Route path='/replytocomment/:id' component={AddCommentReply} />
+]
+
+const questionChildren = [
+  <Route path='/signin_question' component={Signin} />,
+  <Route path='/signup_question' component={Signup} />,
+  <Route path='/askquestion' component={requireAuth(AskQuestion)} />
+]
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={PostsPage} />
-        <Route path='/reviews' component={ReviewPage} />
-        <Route path='/questions' component={QuestionPage}>
-          <Route path='/signin_question_page' component={Signin} />
-          <Route path='/signup_question_page' component={Signup} />
-          <Route path='/askquestion' component={requireAuth(AskQuestion)} />
-        </Route>
-        <Route path='/post/:id' component={Post}>
-          <Route path='/signin_post' component={Signin} />
-          <Route path='/signup_post' component={Signup} />
-          <Route path='/addcomment_post' component={requireAuth(AddComment)} />
-          <Route path='/editcomment_post/:id' component={EditComment} />
-          <Route path='/replytocomment_post/:id' component={AddCommentReply} />
-        </Route>
-        <Route path='/review/:id' component={Review}>
-          <Route path='/signin_review' component={Signin} />
-          <Route path='/signup_review' component={Signup} />
-          <Route path='/addcomment_review' component={requireAuth(AddComment)} />
-          <Route path='/editcomment_review/:id' component={EditComment} />
-          <Route path='/replytocomment_review/:id' component={AddCommentReply} />
-        </Route>
-        <Route path='/question/:id' component={Question}>
-          <Route path='/signin_question' component={Signin} />
-          <Route path='/signup_question' component={Signup} />
-          <Route path='/addcomment_question' component={requireAuth(AddComment)} />
-          <Route path='/editcomment_question/:id' component={EditComment} />
-          <Route path='/replytocomment_question/:id' component={AddCommentReply} />
-        </Route>
+        <Route path='/article/:id' component={Article} children={childRoutes} />
+        <Route path='/reviews' component={ReviewsPage} />
+        <Route path='/questions' component={QuestionsPage} children={questionChildren}/>
       </Route>
     </Router>
   </Provider>

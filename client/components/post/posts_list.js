@@ -1,56 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { getAllPosts } from '../../actions/post_actions';
+import  { Link } from 'react-router';
+import { getArticles } from '../../actions/article_actions';
+import { renderArticle } from '../article/render_article';
 import { formatDate } from '../../utils/date_format';
 
-class PostsList extends Component {
-  static propTypes = {
-    allPosts: PropTypes.array,
-    getAllPosts: PropTypes.func
-  }
+class PostList extends Component {
 
   componentWillMount() {
-    this.props.getAllPosts();
-  }
-
-  renderPosts(postData) {
-    const content = postData.content.substring(0, 250);
-    const postDate = formatDate(postData.createdAt);
-
-    return (
-      <div
-        key={postData.id}
-        className='post_item row'>
-          <div className='list_img col-md-4'>
-            <img src={`../../images/${postData.cover_img}`} height='220px' width='220px'/>
-          </div>
-          <div className='col-md-8 list_info'>
-            <Link className='posts_link' to={`post/${postData.id}`}><h2 className='list-title'>{postData.title}</h2></Link>
-            <small>{postDate}</small>
-            <p className='post_content'>{content}...</p>
-          </div>
-        </div>
-    )
+    this.props.getArticles(1);
   }
 
   render() {
     if (!this.props.allPosts) {
-      return <div>Loading...</div>
+      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
     }
 
     return (
-      <div className='post_list'>
-        {this.props.allPosts.map(this.renderPosts)}
+      <div className='article_list'>
+        {this.props.allPosts.map(post => renderArticle(post))}
       </div>
     );
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ article }) {
   return {
-    allPosts: posts.allPosts
-  };
+   allPosts: article.allPosts
+  }
 }
 
-export default connect(mapStateToProps, { getAllPosts })(PostsList);
+export default connect(mapStateToProps, { getArticles })(PostList);

@@ -44,7 +44,7 @@ class EditComment extends Component {
 
   render() {
     if (!this.props.comment) {
-      return <div>Loading...</div>
+      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
     }
 
     const { handleSubmit, submitting } = this.props;
@@ -67,11 +67,11 @@ class EditComment extends Component {
   }
 }
 
-function mapStatetoProps({ comments }) {
+function mapStatetoProps({ comment }) {
   return {
-    comment: comments.singleComment,
-    didSave: comments.commentSaved,
-    errorMessage: comments.error
+    comment: comment.singleComment,
+    didSave: comment.commentSaved,
+    errorMessage: comment.error
   }
 }
 
