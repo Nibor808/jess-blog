@@ -13,16 +13,15 @@ import QuestionsPage from './components/questions_page';
 import Article from './components/article/article';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
-import AddComment from './components/comment/add_comment';
-import EditComment from './components/comment/edit_comment';
-import AddCommentReply from './components/comment/add_comment_reply';
+import CommentModal from './components/comment/comment_modal';
+import EditModal from './components/comment/edit_modal';
 import AskQuestion from './components/question/ask_question';
 import requireAuth from './components/auth/requireAuth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+export const store = createStoreWithMiddleware(reducers);
 
 const token = localStorage.getItem('token');
 
@@ -33,9 +32,9 @@ if (token) {
 const childRoutes = [
   <Route path='/signin' component={Signin} />,
   <Route path='/signup' component={Signup} />,
-  <Route path='/addcomment' component={requireAuth(AddComment)} />,
-  <Route path='/editcomment/:id' component={EditComment} />,
-  <Route path='/replytocomment/:id' component={AddCommentReply} />
+  <Route path='/addcomment' component={requireAuth(CommentModal)} />,
+  <Route path='/editcomment/:id' component={EditModal} />,
+  <Route path='/replytocomment/:id' component={CommentModal} />
 ]
 
 const questionChildren = [

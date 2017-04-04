@@ -14,7 +14,7 @@ export default function(state = {}, action) {
     return { ...state, repliesArray: action.payload, error: '' }
   case ERROR:
     return { ...state, commentSaved: false, error: action.payload };
+  default:
+    return state;
   }
-
-  return state;
 }

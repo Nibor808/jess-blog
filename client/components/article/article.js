@@ -8,6 +8,7 @@ import { renderComments } from '../comment/comments_list';
 import { renderSigninButton } from '../auth/render_signin_button';
 import { renderSignupPrompt } from '../auth/render_signup_prompt';
 
+
 class Article extends Component {
 
   static propTypes = {

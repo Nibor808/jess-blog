@@ -43,7 +43,7 @@ export function renderComments(commentArray, repliesArray) {
                           <h4>{reply.title}</h4>
                           <p>{reply.content}</p>
                           <small>posted: {replyDate} by: {reply.username}</small>
-                          <p className='pull-right'>{editDiv}</p>
+                          <div className='pull-right'>{editDiv}</div>
                           <hr />
                         </li>
                         )

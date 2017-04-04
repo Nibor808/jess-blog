@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { signinUser } from '../../actions/user_actions';
+import { store } from '../../index';
+import { UNAUTH_USER } from '../../actions/types';
 
 class Signin extends Component {
 
@@ -34,6 +36,11 @@ class Signin extends Component {
     }
   }
 
+  removeAuthError() {
+    store.dispatch({ type: UNAUTH_USER })
+    this.context.router.goBack()
+  }
+
   render() {
     const { handleSubmit } = this.props;
 
@@ -48,7 +55,7 @@ class Signin extends Component {
           <Field name='password' component='input' type='password' className='form-control' />
         </div>
         {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>cancel</button>
+        <button type='button' className='btn btn-default' onClick={this.removeAuthError.bind(this)}>cancel</button>
         <button type='submit' className='btn btn-default pull-right'>sign in</button>
       </form>
     );

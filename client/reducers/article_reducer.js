@@ -1,4 +1,6 @@
-import { GET_ARTICLE, SAVE_ARTICLE, RESET_ARTICLE_STATE, GET_POSTS, GET_QUESTIONS, GET_REVIEWS, ERROR } from '../actions/types';
+import { GET_ARTICLE, SAVE_ARTICLE, RESET_ARTICLE_STATE,
+  GET_POSTS, GET_QUESTIONS, GET_REVIEWS,
+  CLOSE_MODAL, OPEN_MODAL, ERROR } from '../actions/types';
 
 const INITIAL_STATE = {
   allPosts: [],
@@ -21,6 +23,10 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, allQuestions: action.payload, article: null, error: '' }
     case GET_REVIEWS:
       return { ...state, allReviews: action.payload, article: null, error: '' }
+    case CLOSE_MODAL:
+      return { ...state, modalOpen: false }
+    case OPEN_MODAL:
+      return { ...state, modalOpen: true }
     case ERROR:
       return { ...state, error: action.payload }
     default:

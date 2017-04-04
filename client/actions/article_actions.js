@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { GET_POSTS, GET_REVIEWS, GET_QUESTIONS, GET_ARTICLE, SAVE_ARTICLE, RESET_ARTICLE_STATE, ERROR } from './types';
+import { GET_POSTS, GET_REVIEWS, GET_QUESTIONS,
+  GET_ARTICLE, SAVE_ARTICLE, RESET_ARTICLE_STATE,
+  CLOSE_MODAL, OPEN_MODAL, ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function getArticles(type) {
@@ -69,5 +71,19 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
           payload: response.data.error
         })
       })
+  }
+}
+
+export function toggleModal(modalOpen) {
+  return function(dispatch) {
+    if (modalOpen === true) {
+      dispatch({
+        type: CLOSE_MODAL
+      })
+    }else {
+      dispatch({
+        type: OPEN_MODAL
+      })
+    }
   }
 }

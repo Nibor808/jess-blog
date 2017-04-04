@@ -56,11 +56,10 @@ module.exports = {
         return err;
       }else {
         req.body.password = hash;
-        const email = req.body.email.toLowerCase();
 
         knex('Users').insert({
-          email: req.body.email.trim(),
-          password: req.body.password.trim(),
+          email: req.body.email.trim().toLowerCase(),
+          password: req.body.password.trim().toLowerCase(),
           username: req.body.username.trim()
         })
         .then(data => {

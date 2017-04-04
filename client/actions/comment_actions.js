@@ -20,7 +20,7 @@ export function saveComment({ type, id, user, title, content }) {
         dispatch({
           type: ERROR,
           payload: response.data.error
-        });
+        })
       });
   }
 }

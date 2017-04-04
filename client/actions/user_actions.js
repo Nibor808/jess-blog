@@ -16,7 +16,10 @@ export function signupUser({ email, password, username }) {
         browserHistory.goBack();
       })
       .catch(({ response }) => {
-        dispatch(authError(response.data.error))
+       dispatch({
+          type: AUTH_ERROR,
+          payload: response.data.error
+        });
       });
   };
 }
@@ -33,7 +36,10 @@ export function signinUser({ email, password }) {
         localStorage.setItem('user', response.data.username);
       })
       .catch(() => {
-        dispatch(authError('Incorrect login info'));
+        dispatch({
+          type: AUTH_ERROR,
+          payload: 'Incorrect login info'
+        });
       });
   };
 }
@@ -44,12 +50,5 @@ export function signoutUser() {
 
   return {
     type: UNAUTH_USER
-  };
-}
-
-export function authError(error) {
-  return {
-    type: AUTH_ERROR,
-    payload: error
   };
 }

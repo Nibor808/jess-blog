@@ -1,6 +1,7 @@
 const ArticleController = require('./controllers/articles_controller');
 const CommentController = require('./controllers/comments_controller');
 const UserController = require('./controllers/users_controller');
+require('./utils/passport');
 const passport = require('passport');
 
 const requireAuth = passport.authenticate('jwt', { session: false });

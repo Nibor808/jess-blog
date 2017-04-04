@@ -12,4 +12,6 @@ export const GET_COMMENT_REPLIES = 'GET_COMMENT_REPLIES';
 export const SAVE_COMMENT = 'SAVE_COMMENT';
 export const RESET_COMMENT_STATE = 'RESET_COMMENT_STATE';
 export const GET_QUESTIONS = 'GET_ALL_QUESTIONS';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const OPEN_MODAL = 'OPEN_MODAL';
 export const ERROR = 'ERROR';

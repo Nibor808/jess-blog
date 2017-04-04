@@ -62,12 +62,14 @@ module.exports = {
       return;
     }
 
+    const title = req.body.title || null;
+
     //get user_id
     knex('Users').where('username', req.body.user).select('id')
       .then(data => {
         const insertObj = {
           user_id: data[0].id,
-          title: req.body.title.trim(),
+          title: title,
           content: req.body.content.trim(),
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         };

@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signupUser } from '../../actions/user_actions';
+import { store } from '../../index';
+import { UNAUTH_USER } from '../../actions/types';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => {
   return (
@@ -49,16 +51,21 @@ class Signup extends Component {
     }
   }
 
+  removeAuthError() {
+    store.dispatch({ type: UNAUTH_USER })
+    this.context.router.goBack()
+  }
+
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signup_form'>
         <Field name='email' type='email' component={renderField} label='Email:' />
-        <Field name='username' type='text' component={renderField} label='Username:' />
+        <Field name='username' type='text' component={renderField} label='Username: (for display only)' />
         <Field name='password' type='password' component={renderField} label='Password:' />
         <Field name='passwordConfirm' type='password' component={renderField} label='Confirm Password:' />
         {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>cancel</button>
+        <button type='button' className='btn btn-default' onClick={this.removeAuthError.bind(this)}>cancel</button>
         <button className='btn btn-default pull-right' type='submit' disabled={submitting}>sign up</button>
       </form>
     );
