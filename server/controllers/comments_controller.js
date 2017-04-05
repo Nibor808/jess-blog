@@ -96,12 +96,19 @@ module.exports = {
 
   // delete a comment
   deleteComment(req, res) {
+    console.log(req.params.id)
     knex('Comments').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {
-          res.status(204).send({ error: 'Comment does not exist.' });
+          res.send({ error: 'Comment does not exist.' });
         }else {
-          res.send({ ok: 'Comment deleted.' });
+          knex('Comments').where('parent_comment_id', req.params.id).del()
+            .then(() => {
+              res.send({ ok: 'Comment deleted.' });
+            })
+            .catch(err => {
+              res.status(422).send({ error: err });
+            })
         }
       })
       .catch(err => {

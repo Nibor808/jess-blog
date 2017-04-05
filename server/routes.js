@@ -17,6 +17,7 @@ module.exports = function(app) {
   app.get('/editcomment/:id', CommentController.getAComment);
   app.post('/savecomment', CommentController.saveComment);
   app.post('/updatecomment/:id', CommentController.updateComment);
+  app.post('/deletecomment/:id', CommentController.deleteComment);
   //users
   app.get('/users', UserController.getUsers);
   app.get('/user/:id', UserController.getUser);

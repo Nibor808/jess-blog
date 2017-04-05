@@ -68,7 +68,7 @@ module.exports = {
   },
 
   saveArticle(req, res) {
-    if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray || !req.body.category) {
+    if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category) {
       res.send({ error: 'Missing Data' });
       return;
     }
@@ -90,25 +90,29 @@ module.exports = {
     const keywords = req.body.keywordArray.join()
 
     knex('Articles').insert({
-      type: req.body.type.trim(),
+      type: req.body.type,
       title: req.body.title.trim(),
       content: req.body.content.trim(),
       keywords: keywords,
-      category: req.body.category.trim(),
-      cover_img: req.body.cover_img.trim(),
+      category: req.body.category,
+      cover_img: req.body.cover_img,
       createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
     })
       .then(data => {
         if (!data[0] > 0) {
           res.send({ error: 'Article not saved' });
         }
-        const specs = JSON.stringify(req.body.specs);
+        const specsObj = {};
+
+        req.body.specs.map((spec) => {
+          specsObj[spec.key] = spec.value
+        })
 
         knex('AdditionalInfo').insert({
           article_id: data[0],
           pros: req.body.pros,
           cons: req.body.cons,
-          specs: specs,
+          specs: JSON.stringify(specsObj),
           answer: req.body.answer
         })
         .then(data => {

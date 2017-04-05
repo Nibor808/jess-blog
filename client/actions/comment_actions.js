@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE, GET_A_COMMENT, GET_COMMENT_REPLIES, ERROR } from './types';
+import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE,
+  GET_A_COMMENT, GET_COMMENT_REPLIES, DELETE_COMMENT, ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function saveComment({ type, id, user, title, content }) {
@@ -83,6 +84,7 @@ export function updateComment({ id, title, content }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/updatecomment/${id}`, { title, content })
     .then(response => {
+      console.log('resp', response)
         dispatch({
           type: SAVE_COMMENT
         });
@@ -92,10 +94,32 @@ export function updateComment({ id, title, content }) {
           type: RESET_COMMENT_STATE
         });
       })
-      .catch(({ response }) => {
+      .catch(err => {
         dispatch({
           type: ERROR,
-          payload: response.data.error
+          payload: err
+        });
+      });
+  }
+}
+
+export function deleteComment(id) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/deletecomment/${id}`)
+      .then(response => {
+        dispatch({
+          type: DELETE_COMMENT
+        })
+      })
+      .then(() => {
+        dispatch({
+          type: RESET_COMMENT_STATE
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ERROR,
+          payload: err
         });
       });
   }

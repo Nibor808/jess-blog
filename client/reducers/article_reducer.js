@@ -16,7 +16,7 @@ export default function (state = INITIAL_STATE, action) {
     case SAVE_ARTICLE:
       return { ...state, articleSaved: true, error: '' }
     case RESET_ARTICLE_STATE:
-      return { ...state, articleSaved: false, error: '' }
+      return { ...state, articleSaved: false }
     case GET_POSTS:
       return { ...state, allPosts: action.payload, article: null, error: ''};
     case GET_QUESTIONS:

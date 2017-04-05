@@ -4,23 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import Modal from 'react-modal';
 import { toggleModal } from '../../actions/article_actions';
 import { saveComment } from '../../actions/comment_actions';
-import { store } from '../../index';
-import { RESET_COMMENT_STATE } from '../../actions/types';
-
-const customStyles = {
-  content : {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    outline: 'none'
-  },
-  overlay: {
-    backgroundColor: 'rgba(100,100,100,0.75)'
-  }
-};
+import { customStyles } from '../../utils/modal_style';
 
 class CommentModal extends Component {
 
@@ -63,7 +47,6 @@ class CommentModal extends Component {
   }
 
   closeModal() {
-    store.dispatch({ type: RESET_COMMENT_STATE });
     this.props.toggleModal(true);
     this.context.router.goBack()
   }
@@ -75,12 +58,14 @@ class CommentModal extends Component {
     return (
       <Modal
         isOpen={this.props.modalOpen}
-        contentLabel='Comment' className='col-md-4'
+        contentLabel='Comment'
+        className='col-md-4'
+        shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='comment_form'>
           <div className='form-group'>
             <label htmlFor='title'>Title:</label>
-            <Field name='title' component='input' type='text' className='form-control' />
+            <Field name='title' component='input' type='text' className='form-control' placeholder='Optional'/>
           </div>
           <div className='form-group'>
             <label htmlFor='content'>Comment:</label>

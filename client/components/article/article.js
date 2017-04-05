@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { formatDate } from '../../utils/date_format';
 import { getArticle } from '../../actions/article_actions';
 import { getComments, getCommentReplies } from '../../actions/comment_actions';
@@ -23,11 +22,10 @@ class Article extends Component {
     this.props.getArticle(this.props.params.id);
     this.props.getComments('article_id', this.props.params.id);
     this.props.getCommentReplies('parent_comment_id', null);
-    // this.props.getImages('review_id', this.props.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave) {
+    if (nextProps.didSave || nextProps.didDelete) {
       this.props.getComments('article_id', this.props.article.id);
       this.props.getCommentReplies('parent_comment_id', null);
     }
@@ -152,6 +150,7 @@ function mapStateToProps({ article, auth, comment }) {
     didSave: comment.commentSaved,
     commentArray: comment.commentArray,
     repliesArray: comment.repliesArray,
+    didDelete: comment.commentDeleted
   };
 }
 

@@ -56,19 +56,26 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
   return function(dispatch) {
     axios.post(`${ROOT_URL}/savearticle`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
       .then(response => {
-        dispatch({
-          type: SAVE_ARTICLE
-        })
+        if (response.data.error) {
+          dispatch({
+            type: ERROR,
+            payload: 'Missing Data'
+          })
+        }else {
+          dispatch({
+            type: SAVE_ARTICLE
+          })
+        }
       })
       .then(() => {
         dispatch({
           type: RESET_ARTICLE_STATE
         })
       })
-      .catch(({ response }) => {
+      .catch(err => {
         dispatch({
           type: ERROR,
-          payload: response.data.error
+          payload: err
         })
       })
   }

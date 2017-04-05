@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import QuestionList from './question/question_list';
-import PostSidebar from './post/post_sidebar';
-import ReviewSidebar from './review/review_sidebar';
+import QuestionList from './question_list';
+import PostSidebar from '../post/post_sidebar';
+import ReviewSidebar from '../review/review_sidebar';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 

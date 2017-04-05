@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, GET_USERS } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function signupUser({ email, password, username }) {
@@ -35,10 +35,10 @@ export function signinUser({ email, password }) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', response.data.username);
       })
-      .catch(() => {
+      .catch(err => {
         dispatch({
           type: AUTH_ERROR,
-          payload: 'Incorrect login info'
+          payload: 'Invalid Login Info'
         });
       });
   };
@@ -51,4 +51,22 @@ export function signoutUser() {
   return {
     type: UNAUTH_USER
   };
+}
+
+export function getUsers() {
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/users`)
+      .then(response => {
+        dispatch({
+          type: GET_USERS,
+          payload: response.data.ok
+        })
+      })
+      .catch(err => {
+        dispatch({
+          type: AUTH_ERROR,
+          payload: 'Could not get users.'
+        })
+      });
+  }
 }

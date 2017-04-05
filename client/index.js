@@ -7,14 +7,16 @@ import { Route, Router, browserHistory, IndexRoute } from 'react-router';
 import reduxThunk from 'redux-thunk';
 
 import App from './components/app';
-import PostsPage from './components/posts_page';
-import ReviewsPage from './components/reviews_page';
-import QuestionsPage from './components/questions_page';
+import PostsPage from './components/post/posts_page';
+import ReviewsPage from './components/review/reviews_page';
+import QuestionsPage from './components/question/questions_page';
+import AdminPage from './components/admin/admin_page';
 import Article from './components/article/article';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import CommentModal from './components/comment/comment_modal';
 import EditModal from './components/comment/edit_modal';
+import DeleteModal from './components/comment/delete_modal';
 import AskQuestion from './components/question/ask_question';
 import requireAuth from './components/auth/requireAuth';
 import reducers from './reducers';
@@ -34,7 +36,8 @@ const childRoutes = [
   <Route path='/signup' component={Signup} />,
   <Route path='/addcomment' component={requireAuth(CommentModal)} />,
   <Route path='/editcomment/:id' component={EditModal} />,
-  <Route path='/replytocomment/:id' component={CommentModal} />
+  <Route path='/replytocomment/:id' component={CommentModal} />,
+  <Route path='/deletecomment/:id' component={DeleteModal} />
 ]
 
 const questionChildren = [
@@ -51,6 +54,7 @@ ReactDOM.render(
         <Route path='/article/:id' component={Article} children={childRoutes} />
         <Route path='/reviews' component={ReviewsPage} />
         <Route path='/questions' component={QuestionsPage} children={questionChildren}/>
+        <Route path='/admin' component={AdminPage} />
       </Route>
     </Router>
   </Provider>

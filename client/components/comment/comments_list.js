@@ -14,6 +14,7 @@ export function renderComments(commentArray, repliesArray) {
 
     if (user && user === comment.username) {
       editDiv = <small>
+                  <Link to={`/deletecomment/${comment.id}`} className='edit_link'>delete</Link>
                   <Link to={`/editcomment/${comment.id}`} className='edit_link'>edit</Link>
                   <Link to={`/replytocomment/${comment.id}`}>reply</Link>
                 </small>
@@ -33,6 +34,7 @@ export function renderComments(commentArray, repliesArray) {
 
         if (user && user === reply.username) {
           editDiv = <small>
+                      <Link to={`/deletecomment/${reply.id}`} className='edit_link'>delete</Link>
                       <Link to={`/editcomment/${reply.id}`} className='edit_link'>edit</Link>
                     </small>
         }

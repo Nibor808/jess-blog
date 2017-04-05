@@ -13,7 +13,15 @@ class Header extends Component {
 
   renderNavRight() {
     const user = localStorage.getItem('user');
-    if (this.props.authenticated) {
+    if (this.props.authenticated && user === 'Twiggie' || this.props.user === 'Twiggie') {
+      return (
+        <div className='signout_div'>
+          signed in as: { user ? user: this.props.user }
+          <button className='btn btn-default signout_btn' onClick={this.props.signoutUser}>sign out</button>
+          <Link to='/admin'>admin</Link>
+        </div>
+      );
+    }else if (this.props.authenticated) {
       return (
         <div className='signout_div'>
           signed in as: { user ? user: this.props.user }
