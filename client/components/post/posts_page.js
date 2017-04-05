@@ -5,7 +5,7 @@ import QuestionSideBar from '../question/question_sidebar';
 
 export default class PostPage extends Component {
   render() {
-      return (
+    return (
       <div className='col-md-12 page'>
         <div className='col-md-8 page_list'>
           <div className='page_header_content'>

@@ -8,6 +8,18 @@ import { customStyles } from '../../utils/modal_style';
 
 class CommentModal extends Component {
 
+  static propTypes = {
+    toggleModal: PropTypes.func,
+    didSave: PropTypes.bool,
+    params: PropTypes.object,
+    article_id: PropTypes.number,
+    saveComment: PropTypes.func,
+    errorMessage: PropTypes.string,
+    handleSubmit: PropTypes.func,
+    submitting: PropTypes.func,
+    modalOpen: PropTypes.bool
+  }
+
   static contextTypes = {
     router: PropTypes.object
   }

@@ -9,9 +9,9 @@ module.exports = {
 
     knex('Comments').modify(queryBuilder => {
       if (req.params.id === 'null') {
-        queryBuilder.whereNot(req.params.type, null)
+        queryBuilder.whereNot(req.params.type, null);
       }else {
-        queryBuilder.where(req.params.type, req.params.id)
+        queryBuilder.where(req.params.type, req.params.id);
       }
     })
     .join('Users', 'Comments.user_id', '=', 'Users.id')
@@ -26,17 +26,17 @@ module.exports = {
     ).orderBy('createdAt', 'asc')
     .then(data => {
       if (!data.length > 0) {
-        res.status(204).send({ error: 'No comments' })
+        res.status(204).send({ error: 'No comments' });
       }else {
         data.forEach((item) => {
           item.createdAt = moment(item.createdAt).toString();
           comments.push(item);
-        })
+        });
         res.send({ ok: comments });
       }
     })
     .catch(err => {
-      res.status(422).send({ error: 'Could not get coments' })
+      res.status(422).send({ error: 'Could not get coments' });
     });
   },
 
@@ -45,13 +45,13 @@ module.exports = {
     knex('Comments').where('id', req.params.id).select()
     .then(data => {
       if (!data.length > 0) {
-        res.status(204).send({ error: 'Comment not found' })
+        res.status(204).send({ error: 'Comment not found' });
       }else {
-        res.send({ ok: data[0] })
+        res.send({ ok: data[0] });
       }
     })
     .catch(err => {
-      res.status(422).send({ error: 'Could not get comment' })
+      res.status(422).send({ error: 'Could not get comment' });
     });
   },
 
@@ -108,7 +108,7 @@ module.exports = {
             })
             .catch(err => {
               res.status(422).send({ error: err });
-            })
+            });
         }
       })
       .catch(err => {
@@ -129,14 +129,14 @@ module.exports = {
     })
     .then(data => {
       if (!data == 1) {
-        res.status(204).send({ error: 'Comment could not be found' })
+        res.status(204).send({ error: 'Comment could not be found' });
       }else {
-        res.send({ ok: 'Comment updated' })
+        res.send({ ok: 'Comment updated' });
       }
     })
     .catch(err => {
-      res.status(422).send({ error: err })
+      res.status(422).send({ error: err });
     });
   }
-}
+};
 

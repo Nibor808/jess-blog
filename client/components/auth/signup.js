@@ -53,7 +53,6 @@ class Signup extends Component {
 
   removeAuthError() {
     store.dispatch({ type: UNAUTH_USER })
-    this.context.router.goBack()
   }
 
   render() {

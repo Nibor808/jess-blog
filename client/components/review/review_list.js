@@ -7,7 +7,7 @@ import { renderArticle } from '../article/render_article';
 class ReviewList extends Component {
   static propTypes = {
     allReviews: PropTypes.array,
-    getAllReviews: PropTypes.func
+    getArticles: PropTypes.func
   }
 
   componentWillMount() {

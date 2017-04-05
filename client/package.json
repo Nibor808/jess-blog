@@ -6,7 +6,7 @@
   "scripts": {
     "rimraf": "rimraf dist",
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "lint": "esw --config config/.eslintrc.json --cache --quiet --color --watch"
+    "lint": "eslint --quiet --color --config config/.eslintrc.json ./"
   },
   "repository": {
     "type": "git",

@@ -7,6 +7,11 @@ import { formatDate } from '../../utils/date_format';
 
 class PostList extends Component {
 
+  static propTypes = {
+    getArticles: PropTypes.func,
+    allPosts: PropTypes.array
+  }
+
   componentWillMount() {
     this.props.getArticles(1);
   }
@@ -26,7 +31,7 @@ class PostList extends Component {
 
 function mapStateToProps({ article }) {
   return {
-   allPosts: article.allPosts
+    allPosts: article.allPosts
   }
 }
 

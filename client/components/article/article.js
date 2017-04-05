@@ -12,6 +12,13 @@ class Article extends Component {
 
   static propTypes = {
     getArticle: PropTypes.func,
+    getComments: PropTypes.func,
+    getCommentReplies: PropTypes.func,
+    didSave: PropTypes.bool,
+    didDelete: PropTypes.bool,
+    commentArray: PropTypes.array,
+    repliesArray: PropTypes.array,
+    children: PropTypes.object,
     params: PropTypes.object,
     id: PropTypes.number,
     article: PropTypes.object,

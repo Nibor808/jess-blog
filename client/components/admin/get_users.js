@@ -4,6 +4,11 @@ import { getUsers } from '../../actions/user_actions';
 
 class Users extends Component {
 
+  static propTypes = {
+    getUsers: PropTypes.func,
+    users: PropTypes.array
+  }
+
   componentWillMount() {
     this.props.getUsers()
   }

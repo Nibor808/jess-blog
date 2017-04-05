@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import QuestionList from './question_list';
 import PostSidebar from '../post/post_sidebar';
 import ReviewSidebar from '../review/review_sidebar';
@@ -6,6 +6,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 class QuestionsPage extends Component {
+
+  static propTypes = {
+    authenticated: PropTypes.bool,
+    children: PropTypes.object
+  }
 
   renderSignin() {
     if (!this.props.authenticated) {

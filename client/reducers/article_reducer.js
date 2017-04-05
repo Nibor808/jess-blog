@@ -11,25 +11,25 @@ const INITIAL_STATE = {
 
 export default function (state = INITIAL_STATE, action) {
   switch(action.type) {
-    case GET_ARTICLE:
-      return { ...state, article: action.payload, error: '' }
-    case SAVE_ARTICLE:
-      return { ...state, articleSaved: true, error: '' }
-    case RESET_ARTICLE_STATE:
-      return { ...state, articleSaved: false }
-    case GET_POSTS:
-      return { ...state, allPosts: action.payload, article: null, error: ''};
-    case GET_QUESTIONS:
-      return { ...state, allQuestions: action.payload, article: null, error: '' }
-    case GET_REVIEWS:
-      return { ...state, allReviews: action.payload, article: null, error: '' }
-    case CLOSE_MODAL:
-      return { ...state, modalOpen: false }
-    case OPEN_MODAL:
-      return { ...state, modalOpen: true }
-    case ERROR:
-      return { ...state, error: action.payload }
-    default:
-      return state;
+  case GET_ARTICLE:
+    return { ...state, article: action.payload, error: '' }
+  case SAVE_ARTICLE:
+    return { ...state, articleSaved: true, error: '' }
+  case RESET_ARTICLE_STATE:
+    return { ...state, articleSaved: false }
+  case GET_POSTS:
+    return { ...state, allPosts: action.payload, article: null, error: ''};
+  case GET_QUESTIONS:
+    return { ...state, allQuestions: action.payload, article: null, error: '' }
+  case GET_REVIEWS:
+    return { ...state, allReviews: action.payload, article: null, error: '' }
+  case CLOSE_MODAL:
+    return { ...state, modalOpen: false }
+  case OPEN_MODAL:
+    return { ...state, modalOpen: true }
+  case ERROR:
+    return { ...state, error: action.payload }
+  default:
+    return state;
   }
 }

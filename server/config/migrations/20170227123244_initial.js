@@ -14,7 +14,7 @@ exports.up = function(knex) {
         .createTableIfNotExists('ArticleTypes', function(table) {
           table.increments('id').primary();
           table.string('type').notNull().default('');
-        })
+        });
     })
     .then(function() {
       return knex.schema
@@ -69,17 +69,17 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema.table('Articles', function(table) {
-      table.dropForeign('type');
-    })
+    table.dropForeign('type');
+  })
   .then(function() {
     return knex.schema.table('AdditionalInfo', function(table) {
       table.dropForeign('article_id');
-    })
+    });
   })
   .then(function() {
     return knex.schema.table('Comments', function(table) {
       table.dropForeign('article_id');
-    })
+    });
   })
   .then(function() {
     return knex.schema.table('Images', function(table) {
@@ -94,5 +94,5 @@ exports.down = function(knex) {
       .dropTableIfExists('AdditionalInfo')
       .dropTableIfExists('Comments')
       .dropTableIfExists('Images');
-  })
+  });
 };

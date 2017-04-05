@@ -12,7 +12,8 @@ class Signin extends Component {
     signinUser: PropTypes.func,
     errorMessage: PropTypes.string,
     authenticated: PropTypes.bool,
-    handleSubmit: PropTypes.func
+    handleSubmit: PropTypes.func,
+    submitting: PropTypes.bool
   }
 
   static contextTypes = {
@@ -42,7 +43,7 @@ class Signin extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signin_form'>
@@ -56,7 +57,7 @@ class Signin extends Component {
         </div>
         {this.renderAlert()}
         <button type='button' className='btn btn-default' onClick={this.removeAuthError.bind(this)}>cancel</button>
-        <button type='submit' className='btn btn-default pull-right'>sign in</button>
+        <button type='submit' className='btn btn-default pull-right' disabled={submitting}>sign in</button>
       </form>
     );
   }

@@ -82,7 +82,7 @@ module.exports = {
     knex('Users').where('email', req.body.email).select('username')
       .then(data => {
         res.send({ token: tokenForUser(req.user[0].id), username: data[0].username });
-      })
+      });
   },
 
   // delete user

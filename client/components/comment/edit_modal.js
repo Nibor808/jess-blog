@@ -8,6 +8,20 @@ import { customStyles } from '../../utils/modal_style';
 
 class EditComment extends Component {
 
+  static propTypes = {
+    toggleModal: PropTypes.func,
+    didSave: PropTypes.bool,
+    params: PropTypes.object,
+    getAComment: PropTypes.func,
+    updateComment: PropTypes.func,
+    errorMessage: PropTypes.string,
+    handleSubmit: PropTypes.func,
+    submitting: PropTypes.func,
+    modalOpen: PropTypes.bool,
+    comment: PropTypes.object,
+    initialize: PropTypes.func
+  }
+
   static contextTypes = {
     router: PropTypes.object
   }
@@ -39,7 +53,6 @@ class EditComment extends Component {
       };
       this.props.initialize(initData);
     }
-
   }
 
   renderAlert() {
@@ -70,7 +83,7 @@ class EditComment extends Component {
 
     const { handleSubmit, submitting } = this.props;
 
-        return (
+    return (
       <Modal
         isOpen={this.props.modalOpen}
         contentLabel='Comment'

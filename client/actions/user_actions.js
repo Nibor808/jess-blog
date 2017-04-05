@@ -16,7 +16,7 @@ export function signupUser({ email, password, username }) {
         browserHistory.goBack();
       })
       .catch(({ response }) => {
-       dispatch({
+        dispatch({
           type: AUTH_ERROR,
           payload: response.data.error
         });

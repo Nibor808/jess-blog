@@ -2,12 +2,11 @@ const knex = require('../utils/db');
 const moment = require('moment');
 
 module.exports = {
+
+  // get all articles
   getAllArticles(req, res) {
-    knex('Articles').where('type', req.params.type).select()
+    knex('Articles').select()
       .then(data => {
-        data.forEach((item) => {
-          item.createdAt = moment(item.createdAt).toString();
-        })
         res.send({ ok: data });
       })
       .catch(err => {
@@ -15,6 +14,21 @@ module.exports = {
       });
   },
 
+  // get all articles of a type (post = 1, review = 2)
+  getAllArticlesOfType(req, res) {
+    knex('Articles').where('type', req.params.type).select()
+      .then(data => {
+        data.forEach((item) => {
+          item.createdAt = moment(item.createdAt).toString();
+        });
+        res.send({ ok: data });
+      })
+      .catch(err => {
+        res.send({ error: err });
+      });
+  },
+
+  // get an article
   getArticle(req, res) {
     const article = {};
 
@@ -28,10 +42,12 @@ module.exports = {
         }
       })
       .then(() => {
+        // if it's a review(2) or a question(3) get the additional info
         if (article.type === 2 || article.type === 3) {
           knex('AdditionalInfo').where('article_id', req.params.id).select('pros', 'cons', 'specs', 'answer')
             .then(data => {
               if (data[0].specs) {
+                //parse the specs as they are saved as a json string in the database
                 data[0].specs = JSON.parse(data[0].specs);
               }
 
@@ -42,52 +58,47 @@ module.exports = {
               }
             })
             .catch(err => {
-              res.send({ error: err })
+              res.send({ error: err });
             });
         }
       })
       .then(() => {
+        // get any additional images for the article
         const images = [];
         knex('Images').where('article_id', req.params.id).select()
           .then(data => {
             if (data) {
               data.map(image => {
                 images.push(image.file);
-              })
+              });
             }
             article.images = images;
-            res.send({ ok: article })
+            res.send({ ok: article });
           })
           .catch(err => {
-            res.send({ error: err })
-          })
+            res.send({ error: err });
+          });
       })
       .catch(err => {
         res.send({ error: err });
       });
   },
 
+  // save article
   saveArticle(req, res) {
-    if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category) {
-      res.send({ error: 'Missing Data' });
+    if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category || !req.body.cover_img) {
+      res.send({ error: 'Missing Some Info' });
       return;
-    }
-
-    if (req.body.type === 1 || req.body.type === 2) {
-      if (!req.body.cover_img) {
-        res.send({ error: 'Missing cover image' });
-        return;
-      }
     }
 
     if (req.body.type === 2) {
       if (!req.body.pros || !req.body.cons || !req.body.specs) {
-        res.send({ error: 'Missing Review Data' });
+        res.send({ error: 'Missing Review Info' });
         return;
       }
     }
 
-    const keywords = req.body.keywordArray.join()
+    const keywords = req.body.keywordArray.join();
 
     knex('Articles').insert({
       type: req.body.type,
@@ -105,8 +116,8 @@ module.exports = {
         const specsObj = {};
 
         req.body.specs.map((spec) => {
-          specsObj[spec.key] = spec.value
-        })
+          specsObj[spec.key] = spec.value;
+        });
 
         knex('AdditionalInfo').insert({
           article_id: data[0],
@@ -123,7 +134,7 @@ module.exports = {
         })
         .catch(err => {
           res.send({ error: err });
-        })
+        });
       })
       .catch(err => {
         res.send({ error: err });
@@ -131,26 +142,39 @@ module.exports = {
   },
 
    //change to update article
-  updateReview(req, res) {
+  updateArticle(req, res) {
+    if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category || !req.body.cover_img) {
+      res.send({ error: 'Missing Main Data' });
+      return;
+    }
 
-    knex('Reviews').where('id', req.params.id).update({
+    if (req.body.type === 2) {
+      if (!req.body.pros || !req.body.cons || !req.body.specs) {
+        res.send({ error: 'Missing Review Data' });
+        return;
+      }
+    }
+
+    const keywords = req.body.keywordArray.join();
+
+    knex('Articles').where('id', req.params.id).update({
+      type: req.body.type,
       title: req.body.title.trim(),
       content: req.body.content.trim(),
-      pros: req.body.pros.trim(),
-      cons: req.body.cons.trim(),
-      category: req.body.category.trim(),
-      keywords: req.body.keywords.trim()
+      keywords: keywords,
+      category: req.body.category,
+      cover_img: req.body.cover_img,
     })
       .then(data => {
         if (!data == 1) {
-          res.status(204).send({ error: 'Review does not exist.' });
+          res.send({ error: 'Article does not exist.' });
         }else {
-          res.send({ ok: 'Review updated' });
+          res.send({ ok: 'Article updated' });
         }
       })
       .catch(err => {
-        res.status(422).send({ error: err });
+        res.send({ error: err });
         return;
       });
   }
-}
+};

@@ -11,12 +11,12 @@ export function renderSigninButton(authenticated) {
       </div>
     );
   }else {
-      return (
-        <div className='col-md-6'>
-          <Link to='/addcomment' className='pull-right login'>
-            <button className='btn btn-default'>add a comment</button>
-          </Link>
-        </div>
-      );
+    return (
+      <div className='col-md-6'>
+        <Link to='/addcomment' className='pull-right login'>
+          <button className='btn btn-default'>add a comment</button>
+        </Link>
+      </div>
+    );
   }
 }

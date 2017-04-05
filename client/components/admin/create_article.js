@@ -30,6 +30,15 @@ const renderSpecs = ({ fields }) => {
 
 class CreateArticle extends Component {
 
+  static propTypes = {
+    fields: PropTypes.object,
+    errorMessage: PropTypes.string,
+    saveArticle: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    submitting: PropTypes.bool,
+    reset: PropTypes.func,
+  }
+
   renderAlert() {
     if (this.props.errorMessage) {
       return (
@@ -111,11 +120,11 @@ class CreateArticle extends Component {
         </div>
         <h4 className='text-center'>For Reviews Only</h4>
         <div className='form-group col-md-6'>
-          <label htmlFor='pros'>Pros:</label>
+          <label htmlFor='pros'>Pros:(csv)</label>
           <Field name='pros' component='input' type='text' className='form-control'/>
         </div>
         <div className='form-group col-md-6'>
-          <label htmlFor='cons'>Cons:</label>
+          <label htmlFor='cons'>Cons:(csv)</label>
           <Field name='cons' component='input' type='text' className='form-control'/>
         </div>
         <div className='form-group col-md-12'>

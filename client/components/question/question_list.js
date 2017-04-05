@@ -7,7 +7,8 @@ import { renderArticle } from '../article/render_article';
 class QuestionList extends Component {
   static propTypes = {
     allQuestions: PropTypes.array,
-    getArticles: PropTypes.func
+    getArticles: PropTypes.func,
+    didSave: PropTypes.bool
   }
 
   componentWillMount() {

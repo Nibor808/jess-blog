@@ -8,9 +8,16 @@ export function saveComment({ type, id, user, title, content }) {
     axios.defaults.headers['authorization'] = localStorage.getItem('token');
     axios.post(`${ROOT_URL}/savecomment`, {type, id, user, title, content })
       .then(response => {
-        dispatch({
-          type: SAVE_COMMENT
-        });
+        if (response.data.error) {
+          dispatch({
+            type: ERROR,
+            payload: response.data.error
+          })
+        }else {
+          dispatch({
+            type: SAVE_COMMENT
+          });
+        }
       })
       .then(() => {
         dispatch({
@@ -30,15 +37,22 @@ export function getComments(type, id) {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/comments/${type}/${id}`)
     .then(response =>{
-      dispatch({
-        type: GET_COMMENTS,
-        payload: response.data.ok
-      });
+      if (response.data.error) {
+        dispatch({
+          type: ERROR,
+          payload: response.data.error
+        })
+      }else {
+        dispatch({
+          type: GET_COMMENTS,
+          payload: response.data.ok
+        });
+      }
     })
     .catch(err => {
       dispatch({
         type: ERROR,
-        payload: err
+        payload: err.message
       });
     });
   }
@@ -48,15 +62,22 @@ export function getCommentReplies(type, id) {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/comments/${type}/${id}`)
     .then(response =>{
-      dispatch({
-        type: GET_COMMENT_REPLIES,
-        payload: response.data.ok
-      });
+      if (response.data.error) {
+        dispatch({
+          type: ERROR,
+          payload: response.data.error
+        })
+      }else {
+        dispatch({
+          type: GET_COMMENT_REPLIES,
+          payload: response.data.ok
+        });
+      }
     })
     .catch(err => {
       dispatch({
         type: ERROR,
-        payload: err
+        payload: err.message
       });
     });
   }
@@ -66,15 +87,22 @@ export function getAComment(id) {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/editcomment/${id}`)
     .then(response => {
-      dispatch({
-        type: GET_A_COMMENT,
-        payload: response.data.ok
-      })
+      if (response.data.error) {
+        dispatch({
+          type: ERROR,
+          payload: response.data.error
+        })
+      }else {
+        dispatch({
+          type: GET_A_COMMENT,
+          payload: response.data.ok
+        })
+      }
     })
     .catch(err => {
       dispatch({
         type: ERROR,
-        payload: err
+        payload: err.message
       });
     });
   }
@@ -84,22 +112,28 @@ export function updateComment({ id, title, content }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/updatecomment/${id}`, { title, content })
     .then(response => {
-      console.log('resp', response)
+      if (response.data.error) {
+        dispatch({
+          type: ERROR,
+          payload: response.data.error
+        })
+      }else {
         dispatch({
           type: SAVE_COMMENT
         });
-      })
-      .then(() => {
-        dispatch({
-          type: RESET_COMMENT_STATE
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: ERROR,
-          payload: err
-        });
+      }
+    })
+    .then(() => {
+      dispatch({
+        type: RESET_COMMENT_STATE
       });
+    })
+    .catch(err => {
+      dispatch({
+        type: ERROR,
+        payload: err.message
+      });
+    });
   }
 }
 
@@ -107,9 +141,16 @@ export function deleteComment(id) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/deletecomment/${id}`)
       .then(response => {
-        dispatch({
-          type: DELETE_COMMENT
-        })
+        if (response.data.error) {
+          dispatch({
+            type: ERROR,
+            payload: response.data.error
+          })
+        }else {
+          dispatch({
+            type: DELETE_COMMENT
+          })
+        }
       })
       .then(() => {
         dispatch({
@@ -119,7 +160,7 @@ export function deleteComment(id) {
       .catch(err => {
         dispatch({
           type: ERROR,
-          payload: err
+          payload: err.message
         });
       });
   }

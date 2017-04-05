@@ -7,6 +7,17 @@ import { customStyles } from '../../utils/modal_style';
 
 class AskQuestion extends Component {
 
+  static propTypes = {
+    toggleModal: PropTypes.func,
+    didSave: PropTypes.bool,
+    params: PropTypes.object,
+    saveArticle: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    submitting: PropTypes.bool,
+    errorMessage: PropTypes.string,
+    modalOpen: PropTypes.bool
+  }
+
   static contextTypes = {
     router: PropTypes.object
   }

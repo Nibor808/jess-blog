@@ -1,22 +1,22 @@
 const moment = require('moment');
 const knex = require('../../utils/db');
 
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
   return seedUsers()
     .then(function() {
-      return seedArticleTypes()
+      return seedArticleTypes();
     })
     .then(function() {
-      return seedArticles()
+      return seedArticles();
     })
     .then(function() {
-      return seedAdditionalInfo()
+      return seedAdditionalInfo();
     })
     .then(function() {
-      return seedComments()
+      return seedComments();
     })
     .then(function() {
-      return seedImages()
+      return seedImages();
     });
 };
 
@@ -63,7 +63,7 @@ function seedArticleTypes() {
         {type: 'review'},
         {type: 'question'}
       ]);
-    })
+    });
 }
 
 function seedArticles() {
@@ -152,7 +152,7 @@ function seedArticles() {
           type: 3,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
-                {
+        {
           title: 'Phillips LCD-243V5',
           content: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
           Dolorum sapiente inventore repellendus explicabo dolore consequatur nesciunt ex repellat corrupti
@@ -213,7 +213,7 @@ function seedAdditionalInfo() {
           article_id: 4,
           answer: 'The blah blah blah monitor is the best'
         }
-      ])
+      ]);
     });
 }
 

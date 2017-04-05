@@ -7,6 +7,15 @@ import { customStyles } from '../../utils/modal_style';
 
 class DeleteModal extends Component {
 
+  static propTypes = {
+    toggleModal: PropTypes.func,
+    didDelete: PropTypes.bool,
+    params: PropTypes.object,
+    deleteComment: PropTypes.func,
+    errorMessage: PropTypes.string,
+    modalOpen: PropTypes.bool
+  }
+
   static contextTypes = {
     router: PropTypes.object
   }
@@ -45,7 +54,8 @@ class DeleteModal extends Component {
 function mapStateToProps({ article, comment }) {
   return {
     modalOpen: article.modalOpen,
-    didDelete: comment.commentDeleted
+    didDelete: comment.commentDeleted,
+    errorMessage: comment.error
   }
 }
 
