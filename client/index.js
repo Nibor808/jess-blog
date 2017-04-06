@@ -54,7 +54,7 @@ ReactDOM.render(
         <Route path='/article/:id' component={Article} children={childRoutes} />
         <Route path='/reviews' component={ReviewsPage} />
         <Route path='/questions' component={QuestionsPage} children={questionChildren}/>
-        <Route path='/admin' component={AdminPage} />
+        <Route path='/admin' component={requireAuth(AdminPage)} />
       </Route>
     </Router>
   </Provider>

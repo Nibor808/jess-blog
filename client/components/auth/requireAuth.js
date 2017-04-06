@@ -18,9 +18,9 @@ export default function(ComposedComponent) {
       }
     }
 
-    componentWillUpdate() {
+    componentWillUpdate(nextProps) {
       if (!nextProps.authenticated) {
-        this.context.router.goBack();
+        this.context.router.push('/');
       }
     }
 
