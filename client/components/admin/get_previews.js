@@ -17,7 +17,7 @@ class GetPreviews extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave) {
+    if (nextProps.didSave || nextProps.didDelete) {
       this.props.getAllArticles(1)
     }
   }
@@ -30,7 +30,7 @@ class GetPreviews extends Component {
     return (
       <ul className='list-group'>
         <li className='list-group-item'><h3 className='list_group_title'>Preview Articles</h3></li>
-        {this.props.allPreviews.map(preview_article => renderArticleListItem(preview_article))}
+        {this.props.allPreviews.map(preview_article => renderArticleListItem(preview_article, true))}
       </ul>
     );
   }
@@ -40,6 +40,7 @@ function mapStateToProps({ admin, article }) {
   return {
     allPreviews: admin.allPreviews,
     didSave: article.articleSaved,
+    didDelete: admin.articleDeleted,
     errorMessage: admin.error
   };
 }

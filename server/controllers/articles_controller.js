@@ -89,7 +89,7 @@ module.exports = {
 
   // save article
   saveArticle(req, res) {
-    if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category || !req.body.cover_img) {
+    if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category) {
       res.send({ error: 'Missing Some Info' });
       return;
     }
@@ -99,6 +99,20 @@ module.exports = {
         res.send({ error: 'Missing Review Info' });
         return;
       }
+    }
+
+    if (req.body.type === 1 || req.body.type === 2) {
+      if (!req.body.cover_img) {
+        res.send({ error: 'Missing cover image' })
+        return;
+      }else if (!req.body.cover_img.includes('.png') ||
+                !req.body.cover_img.includes('.jpeg') ||
+                !req.body.cover_img.includes('.jpg') ||
+                !req.body.cover_img.includes('.gif')
+                ) {
+                  res.send({ error: 'Invalid cover_img' })
+                  return;
+                }
     }
 
     // if post or review put in pre publish state (publish will be an update)
@@ -144,7 +158,7 @@ module.exports = {
           if (!data[0] > 0) {
             res.send({ error: 'Additional Info not saved' });
           }
-          res.send({ ok: 'Article saved' });
+          res.send({ success: 'Article saved' });
         })
         .catch(err => {
           res.send({ error: err.message });
@@ -183,12 +197,44 @@ module.exports = {
         if (!data == 1) {
           res.send({ error: 'Article does not exist.' });
         }else {
-          res.send({ ok: 'Article updated' });
+          res.send({ success: 'Article updated' });
         }
       })
       .catch(err => {
         res.send({ error: err.message });
-        return;
+      });
+  },
+
+  publishArticle(req, res) {
+    knex('Articles').where('id', req.params.id).update('preview', 0)
+      .then(data => {
+        if (!data == 1) {
+          res.send({ error: 'Article does not exist' })
+        }else {
+          res.send({ success: 'Article published' })
+        }
+      })
+      .catch(err => {
+        res.send({ error: err.message })
+      });
+  },
+
+  deleteArticle(req, res) {
+    if (!req.body.id) {
+      res.send({ error: 'Enter an article id' });
+      return;
+    }
+
+    knex('Articles').where('id', req.body.id).del()
+      .then(data => {
+        if (!data == 1) {
+          res.send({ error: 'Article does not exist' })
+        }else {
+          res.send({ success: 'Article deleted' })
+        }
+      })
+      .catch(err => {
+        res.send({ error: err.message })
       });
   }
 };

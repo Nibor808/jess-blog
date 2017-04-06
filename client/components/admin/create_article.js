@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field, initialize, FieldArray } from 'redux-form';
+import { reduxForm, Field, initialize, FieldArray, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import { saveArticle } from '../../actions/article_actions';
 
@@ -46,6 +46,20 @@ class CreateArticle extends Component {
         </div>
       );
     }
+
+    if (this.props.successMessage) {
+      return (
+        <div className='alert alert-success col-md-12'>
+          {this.props.successMessage}
+        </div>
+      );
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.didSave) {
+      this.props.reset('create_article');
+    }
   }
 
   handleFormSubmit({ type, title, content, category, keywords, cover_img, specs, pros, cons }) {
@@ -64,76 +78,78 @@ class CreateArticle extends Component {
     const keywords = ['price', 'comparison', 'quality', 'best'];
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='create_article_form'>
-        <h3>Create Article</h3>
-        <div className='form-group col-md-6'>
-          <label htmlFor='type'>Type:</label>
-          <Field name='type' component='select' type='text' className='form-control'>
-            <option></option>
-            <option value='1'>post</option>
-            <option value='2'>review</option>
-          </Field>
-        </div>
-         <div className='form-group col-md-6'>
-          <label htmlFor='title'>Title:</label>
-          <Field name='title' component='input' type='text' className='form-control'/>
-        </div>
-        <div className='form-group col-md-12'>
-          <label htmlFor='content'>Content:</label>
-          <Field name='content' component='textarea' type='textarea' className='form-control'/>
-        </div>
-        <div className='form-group col-md-6'>
-          <label htmlFor='cover_img'>Cover Image:</label>
-          <Field name='cover_img' component='input' type='text' className='form-control'/>
-        </div>
-         <div className='form-group col-md-6'>
-          <label htmlFor='images'>Additional Images: (csv)</label>
-          <Field name='images' component='input' type='text' className='form-control'/>
-        </div>
-        <div className='form-group col-md-6'>
-          <label htmlFor='category'>Category:</label>
-          <Field name='category' component='select' className='form-control'>
-            <option></option>
-            <option>monitor</option>
-            <option>keyboard</option>
-            <option>mouse</option>
-            <option>cpu</option>
-            <option>laptop</option>
-            <option>printer</option>
-            <option>OS</option>
-            <option>tablet</option>
-            <option>accessories</option>
-            <option>gaming</option>
-          </Field>
-        </div>
-        <div className='form-group col-md-6'>
-          <label>Keywords:</label>
-          {keywords.map((name, index) => {
-            return (
-              <div key={index}>
-                <label htmlFor={`keywords[${name}]`} className='checkbox_label'>{name}</label>
-                <Field name={`keywords[${name}]`} component='input' type='checkbox' />
-              </div>
-            )
-          })}
-        </div>
-        <h4 className='text-center'>For Reviews Only</h4>
-        <div className='form-group col-md-6'>
-          <label htmlFor='pros'>Pros: (csv)</label>
-          <Field name='pros' component='input' type='text' className='form-control'/>
-        </div>
-        <div className='form-group col-md-6'>
-          <label htmlFor='cons'>Cons: (csv)</label>
-          <Field name='cons' component='input' type='text' className='form-control'/>
-        </div>
-        <div className='form-group col-md-12'>
-          <label htmlFor='specs'>Specs:</label>
-          <FieldArray name='specs' component={renderSpecs} />
-        </div>
+      <div>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='create_article_form'>
+          <h3>Create Article</h3>
+          <div className='form-group col-md-6'>
+            <label htmlFor='type'>Type:</label>
+            <Field name='type' component='select' type='text' className='form-control'>
+              <option></option>
+              <option value='1'>post</option>
+              <option value='2'>review</option>
+            </Field>
+          </div>
+          <div className='form-group col-md-6'>
+            <label htmlFor='title'>Title:</label>
+            <Field name='title' component='input' type='text' className='form-control'/>
+          </div>
+          <div className='form-group col-md-12'>
+            <label htmlFor='content'>Content:</label>
+            <Field name='content' component='textarea' type='textarea' className='form-control'/>
+          </div>
+          <div className='form-group col-md-6'>
+            <label htmlFor='cover_img'>Cover Image:</label>
+            <Field name='cover_img' component='input' type='text' className='form-control'/>
+          </div>
+          <div className='form-group col-md-6'>
+            <label htmlFor='images'>Additional Images: (csv)</label>
+            <Field name='images' component='input' type='text' className='form-control' disabled />
+          </div>
+          <div className='form-group col-md-6'>
+            <label htmlFor='category'>Category:</label>
+            <Field name='category' component='select' className='form-control'>
+              <option></option>
+              <option>monitor</option>
+              <option>keyboard</option>
+              <option>mouse</option>
+              <option>cpu</option>
+              <option>laptop</option>
+              <option>printer</option>
+              <option>OS</option>
+              <option>tablet</option>
+              <option>accessories</option>
+              <option>gaming</option>
+            </Field>
+          </div>
+          <div className='form-group col-md-6'>
+            <label>Keywords:</label>
+            {keywords.map((name, index) => {
+              return (
+                <div key={index}>
+                  <label htmlFor={`keywords[${name}]`} className='checkbox_label'>{name}</label>
+                  <Field name={`keywords[${name}]`} component='input' type='checkbox' />
+                </div>
+              )
+            })}
+          </div>
+          <h4 className='text-center'>For Reviews Only</h4>
+          <div className='form-group col-md-6'>
+            <label htmlFor='pros'>Pros: (csv)</label>
+            <Field name='pros' component='input' type='text' className='form-control'/>
+          </div>
+          <div className='form-group col-md-6'>
+            <label htmlFor='cons'>Cons: (csv)</label>
+            <Field name='cons' component='input' type='text' className='form-control'/>
+          </div>
+          <div className='form-group col-md-12'>
+            <label htmlFor='specs'>Specs:</label>
+            <FieldArray name='specs' component={renderSpecs} />
+          </div>
+          <button className='btn btn-default' type='button' onClick={() => reset('create_article')}>clear values</button>
+          <button className='btn btn-default pull-right' type='submit' disabled={submitting}>submit</button>
+        </form>
         {this.renderAlert()}
-        <button className='btn btn-default' type='button' onClick={() => reset('create_article')}>clear values</button>
-        <button className='btn btn-default pull-right' type='submit' disabled={submitting}>submit</button>
-      </form>
+      </div>
     )
   }
 }
@@ -141,7 +157,8 @@ class CreateArticle extends Component {
 function mapStateToProps({ article }) {
   return {
     didSave: article.articleSaved,
-    errorMessage: article.error
+    errorMessage: article.error,
+    successMessage: article.success
   }
 }
 

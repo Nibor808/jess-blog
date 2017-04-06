@@ -13,6 +13,8 @@ module.exports = function(app) {
   app.get('/article/:id', ArticleController.getArticle);
   app.post('/savearticle', ArticleController.saveArticle);
   app.get('/allarticles/:isPreview', ArticleController.getAllArticles);
+  app.post('/publisharticle/:id', requireAuth, ArticleController.publishArticle);
+  app.post('/deletearticle', ArticleController.deleteArticle);
   //comments
   app.get('/comments/:type/:id', CommentController.getComments);
   app.get('/editcomment/:id', CommentController.getAComment);

@@ -17,7 +17,7 @@ class GetArticles extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave) {
+    if (nextProps.didSave || nextProps.didDelete) {
       this.props.getAllArticles(0)
     }
   }
@@ -30,7 +30,7 @@ class GetArticles extends Component {
     return (
       <ul className='list-group'>
         <li className='list-group-item'><h3 className='list_group_title'>Articles</h3></li>
-        {this.props.allArticles.map(article => renderArticleListItem(article))}
+        {this.props.allArticles.map(article => renderArticleListItem(article, true))}
       </ul>
     );
   }
@@ -39,7 +39,8 @@ class GetArticles extends Component {
 function mapStateToProps({ admin, article }) {
   return {
     allArticles: admin.allArticles,
-    didSave: article.srticleSaved,
+    didSave: article.articleSaved,
+    didDelete: admin.articleDeleted,
     errorMessage: admin.error
   };
 }

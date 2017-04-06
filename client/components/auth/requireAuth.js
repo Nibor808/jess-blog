@@ -14,7 +14,7 @@ export default function(ComposedComponent) {
 
     componentWillMount() {
       if (!this.props.authenticated) {
-        this.context.router.goBack();
+        this.context.router.push('/');
       }
     }
 

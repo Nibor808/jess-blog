@@ -15,16 +15,30 @@ body {
   font-family: 'Pavanam', sans-serif;
 }
 
+.container {
+  margin-top: 40px;
+  min-height: 100%;
+  position: relative;
+  padding: 0;
+
+  &:after {
+    content: '';
+    display: block;
+    height: 200px;
+  }
+}
+
+.footer,
+.container:after {
+  height: 100px;
+}
+
 textarea {
   resize: vertical;
 }
 
 .row {
   margin: 0;
-}
-
-.container {
-  margin-top: 40px;
 }
 
 p {
@@ -59,7 +73,10 @@ li.list-group-item,
 .signup_prompt,
 .page_header_content,
 .delete_modal,
-.create_article_form {
+.create_article_form,
+.publish_div,
+.delete_form,
+.edit_form {
   color: $font-color;
   background-color: $white;
   border-radius: 3px;
@@ -115,6 +132,24 @@ ul > li {
   }
 }
 
+.footer {
+  border-top: 1px solid $white;
+  position: absolute;
+  bottom: 0;
+  padding: 0;
+
+  .col-md-4 {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  a {
+    color: $white;
+  }
+}
+
 .signout_div {
   padding: 30px 40px 30px 0;
 
@@ -134,11 +169,25 @@ ul > li {
   padding: 20px;
 }
 
+.admin_page {
+
+  .delete_form,
+  .edit_form {
+    padding: 10px;
+  }
+
+  .col-md-3 {
+    padding-left: 0;
+  }
+}
+
 .signin_form,
 .signup_form,
 .question_form,
 .edit_comment_form,
-.signup_prompt {
+.signup_prompt,
+.create_article_form,
+.delete_form {
   margin-bottom: 30px;
 }
 
@@ -175,11 +224,20 @@ ul > li {
     align-items: center;
     justify-content: space-between;
   }
+
+  .col-md-7 {
+    padding: 0;
+  }
+
+  img {
+    margin-right: 10px;
+  }
 }
 
 .page {
   padding-left: 0;
   padding-right: 0;
+  margin-bottom: 20px;
 
   .page_list{
     padding-left: 0;
@@ -250,7 +308,7 @@ ul > li {
 }
 
 .proscons {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .checkbox_label,

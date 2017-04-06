@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { formatDate } from '../../utils/date_format';
-import { getArticle } from '../../actions/article_actions';
+import { getArticle, publishArticle } from '../../actions/article_actions';
 import { getComments, getCommentReplies } from '../../actions/comment_actions';
 import { renderComments } from '../comment/comments_list';
 import { renderSigninButton } from '../auth/render_signin_button';
@@ -85,7 +85,6 @@ class Article extends Component {
         </div>
       )
     }
-    return <div></div>
   }
 
   renderImage() {
@@ -107,6 +106,29 @@ class Article extends Component {
           {renderComments(this.props.commentArray, this.props.repliesArray)}
         </ul>
       )
+    }
+  }
+
+  isPreview() {
+    if (this.props.article.preview === 1) {
+      return (
+        <div className='publish_div pull-right'>
+          <button type='button' className='btn btn-default pull-right' onClick={() => this.props.publishArticle(this.props.article.id)}>
+            publish article
+          </button>
+          {this.renderAlert()}
+        </div>
+      )
+    }
+  }
+
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className='alert alert-danger col-md-12'>
+          {this.props.errorMessage}
+        </div>
+      );
     }
   }
 
@@ -134,6 +156,7 @@ class Article extends Component {
           {this.renderSpecs(this.props.article.specs)}
           {this.renderAnswer()}
         </div>
+        {this.isPreview()}
         <div className='comments_section col-md-6'>
           <div className='row'>
             <div className='col-md-6'><h2>Comments:</h2></div>
@@ -153,6 +176,8 @@ class Article extends Component {
 function mapStateToProps({ article, auth, comment }) {
   return {
     article: article.article,
+    articleSaved: article.articleSaved,
+    errorMessage: article.error,
     authenticated: auth.authenticated,
     didSave: comment.commentSaved,
     commentArray: comment.commentArray,
@@ -161,4 +186,4 @@ function mapStateToProps({ article, auth, comment }) {
   };
 }
 
-export default connect(mapStateToProps, { getArticle, getComments, getCommentReplies })(Article);
+export default connect(mapStateToProps, { getArticle, getComments, getCommentReplies, publishArticle })(Article);

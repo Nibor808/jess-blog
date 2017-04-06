@@ -1,4 +1,4 @@
-import { GET_ARTICLE, SAVE_ARTICLE, RESET_ARTICLE_STATE,
+import { GET_ARTICLE, SAVE_ARTICLE, DELETE_ARTICLE, RESET_ARTICLE_STATE,
   GET_POSTS, GET_QUESTIONS, GET_REVIEWS,
   CLOSE_MODAL, OPEN_MODAL, ERROR } from '../actions/types';
 
@@ -14,9 +14,11 @@ export default function (state = INITIAL_STATE, action) {
   case GET_ARTICLE:
     return { ...state, article: action.payload, error: '' }
   case SAVE_ARTICLE:
-    return { ...state, articleSaved: true, error: '' }
+    return { ...state, articleSaved: true, success: action.payload, error: '' }
+  case DELETE_ARTICLE:
+    return { ...state, articleDeleted: true, success: action.payload, error: '' }
   case RESET_ARTICLE_STATE:
-    return { ...state, articleSaved: false }
+    return { ...state, articleSaved: false, articleDeleted: false }
   case GET_POSTS:
     return { ...state, allPosts: action.payload, article: null, error: ''};
   case GET_QUESTIONS:
