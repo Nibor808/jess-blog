@@ -16,14 +16,14 @@ module.exports = {
     knex('Users').select()
       .then(data => {
         if(!data.length > 0) {
-          res.status(204).send({ error: 'No users no get.'});
+          res.send({ error: 'No users no get.'});
           return;
         }else {
           res.send({ ok: data });
         }
       })
       .catch(err => {
-        res.status(422).send({ error: err });
+        res.send({ error: err.message });
       });
   },
 
@@ -32,21 +32,21 @@ module.exports = {
     knex('Users').where('id', req.params.id).select()
       .then(data => {
         if(!data.length > 0) {
-          res.status(204).send({ error: 'No such user.' });
+          res.send({ error: 'No such user.' });
           return;
         }else {
           res.send({ ok: data });
         }
       })
       .catch(err => {
-        res.status(422).send({ error: err });
+        res.send({ error: err.message });
       });
   },
 
   // sign up new user
   signupUser(req, res) {
     if(!req.body.username || !req.body.email || !req.body.password) {
-      res.status(422).send({ error: 'Please fill out all fields.' });
+      res.send({ error: 'Please fill out all fields.' });
       return;
     }
 
@@ -64,14 +64,14 @@ module.exports = {
         })
         .then(data => {
           if(!data[0] > 0) {
-            res.status(422).send({ error: 'User was not saved.' });
+            res.send({ error: 'User was not saved.' });
             return;
           }else {
             res.send({ token: tokenForUser(data[0]), username: req.body.username });
           }
         })
-        .catch(() => {
-          res.status(422).send({ error: 'Email or Username already in use.' });
+        .catch(err => {
+          res.send({ error: err.message });
         });
       }
     });
@@ -93,20 +93,20 @@ module.exports = {
     knex('Users').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {
-          res.status(204).send({ error: 'User doesn\'t exist.' });
+          res.send({ error: 'User doesn\'t exist.' });
         }else {
           res.send({ ok: 'User deleted.' });
         }
       })
       .catch(err => {
-        res.status(422).send({ error: err });
+        res.send({ error: err.message });
       });
   },
 
   // send email for password reset
   passwordReset(req, res) {
     if (!req.body.email) {
-      res.status(422).send({ error: 'Please provide an email address.' });
+      res.send({ error: 'Please provide an email address.' });
     }
 
     const passResetToken = Math.random().toString(36);
@@ -125,14 +125,14 @@ module.exports = {
         })
           .then(data => {
             if (!data == 1) {
-              res.status(204).send({ error: 'User with this email not found.' });
+              res.send({ error: 'User with this email not found.' });
             }else {
               res.send({ ok: 'Email sent.' });
             }
           });
       })
-      .catch((err) => {
-        res.status(422).send({ error: err });
+      .catch(err => {
+        res.send({ error: err.message });
       });
   },
 
@@ -142,9 +142,9 @@ module.exports = {
     knex('Users').where('email', req.params.user).select()
       .then(data => {
         if (!data.length) {
-          res.status(204).send({ error: 'User not found.' });
+          res.send({ error: 'User not found.' });
         }else if (req.params.token !== data.passResetToken){
-          res.status(422).send({ error: 'Link expired.' });
+          res.send({ error: 'Link expired.' });
         }else {
           res.send({ ok: 'Redirect.' });
           knex('Users').where('email', req.params.user).update('passResetToken', null);

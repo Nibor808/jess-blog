@@ -81,6 +81,7 @@ function seedArticles() {
           facere? Maiores, debitis.`,
           category: 'monitors',
           keywords: 'monitor',
+          preview: false,
           type: 1,
           cover_img: 'monitor1.png',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
@@ -95,6 +96,7 @@ function seedArticles() {
           facere? Maiores, debitis.`,
           category: 'keyboards',
           keywords: 'keyboard',
+          preview: false,
           type: 1,
           cover_img: 'keyboard.png',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
@@ -109,6 +111,7 @@ function seedArticles() {
           facere? Maiores, debitis.`,
           category: 'cpus',
           keywords: 'cpu',
+          preview: false,
           type: 1,
           cover_img: 'cpu.gif',
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
@@ -123,6 +126,7 @@ function seedArticles() {
           facere? Maiores, debitis.`,
           category: 'monitors',
           keywords: 'monitor, gaming monitor, best, under 200',
+          preview: false,
           type: 3,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -136,6 +140,7 @@ function seedArticles() {
           facere? Maiores, debitis.`,
           category: 'computers',
           keywords: 'mac, pc, compare, windows',
+          preview: false,
           type: 3,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -149,6 +154,7 @@ function seedArticles() {
           facere? Maiores, debitis.`,
           category: 'keybords',
           keywords: 'keyboard, quiet',
+          preview: false,
           type: 3,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -163,6 +169,7 @@ function seedArticles() {
           category: 'monitors',
           keywords: 'monitor',
           cover_img: 'monitor1.png',
+          preview: false,
           type: 2,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -177,6 +184,7 @@ function seedArticles() {
           category: 'monitors',
           keywords: 'monitor',
           cover_img: 'monitor2.png',
+          preview: false,
           type: 2,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         }
@@ -246,42 +254,42 @@ function seedComments() {
         {
           title: 'What Are You Talking About?',
           content: 'I\'m not sure you know what you\'re talking about.',
-          article_id: 2,
+          article_id: 7,
           user_id: 3,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
           title: 'I Think She Get\'s It',
           content: 'She totally get\'s the subject matter.',
-          article_id: 2,
+          article_id: 7,
           user_id: 1,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
-          title: 'This This Is Awesome!',
+          title: 'This Is Awesome!',
           content: 'I can\'t belive I didn\'t know about this before!' ,
-          article_id: 3,
+          article_id: 2,
           user_id: 2,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
           title: 'This Review Sucks!',
           content: 'Worst review ever',
-          article_id: 3,
+          article_id: 8,
           user_id: 1,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
           title: 'Great Review!',
           content: 'This is a great review.' ,
-          article_id: 4,
+          article_id: 8,
           user_id: 2,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
           title: 'Not Sure I get It?',
           content: 'Not sure what this review is saying. Shold I buy it or not?',
-          article_id: 5,
+          article_id: 8,
           user_id: 1,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -302,27 +310,27 @@ function seedComments() {
         {
           title: 'Acer 5000',
           content: 'The Acer 5000 has been my go to monitor for years.',
-          article_id: 6,
+          article_id: 4,
           user_id: 2,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
           title: 'PC all the way!!!!',
           content: 'PC\'s are obviously the best for everything.',
-          article_id: 6,
+          article_id: 5,
           user_id: 3,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
           title: 'Mac FTW!',
           content: 'Once you go mac you will never go back.',
-          article_id: 7,
+          article_id: 5,
           user_id: 1,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },
         {
           title: 'Not really sure.',
-          content: 'It depends on what you are goin gto use it for.',
+          content: 'It depends on what you are going to use it for.',
           article_id: 8,
           user_id: 2,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
@@ -330,7 +338,7 @@ function seedComments() {
         {
           title: 'I disagree.',
           content: 'I got one of these and it sounds like a herd of elephants walking in the room.',
-          article_id: 8,
+          article_id: 6,
           user_id: 1,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
         },

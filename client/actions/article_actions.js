@@ -1,17 +1,25 @@
 import axios from 'axios';
 import { GET_POSTS, GET_REVIEWS, GET_QUESTIONS,
-  GET_ARTICLE, GET_ALL_ARTICLES, SAVE_ARTICLE, RESET_ARTICLE_STATE,
+  GET_ARTICLE, GET_ALL_ARTICLES, GET_ALL_PREVIEWS, SAVE_ARTICLE, RESET_ARTICLE_STATE,
   CLOSE_MODAL, OPEN_MODAL, ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
-export function getAllArticles() {
+export function getAllArticles(isPreview) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/allarticles`)
+    axios.get(`${ROOT_URL}/allarticles/${isPreview}`,)
       .then(response => {
-        dispatch({
-          type: GET_ALL_ARTICLES,
-          payload: response.data.ok
-        });
+        if (isPreview === 0) {
+          dispatch({
+            type: GET_ALL_ARTICLES,
+            payload: response.data.ok
+          });
+        }else {
+          dispatch({
+            type: GET_ALL_PREVIEWS,
+            payload: response.data.ok
+          });
+        }
+
       })
       .catch(err => {
         dispatch({
@@ -89,6 +97,7 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
     axios.post(`${ROOT_URL}/savearticle`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
       .then(response => {
         if (response.data.error) {
+          console.log(response.data.error)
           dispatch({
             type: ERROR,
             payload: response.data.error

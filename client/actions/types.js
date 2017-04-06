@@ -4,6 +4,7 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const GET_USERS = 'GET_USERS';
 export const GET_ARTICLE = 'GET_ARTICLE';
 export const GET_ALL_ARTICLES = 'GET_ALL_ARTICLES';
+export const GET_ALL_PREVIEWS = 'GET_ALL_PREVIEWS';
 export const SAVE_ARTICLE = 'SAVE_ARTICLE';
 export const RESET_ARTICLE_STATE = 'RESET_ARTICLE_STATE';
 export const GET_POSTS = 'GET_POSTS';

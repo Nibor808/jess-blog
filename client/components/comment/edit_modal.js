@@ -16,7 +16,7 @@ class EditComment extends Component {
     updateComment: PropTypes.func,
     errorMessage: PropTypes.string,
     handleSubmit: PropTypes.func,
-    submitting: PropTypes.func,
+    submitting: PropTypes.bool,
     modalOpen: PropTypes.bool,
     comment: PropTypes.object,
     initialize: PropTypes.func

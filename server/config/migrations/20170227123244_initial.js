@@ -27,6 +27,7 @@ exports.up = function(knex) {
           table.string('cover_img').nullable();
           table.integer('type').unsigned();
           table.foreign('type').references('id').inTable('ArticleTypes');
+          table.boolean('preview').notNull().default(false);
           table.dateTime('createdAt').notNull();
         });
     })

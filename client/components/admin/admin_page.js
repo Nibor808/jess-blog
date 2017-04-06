@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import CreateArticle from './create_article';
 import Users from './get_users';
 import Articles from './get_articles';
+import Previews from './get_previews';
 
 export default class AdminPage extends Component {
   render() {
@@ -13,6 +15,7 @@ export default class AdminPage extends Component {
         <div className='col-md-4 side_bar'>
           <Users />
           <Articles />
+          <Previews />
        </div>
       </div>
     )

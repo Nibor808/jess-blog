@@ -5,18 +5,7 @@ module.exports = {
 
   // get all articles
   getAllArticles(req, res) {
-    knex('Articles').select()
-      .then(data => {
-        res.send({ ok: data });
-      })
-      .catch(err => {
-        res.send({ error: err });
-      });
-  },
-
-  // get all articles of a type (post = 1, review = 2)
-  getAllArticlesOfType(req, res) {
-    knex('Articles').where('type', req.params.type).select()
+    knex('Articles').where('preview', req.params.isPreview).select()
       .then(data => {
         data.forEach((item) => {
           item.createdAt = moment(item.createdAt).toString();
@@ -24,7 +13,21 @@ module.exports = {
         res.send({ ok: data });
       })
       .catch(err => {
-        res.send({ error: err });
+        res.send({ error: err.message });
+      });
+  },
+
+  // get all articles of a type (post = 1, review = 2, question = 3)
+  getAllArticlesOfType(req, res) {
+    knex('Articles').where({ 'type': req.params.type, 'preview': false }).select()
+      .then(data => {
+        data.forEach((item) => {
+          item.createdAt = moment(item.createdAt).toString();
+        });
+        res.send({ ok: data });
+      })
+      .catch(err => {
+        res.send({ error: err.message });
       });
   },
 
@@ -58,7 +61,7 @@ module.exports = {
               }
             })
             .catch(err => {
-              res.send({ error: err });
+              res.send({ error: err.message });
             });
         }
       })
@@ -76,11 +79,11 @@ module.exports = {
             res.send({ ok: article });
           })
           .catch(err => {
-            res.send({ error: err });
+            res.send({ error: err.message });
           });
       })
       .catch(err => {
-        res.send({ error: err });
+        res.send({ error: err.message });
       });
   },
 
@@ -98,6 +101,14 @@ module.exports = {
       }
     }
 
+    // if post or review put in pre publish state (publish will be an update)
+    let preview;
+    if (req.body.type === 1 || req.body.type === 2) {
+      preview = true
+    }else {
+      preview = false
+    }
+
     const keywords = req.body.keywordArray.join();
 
     knex('Articles').insert({
@@ -107,6 +118,7 @@ module.exports = {
       keywords: keywords,
       category: req.body.category,
       cover_img: req.body.cover_img,
+      preview: preview,
       createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
     })
       .then(data => {
@@ -115,9 +127,11 @@ module.exports = {
         }
         const specsObj = {};
 
-        req.body.specs.map((spec) => {
-          specsObj[spec.key] = spec.value;
-        });
+        if (req.body.specs) {
+          req.body.specs.map((spec) => {
+            specsObj[spec.key] = spec.value;
+          });
+        }
 
         knex('AdditionalInfo').insert({
           article_id: data[0],
@@ -133,18 +147,18 @@ module.exports = {
           res.send({ ok: 'Article saved' });
         })
         .catch(err => {
-          res.send({ error: err });
+          res.send({ error: err.message });
         });
       })
       .catch(err => {
-        res.send({ error: err });
+        res.send({ error: err.message });
       });
   },
 
-   //change to update article
+   //update article
   updateArticle(req, res) {
     if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category || !req.body.cover_img) {
-      res.send({ error: 'Missing Main Data' });
+      res.send({ error: 'Missing Data' });
       return;
     }
 
@@ -173,7 +187,7 @@ module.exports = {
         }
       })
       .catch(err => {
-        res.send({ error: err });
+        res.send({ error: err.message });
         return;
       });
   }

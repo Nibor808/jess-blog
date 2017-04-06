@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm, Field, initialize, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
 import { saveArticle } from '../../actions/article_actions';
-import { store } from '../../index.js';
 
 const renderSpecs = ({ fields }) => {
   return (
@@ -120,11 +119,11 @@ class CreateArticle extends Component {
         </div>
         <h4 className='text-center'>For Reviews Only</h4>
         <div className='form-group col-md-6'>
-          <label htmlFor='pros'>Pros:(csv)</label>
+          <label htmlFor='pros'>Pros: (csv)</label>
           <Field name='pros' component='input' type='text' className='form-control'/>
         </div>
         <div className='form-group col-md-6'>
-          <label htmlFor='cons'>Cons:(csv)</label>
+          <label htmlFor='cons'>Cons: (csv)</label>
           <Field name='cons' component='input' type='text' className='form-control'/>
         </div>
         <div className='form-group col-md-12'>
@@ -132,7 +131,7 @@ class CreateArticle extends Component {
           <FieldArray name='specs' component={renderSpecs} />
         </div>
         {this.renderAlert()}
-        <button className='btn btn-default' type='button' onClick={() => store.dispatch(reset('create_article'))}>clear values</button>
+        <button className='btn btn-default' type='button' onClick={() => reset('create_article')}>clear values</button>
         <button className='btn btn-default pull-right' type='submit' disabled={submitting}>submit</button>
       </form>
     )

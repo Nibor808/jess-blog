@@ -26,7 +26,7 @@ module.exports = {
     ).orderBy('createdAt', 'asc')
     .then(data => {
       if (!data.length > 0) {
-        res.status(204).send({ error: 'No comments' });
+        res.send({ error: 'No comments' });
       }else {
         data.forEach((item) => {
           item.createdAt = moment(item.createdAt).toString();
@@ -36,7 +36,7 @@ module.exports = {
       }
     })
     .catch(err => {
-      res.status(422).send({ error: 'Could not get coments' });
+      res.send({ error: err.message });
     });
   },
 
@@ -45,20 +45,20 @@ module.exports = {
     knex('Comments').where('id', req.params.id).select()
     .then(data => {
       if (!data.length > 0) {
-        res.status(204).send({ error: 'Comment not found' });
+        res.send({ error: 'Comment not found' });
       }else {
         res.send({ ok: data[0] });
       }
     })
     .catch(err => {
-      res.status(422).send({ error: 'Could not get comment' });
+      res.send({ error: err.message });
     });
   },
 
   // save comment
   saveComment(req, res) {
     if(!req.body.content) {
-      res.status(422).send({ error: 'You must have some content in your comment.' });
+      res.send({ error: 'You must have some content in your comment.' });
       return;
     }
 
@@ -80,17 +80,17 @@ module.exports = {
         knex('Comments').insert( insertObj )
         .then(data => {
           if(!data[0] > 0) {
-            res.status(422).send({ error: 'Comment was not saved.' });
+            res.send({ error: 'Comment was not saved.' });
           }else {
             res.send({ ok: 'Comment saved.' });
           }
         })
         .catch(err => {
-          res.status(422).send({ error: err });
+          res.send({ error: err.message });
         });
       })
       .catch(err => {
-        res.status(422).send({ error: err });
+        res.send({ error: err.message });
       });
   },
 
@@ -107,19 +107,19 @@ module.exports = {
               res.send({ ok: 'Comment deleted.' });
             })
             .catch(err => {
-              res.status(422).send({ error: err });
+              res.send({ error: err.message });
             });
         }
       })
       .catch(err => {
-        res.status(422).send({ error: err });
+        res.send({ error: err.message });
       });
   },
 
   // edit comment
   updateComment(req, res) {
     if (!req.body.content) {
-      res.status(422).send({ error: 'You must have some content in your comment.' });
+      res.send({ error: 'You must have some content in your comment.' });
       return;
     }
 
@@ -135,7 +135,7 @@ module.exports = {
       }
     })
     .catch(err => {
-      res.status(422).send({ error: err });
+      res.send({ error: err.message });
     });
   }
 };

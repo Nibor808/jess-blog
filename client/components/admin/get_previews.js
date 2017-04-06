@@ -3,34 +3,34 @@ import { connect } from 'react-redux';
 import { getAllArticles } from '../../actions/article_actions';
 import { renderArticleListItem } from '../article/render_article_list_item';
 
-class GetArticles extends Component {
+class GetPreviews extends Component {
 
   static propTypes = {
     getAllArticles: PropTypes.func,
-    allArticles: PropTypes.array,
+    allPreviews: PropTypes.array,
     errorMessage: PropTypes.string
   }
 
   componentWillMount() {
-    // where isPreview = false(0)
-    this.props.getAllArticles(0)
+    // where isPreview = true(1)
+    this.props.getAllArticles(1)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didSave) {
-      this.props.getAllArticles(0)
+      this.props.getAllArticles(1)
     }
   }
 
   render() {
-    if (!this.props.allArticles) {
+    if (!this.props.allPreviews) {
       return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
     }
 
     return (
       <ul className='list-group'>
-        <li className='list-group-item'><h3 className='list_group_title'>Articles</h3></li>
-        {this.props.allArticles.map(article => renderArticleListItem(article))}
+        <li className='list-group-item'><h3 className='list_group_title'>Preview Articles</h3></li>
+        {this.props.allPreviews.map(preview_article => renderArticleListItem(preview_article))}
       </ul>
     );
   }
@@ -38,10 +38,10 @@ class GetArticles extends Component {
 
 function mapStateToProps({ admin, article }) {
   return {
-    allArticles: admin.allArticles,
-    didSave: article.srticleSaved,
+    allPreviews: admin.allPreviews,
+    didSave: article.articleSaved,
     errorMessage: admin.error
   };
 }
 
-export default connect(mapStateToProps, { getAllArticles })(GetArticles);
+export default connect(mapStateToProps, { getAllArticles })(GetPreviews);

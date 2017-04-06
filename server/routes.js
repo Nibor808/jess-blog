@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.get('/articles/:type', ArticleController.getAllArticlesOfType);
   app.get('/article/:id', ArticleController.getArticle);
   app.post('/savearticle', ArticleController.saveArticle);
-  app.get('/allarticles', ArticleController.getAllArticles);
+  app.get('/allarticles/:isPreview', ArticleController.getAllArticles);
   //comments
   app.get('/comments/:type/:id', CommentController.getComments);
   app.get('/editcomment/:id', CommentController.getAComment);
