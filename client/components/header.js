@@ -16,16 +16,16 @@ class Header extends Component {
     if (this.props.authenticated && user === 'Twiggie' || this.props.authenticated && this.props.user === 'Twiggie') {
       return (
         <div className='signout_div'>
-          signed in as: { user ? user: this.props.user }
-          <button className='btn btn-default signout_btn' onClick={this.props.signoutUser}>sign out</button>
-          <Link to='/admin'>admin</Link>
+          <small>signed in as: { user ? user: this.props.user }</small>
+          <Link className='signout_btn' onClick={this.props.signoutUser}><small>sign out</small></Link>
+          <Link to='/admin'><small>admin</small></Link>
         </div>
       );
     }else if (this.props.authenticated) {
       return (
         <div className='signout_div'>
           signed in as: { user ? user: this.props.user }
-          <button className='btn btn-default signout_btn' onClick={this.props.signoutUser}>sign out</button>
+          <Link className='signout_btn' onClick={this.props.signoutUser}><small>sign out</small></Link>
         </div>
       );
     }
@@ -33,48 +33,62 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className='navbar navbar-default'>
-        <div className='navbar-header'>
-          <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#main-nav' aria-expanded='false'>
-            <span className='sr-only'>Toggle navigation</span>
-            <span className='icon-bar'></span>
-            <span className='icon-bar'></span>
-            <span className='icon-bar'></span>
-          </button>
-        </div>
-
-        <div className='collapse navbar-collapse' id='main-nav'>
-          <ul className='nav navbar-nav'>
-            <li>
-              <Link to='/'>
-              <i className='fa fa-clipboard fa-2x' aria-hidden='true'></i>
-              <span>Posts</span>
-              </Link>
-            </li>
-            <li>
-              <Link to='/reviews'>
-              <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>
-              <span>Reviews</span>
-              </Link>
-            </li>
-            <li>
-              <Link to='/questions'>
-              <i className='fa fa-question fa-2x' aria-hidden='true'></i>
-                <span>Q&A</span>
-              </Link>
-            </li>
-            <li>
-              <Link to='/'>
-              <i className='fa fa-female fa-2x' aria-hidden='true'></i>
-              <span>About Me</span>
-              </Link>
-            </li>
-          </ul>
-          <div className='nav navbar-nav navbar-right'>
-            {this.renderNavRight()}
+      <div className='row header_box'>
+        <div className='col-md-2 logo_box'>
+          <div>
+            <h3 className='logo'>JessTech</h3>
           </div>
         </div>
-      </nav>
+        <div className='col-md-10 nav_box'>
+        <div className='row'>
+          <i className='fa fa-linkedin-square fa-2x pull-right' aria-hidden='true'></i>
+          <i className='fa fa-youtube-square fa-2x pull-right' aria-hidden='true'></i>
+          <i className='fa fa-twitter-square fa-2x pull-right' aria-hidden='true'></i>
+        </div>
+        <nav className='navbar navbar-default'>
+          <div className='navbar-header'>
+            <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#main-nav' aria-expanded='false'>
+              <span className='sr-only'>Toggle navigation</span>
+              <span className='icon-bar'></span>
+              <span className='icon-bar'></span>
+              <span className='icon-bar'></span>
+            </button>
+          </div>
+
+          <div className='collapse navbar-collapse' id='main-nav'>
+            <ul className='nav navbar-nav'>
+              <li>
+                <Link to='/'>
+                <i className='fa fa-clipboard fa-2x' aria-hidden='true'></i>
+                  <span>Posts</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='/reviews'>
+                <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>
+                  <span>Reviews</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='/questions'>
+                <i className='fa fa-question fa-2x' aria-hidden='true'></i>
+                  <span>Q&A</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='/'>
+                <i className='fa fa-female fa-2x' aria-hidden='true'></i>
+                  <span>About Me</span>
+                </Link>
+              </li>
+            </ul>
+            <div className='nav navbar-nav navbar-right'>
+              {this.renderNavRight()}
+            </div>
+          </div>
+        </nav>
+        </div>
+      </div>
     );
   }
 }

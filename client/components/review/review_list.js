@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getArticles } from '../../actions/article_actions';
-import { renderArticle } from '../article/render_article';
+import { renderArticleItem } from '../article/render_article_item';
 
 class ReviewList extends Component {
   static propTypes = {
@@ -20,8 +20,8 @@ class ReviewList extends Component {
     }
 
     return (
-      <div className='review_list'>
-        {this.props.allReviews.map(review => renderArticle(review))}
+      <div className='article_list'>
+        {this.props.allReviews.map(review => this.props.renderArticleItem(review))}
       </div>
     );
   }
@@ -33,4 +33,4 @@ function mapStateToProps({ article }) {
   };
 }
 
-export default connect(mapStateToProps, { getArticles })(ReviewList);
+export default connect(mapStateToProps, { getArticles, renderArticleItem })(ReviewList);

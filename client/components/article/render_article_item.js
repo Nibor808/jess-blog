@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router';
 import { formatDate } from '../../utils/date_format';
 
-export function renderArticle(article) {
+export function renderArticleItem(article) {
   let content;
   if (article.content.length > 250) {
     content = article.content.substring(0, 250) + '...';
@@ -17,15 +17,15 @@ export function renderArticle(article) {
       <div
       key={article.id}
       className='article_item row'>
-      <div className='list_img col-md-4'>
-        <img src={`../../images/${article.cover_img}`} height='220px' width='220px'/>
+        <div className='col-md-4'>
+          <img src={`../../images/${article.cover_img}`} height='220px' width='220px'/>
+        </div>
+        <div className='col-md-8 article_info'>
+          <Link to={`article/${article.id}`}><h2 className='list-title'>{article.title}</h2></Link>
+          <small className='date'>{date}</small>
+          <p className='article_content'>{content}...</p>
+        </div>
       </div>
-      <div className='col-md-8 list_info'>
-        <Link to={`article/${article.id}`}><h2 className='list-title'>{article.title}</h2></Link>
-        <small className='date'>{date}</small>
-        <p className='article_content'>{content}...</p>
-      </div>
-    </div>
     );
   }else {
     return (

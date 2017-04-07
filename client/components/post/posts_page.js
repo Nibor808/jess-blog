@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PostList from './posts_list';
 import ReviewSidebar from '../review/review_sidebar';
 import QuestionSideBar from '../question/question_sidebar';
+import Carousel from '../carousel';
 
 export default class PostPage extends Component {
   render() {
     return (
       <div className='col-md-12 page'>
+        <Carousel />
         <div className='col-md-8 page_list'>
           <div className='page_header_content'>
             <div className='row'>

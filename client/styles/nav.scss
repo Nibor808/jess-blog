@@ -1,0 +1,44 @@
+
+.navbar-default {
+  border: 0;
+  border-radius: 2px;
+  background: $blue-black;
+  height: 75px;
+  margin: 0;
+  width: 100%;
+  .navbar-collapse {
+    padding: 0;
+  }
+  .navbar-nav {
+    padding-left: 50px;
+    li {
+      a {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 10px 40px 0 40px;
+        color: $white;
+
+        &:hover,
+        &.active,
+        &:focus,
+        &.active:focus,
+        &.active:focus {
+          color: $green;
+        }
+        span:first-of-type {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  .navbar-right {
+    margin-top: 10px;
+    padding-left: 0;
+    a {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
