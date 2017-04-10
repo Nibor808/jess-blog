@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { toggleModal } from '../../actions/article_actions';
 import { updateArticle } from '../../actions/article_actions';
 import { customStyles } from '../../utils/modal_style';
+import { keywords } from '../../config/keywords';
 
 class EditArticleModal extends Component {
 
@@ -92,7 +93,6 @@ class EditArticleModal extends Component {
     }
 
     const { handleSubmit, submitting, reset } = this.props;
-    const keywords = ['price', 'comparison', 'quality', 'best'];
 
     return (
       <Modal
@@ -124,10 +124,6 @@ class EditArticleModal extends Component {
             <Field name='cover_img' component='input' type='text' className='form-control'/>
           </div>
           <div className='form-group col-md-6'>
-            <label htmlFor='images'>Additional Images: (csv)</label>
-            <Field name='images' component='input' type='text' className='form-control' disabled />
-          </div>
-          <div className='form-group col-md-6'>
             <label htmlFor='category'>Category:</label>
             <Field name='category' component='select' className='form-control'>
               <option></option>
@@ -143,17 +139,19 @@ class EditArticleModal extends Component {
               <option value='gaming'>gaming</option>
             </Field>
           </div>
-          <div className='form-group col-md-6'>
+          <div className='col-md-12 form-group'>
             <label>Keywords:</label>
+          </div>
+          <ul className='form-group col-md-12 keywords_list'>
             {keywords.map((name, index) => {
               return (
-                <div key={index}>
+                <li key={index}>
                   <label htmlFor={`keywords[${name}]`} className='checkbox_label'>{name}</label>
                   <Field name={`keywords[${name}]`} component='input' type='checkbox' />
-                </div>
+                </li>
               )
             })}
-          </div>
+          </ul>
           <h4 className='text-center'>For Reviews Only</h4>
           <div className='form-group col-md-6'>
             <label htmlFor='pros'>Pros: (csv)</label>
