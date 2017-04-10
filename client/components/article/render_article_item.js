@@ -18,7 +18,7 @@ export function renderArticleItem(article) {
       key={article.id}
       className='article_item row'>
         <div className='col-md-4'>
-          <img src={`../../images/${article.cover_img}`} height='220px' width='220px'/>
+          <img src={`../../images/${article.cover_img}`} height='200px' width='200px'/>
         </div>
         <div className='col-md-8 article_info'>
           <Link to={`article/${article.id}`}><h2 className='list-title'>{article.title}</h2></Link>

@@ -80,7 +80,7 @@ function seedArticles() {
           sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
           facere? Maiores, debitis.`,
           category: 'monitors',
-          keywords: 'monitor',
+          keywords: 'price',
           preview: false,
           type: 1,
           cover_img: 'monitor1.png',
@@ -95,7 +95,7 @@ function seedArticles() {
           sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
           facere? Maiores, debitis.`,
           category: 'keyboards',
-          keywords: 'keyboard',
+          keywords: 'quality',
           preview: false,
           type: 1,
           cover_img: 'keyboard.png',
@@ -110,7 +110,7 @@ function seedArticles() {
           sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
           facere? Maiores, debitis.`,
           category: 'cpus',
-          keywords: 'cpu',
+          keywords: 'best',
           preview: false,
           type: 1,
           cover_img: 'cpu.gif',
@@ -138,7 +138,7 @@ function seedArticles() {
           ipsum dolor sit amet, consectetur adipisicing elit. Sunt corporis mollitia, magnam, quod aperiam
           sapiente inventore illum distinctio veniam nemo dolorum vero nisi maiores laudantium porro ipsam
           facere? Maiores, debitis.`,
-          category: 'computers',
+          category: 'OS',
           keywords: 'mac, pc, compare, windows',
           preview: false,
           type: 3,

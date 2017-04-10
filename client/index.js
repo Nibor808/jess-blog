@@ -11,6 +11,7 @@ import PostsPage from './components/post/posts_page';
 import ReviewsPage from './components/review/reviews_page';
 import QuestionsPage from './components/question/questions_page';
 import AdminPage from './components/admin/admin_page';
+import EditArticleModal from './components/admin/edit_article_modal';
 import Article from './components/article/article';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
@@ -31,13 +32,14 @@ if (token) {
   store.dispatch({ type: AUTH_USER });
 }
 
-const childRoutes = [
+const articleChildren = [
   <Route path='/signin' component={Signin} />,
   <Route path='/signup' component={Signup} />,
   <Route path='/addcomment' component={requireAuth(CommentModal)} />,
   <Route path='/editcomment/:id' component={EditModal} />,
   <Route path='/replytocomment/:id' component={CommentModal} />,
-  <Route path='/deletecomment/:id' component={DeleteModal} />
+  <Route path='/deletecomment/:id' component={DeleteModal} />,
+  <Route path='/editarticle/:id' component={EditArticleModal} />
 ]
 
 const questionChildren = [
@@ -51,7 +53,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={PostsPage} />
-        <Route path='/article/:id' component={Article} children={childRoutes} />
+        <Route path='/article/:id' component={Article} children={articleChildren} />
         <Route path='/reviews' component={ReviewsPage} />
         <Route path='/questions' component={QuestionsPage} children={questionChildren}/>
         <Route path='/admin' component={requireAuth(AdminPage)} />

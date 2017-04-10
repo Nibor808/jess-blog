@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GET_POSTS, GET_REVIEWS, GET_QUESTIONS,
   GET_ARTICLE, GET_ALL_ARTICLES, GET_ALL_PREVIEWS,
   SAVE_ARTICLE, RESET_ARTICLE_STATE, PUBLISH_ARTICLE,
-  DELETE_ARTICLE, CLOSE_MODAL, OPEN_MODAL, ERROR } from './types';
+  DELETE_ARTICLE, EDIT_ARTICLE, CLOSE_MODAL, OPEN_MODAL, ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function getAllArticles(isPreview) {
@@ -149,9 +149,9 @@ export function publishArticle(id) {
   }
 }
 
-export function deleteArticle({ id }) {
+export function deleteArticle(id) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/deletearticle`, { id })
+    axios.post(`${ROOT_URL}/deletearticle/${id}`)
       .then(response => {
         if (response.data.error) {
           dispatch({
@@ -179,9 +179,36 @@ export function deleteArticle({ id }) {
   }
 }
 
-export function editArticle(id) {
-
+export function updateArticle({ id, type, title, content, category, keywordArray, cover_img, specs, pros, cons }) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/updatearticle/${id}`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
+    .then(response => {
+      if (response.data.error) {
+        dispatch({
+          type: ERROR,
+          payload: response.data.error
+        });
+        }else {
+          dispatch({
+            type: SAVE_ARTICLE,
+            payload: response.data.success
+          });
+        }
+      })
+      .then(() => {
+        dispatch({
+          type: RESET_ARTICLE_STATE
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ERROR,
+          payload: err.message
+        });
+      });
+  }
 }
+
 
 export function toggleModal(modalOpen) {
   return function(dispatch) {

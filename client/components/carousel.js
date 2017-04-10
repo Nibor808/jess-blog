@@ -19,16 +19,16 @@ class Carousel extends Component {
         slideshowSpeed={8000}
         leftImage='../images/arrow-left.png'
         rightImage='../images/arrow-right.png'>
-       {this.props.allPosts.map(post => this.props.renderArticleItem(post))}
+        {this.props.allPosts.map(post => renderArticleItem(post))}
       </React_Bootstrap_Carousel>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ article }) {
   return {
-    allPosts: state.article.allPosts
+    allPosts: article.allPosts
   };
 }
 
-export default connect(mapStateToProps, { getArticles, renderArticleItem })(Carousel);
+export default connect(mapStateToProps, { getArticles })(Carousel);

@@ -29,7 +29,7 @@ export function renderArticleListItem(article, isAdmin) {
       key={article.id}
       className='list-group-item'>
         <div className='col-md-7'>
-          <Link className='article_link' to={`/article/${article.id}`}>{article.id}: {article.title}</Link>
+          <strong>{article.id}: </strong><Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
         </div>
         <div className='col-md-5'>
           <small className='pull-right'>{date}</small>

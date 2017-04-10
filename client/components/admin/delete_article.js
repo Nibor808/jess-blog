@@ -6,7 +6,7 @@ import { deleteArticle } from '../../actions/article_actions';
 class DeleteArticle extends Component {
 
   handleFormSubmit({ id }) {
-    this.props.deleteArticle({ id });
+    this.props.deleteArticle(id);
     this.props.reset('delete_form');
   }
 

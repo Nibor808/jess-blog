@@ -18,7 +18,7 @@ class Users extends Component {
       <li key={user.id}
       className='list-group-item'>
         <div>email: {user.email}</div>
-        <div>username: {user.username}</div>
+        <div>user: {user.username}</div>
       </li>
     )
   }

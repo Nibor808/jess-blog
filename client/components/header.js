@@ -34,12 +34,10 @@ class Header extends Component {
   render() {
     return (
       <div className='row header_box'>
-        <div className='col-md-2 logo_box'>
-          <div>
-            <h3 className='logo'>JessTech</h3>
-          </div>
+        <div className='logo_box'>
+          <h2 className='logo'>JessTech</h2>
         </div>
-        <div className='col-md-10 nav_box'>
+        <div className='nav_box'>
         <div className='row'>
           <i className='fa fa-linkedin-square fa-2x pull-right' aria-hidden='true'></i>
           <i className='fa fa-youtube-square fa-2x pull-right' aria-hidden='true'></i>

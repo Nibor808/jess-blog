@@ -40,7 +40,7 @@ function mapStateToProps({ admin, article }) {
   return {
     allArticles: admin.allArticles,
     didSave: article.articleSaved,
-    didDelete: admin.articleDeleted,
+    didDelete: article.articleDeleted,
     errorMessage: admin.error
   };
 }

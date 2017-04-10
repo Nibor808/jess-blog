@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { formatDate } from '../../utils/date_format';
 import { getArticle, publishArticle } from '../../actions/article_actions';
 import { getComments, getCommentReplies } from '../../actions/comment_actions';
@@ -35,6 +36,9 @@ class Article extends Component {
     if (nextProps.didSave || nextProps.didDelete) {
       this.props.getComments('article_id', this.props.article.id);
       this.props.getCommentReplies('parent_comment_id', null);
+    }
+    if (nextProps.articleSaved) {
+      this.props.getArticle(this.props.params.id);
     }
   }
 
@@ -98,7 +102,7 @@ class Article extends Component {
   }
 
   hasComments() {
-    if (!this.props.commentArray) {
+    if (!this.props.commentArray || this.props.article.preview === 1) {
       return <p className='col-md-6'>Be the first to comment.</p>
     }else {
       return (
@@ -116,6 +120,7 @@ class Article extends Component {
           <button type='button' className='btn btn-default pull-right' onClick={() => this.props.publishArticle(this.props.article.id)}>
             publish article
           </button>
+          <Link to={`/editarticle/${this.props.article.id}`} className='btn btn-default edit_link'>edit article</Link>
           {this.renderAlert()}
         </div>
       )
@@ -134,7 +139,7 @@ class Article extends Component {
 
   render() {
     if (!this.props.article) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className='fa fa-spinner' aria-hidden='true'></i></div>;
     }
 
     const date = formatDate(this.props.article.createdAt);
@@ -155,6 +160,9 @@ class Article extends Component {
           <p>{this.props.article.content}</p>
           {this.renderSpecs(this.props.article.specs)}
           {this.renderAnswer()}
+        </div>
+        <div className='col-md-12 color_bar_div'>
+          <hr className='color_bar' />
         </div>
         {this.isPreview()}
         <div className='comments_section col-md-6'>

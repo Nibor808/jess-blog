@@ -1,41 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field, initialize, FieldArray, reset } from 'redux-form';
+import { reduxForm, Field, initialize } from 'redux-form';
+import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { saveArticle } from '../../actions/article_actions';
+import { toggleModal } from '../../actions/article_actions';
+import { updateArticle } from '../../actions/article_actions';
+import { customStyles } from '../../utils/modal_style';
 
-const renderSpecs = ({ fields }) => {
-  return (
-    <ul>
-      <li><button type='button' className='btn btn-default' onClick={() => fields.push({})}>Add Spec</button></li>
-        {fields.map((spec, index) =>
-          <li key={index}>
-            <button type='button' className='btn btn-default pull-right' onClick={() => fields.remove(index)}>Remove</button>
-            <label htmlFor={`${spec}.key`}>Spec #{index + 1}</label>
-            <div className='row'>
-              <div className='col-md-4'>
-                <label>Name</label>
-                <Field name={`${spec}.key`} type='text' component='input' />
-              </div>
-              <div className='col-md-4 pull-right'>
-                <label>Value</label>
-                <Field name={`${spec}.value`} type='text' component='input' />
-              </div>
-            </div>
-          </li>
-        )}
-    </ul>
-  )
-}
-
-class CreateArticle extends Component {
+class EditArticleModal extends Component {
 
   static propTypes = {
-    fields: PropTypes.object,
     errorMessage: PropTypes.string,
-    saveArticle: PropTypes.func,
+    updateArticle: PropTypes.func,
     handleSubmit: PropTypes.func,
-    submitting: PropTypes.bool,
-    reset: PropTypes.func,
+    submitting: PropTypes.bool
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
   }
 
   renderAlert() {
@@ -56,31 +37,71 @@ class CreateArticle extends Component {
     }
   }
 
+  componentWillMount() {
+    this.props.toggleModal(false);
+
+    // create object to pass to keywords to trigger checked property
+    const keyArray = this.props.article.keywords.split(',');
+    const keywordObj = {};
+
+    keyArray.map(word => {
+      keywordObj[word] = true
+    })
+
+    const initData = {
+        title: this.props.article.title,
+        content: this.props.article.content,
+        cover_img: this.props.article.cover_img,
+        type: this.props.article.type,
+        category: this.props.article.category,
+        keywords: keywordObj,
+        pros: this.props.article.pros,
+        cons: this.props.article.cons,
+        specs: JSON.stringify(this.props.article.specs)
+      }
+      this.props.initialize(initData);
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave) {
-      this.props.reset('create_article');
+    if(nextProps.articleSaved) {
+      this.context.router.goBack()
     }
   }
 
+  closeModal() {
+    this.props.toggleModal(true);
+    this.context.router.goBack();
+  }
+
   handleFormSubmit({ type, title, content, category, keywords, cover_img, specs, pros, cons }) {
-    console.log('words', keywords)
     const keywordArray = [];
     for (let key in keywords) {
       if (keywords.hasOwnProperty(key) && keywords[key] == true) {
         keywordArray.push(key);
       }
     }
+
     type = parseInt(type)
-    this.props.saveArticle({ type, title, content, category, keywordArray, cover_img, specs, pros, cons });
+    const id = this.props.article.id;
+    this.props.updateArticle({ id, type, title, content, category, keywordArray, cover_img, specs, pros, cons })
   }
 
   render() {
+    if (!this.props.article) {
+      return <div><i className='fa fa-spinner' aria-hidden='true'></i></div>;
+    }
+
     const { handleSubmit, submitting, reset } = this.props;
     const keywords = ['price', 'comparison', 'quality', 'best'];
 
     return (
-      <div>
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='create_article_form'>
+      <Modal
+        isOpen={this.props.modalOpen}
+        contentLabel='EditArticle'
+        className='col-md-4'
+        shouldCloseOnOverlayClick={false}
+        style={customStyles}>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='edit_article_form'>
           <h3>Create Article</h3>
           <div className='form-group col-md-6'>
             <label htmlFor='type'>Type:</label>
@@ -144,13 +165,13 @@ class CreateArticle extends Component {
           </div>
           <div className='form-group col-md-12'>
             <label htmlFor='specs'>Specs:</label>
-            <FieldArray name='specs' component={renderSpecs} />
+            <Field name='specs' component='textarea' type='textarea' className='form-control'/>
           </div>
-          <button className='btn btn-default' type='button' onClick={() => reset('create_article')}>clear values</button>
+          <button className='btn btn-default' type='button' onClick={() => this.closeModal()}>close</button>
           <button className='btn btn-default pull-right' type='submit'>save</button>
         </form>
         {this.renderAlert()}
-      </div>
+      </Modal>
     )
   }
 }
@@ -158,14 +179,15 @@ class CreateArticle extends Component {
 function mapStateToProps({ article }) {
   return {
     article: article.article,
-    didSave: article.articleSaved,
+    modalOpen: article.modalOpen,
+    articleSaved: article.articleSaved,
     errorMessage: article.error,
     successMessage: article.success
   }
 }
 
-CreateArticle = reduxForm({
-  form: 'create_article'
-})(CreateArticle);
+EditArticleModal = reduxForm({
+  form: 'edit_article'
+})(EditArticleModal);
 
-export default connect(mapStateToProps, { saveArticle })(CreateArticle);
+export default connect(mapStateToProps, { updateArticle, toggleModal })(EditArticleModal);

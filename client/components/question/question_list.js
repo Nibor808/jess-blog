@@ -28,7 +28,7 @@ class QuestionList extends Component {
 
     return (
       <div className='article_list'>
-        {this.props.allQuestions.map(question => this.props.renderArticleItem(question))}
+        {this.props.allQuestions.map(question => renderArticleItem(question))}
       </div>
     );
   }
@@ -41,4 +41,4 @@ function mapStateToProps({ article }) {
   };
 }
 
-export default connect(mapStateToProps, { getArticles, renderArticleItem })(QuestionList);
+export default connect(mapStateToProps, { getArticles })(QuestionList);

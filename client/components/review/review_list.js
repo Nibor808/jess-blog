@@ -21,7 +21,7 @@ class ReviewList extends Component {
 
     return (
       <div className='article_list'>
-        {this.props.allReviews.map(review => this.props.renderArticleItem(review))}
+        {this.props.allReviews.map(review => renderArticleItem(review))}
       </div>
     );
   }
@@ -33,4 +33,4 @@ function mapStateToProps({ article }) {
   };
 }
 
-export default connect(mapStateToProps, { getArticles, renderArticleItem })(ReviewList);
+export default connect(mapStateToProps, { getArticles })(ReviewList);

@@ -23,7 +23,7 @@ class PostList extends Component {
 
     return (
       <div className='article_list'>
-        {this.props.allPosts.map(post => this.props.renderArticleItem(post))}
+        {this.props.allPosts.map(post => renderArticleItem(post))}
       </div>
     );
   }
@@ -35,4 +35,4 @@ function mapStateToProps({ article }) {
   }
 }
 
-export default connect(mapStateToProps, { getArticles, renderArticleItem })(PostList);
+export default connect(mapStateToProps, { getArticles })(PostList);
