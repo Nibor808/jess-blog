@@ -4,7 +4,7 @@ $fa-font-path: '../node_modules/font-awesome/fonts';
 @import '../node_modules/react-bootstrap-carousel/dist/react-bootstrap-carousel.css';
 @import '../node_modules/font-awesome/scss/font-awesome';
 @import './colors.scss';
-@import url('https://fonts.googleapis.com/css?family=Pavanam|Stint+Ultra+Expanded|Gruppo');
+@import url('https://fonts.googleapis.com/css?family=Pavanam|Gruppo|Roboto|Muli|PT+Sans:400i|Open+Sans|Lato:300');
 
 @import './nav.scss';
 
@@ -440,11 +440,17 @@ body {
   font-family: 'Pavanam', sans-serif;
 }
 
+// .page_header_title,
+// .list_title {
+//   font-family: 'Pavanam', sans-serif;
+// }
+
 .logo {
   font-family: 'Gruppo', sans-serif;
   font-size: 32px;
 }
 
 p {
-  font-size: 16px;
+  font-size: 15px;
+  font-family: Lato, sans-serif;
 }

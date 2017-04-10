@@ -157,7 +157,7 @@ class Article extends Component {
           </div>
           {this.renderImage()}
           {this.renderProsCons()}
-          <p>{this.props.article.content}</p>
+          <p dangerouslySetInnerHTML={{__html: this.props.article.content}}></p>
           {this.renderSpecs(this.props.article.specs)}
           {this.renderAnswer()}
         </div>

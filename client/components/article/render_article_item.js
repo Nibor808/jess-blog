@@ -21,7 +21,7 @@ export function renderArticleItem(article) {
           <img src={`../../images/${article.cover_img}`} height='200px' width='200px'/>
         </div>
         <div className='col-md-8 article_info'>
-          <Link to={`article/${article.id}`}><h2 className='list-title'>{article.title}</h2></Link>
+          <Link to={`article/${article.id}`}><h2 className='list_title'>{article.title}</h2></Link>
           <small className='date'>{date}</small>
           <p className='article_content'>{content}...</p>
         </div>
@@ -33,7 +33,7 @@ export function renderArticleItem(article) {
       key={article.id}
       className='article_item row'>
       <div className='col-md-12 list_info'>
-        <Link to={`article/${article.id}`}><h2 className='list-title'>{article.title}</h2></Link>
+        <Link to={`article/${article.id}`}><h2 className='list_title'>{article.title}</h2></Link>
         <small className='date'>{date}</small>
         <p className='article_content'>{content}</p>
       </div>

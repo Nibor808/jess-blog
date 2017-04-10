@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { signoutUser } from '../actions/user_actions';
+import { ADMIN_USER } from '../config/config.json';
 
 class Header extends Component {
 
@@ -13,7 +14,7 @@ class Header extends Component {
 
   renderNavRight() {
     const user = localStorage.getItem('user');
-    if (this.props.authenticated && user === 'Twiggie' || this.props.authenticated && this.props.user === 'Twiggie') {
+    if (this.props.authenticated && user === `${ADMIN_USER}` || this.props.authenticated && this.props.user === `${ADMIN_USER}`) {
       return (
         <div className='signout_div'>
           <small>signed in as: { user ? user: this.props.user }</small>
