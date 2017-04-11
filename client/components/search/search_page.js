@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import ReviewList from './review_list';
-import PostSidebar from '../post/post_sidebar';
+import React, { Component, PropTypes } from 'react';
+import SearchForm from './search_form';
+import ReviewSidebar from '../review/review_sidebar';
 import QuestionSideBar from '../question/question_sidebar';
+import PostSidebar from '../post/post_sidebar';
 
-export default class ReviewsPage extends Component {
+export default class SearchPage extends Component {
 
   render() {
     return (
@@ -11,17 +12,19 @@ export default class ReviewsPage extends Component {
         <div className='col-md-8 page_list'>
           <div className='page_header_content'>
             <div className='row'>
-              <div className='col-md-8 page_header_title'><h1>Reviews</h1></div>
+              <div className='page_header_title'><h1>Search</h1></div>
             </div>
             <div className='row'>
-              <p>Yay reviews are awsome and you should read them all?</p>
+              <p>Start by selecting the keywords you would like to search for.</p>
+              <p>Then click search to see a list of related articles.</p>
             </div>
           </div>
           <hr className='color_bar' />
-          <ReviewList />
+          <SearchForm />
         </div>
         <div className='col-md-4 side_bar'>
           <PostSidebar />
+          <ReviewSidebar />
           <QuestionSideBar />
         </div>
       </div>

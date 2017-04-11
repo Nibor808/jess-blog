@@ -98,11 +98,11 @@ class EditArticleModal extends Component {
       <Modal
         isOpen={this.props.modalOpen}
         contentLabel='EditArticle'
-        className='col-md-4'
+        className='col-md-6'
         shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='edit_article_form'>
-          <h3>Create Article</h3>
+          <h3>Edit Article</h3>
           <div className='form-group col-md-6'>
             <label htmlFor='type'>Type:</label>
             <Field name='type' component='select' type='text' className='form-control' id='typeSelect'>

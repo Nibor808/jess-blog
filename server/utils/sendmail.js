@@ -1,3 +1,4 @@
+'use strict'
 const nodemailer = require('nodemailer');
 const { MAIL_PASS, MAIL_USER } = require('../config/config.json');
 

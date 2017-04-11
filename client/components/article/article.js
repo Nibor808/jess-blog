@@ -7,7 +7,7 @@ import { getComments, getCommentReplies } from '../../actions/comment_actions';
 import { renderComments } from '../comment/comments_list';
 import { renderSigninButton } from '../auth/render_signin_button';
 import { renderSignupPrompt } from '../auth/render_signup_prompt';
-
+import { ADMIN_USER } from '../../config/config.json';
 
 class Article extends Component {
 
@@ -114,12 +114,21 @@ class Article extends Component {
   }
 
   isPreview() {
-    if (this.props.article.preview === 1) {
+    const user = this.props.user ? this.props.user : localStorage.getItem('user');
+
+    if (this.props.article.preview === 1 && user === ADMIN_USER) {
       return (
         <div className='publish_div pull-right'>
           <button type='button' className='btn btn-default pull-right' onClick={() => this.props.publishArticle(this.props.article.id)}>
             publish article
           </button>
+          <Link to={`/editarticle/${this.props.article.id}`} className='btn btn-default edit_link'>edit article</Link>
+          {this.renderAlert()}
+        </div>
+      )
+    }else if (user === ADMIN_USER) {
+      return (
+        <div className='publish_div pull-right'>
           <Link to={`/editarticle/${this.props.article.id}`} className='btn btn-default edit_link'>edit article</Link>
           {this.renderAlert()}
         </div>
@@ -183,6 +192,7 @@ class Article extends Component {
 
 function mapStateToProps({ article, auth, comment }) {
   return {
+    user: auth.user,
     article: article.article,
     articleSaved: article.articleSaved,
     errorMessage: article.error,

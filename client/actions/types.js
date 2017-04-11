@@ -20,4 +20,6 @@ export const RESET_COMMENT_STATE = 'RESET_COMMENT_STATE';
 export const GET_QUESTIONS = 'GET_ALL_QUESTIONS';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL = 'OPEN_MODAL';
+export const SEARCH_RESULT = 'SEARCH_RESULT';
+export const RESET_SEARCH_RESULT = 'RESET_SEARCH_RESULT';
 export const ERROR = 'ERROR';

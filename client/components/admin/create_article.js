@@ -64,7 +64,6 @@ class CreateArticle extends Component {
   }
 
   handleFormSubmit({ type, title, content, category, keywords, cover_img, specs, pros, cons }) {
-    console.log('words', keywords)
     const keywordArray = [];
     for (let key in keywords) {
       if (keywords.hasOwnProperty(key) && keywords[key] == true) {
@@ -145,7 +144,7 @@ class CreateArticle extends Component {
             <FieldArray name='specs' component={renderSpecs} />
           </div>
           <button className='btn btn-default' type='button' onClick={() => reset('create_article')}>clear values</button>
-          <button className='btn btn-default pull-right' type='submit'>save</button>
+          <button className='btn btn-default pull-right' type='submit' disabled={submitting}>save</button>
         </form>
         {this.renderAlert()}
       </div>

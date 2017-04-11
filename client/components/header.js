@@ -80,6 +80,12 @@ class Header extends Component {
                   <span>About Me</span>
                 </Link>
               </li>
+              <li>
+                <Link to='/search'>
+                <i className='fa fa-search fa-2x' aria-hidden='true'></i>
+                  <span>Search</span>
+                </Link>
+              </li>
             </ul>
             <div className='nav navbar-nav navbar-right'>
               {this.renderNavRight()}

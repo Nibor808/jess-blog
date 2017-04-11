@@ -1,6 +1,8 @@
+'use strict';
 const ArticleController = require('./controllers/articles_controller');
 const CommentController = require('./controllers/comments_controller');
 const UserController = require('./controllers/users_controller');
+const SearchController = require('./controllers/search_controller');
 require('./utils/passport');
 const passport = require('passport');
 
@@ -30,4 +32,6 @@ module.exports = function(app) {
   app.post('/deleteuser/:id', UserController.deleteUser);
   app.post('/passreset', UserController.passwordReset);
   app.post('passresetlink/:token/:user', UserController.passResetLink);
+  // search
+  app.post('/search', SearchController.getSearchResults);
 };

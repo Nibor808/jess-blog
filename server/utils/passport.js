@@ -1,3 +1,4 @@
+'use strict'
 const passport = require('passport');
 const { JWT_SECRET } = require('../config/config.json');
 const JWTStrategy = require('passport-jwt').Strategy;

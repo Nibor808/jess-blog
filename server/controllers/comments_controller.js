@@ -1,3 +1,4 @@
+'use strict'
 const knex = require('../utils/db');
 const moment = require('moment');
 
@@ -26,7 +27,7 @@ module.exports = {
     ).orderBy('createdAt', 'asc')
     .then(data => {
       if (!data.length > 0) {
-        res.send({ error: 'No comments' });
+        return;
       }else {
         data.forEach((item) => {
           item.createdAt = moment(item.createdAt).toString();
@@ -58,11 +59,10 @@ module.exports = {
   // save comment
   saveComment(req, res) {
     if(!req.body.content) {
-      res.send({ error: 'You must have some content in your comment.' });
-      return;
+      return res.send({ error: 'You must have some content in your comment.' });
     }
 
-    const title = req.body.title || null;
+    const title = req.body.title ? req.body.title : null;
 
     //get user_id
     knex('Users').where('username', req.body.user).select('id')
@@ -119,8 +119,7 @@ module.exports = {
   // edit comment
   updateComment(req, res) {
     if (!req.body.content) {
-      res.send({ error: 'You must have some content in your comment.' });
-      return;
+      return res.send({ error: 'You must have some content in your comment.' });
     }
 
     knex('Comments').where('id', req.params.id).update({

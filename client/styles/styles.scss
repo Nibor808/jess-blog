@@ -56,10 +56,6 @@ ul {
   }
 }
 
-.example {
-  box-shadow: 1px 1px 1px $shadow-color;
-}
-
 .logo_box {
   border: 1px solid $white;
   display: -webkit-box;
@@ -133,8 +129,8 @@ ul {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     margin-bottom: 20px;
     img {
       padding: 10px;
@@ -235,7 +231,8 @@ ul {
 .signup_prompt,
 .delete_form,
 .create_article_form,
-.edit_article_form {
+.edit_article_form,
+.search_form {
   padding: 20px;
 }
 
@@ -258,7 +255,8 @@ ul {
 .edit_comment_form,
 .signup_prompt,
 .create_article_form,
-.delete_form {
+.delete_form,
+.search_form {
   margin-bottom: 30px;
 }
 
@@ -325,6 +323,7 @@ body,
     border-radius: 2px;
   }
 }
+
 .article,
 .article_item,
 .comments_section,
@@ -338,7 +337,8 @@ body,
 .delete_modal,
 .create_article_form,
 .delete_form,
-.edit_form {
+.edit_form,
+.search_form {
   background: $white;
   color: $font-color;
   border: 1px solid $shadow-color;
@@ -375,7 +375,7 @@ body,
 }
 
 h1,
-h2:not(.list-title),
+h2:not(.list_title),
 h3,
 h4,
 h5 {
@@ -450,11 +450,6 @@ html,
 body {
   font-family: 'Pavanam', sans-serif;
 }
-
-/* .page_header_title,*/
-/* .list_title {*/
-/*   font-family: 'Pavanam', sans-serif;*/
-/* }*/
 
 .logo {
   font-family: 'Gruppo', sans-serif;

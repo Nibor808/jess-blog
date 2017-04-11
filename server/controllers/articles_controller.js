@@ -1,3 +1,4 @@
+'use strict'
 const knex = require('../utils/db');
 const moment = require('moment');
 
@@ -91,28 +92,23 @@ module.exports = {
   saveArticle(req, res) {
     if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category) {
       res.send({ error: 'Missing Some Info' });
-      return;
     }
 
     if (req.body.type === 2) {
       if (!req.body.pros || !req.body.cons || !req.body.specs) {
         res.send({ error: 'Missing Review Info' });
-        return;
       }
     }
 
     if (req.body.type === 1 || req.body.type === 2) {
-      console.log(req.body.cover_img.indexOf('.png'))
       if (!req.body.cover_img) {
         res.send({ error: 'Missing cover image' })
-        return;
       }else if (req.body.cover_img.indexOf('.png') == -1 &&
         req.body.cover_img.indexOf('.jpg') == -1 &&
         req.body.cover_img.indexOf('.jpeg') == -1 &&
         req.body.cover_img.indexOf('.gif') == -1
         ) {
           res.send({ error: 'Invalid cover_img' })
-          return;
         }
     }
 
@@ -173,14 +169,12 @@ module.exports = {
    //update article
   updateArticle(req, res) {
     if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category || !req.body.cover_img) {
-      res.send({ error: 'Missing Data' });
-      return;
+      return res.send({ error: 'Missing Data' });
     }
 
     if (req.body.type === 2) {
       if (!req.body.pros || !req.body.cons || !req.body.specs) {
-        res.send({ error: 'Missing Review Data' });
-        return;
+        return res.send({ error: 'Missing Review Data' });
       }
     }
 

@@ -1,3 +1,4 @@
+'use strict'
 const knex = require('../utils/db');
 const bcrypt = require('bcrypt-nodejs');
 const { JWT_SECRET, ROOT_URL } = require('../config/config.json');

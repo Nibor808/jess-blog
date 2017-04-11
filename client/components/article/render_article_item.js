@@ -23,7 +23,7 @@ export function renderArticleItem(article) {
         <div className='col-md-8 article_info'>
           <Link to={`article/${article.id}`}><h2 className='list_title'>{article.title}</h2></Link>
           <small className='date'>{date}</small>
-          <p className='article_content'>{content}...</p>
+          <p className='article_content' dangerouslySetInnerHTML={ {__html: content} }></p>
         </div>
       </div>
     );

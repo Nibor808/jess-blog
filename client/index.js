@@ -19,6 +19,7 @@ import CommentModal from './components/comment/comment_modal';
 import EditModal from './components/comment/edit_modal';
 import DeleteModal from './components/comment/delete_modal';
 import AskQuestion from './components/question/ask_question';
+import SearchPage from './components/search/search_page'
 import requireAuth from './components/auth/requireAuth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
@@ -57,6 +58,7 @@ ReactDOM.render(
         <Route path='/reviews' component={ReviewsPage} />
         <Route path='/questions' component={QuestionsPage} children={questionChildren}/>
         <Route path='/admin' component={requireAuth(AdminPage)} />
+        <Route path='/search' component={SearchPage} />
       </Route>
     </Router>
   </Provider>
