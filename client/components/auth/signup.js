@@ -64,7 +64,7 @@ class Signup extends Component {
         <Field name='password' type='password' component={renderField} label='Password:' />
         <Field name='passwordConfirm' type='password' component={renderField} label='Confirm Password:' />
         {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={this.closeForm.bind(this)}>cancel</button>
+        <button type='button' className='btn btn-default' onClick={() => this.closeForm()}>cancel</button>
         <button className='btn btn-default pull-right' type='submit' disabled={submitting}>sign up</button>
       </form>
     );

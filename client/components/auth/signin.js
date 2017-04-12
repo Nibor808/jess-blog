@@ -58,7 +58,7 @@ class Signin extends Component {
           <Field name='password' component='input' type='password' className='form-control' />
         </div>
         {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={this.closeForm.bind(this)}>cancel</button>
+        <button type='button' className='btn btn-default' onClick={() => this.closeForm()}>cancel</button>
         <button type='submit' className='btn btn-default pull-right' disabled={submitting}>sign in</button>
       </form>
     );

@@ -85,7 +85,7 @@ class CommentModal extends Component {
             <Field name='content' component='textarea' type='textarea' className='form-control' />
           </div>
           {this.renderAlert()}
-          <button className='btn btn-default' type='button' onClick={this.closeModal.bind(this)}>cancel</button>
+          <button className='btn btn-default' type='button' onClick={() => this.closeModal()}>cancel</button>
           <button className='btn btn-default pull-right' type='submit' disabled={submitting}>submit</button>
         </form>
       </Modal>

@@ -44,7 +44,7 @@ class DeleteModal extends Component {
         shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <label>Are you sure you want to delete this comment?</label>
-        <button className='btn btn-default' type='button' onClick={this.closeModal.bind(this)}>cancel</button>
+        <button className='btn btn-default' type='button' onClick={() => this.closeModal()}>cancel</button>
         <button className='btn btn-default' type='submit' onClick={() => this.props.deleteComment(this.props.params.id)}>yes</button>
     </Modal>
     )
