@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { saveArticle, toggleModal } from '../../actions/article_actions';
 import Modal from 'react-modal';
 import { customStyles } from '../../utils/modal_style';
-import { keywords } from '../../config/keywords'
+import { keywords } from '../../config/keywords';
+import { CLEAR_ERROR } from '../../actions/types';
 
 class AskQuestion extends Component {
 
@@ -44,6 +45,7 @@ class AskQuestion extends Component {
   }
 
   closeModal() {
+    this.props.dispatch({ type: CLEAR_ERROR });
     this.props.toggleModal(true);
     this.context.router.goBack()
   }
@@ -90,11 +92,10 @@ class AskQuestion extends Component {
               <option>gaming</option>
             </Field>
           </div>
-          <div className='col-md-12 form-group'>
+          <div className='form-group'>
             <label>Keywords:</label>
           </div>
           <ul className='form-group keywords_list col-md-12'>
-            <label>Keywords:</label>
             {keywords.map((name, index) => {
               return (
                 <li key={index}>
@@ -109,7 +110,7 @@ class AskQuestion extends Component {
             <Field name='content' component='textarea' type='textarea' className='form-control' />
           </div>
           {this.renderAlert()}
-          <button className='btn btn-default' type='button' onClick={this.context.router.goBack}>cancel</button>
+          <button className='btn btn-default' type='button' onClick={this.closeModal.bind(this)}>cancel</button>
           <button className='btn btn-default pull-right' type='submit' disabled={submitting}>submit question</button>
         </form>
       </Modal>
@@ -117,6 +118,7 @@ class AskQuestion extends Component {
   }
 }
 
+// ask question is the same as adding an article
 function mapStateToProps({ article }) {
   return {
     didSave: article.articleSaved,

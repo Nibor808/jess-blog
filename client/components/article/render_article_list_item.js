@@ -5,8 +5,10 @@ import { formatDate } from '../../utils/date_format';
 export function renderArticleListItem(article, isAdmin) {
   const date = formatDate(article.createdAt).substring(0, 15);
 
-  if (article.title.length > 19) {
+  if (article.cover_img != null && article.title.length > 19) {
     article.title = article.title.substring(0, 19) + '...';
+  }else if (article.cover_img == null && article.title.length > 30) {
+    article.title = article.title.substring(0, 30) + '...';
   }
 
   if (article.cover_img && !isAdmin) {

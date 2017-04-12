@@ -43,12 +43,7 @@ class SearchForm extends Component {
   }
 
   handleFormSubmit({ keywords }) {
-    const keywordArray = [];
-    for (let key in keywords) {
-      if (keywords.hasOwnProperty(key)) {
-        keywordArray.push(key)
-      }
-    }
+    const keywordArray = keywords.split(',');
     this.props.search({ keywordArray });
   }
 
@@ -59,18 +54,13 @@ class SearchForm extends Component {
       <div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='search_form'>
           <div className='form-group'>
-            <label>Keywords:</label>
+            <h4>Keywords:</h4>
+            <p>Enter keywords separated by a comma. (price,compare,monitor)</p>
+            <p>Or a product name. (Phillips LCD-243V5)</p>
           </div>
-          <ul className='form-group keywords_list'>
-            {keywords.map((name, index) => {
-              return (
-                <li key={index}>
-                  <label htmlFor={`keywords[${name}]`} className='checkbox_label'>{name}</label>
-                  <Field name={`keywords[${name}]`} component='input' type='checkbox' />
-                </li>
-              )
-            })}
-          </ul>
+          <div className='form-group'>
+            <Field type='text' component='input' name='keywords' />
+          </div>
           <button className='btn btn-default' type='button' onClick={() => this.clearResults()}>clear search</button>
           {this.renderSearchBtn(submitting)}
         </form>
