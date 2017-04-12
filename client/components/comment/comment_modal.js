@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import { toggleModal } from '../../actions/article_actions';
 import { saveComment } from '../../actions/comment_actions';
 import { customStyles } from '../../utils/modal_style';
+import { CLEAR_ERROR } from '../../actions/types';
 
 class CommentModal extends Component {
 
@@ -29,7 +30,7 @@ class CommentModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave) {
+    if (nextProps.commentSaved) {
       this.context.router.goBack()
     }
   }
@@ -59,12 +60,12 @@ class CommentModal extends Component {
   }
 
   closeModal() {
+    this.props.dispatch({ type: CLEAR_ERROR });
     this.props.toggleModal(true);
-    this.context.router.goBack()
+    this.context.router.goBack();
   }
 
   render() {
-
     const { handleSubmit, submitting } = this.props;
 
     return (
@@ -96,7 +97,7 @@ function mapStateToProps({ article, comment }) {
   return {
     modalOpen: article.modalOpen,
     article_id: article.article.id,
-    didSave: comment.commentSaved,
+    commentSaved: comment.commentSaved,
     errorMessage: comment.error
   }
 }

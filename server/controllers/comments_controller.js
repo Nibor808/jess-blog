@@ -96,7 +96,6 @@ module.exports = {
 
   // delete a comment
   deleteComment(req, res) {
-    console.log(req.params.id)
     knex('Comments').where('id', req.params.id).del()
       .then(data => {
         if(!data == 1) {

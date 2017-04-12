@@ -47,10 +47,9 @@ module.exports = {
   // sign up new user
   signupUser(req, res) {
     if(!req.body.username || !req.body.email || !req.body.password) {
-      res.send({ error: 'Please fill out all fields.' });
-      return;
+      return res.send({ error: 'Please fill out all fields.' });
     }
-
+    console.log(req.body)
     // hash password before saving
     bcrypt.hash(req.body.password, null, null, (err, hash) => {
       if(err) {
@@ -64,15 +63,10 @@ module.exports = {
           username: req.body.username.trim()
         })
         .then(data => {
-          if(!data[0] > 0) {
-            res.send({ error: 'User was not saved.' });
-            return;
-          }else {
-            res.send({ token: tokenForUser(data[0]), username: req.body.username });
-          }
+          res.send({ token: tokenForUser(data[0]), username: req.body.username });
         })
         .catch(err => {
-          res.send({ error: err.message });
+          res.send({ error: 'Username and/or password already in use' });
         });
       }
     });

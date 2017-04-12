@@ -7,7 +7,8 @@ exports.up = function(knex) {
       table.string('username').notNull().default('');
       table.string('password').notNull().default('');
       table.string('passResetToken').nullable();
-      table.unique(['email', 'username']);
+      table.unique('email');
+      table.unique('username');
     })
     .then(function() {
       return knex.schema

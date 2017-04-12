@@ -33,7 +33,7 @@ class Article extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave || nextProps.didDelete) {
+    if (nextProps.commentSaved || nextProps.commentDeleted) {
       this.props.getComments('article_id', this.props.article.id);
       this.props.getCommentReplies('parent_comment_id', null);
     }
@@ -156,7 +156,6 @@ class Article extends Component {
     return (
       <div>
         <div
-        key={this.props.article.id}
         className='article col-md-12'>
           <div className='row'>
             <h1>{this.props.article.title}</h1>
@@ -197,10 +196,10 @@ function mapStateToProps({ article, auth, comment }) {
     articleSaved: article.articleSaved,
     errorMessage: article.error,
     authenticated: auth.authenticated,
-    didSave: comment.commentSaved,
+    commentSaved: comment.commentSaved,
     commentArray: comment.commentArray,
     repliesArray: comment.repliesArray,
-    didDelete: comment.commentDeleted
+    commentDeleted: comment.commentDeleted
   };
 }
 

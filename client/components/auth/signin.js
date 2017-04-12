@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { signinUser } from '../../actions/user_actions';
+import { CLEAR_ERROR } from '../../actions/types';
 
 class Signin extends Component {
 
@@ -38,6 +39,11 @@ class Signin extends Component {
     }
   }
 
+  closeForm() {
+    this.props.dispatch({ type: CLEAR_ERROR });
+    this.context.router.goBack();
+  }
+
   render() {
     const { handleSubmit, submitting } = this.props;
 
@@ -52,7 +58,7 @@ class Signin extends Component {
           <Field name='password' component='input' type='password' className='form-control' />
         </div>
         {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>cancel</button>
+        <button type='button' className='btn btn-default' onClick={this.closeForm.bind(this)}>cancel</button>
         <button type='submit' className='btn btn-default pull-right' disabled={submitting}>sign in</button>
       </form>
     );

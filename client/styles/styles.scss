@@ -431,10 +431,9 @@ a {
 }
 
 .footer {
-   a {
+  a {
     color: $font-color;
-
-     &:hover,
+    &:hover,
     &.active,
     &:active,
     &.active:focus,

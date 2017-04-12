@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { saveArticle, toggleModal } from '../../actions/article_actions';
 import Modal from 'react-modal';
 import { customStyles } from '../../utils/modal_style';
+import { keywords } from '../../config/keywords'
 
 class AskQuestion extends Component {
 
@@ -60,7 +61,6 @@ class AskQuestion extends Component {
 
   render() {
     const { handleSubmit, submitting } = this.props;
-    const keywords = ['price', 'comparison', 'quality', 'best'];
 
     return (
       <Modal
@@ -90,17 +90,20 @@ class AskQuestion extends Component {
               <option>gaming</option>
             </Field>
           </div>
-          <div className='form-group'>
+          <div className='col-md-12 form-group'>
+            <label>Keywords:</label>
+          </div>
+          <ul className='form-group keywords_list col-md-12'>
             <label>Keywords:</label>
             {keywords.map((name, index) => {
               return (
-                <div key={index}>
+                <li key={index}>
                   <label htmlFor={`keywords[${name}]`} className='checkbox_label'>{name}</label>
                   <Field name={`keywords[${name}]`} component='input' type='checkbox' />
-                </div>
+                </li>
               )
             })}
-          </div>
+          </ul>
           <div className='form-group'>
             <label htmlFor='content'>Question:</label>
             <Field name='content' component='textarea' type='textarea' className='form-control' />

@@ -13,6 +13,7 @@ module.exports = {
     const articles = [];
     let merged;
 
+    // use a promise to avoid repetative res.sends
     const result = new Promise((resolve, reject) => {
       req.body.keywordArray.map(keyword => {
         knex('Articles').where('keywords', 'like', `%${keyword}%`)
@@ -21,6 +22,8 @@ module.exports = {
               res.send({ error: 'No articles matching your search' })
             }else {
               articles.push(data)
+              // concat and flatten the articles array
+              // .apply flattens one level of array and turns the articles array into a list of values to concat to merge
               merged = [].concat.apply([], articles)
               resolve()
             }

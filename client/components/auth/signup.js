@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signupUser } from '../../actions/user_actions';
+import { CLEAR_ERROR } from '../../actions/types';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => {
   return (
@@ -49,6 +50,11 @@ class Signup extends Component {
     }
   }
 
+  closeForm() {
+    this.props.dispatch({ type: CLEAR_ERROR });
+    this.context.router.goBack();
+  }
+
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
@@ -58,7 +64,7 @@ class Signup extends Component {
         <Field name='password' type='password' component={renderField} label='Password:' />
         <Field name='passwordConfirm' type='password' component={renderField} label='Confirm Password:' />
         {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={this.context.router.goBack}>cancel</button>
+        <button type='button' className='btn btn-default' onClick={this.closeForm.bind(this)}>cancel</button>
         <button className='btn btn-default pull-right' type='submit' disabled={submitting}>sign up</button>
       </form>
     );
