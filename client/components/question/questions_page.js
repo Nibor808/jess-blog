@@ -33,7 +33,7 @@ class QuestionsPage extends Component {
   }
 
   renderSignup() {
-    if (!this.props.authenticated) {
+    if (!this.props.authenticated && Object.keys(this.props.form).length == 0) {
       return (
         <div className='signup_prompt text-center'>
           <h2>Not already part of the converstation?</h2>
@@ -75,9 +75,10 @@ class QuestionsPage extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps({ auth, form }) {
   return {
-    authenticated: auth.authenticated
+    authenticated: auth.authenticated,
+    form
   }
 }
 

@@ -182,14 +182,14 @@ class Article extends Component {
         </div>
         <div className='col-md-5 col-md-offset-1 auth_children'>
           {this.props.children}
-          {renderSignupPrompt(this.props.authenticated)}
+          {renderSignupPrompt(this.props.authenticated, this.props.form)}
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ article, auth, comment }) {
+function mapStateToProps({ article, auth, comment, form }) {
   return {
     user: auth.user,
     article: article.article,
@@ -199,7 +199,8 @@ function mapStateToProps({ article, auth, comment }) {
     commentSaved: comment.commentSaved,
     commentArray: comment.commentArray,
     repliesArray: comment.repliesArray,
-    commentDeleted: comment.commentDeleted
+    commentDeleted: comment.commentDeleted,
+    form
   };
 }
 
