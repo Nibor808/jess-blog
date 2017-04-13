@@ -21,6 +21,9 @@ module.exports = {
             if (!data.length > 0) {
               res.send({ error: 'No articles matching your search' })
             }else {
+              data.map((item) => {
+                item.createdAt = moment(item.createdAt).toString();
+              });
               articles.push(data)
               // concat and flatten the articles array
               // .apply flattens one level of array and turns the articles array into a list of values to concat to merge

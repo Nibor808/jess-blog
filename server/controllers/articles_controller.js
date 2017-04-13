@@ -8,7 +8,7 @@ module.exports = {
   getAllArticles(req, res) {
     knex('Articles').where('preview', req.params.isPreview).select()
       .then(data => {
-        data.forEach((item) => {
+        data.map((item) => {
           item.createdAt = moment(item.createdAt).toString();
         });
         res.send({ ok: data });
@@ -22,7 +22,7 @@ module.exports = {
   getAllArticlesOfType(req, res) {
     knex('Articles').where({ 'type': req.params.type, 'preview': false }).select()
       .then(data => {
-        data.forEach((item) => {
+        data.map((item) => {
           item.createdAt = moment(item.createdAt).toString();
         });
         res.send({ ok: data });
@@ -91,24 +91,24 @@ module.exports = {
   // save article
   saveArticle(req, res) {
     if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category) {
-      res.send({ error: 'Missing Some Info' });
+      return res.send({ error: 'Missing Some Info' });
     }
 
     if (req.body.type === 2) {
       if (!req.body.pros || !req.body.cons || !req.body.specs) {
-        res.send({ error: 'Missing Review Info' });
+        return res.send({ error: 'Missing Review Info' });
       }
     }
 
     if (req.body.type === 1 || req.body.type === 2) {
       if (!req.body.cover_img) {
-        res.send({ error: 'Missing cover image' })
+        return res.send({ error: 'Missing cover image' })
       }else if (req.body.cover_img.indexOf('.png') == -1 &&
         req.body.cover_img.indexOf('.jpg') == -1 &&
         req.body.cover_img.indexOf('.jpeg') == -1 &&
         req.body.cover_img.indexOf('.gif') == -1
         ) {
-          res.send({ error: 'Invalid cover_img' })
+          return res.send({ error: 'Invalid cover_img' })
         }
     }
 

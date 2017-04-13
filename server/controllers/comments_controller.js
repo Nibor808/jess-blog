@@ -29,7 +29,7 @@ module.exports = {
       if (!data.length > 0) {
         return;
       }else {
-        data.forEach((item) => {
+        data.map((item) => {
           item.createdAt = moment(item.createdAt).toString();
           comments.push(item);
         });
