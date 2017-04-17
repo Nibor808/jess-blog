@@ -63,14 +63,23 @@ class CreateArticle extends Component {
     }
   }
 
-  handleFormSubmit({ type, title, content, category, keywords, cover_img, specs, pros, cons }) {
-    const keywordArray = [];
+  handleFormSubmit({ type, title, content, category, keywords, additionalKeywords, cover_img, specs, pros, cons }) {
+    const tempKeywords = [];
+    let keywordArray;
+
     for (let key in keywords) {
       if (keywords.hasOwnProperty(key) && keywords[key] == true) {
-        keywordArray.push(key);
+        tempKeywords.push(key);
       }
     }
-    type = parseInt(type)
+
+    if (additionalKeywords) {
+      keywordArray = tempKeywords.concat(additionalKeywords.split(','));
+    }else {
+      keywordArray = tempKeywords;
+    }
+
+    type = parseInt(type);
     this.props.saveArticle({ type, title, content, category, keywordArray, cover_img, specs, pros, cons });
   }
 
@@ -129,6 +138,8 @@ class CreateArticle extends Component {
                 </li>
               )
             })}
+            <label htmlFor='additionalKeywords'>Additional:</label>
+            <li><Field type='text' component='input' name='additionalKeywords' /></li>
           </ul>
           <h4 className='text-center'>For Reviews Only</h4>
           <div className='form-group col-md-6'>

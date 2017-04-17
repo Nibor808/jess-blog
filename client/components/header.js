@@ -46,15 +46,14 @@ class Header extends Component {
         </div>
         <nav className='navbar navbar-default'>
           <div className='navbar-header'>
-            <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#main-nav' aria-expanded='false'>
+            <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#main_nav' aria-expanded='false'>
               <span className='sr-only'>Toggle navigation</span>
               <span className='icon-bar'></span>
               <span className='icon-bar'></span>
               <span className='icon-bar'></span>
             </button>
           </div>
-
-          <div className='collapse navbar-collapse' id='main-nav'>
+          <div className='collapse navbar-collapse' id='main_nav'>
             <ul className='nav navbar-nav'>
               <li>
                 <Link to='/'>

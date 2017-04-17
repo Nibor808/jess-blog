@@ -27,7 +27,7 @@ module.exports = {
     ).orderBy('createdAt', 'asc')
     .then(data => {
       if (!data.length > 0) {
-        return;
+        return res.send({ ok: data });
       }else {
         data.map((item) => {
           item.createdAt = moment(item.createdAt).toString();

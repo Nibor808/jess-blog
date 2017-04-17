@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { search, resetSearch } from '../../actions/search_actions';
 import { keywords } from '../../config/keywords';
 import { renderArticleItem } from '../article//render_article_item';
+import { CLEAR_ERROR } from '../../actions/types';
 
 class SearchForm extends Component {
 
@@ -33,7 +34,8 @@ class SearchForm extends Component {
 
   clearResults() {
     this.props.reset('search_article');
-    this.props.resetSearch()
+    this.props.resetSearch();
+    this.props.dispatch({ type: CLEAR_ERROR });
   }
 
   renderSearchBtn(submitting) {

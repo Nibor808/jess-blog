@@ -8,6 +8,7 @@ import { renderComments } from '../comment/comments_list';
 import { renderSigninButton } from '../auth/render_signin_button';
 import { renderSignupPrompt } from '../auth/render_signup_prompt';
 import { ADMIN_USER } from '../../config/config.json';
+import { CLEAR_COMMENTS } from '../../actions/types';
 
 class Article extends Component {
 
@@ -102,7 +103,7 @@ class Article extends Component {
   }
 
   hasComments() {
-    if (!this.props.commentArray || this.props.article.preview === 1) {
+    if (!this.props.commentArray.length > 0 || this.props.article.preview === 1) {
       return <p className='col-md-6'>Be the first to comment.</p>
     }else {
       return (
