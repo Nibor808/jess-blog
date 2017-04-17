@@ -3,6 +3,7 @@ import { reduxForm, Field, initialize, FieldArray, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import { saveArticle } from '../../actions/article_actions';
 import { keywords } from '../../config/keywords';
+import { CLEAR_ERROR } from '../../actions/types';
 
 const renderSpecs = ({ fields }) => {
   return (
@@ -55,6 +56,10 @@ class CreateArticle extends Component {
         </div>
       );
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({ type: CLEAR_ERROR });
   }
 
   componentWillReceiveProps(nextProps) {

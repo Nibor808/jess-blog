@@ -6,6 +6,7 @@ import { toggleModal } from '../../actions/article_actions';
 import { updateArticle } from '../../actions/article_actions';
 import { customStyles } from '../../utils/modal_style';
 import { keywords } from '../../config/keywords';
+import { CLEAR_ERROR } from '../../actions/types';
 
 class EditArticleModal extends Component {
 
@@ -47,7 +48,7 @@ class EditArticleModal extends Component {
 
     keyArray.map(word => {
       keywordObj[word] = true
-    })
+    });
 
     const initData = {
         title: this.props.article.title,
@@ -67,6 +68,10 @@ class EditArticleModal extends Component {
     if(nextProps.articleSaved) {
       this.context.router.goBack()
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({ type: CLEAR_ERROR });
   }
 
   closeModal() {
@@ -98,7 +103,7 @@ class EditArticleModal extends Component {
       <Modal
         isOpen={this.props.modalOpen}
         contentLabel='EditArticle'
-        className='col-md-6'
+        className='col-md-6 modal_box'
         shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='edit_article_form'>

@@ -32,7 +32,7 @@ export default function (state = INITIAL_STATE, action) {
   case ERROR:
     return { ...state, error: action.payload }
   case CLEAR_ERROR:
-    return { ...state, error: '' }
+    return { ...state, error: '', success: '' }
   default:
     return state;
   }

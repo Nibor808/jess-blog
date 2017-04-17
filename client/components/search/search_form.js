@@ -61,7 +61,7 @@ class SearchForm extends Component {
             <p>Or a product name. (Phillips LCD-243V5)</p>
           </div>
           <div className='form-group'>
-            <Field type='text' component='input' name='keywords' />
+            <Field type='text' component='input' name='keywords' disabled={this.props.searchResult.length > 0}/>
           </div>
           <button className='btn btn-default' type='button' onClick={() => this.clearResults()}>clear search</button>
           {this.renderSearchBtn(submitting)}

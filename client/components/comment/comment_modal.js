@@ -72,7 +72,7 @@ class CommentModal extends Component {
       <Modal
         isOpen={this.props.modalOpen}
         contentLabel='Comment'
-        className='col-md-4'
+        className='col-md-4 modal_box'
         shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='comment_form'>
