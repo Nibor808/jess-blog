@@ -60,28 +60,14 @@ module.exports = {
                   article[key] = data[0][key];
                 }
               }
+              res.send({ ok: article });
             })
             .catch(err => {
               res.send({ error: err.message });
             });
+        }else {
+          res.send({ ok: article });
         }
-      })
-      .then(() => {
-        // get any additional images for the article
-        const images = [];
-        knex('Images').where('article_id', req.params.id).select()
-          .then(data => {
-            if (data) {
-              data.map(image => {
-                images.push(image.file);
-              });
-            }
-            article.images = images;
-            res.send({ ok: article });
-          })
-          .catch(err => {
-            res.send({ error: err.message });
-          });
       })
       .catch(err => {
         res.send({ error: err.message });
@@ -134,7 +120,7 @@ module.exports = {
     })
     .then(data => {
       if (!data[0] > 0) {
-        res.send({ error: 'Article not saved' });
+        return res.send({ error: 'Article not saved' });
       }
       const specsObj = {};
 
@@ -153,7 +139,7 @@ module.exports = {
       })
       .then(data => {
         if (!data[0] > 0) {
-          res.send({ error: 'Additional Info not saved' });
+          return res.send({ error: 'Additional Info not saved' });
         }
         res.send({ success: 'Article saved' });
       })
@@ -209,7 +195,7 @@ module.exports = {
         })
         .then(data => {
           if (!data[0] > 0) {
-            res.send({ error: 'Additional Info not updated' });
+            return res.send({ error: 'Additional Info not updated' });
           }
           res.send({ success: 'Article updated' });
         })

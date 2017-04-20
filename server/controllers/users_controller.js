@@ -16,9 +16,8 @@ module.exports = {
   getUsers(req, res) {
     knex('Users').select()
       .then(data => {
-        if(!data.length > 0) {
+        if(!data.length) {
           res.send({ error: 'No users no get.'});
-          return;
         }else {
           res.send({ ok: data });
         }
@@ -32,9 +31,8 @@ module.exports = {
   getUser(req, res) {
     knex('Users').where('id', req.params.id).select()
       .then(data => {
-        if(!data.length > 0) {
+        if(!data.length) {
           res.send({ error: 'No such user.' });
-          return;
         }else {
           res.send({ ok: data });
         }
@@ -49,7 +47,7 @@ module.exports = {
     if(!req.body.username || !req.body.email || !req.body.password) {
       return res.send({ error: 'Please fill out all fields.' });
     }
-    console.log(req.body)
+
     // hash password before saving
     bcrypt.hash(req.body.password, null, null, (err, hash) => {
       if(err) {
@@ -59,14 +57,14 @@ module.exports = {
 
         knex('Users').insert({
           email: req.body.email.trim().toLowerCase(),
-          password: req.body.password.trim().toLowerCase(),
+          password: req.body.password.trim(),
           username: req.body.username.trim()
         })
         .then(data => {
           res.send({ token: tokenForUser(data[0]), username: req.body.username });
         })
         .catch(err => {
-          res.send({ error: 'Username and/or password already in use' });
+          res.send({ error: 'Email and/or username already in use' });
         });
       }
     });
@@ -101,7 +99,7 @@ module.exports = {
   // send email for password reset
   passwordReset(req, res) {
     if (!req.body.email) {
-      res.send({ error: 'Please provide an email address.' });
+      return res.send({ error: 'Please provide an email address.' });
     }
 
     const passResetToken = Math.random().toString(36);

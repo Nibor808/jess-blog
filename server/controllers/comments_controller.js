@@ -26,8 +26,8 @@ module.exports = {
       'Users.username as username'
     ).orderBy('createdAt', 'asc')
     .then(data => {
-      if (!data.length > 0) {
-        return res.send({ ok: data });
+      if (!data.length) {
+        res.send({ ok: data });
       }else {
         data.map((item) => {
           item.createdAt = moment(item.createdAt).toString();
@@ -45,7 +45,7 @@ module.exports = {
   getAComment(req, res) {
     knex('Comments').where('id', req.params.id).select()
     .then(data => {
-      if (!data.length > 0) {
+      if (!data.length) {
         res.send({ error: 'Comment not found' });
       }else {
         res.send({ ok: data[0] });

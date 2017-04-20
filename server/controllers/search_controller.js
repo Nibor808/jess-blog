@@ -18,7 +18,7 @@ module.exports = {
       req.body.keywordArray.map(keyword => {
         knex('Articles').where('keywords', 'like', `%${keyword}%`)
           .then(data => {
-            if (!data.length > 0) {
+            if (!data.length) {
               res.send({ error: 'No articles matching your search' })
             }else {
               data.map((item) => {
