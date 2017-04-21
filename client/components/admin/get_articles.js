@@ -8,7 +8,9 @@ class GetArticles extends Component {
   static propTypes = {
     getAllArticles: PropTypes.func,
     allArticles: PropTypes.array,
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    didSave: PropTypes.bool,
+    didDelete: PropTypes.bool
   }
 
   componentWillMount() {

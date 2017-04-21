@@ -9,7 +9,8 @@ class QuestionsPage extends Component {
 
   static propTypes = {
     authenticated: PropTypes.bool,
-    children: PropTypes.object
+    children: PropTypes.object,
+    form: PropTypes.object
   }
 
   renderSignin() {

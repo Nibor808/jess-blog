@@ -5,7 +5,7 @@ import { ROOT_URL } from '../config/config.json';
 
 export function signupUser({ email, password, username }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/signup`, { email, password, username })
+    return axios.post(`${ROOT_URL}/signup`, { email, password, username })
       .then((response) => {
         if (response.data.error) {
           dispatch({
@@ -33,7 +33,7 @@ export function signupUser({ email, password, username }) {
 
 export function signinUser({ email, password }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/signin`, { email, password })
+    return axios.post(`${ROOT_URL}/signin`, { email, password })
       .then(response => {
         dispatch({
           type: AUTH_USER,
@@ -62,7 +62,7 @@ export function signoutUser() {
 
 export function getUsers() {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/users`)
+    return axios.get(`${ROOT_URL}/users`)
       .then(response => {
         dispatch({
           type: GET_USERS,

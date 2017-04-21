@@ -12,9 +12,18 @@ class EditArticleModal extends Component {
 
   static propTypes = {
     errorMessage: PropTypes.string,
+    successMessage: PropTypes.string,
+    toggleModal: PropTypes.func,
     updateArticle: PropTypes.func,
     handleSubmit: PropTypes.func,
-    submitting: PropTypes.bool
+    submitting: PropTypes.bool,
+    article: PropTypes.object,
+    keywords: PropTypes.array,
+    articleSaved: PropTypes.bool,
+    modalOpen: PropTypes.bool,
+    initialize: PropTypes.func,
+    dispatch: PropTypes.func,
+    reset: PropTypes.func
   }
 
   static contextTypes = {
@@ -41,27 +50,26 @@ class EditArticleModal extends Component {
 
   componentWillMount() {
     this.props.toggleModal(false);
+    console.log(this.props.article)
 
     // create object to pass to keywords to trigger checked property
     const keyArray = this.props.article.keywords.split(',');
     const keywordObj = {};
 
-    keyArray.map(word => {
-      keywordObj[word] = true
-    });
+    keyArray.map(word => keywordObj[word] = true);
 
     const initData = {
-        title: this.props.article.title,
-        content: this.props.article.content,
-        cover_img: this.props.article.cover_img,
-        type: this.props.article.type,
-        category: this.props.article.category,
-        keywords: keywordObj,
-        pros: this.props.article.pros,
-        cons: this.props.article.cons,
-        specs: JSON.stringify(this.props.article.specs)
-      }
-      this.props.initialize(initData);
+      title: this.props.article.title,
+      content: this.props.article.content,
+      cover_img: this.props.article.cover_img,
+      type: this.props.article.type,
+      category: this.props.article.category,
+      keywords: keywordObj,
+      pros: this.props.article.pros,
+      cons: this.props.article.cons,
+      specs: JSON.stringify(this.props.article.specs)
+    }
+    this.props.initialize(initData);
   }
 
   componentWillReceiveProps(nextProps) {

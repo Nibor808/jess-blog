@@ -11,14 +11,15 @@ class CommentModal extends Component {
 
   static propTypes = {
     toggleModal: PropTypes.func,
-    didSave: PropTypes.bool,
+    commentSaved: PropTypes.bool,
     params: PropTypes.object,
     article_id: PropTypes.number,
     saveComment: PropTypes.func,
     errorMessage: PropTypes.string,
     handleSubmit: PropTypes.func,
     submitting: PropTypes.bool,
-    modalOpen: PropTypes.bool
+    modalOpen: PropTypes.bool,
+    dispatch: PropTypes.func
   }
 
   static contextTypes = {

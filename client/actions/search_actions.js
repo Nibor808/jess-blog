@@ -4,7 +4,7 @@ import { ROOT_URL } from '../config/config.json';
 
 export function search({ keywordArray }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/search`, { keywordArray })
+    return axios.post(`${ROOT_URL}/search`, { keywordArray })
       .then(response => {
         if (response.data.error) {
           dispatch({

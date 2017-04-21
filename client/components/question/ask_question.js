@@ -17,7 +17,8 @@ class AskQuestion extends Component {
     handleSubmit: PropTypes.func,
     submitting: PropTypes.bool,
     errorMessage: PropTypes.string,
-    modalOpen: PropTypes.bool
+    modalOpen: PropTypes.bool,
+    dispatch: PropTypes.func
   }
 
   static contextTypes = {

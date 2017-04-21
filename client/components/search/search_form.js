@@ -8,8 +8,22 @@ import { CLEAR_ERROR } from '../../actions/types';
 
 class SearchForm extends Component {
 
+  static propTypes = {
+    errorMessage: PropTypes.string,
+    searchResult: PropTypes.array,
+    reset: PropTypes.func,
+    resetSearch: PropTypes.func,
+    dispatch: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    submitting: PropTypes.bool
+  }
+
   static contextTypes = {
     router: PropTypes.object
+  }
+
+  componentWillMount() {
+   this.props.resetSearch();
   }
 
   renderAlert() {

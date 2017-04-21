@@ -6,7 +6,7 @@ import { ROOT_URL } from '../config/config.json';
 export function saveComment({ type, id, user, title, content }) {
   return function(dispatch) {
     axios.defaults.headers['authorization'] = localStorage.getItem('token');
-    axios.post(`${ROOT_URL}/savecomment`, {type, id, user, title, content })
+    return axios.post(`${ROOT_URL}/savecomment`, {type, id, user, title, content })
       .then(response => {
         if (response.data.error) {
           dispatch({
@@ -35,7 +35,7 @@ export function saveComment({ type, id, user, title, content }) {
 
 export function getComments(type, id) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/comments/${type}/${id}`)
+    return axios.get(`${ROOT_URL}/comments/${type}/${id}`)
     .then(response =>{
       if (response.data.error) {
         dispatch({
@@ -60,7 +60,7 @@ export function getComments(type, id) {
 
 export function getCommentReplies(type, id) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/comments/${type}/${id}`)
+    return axios.get(`${ROOT_URL}/comments/${type}/${id}`)
     .then(response =>{
       if (response.data.error) {
         dispatch({
@@ -85,7 +85,7 @@ export function getCommentReplies(type, id) {
 
 export function getAComment(id) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/editcomment/${id}`)
+    return axios.get(`${ROOT_URL}/editcomment/${id}`)
     .then(response => {
       if (response.data.error) {
         dispatch({
@@ -110,7 +110,7 @@ export function getAComment(id) {
 
 export function updateComment({ id, title, content }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/updatecomment/${id}`, { title, content })
+    return axios.post(`${ROOT_URL}/updatecomment/${id}`, { title, content })
     .then(response => {
       if (response.data.error) {
         dispatch({
@@ -139,7 +139,7 @@ export function updateComment({ id, title, content }) {
 
 export function deleteComment(id) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/deletecomment/${id}`)
+    return axios.post(`${ROOT_URL}/deletecomment/${id}`)
       .then(response => {
         if (response.data.error) {
           dispatch({

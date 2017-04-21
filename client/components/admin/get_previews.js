@@ -8,7 +8,9 @@ class GetPreviews extends Component {
   static propTypes = {
     getAllArticles: PropTypes.func,
     allPreviews: PropTypes.array,
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    didSave: PropTypes.bool,
+    didDelete: PropTypes.bool
   }
 
   componentWillMount() {

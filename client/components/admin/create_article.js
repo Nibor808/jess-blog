@@ -34,10 +34,13 @@ class CreateArticle extends Component {
   static propTypes = {
     fields: PropTypes.object,
     errorMessage: PropTypes.string,
+    successMessage: PropTypes.string,
     saveArticle: PropTypes.func,
     handleSubmit: PropTypes.func,
     submitting: PropTypes.bool,
     reset: PropTypes.func,
+    dispatch: PropTypes.func,
+    didSave: PropTypes.bool
   }
 
   renderAlert() {

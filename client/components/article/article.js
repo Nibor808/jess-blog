@@ -16,15 +16,20 @@ class Article extends Component {
     getArticle: PropTypes.func,
     getComments: PropTypes.func,
     getCommentReplies: PropTypes.func,
-    didSave: PropTypes.bool,
-    didDelete: PropTypes.bool,
+    articleSaved: PropTypes.bool,
+    commentSaved: PropTypes.bool,
+    commentDeleted: PropTypes.bool,
     commentArray: PropTypes.array,
     repliesArray: PropTypes.array,
     children: PropTypes.object,
     params: PropTypes.object,
     id: PropTypes.number,
     article: PropTypes.object,
-    authenticated: PropTypes.bool
+    authenticated: PropTypes.bool,
+    user: PropTypes.string,
+    publishArticle: PropTypes.func,
+    errorMessage: PropTypes.string,
+    form: PropTypes.object
   }
 
   componentWillMount() {
@@ -127,7 +132,7 @@ class Article extends Component {
           {this.renderAlert()}
         </div>
       )
-    }else if (user === ADMIN_USER) {
+    }else if (user === ADMIN_USER && this.props.article.type !== 3) {
       return (
         <div className='publish_div pull-right'>
           <Link to={`/editarticle/${this.props.article.id}`} className='btn btn-default edit_link'>edit article</Link>

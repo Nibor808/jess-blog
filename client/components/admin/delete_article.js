@@ -5,6 +5,13 @@ import { deleteArticle } from '../../actions/article_actions';
 
 class DeleteArticle extends Component {
 
+  static propTypes = {
+    deleteArticle: PropTypes.func,
+    reset: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    submitting: PropTypes.bool
+  }
+
   handleFormSubmit({ id }) {
     this.props.deleteArticle(id);
     this.props.reset('delete_form');

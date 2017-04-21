@@ -6,6 +6,11 @@ import { React_Bootstrap_Carousel } from 'react-bootstrap-carousel';
 
 class Carousel extends Component {
 
+  static propTypes = {
+    getArticles: PropTypes.func,
+    allPosts: PropTypes.array
+  }
+
   componentWillMount() {
     this.props.getArticles(1);
   }

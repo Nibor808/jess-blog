@@ -12,7 +12,8 @@ class Signin extends Component {
     errorMessage: PropTypes.string,
     authenticated: PropTypes.bool,
     handleSubmit: PropTypes.func,
-    submitting: PropTypes.bool
+    submitting: PropTypes.bool,
+    dispatch: PropTypes.func
   }
 
   static contextTypes = {

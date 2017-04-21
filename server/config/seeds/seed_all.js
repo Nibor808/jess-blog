@@ -47,9 +47,9 @@ function seedUsers() {
   return knex('Users').del()
     .then(function () {
       return knex('Users').insert([
-        {email: 're@incubo.ca', username: 'Nibor', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
-        {email: 'jessica.e.austen@gmail.com', username: 'Twiggie', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
-        {email: 'development@incubo.ca', username: 'Big Daddy', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
+        {email: 'user1@test.com', username: 'User1', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
+        {email: 'admin@test.com', username: 'Admin', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
+        {email: 'user2@test.com', username: 'User2', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
       ]);
     });
 };

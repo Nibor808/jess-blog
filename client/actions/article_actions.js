@@ -7,7 +7,7 @@ import { ROOT_URL } from '../config/config.json';
 
 export function getAllArticles(isPreview) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/allarticles/${isPreview}`,)
+    return axios.get(`${ROOT_URL}/allarticles/${isPreview}`,)
       .then(response => {
         if (isPreview === 0) {
           dispatch({
@@ -34,7 +34,7 @@ export function getAllArticles(isPreview) {
 // get post, review, or question articles based on type (post = 1, review = 2, question = 3)
 export function getArticles(type) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/articles/${type}`)
+    return axios.get(`${ROOT_URL}/articles/${type}`)
       .then(response => {
         if (response.data.error) {
           dispatch({
@@ -71,7 +71,7 @@ export function getArticles(type) {
 
 export function getArticle(id) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/article/${id}`)
+    return axios.get(`${ROOT_URL}/article/${id}`)
       .then(response => {
         if (response.data.error) {
           dispatch({
@@ -96,7 +96,7 @@ export function getArticle(id) {
 
 export function saveArticle({ type, title, content, category, keywordArray, cover_img, specs, pros, cons }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/savearticle`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
+    return axios.post(`${ROOT_URL}/savearticle`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
       .then(response => {
         if (response.data.error) {
           dispatch({
@@ -127,7 +127,7 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
 export function publishArticle(id) {
   return function(dispatch) {
     axios.defaults.headers['authorization'] = localStorage.getItem('token');
-    axios.post(`${ROOT_URL}/publisharticle/${id}`)
+    return axios.post(`${ROOT_URL}/publisharticle/${id}`)
       .then(response => {
         if (response.data.error) {
           dispatch({
@@ -151,7 +151,7 @@ export function publishArticle(id) {
 
 export function deleteArticle(id) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/deletearticle/${id}`)
+    return axios.post(`${ROOT_URL}/deletearticle/${id}`)
       .then(response => {
         if (response.data.error) {
           dispatch({
@@ -181,31 +181,31 @@ export function deleteArticle(id) {
 
 export function updateArticle({ id, type, title, content, category, keywordArray, cover_img, specs, pros, cons }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/updatearticle/${id}`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
+    return axios.post(`${ROOT_URL}/updatearticle/${id}`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
     .then(response => {
       if (response.data.error) {
         dispatch({
           type: ERROR,
           payload: response.data.error
         });
-        }else {
-          dispatch({
-            type: SAVE_ARTICLE,
-            payload: response.data.success
-          });
-        }
-      })
-      .then(() => {
+      }else {
         dispatch({
-          type: RESET_ARTICLE_STATE
+          type: SAVE_ARTICLE,
+          payload: response.data.success
         });
-      })
-      .catch(err => {
-        dispatch({
-          type: ERROR,
-          payload: err.message
-        });
+      }
+    })
+    .then(() => {
+      dispatch({
+        type: RESET_ARTICLE_STATE
       });
+    })
+    .catch(err => {
+      dispatch({
+        type: ERROR,
+        payload: err.message
+      });
+    });
   }
 }
 

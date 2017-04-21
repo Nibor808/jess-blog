@@ -23,7 +23,8 @@ class Signup extends Component {
     label: PropTypes.string,
     type: PropTypes.string,
     meta: PropTypes.object,
-    submitting: PropTypes.bool
+    submitting: PropTypes.bool,
+    dispatch: PropTypes.func
   }
 
   static contextTypes = {
