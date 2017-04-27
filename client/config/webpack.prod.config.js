@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ETPlugin = require('extract-text-webpack-plugin');
 const HTMLPlugin = require('html-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const VENDOR_LIBS = [
   'react',
@@ -40,25 +41,27 @@ module.exports = {
         })
       },
       {
-        test: /\.json$/,
-        use: 'json-loader'
-      },
-      {
         test: /\.(png|jpg|jpeg|gif|woff|ttf|eot|svg)/,
         use: 'url-loader?limit=8192'
       }
     ]
   },
   resolve: {
-    extensions: [ '*', '.js' ]
+    extensions: [ '*', '.js', '.jsx' ]
   },
+  devtool: 'source-map',
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       names: [ 'vendor', 'manifest' ]
     }),
-    new ETPlugin('style.css'),
+    new ETPlugin({
+      filename: 'style.css'
+    }),
     new HTMLPlugin({
       template: './index.html'
+    }),
+    new UglifyJSPlugin({
+      sourceMap: true
     }),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
