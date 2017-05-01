@@ -50,7 +50,6 @@ class EditArticleModal extends Component {
 
   componentWillMount() {
     this.props.toggleModal(false);
-    console.log(this.props.article)
 
     // create object to pass to keywords to trigger checked property
     const keyArray = this.props.article.keywords.split(',');

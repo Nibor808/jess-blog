@@ -129,14 +129,12 @@ class Article extends Component {
             publish article
           </button>
           <Link to={`/editarticle/${this.props.article.id}`} className='btn btn-default edit_link'>edit article</Link>
-          {this.renderAlert()}
         </div>
       )
     }else if (user === ADMIN_USER && this.props.article.type !== 3) {
       return (
         <div className='publish_div pull-right'>
           <Link to={`/editarticle/${this.props.article.id}`} className='btn btn-default edit_link'>edit article</Link>
-          {this.renderAlert()}
         </div>
       )
     }
@@ -150,10 +148,17 @@ class Article extends Component {
         </div>
       );
     }
+    if (this.props.successMessage) {
+      return (
+        <div className='alert alert-success col-md-12'>
+          {this.props.successMessage}
+        </div>
+      );
+    }
   }
 
   render() {
-    if (!this.props.article) {
+    if (!this.props.article || !this.props.commentArray) {
       return <div><i className='fa fa-spinner' aria-hidden='true'></i></div>;
     }
 
@@ -179,6 +184,7 @@ class Article extends Component {
           <hr className='color_bar' />
         </div>
         {this.isPreview()}
+        {this.renderAlert()}
         <div className='comments_section col-md-6'>
           <div className='row'>
             <div className='col-md-6'><h2>Comments:</h2></div>
@@ -200,6 +206,7 @@ function mapStateToProps({ article, auth, comment, form }) {
     user: auth.user,
     article: article.article,
     articleSaved: article.articleSaved,
+    successMessage: article.success,
     errorMessage: article.error,
     authenticated: auth.authenticated,
     commentSaved: comment.commentSaved,

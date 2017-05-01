@@ -281,6 +281,14 @@ ul {
   -moz-columns: 2;
 }
 
+.addSpecs_list > li {
+  padding: 10px;
+
+  .spec_title {
+    text-decoration: underline;
+  }
+}
+
 .keywords_list {
   columns: 3;
   -webkit-columns: 3;
@@ -306,6 +314,13 @@ ul {
   position: relative;
   z-index: 2;
 }
+
+.delete_modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 
 /* ------------------------------- COLOR ADJUST ------------------------------- */
 

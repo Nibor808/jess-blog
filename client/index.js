@@ -13,12 +13,13 @@ import ReviewsPage from './components/review/reviews_page';
 import QuestionsPage from './components/question/questions_page';
 import AdminPage from './components/admin/admin_page';
 import EditArticleModal from './components/admin/edit_article_modal';
+import DeleteArticleModal from './components/admin/delete_article_modal';
 import Article from './components/article/article';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import CommentModal from './components/comment/comment_modal';
 import EditModal from './components/comment/edit_modal';
-import DeleteModal from './components/comment/delete_modal';
+import DeleteCommentModal from './components/comment/delete_comment_modal';
 import AskQuestion from './components/question/ask_question';
 import SearchPage from './components/search/search_page'
 import requireAuth from './components/auth/requireAuth';
@@ -41,8 +42,9 @@ const articleChildren = [
   <Route path='/addcomment' component={requireAuth(CommentModal)} />,
   <Route path='/editcomment/:id' component={EditModal} />,
   <Route path='/replytocomment/:id' component={CommentModal} />,
-  <Route path='/deletecomment/:id' component={DeleteModal} />,
-  <Route path='/editarticle/:id' component={EditArticleModal} />
+  <Route path='/deletecomment/:id' component={DeleteCommentModal} />,
+  <Route path='/editarticle/:id' component={EditArticleModal} />,
+  <Route path='/deletearticle/:id' component={DeleteArticleModal} />
 ]
 
 const questionChildren = [

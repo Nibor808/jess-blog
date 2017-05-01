@@ -28,11 +28,12 @@ export function renderArticleListItem(article, isAdmin) {
       <li
       key={article.id}
       className='list-group-item'>
-        <div className='col-md-7'>
-          <strong>{article.id}: </strong><Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
-        </div>
         <div className='col-md-5'>
-          <small className='pull-right'>{date}</small>
+          <Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
+        </div>
+        <div className='col-md-7'>
+          <small>{date}</small>
+          <Link className='pull-right' to={`/deletearticle/${article.id}`}>delete</Link>
         </div>
       </li>
     );

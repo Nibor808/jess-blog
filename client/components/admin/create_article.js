@@ -1,31 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm, Field, initialize, FieldArray, reset } from 'redux-form';
 import { connect } from 'react-redux';
-import { saveArticle } from '../../actions/article_actions';
+import { saveArticle, toggleReview } from '../../actions/article_actions';
 import { keywords } from '../../config/keywords';
 import { CLEAR_ERROR } from '../../actions/types';
 
 const renderSpecs = ({ fields }) => {
   return (
-    <ul>
-      <li><button type='button' className='btn btn-default' onClick={() => fields.push({})}>Add Spec</button></li>
-        {fields.map((spec, index) =>
-          <li key={index}>
-            <button type='button' className='btn btn-default pull-right' onClick={() => fields.remove(index)}>Remove</button>
-            <label htmlFor={`${spec}.key`}>Spec #{index + 1}</label>
-            <div className='row'>
-              <div className='col-md-4'>
-                <label>Name</label>
-                <Field name={`${spec}.key`} type='text' component='input' />
+    <div>
+      <button type='button' className='btn btn-default' onClick={() => fields.push({})}>Add A Spec</button>
+      <ul className='addSpecs_list'>
+          {fields.map((spec, index) =>
+            <li key={index}>
+              <button type='button' className='btn btn-default pull-right' onClick={() => fields.remove(index)}>Remove Spec</button>
+              <label className='spec_title' htmlFor={`${spec}.key`}>Spec #{index + 1}</label>
+              <div className='row'>
+                <div className='col-md-4'>
+                  <label>Name</label>
+                  <Field name={`${spec}.key`} type='text' component='input' />
+                </div>
+                <div className='col-md-4 pull-right'>
+                  <label>Value</label>
+                  <Field name={`${spec}.value`} type='text' component='input' />
+                </div>
               </div>
-              <div className='col-md-4 pull-right'>
-                <label>Value</label>
-                <Field name={`${spec}.value`} type='text' component='input' />
-              </div>
-            </div>
-          </li>
-        )}
-    </ul>
+            </li>
+          )}
+      </ul>
+    </div>
   )
 }
 
@@ -41,6 +43,21 @@ class CreateArticle extends Component {
     reset: PropTypes.func,
     dispatch: PropTypes.func,
     didSave: PropTypes.bool
+  }
+
+  componentWillMount() {
+    this.props.toggleReview(false);
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({ type: CLEAR_ERROR });
+    this.props.toggleReview(false);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.didSave) {
+      this.props.reset('create_article');
+    }
   }
 
   renderAlert() {
@@ -61,13 +78,34 @@ class CreateArticle extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.props.dispatch({ type: CLEAR_ERROR });
+  reviewOpts(value) {
+    if (value == 2) {
+      this.props.toggleReview(true);
+    }else if (value == 1) {
+      this.props.toggleReview(false);
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.didSave) {
-      this.props.reset('create_article');
+  renderReview() {
+    if (this.props.isReview) {
+      return (
+        <div>
+          <div className='form-group col-md-6'>
+            <label htmlFor='pros'>Pros: (csv)</label>
+            <Field name='pros' component='input' type='text' className='form-control'/>
+          </div>
+          <div className='form-group col-md-6'>
+            <label htmlFor='cons'>Cons: (csv)</label>
+            <Field name='cons' component='input' type='text' className='form-control'/>
+          </div>
+          <div className='form-group col-md-12'>
+            <label htmlFor='specs'>Specs:</label>
+            <FieldArray name='specs' component={renderSpecs} />
+          </div>
+        </div>
+      )
+    }else {
+      return;
     }
   }
 
@@ -100,7 +138,13 @@ class CreateArticle extends Component {
           <h3>Create Article</h3>
           <div className='form-group col-md-6'>
             <label htmlFor='type'>Type:</label>
-            <Field name='type' component='select' type='text' className='form-control' id='typeSelect'>
+            <Field
+            name='type'
+            component='select'
+            type='text'
+            className='form-control'
+            id='typeSelect'
+            onChange={(ev) => this.reviewOpts(ev.target.value)}>
               <option></option>
               <option value='1'>post</option>
               <option value='2'>review</option>
@@ -149,19 +193,7 @@ class CreateArticle extends Component {
             <label htmlFor='additionalKeywords'>Additional:</label>
             <li><Field type='text' component='input' name='additionalKeywords' /></li>
           </ul>
-          <h4 className='text-center'>For Reviews Only</h4>
-          <div className='form-group col-md-6'>
-            <label htmlFor='pros'>Pros: (csv)</label>
-            <Field name='pros' component='input' type='text' className='form-control'/>
-          </div>
-          <div className='form-group col-md-6'>
-            <label htmlFor='cons'>Cons: (csv)</label>
-            <Field name='cons' component='input' type='text' className='form-control'/>
-          </div>
-          <div className='form-group col-md-12'>
-            <label htmlFor='specs'>Specs:</label>
-            <FieldArray name='specs' component={renderSpecs} />
-          </div>
+          {this.renderReview()}
           <button className='btn btn-default' type='button' onClick={() => reset('create_article')}>clear values</button>
           <button className='btn btn-default pull-right' type='submit' disabled={submitting}>save</button>
         </form>
@@ -174,6 +206,7 @@ class CreateArticle extends Component {
 function mapStateToProps({ article }) {
   return {
     article: article.article,
+    isReview: article.isReview,
     didSave: article.articleSaved,
     errorMessage: article.error,
     successMessage: article.success
@@ -184,4 +217,4 @@ CreateArticle = reduxForm({
   form: 'create_article'
 })(CreateArticle);
 
-export default connect(mapStateToProps, { saveArticle })(CreateArticle);
+export default connect(mapStateToProps, { saveArticle, toggleReview })(CreateArticle);

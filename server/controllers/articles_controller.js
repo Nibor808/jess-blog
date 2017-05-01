@@ -141,7 +141,7 @@ module.exports = {
         if (!data[0] > 0) {
           return res.send({ error: 'Additional Info not saved' });
         }
-        res.send({ success: 'Article saved' });
+        res.send({ ok: 'Article saved' });
       })
       .catch(err => {
         res.send({ error: err.message });
@@ -197,7 +197,7 @@ module.exports = {
           if (!data[0] > 0) {
             return res.send({ error: 'Additional Info not updated' });
           }
-          res.send({ success: 'Article updated' });
+          res.send({ ok: 'Article updated' });
         })
         .catch(err => {
           res.send({ error: err.message });
@@ -215,7 +215,7 @@ module.exports = {
         if (!data == 1) {
           res.send({ error: 'Article does not exist' })
         }else {
-          res.send({ success: 'Article published' })
+          res.send({ ok: 'Article published' })
         }
       })
       .catch(err => {
@@ -229,7 +229,7 @@ module.exports = {
         if (!data == 1) {
           res.send({ error: 'Article does not exist' })
         }else {
-          res.send({ success: 'Article deleted' })
+          res.send({ ok: 'Article deleted' })
         }
       })
       .catch(err => {

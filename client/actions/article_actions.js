@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GET_POSTS, GET_REVIEWS, GET_QUESTIONS,
   GET_ARTICLE, GET_ALL_ARTICLES, GET_ALL_PREVIEWS,
   SAVE_ARTICLE, RESET_ARTICLE_STATE, PUBLISH_ARTICLE,
-  DELETE_ARTICLE, EDIT_ARTICLE, CLOSE_MODAL, OPEN_MODAL, ERROR } from './types';
+  DELETE_ARTICLE, EDIT_ARTICLE, CLOSE_MODAL, OPEN_MODAL, IS_REVIEW, ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function getAllArticles(isPreview) {
@@ -106,7 +106,7 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
         }else {
           dispatch({
             type: SAVE_ARTICLE,
-            payload: response.data.success
+            payload: response.data.ok
           });
         }
       })
@@ -136,7 +136,8 @@ export function publishArticle(id) {
           });
         }else {
           dispatch({
-            type: PUBLISH_ARTICLE
+            type: PUBLISH_ARTICLE,
+            payload: response.data.ok
           });
         }
       })
@@ -161,7 +162,7 @@ export function deleteArticle(id) {
         }else {
           dispatch({
             type: DELETE_ARTICLE,
-            payload: response.data.success
+            payload: response.data.ok
           });
         }
       })
@@ -191,7 +192,7 @@ export function updateArticle({ id, type, title, content, category, keywordArray
       }else {
         dispatch({
           type: SAVE_ARTICLE,
-          payload: response.data.success
+          payload: response.data.ok
         });
       }
     })
@@ -212,7 +213,7 @@ export function updateArticle({ id, type, title, content, category, keywordArray
 
 export function toggleModal(modalOpen) {
   return function(dispatch) {
-    if (modalOpen === true) {
+    if (modalOpen) {
       dispatch({
         type: CLOSE_MODAL
       })
@@ -220,6 +221,22 @@ export function toggleModal(modalOpen) {
       dispatch({
         type: OPEN_MODAL
       })
+    }
+  }
+}
+
+export function toggleReview(isReview) {
+  return function(dispatch) {
+    if (isReview) {
+      dispatch({
+        type: IS_REVIEW,
+        payload: true
+      });
+    }else {
+      dispatch({
+        type: IS_REVIEW,
+        payload: false
+      });
     }
   }
 }
