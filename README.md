@@ -44,7 +44,22 @@ The server should now be running on port 3001.
 
 Webpack dev server should now be running on localhost:8080
 
-#### All user passwords are 123
+### Users
+
+##### Admin
+
+    email: admin@test.com
+    pass: 123
+
+##### User 1
+
+    email: user1@test.com
+    pass: 123
+
+##### User 2
+
+    email: user2@test.com
+    pass: 123
 
 You may sign in from any article's comment section
 
