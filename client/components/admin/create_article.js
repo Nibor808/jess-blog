@@ -42,7 +42,9 @@ class CreateArticle extends Component {
     submitting: PropTypes.bool,
     reset: PropTypes.func,
     dispatch: PropTypes.func,
-    didSave: PropTypes.bool
+    didSave: PropTypes.bool,
+    toggleReview: PropTypes.func,
+    isReview: PropTypes.bool
   }
 
   componentWillMount() {

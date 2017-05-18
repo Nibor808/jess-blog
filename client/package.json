@@ -8,7 +8,9 @@
     "test:watch": "npm run test -- --watch",
     "rimraf": "rimraf dist",
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "prod:build": "npm run rimraf && NODE_ENV=production webpack -p --config ./config/webpack.prod.config.js",
+    "copy_images": "cp -R images dist/",
+    "copy_app": "cp app.js dist/",
+    "prod:build": "npm run rimraf && NODE_ENV=production webpack -p --config ./config/webpack.prod.config.js && npm run copy_images && npm run copy_app",
     "lint": "eslint --quiet --color --config config/.eslintrc.json ./"
   },
   "repository": {
@@ -25,6 +27,7 @@
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",
     "css-loader": "^0.26.4",
+    "express": "^4.15.3",
     "file-loader": "^0.10.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",

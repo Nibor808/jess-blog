@@ -29,6 +29,7 @@ class Article extends Component {
     user: PropTypes.string,
     publishArticle: PropTypes.func,
     errorMessage: PropTypes.string,
+    successMessage: PropTypes.string,
     form: PropTypes.object
   }
 

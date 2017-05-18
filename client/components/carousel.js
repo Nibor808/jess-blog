@@ -6,6 +6,13 @@ import { React_Bootstrap_Carousel } from 'react-bootstrap-carousel';
 
 class Carousel extends Component {
 
+  /*
+    For simplicity renderArticleItem() is not a connected componentent.
+    Due to this the carousel component throws a warning about changing state when it
+    switches slides.
+    Choosing to ignore this warning.
+   */
+
   static propTypes = {
     getArticles: PropTypes.func,
     allPosts: PropTypes.array

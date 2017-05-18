@@ -1,11 +1,11 @@
 import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import reduxThunk from 'redux-thunk';
 import nock from 'nock';
 import { getArticle } from '../../actions/article_actions';
 import { GET_ARTICLE } from '../../actions/types';
 import { expect } from 'chai';
 
-const middlewares = [ thunk ];
+const middlewares = [ reduxThunk ];
 const mockStore = configureMockStore(middlewares);
 
 describe('article', () => {

@@ -14,10 +14,6 @@ export default class SearchPage extends Component {
             <div className='row'>
               <div className='page_header_title'><h1>Search</h1></div>
             </div>
-            <div className='row'>
-              <p>Start by selecting the keywords you would like to search for.</p>
-              <p>Then click search to see a list of related articles.</p>
-            </div>
           </div>
           <hr className='color_bar' />
           <SearchForm />

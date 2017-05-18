@@ -11,7 +11,8 @@ class DeleteModal extends Component {
     toggleModal: PropTypes.func,
     didDelete: PropTypes.bool,
     deleteArticle: PropTypes.func,
-    modalOpen: PropTypes.bool
+    modalOpen: PropTypes.bool,
+    params: PropTypes.object
   }
 
   static contextTypes = {

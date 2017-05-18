@@ -15,7 +15,8 @@ class SearchForm extends Component {
     resetSearch: PropTypes.func,
     dispatch: PropTypes.func,
     handleSubmit: PropTypes.func,
-    submitting: PropTypes.bool
+    submitting: PropTypes.bool,
+    search: PropTypes.func
   }
 
   static contextTypes = {
@@ -23,7 +24,7 @@ class SearchForm extends Component {
   }
 
   componentWillMount() {
-   this.props.resetSearch();
+    this.props.resetSearch();
   }
 
   renderAlert() {
@@ -59,8 +60,10 @@ class SearchForm extends Component {
   }
 
   handleFormSubmit({ keywords }) {
-    const keywordArray = keywords.split(',');
-    this.props.search({ keywordArray });
+    if (keywords) {
+      const keywordArray = keywords.split(' ');
+      this.props.search({ keywordArray });
+    }
   }
 
   render() {
@@ -70,9 +73,7 @@ class SearchForm extends Component {
       <div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='search_form'>
           <div className='form-group'>
-            <h4>Keywords:</h4>
-            <p>Enter keywords separated by a comma. (price,compare,monitor)</p>
-            <p>Or a product name. (Phillips LCD-243V5)</p>
+            <p>Enter keywords or a product name.</p>
           </div>
           <div className='form-group'>
             <Field type='text' component='input' name='keywords' disabled={this.props.searchResult.length > 0}/>
