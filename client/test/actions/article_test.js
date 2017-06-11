@@ -1,6 +1,5 @@
 import configureMockStore from 'redux-mock-store';
 import reduxThunk from 'redux-thunk';
-import nock from 'nock';
 import { getArticle } from '../../actions/article_actions';
 import { GET_ARTICLE } from '../../actions/types';
 import { expect } from 'chai';
