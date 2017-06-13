@@ -109,7 +109,7 @@ class Article extends Component {
   }
 
   hasComments() {
-    if (!this.props.commentArray.length > 0 || this.props.article.preview === 1) {
+    if (!this.props.commentArray.length > 0 || this.props.article.preview === true) {
       return <p className='col-md-6'>Be the first to comment.</p>
     }else {
       return (

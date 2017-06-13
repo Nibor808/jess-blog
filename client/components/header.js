@@ -14,6 +14,7 @@ class Header extends Component {
 
   renderNavRight() {
     const user = localStorage.getItem('user');
+
     if (this.props.authenticated && user === `${ADMIN_USER}` || this.props.authenticated && this.props.user === `${ADMIN_USER}`) {
       return (
         <div className='signout_div'>

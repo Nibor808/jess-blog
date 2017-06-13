@@ -10,7 +10,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => {
       <label>{label}</label>
       <div>
         <input {...input} type={type} className='form-control' />
-        {touched && error ? <span className='text-danger'>{error}</span>: ''}
+        {touched && error ? <span className='text-danger'><strong>{error}</strong></span>: ''}
       </div>
     </div>
   );
