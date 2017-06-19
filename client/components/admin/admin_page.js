@@ -9,10 +9,10 @@ export default class AdminPage extends Component {
   render() {
     return (
       <div className='admin_page'>
-        <div className='col-md-8 admin_main'>
+        <div className='col-sm-8 admin_main'>
           <CreateArticle />
         </div>
-        <div className='col-md-4 side_bar'>
+        <div className='col-sm-4 side_bar'>
           <Users />
           <Previews />
           <Articles />

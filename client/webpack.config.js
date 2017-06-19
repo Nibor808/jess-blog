@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 
 module.exports = {
 
@@ -38,5 +39,12 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: './'
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
+    })
+  ]
 };

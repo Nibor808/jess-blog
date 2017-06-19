@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GET_POSTS, GET_REVIEWS, GET_QUESTIONS,
   GET_ARTICLE, GET_ALL_ARTICLES, GET_ALL_PREVIEWS,
   SAVE_ARTICLE, RESET_ARTICLE_STATE, PUBLISH_ARTICLE,
-  DELETE_ARTICLE, EDIT_ARTICLE, CLOSE_MODAL, OPEN_MODAL, IS_REVIEW, ERROR } from './types';
+  DELETE_ARTICLE, EDIT_ARTICLE, CLOSE_MODAL, OPEN_MODAL, IS_REVIEW, ARTICLE_ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function getAllArticles(isPreview) {
@@ -24,7 +24,7 @@ export function getAllArticles(isPreview) {
       })
       .catch(err => {
         dispatch({
-          type: ERROR,
+          type: ARTICLE_ERROR,
           payload: err.message
         })
       });
@@ -38,7 +38,7 @@ export function getArticles(type) {
       .then(response => {
         if (response.data.error) {
           dispatch({
-            type: ERROR,
+            type: ARTICLE_ERROR,
             payload: response.data.error
           });
         }else {
@@ -62,7 +62,7 @@ export function getArticles(type) {
       })
       .catch(err => {
         dispatch({
-          type: ERROR,
+          type: ARTICLE_ERROR,
           payload: err.message
         });
       });
@@ -75,7 +75,7 @@ export function getArticle(id) {
       .then(response => {
         if (response.data.error) {
           dispatch({
-            type: ERROR,
+            type: ARTICLE_ERROR,
             payload: response.data.error
           })
         }else {
@@ -87,7 +87,7 @@ export function getArticle(id) {
       })
       .catch(err => {
         dispatch({
-          type: ERROR,
+          type: ARTICLE_ERROR,
           payload: err.message
         });
       });
@@ -100,7 +100,7 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
       .then(response => {
         if (response.data.error) {
           dispatch({
-            type: ERROR,
+            type: ARTICLE_ERROR,
             payload: response.data.error
           });
         }else {
@@ -117,7 +117,7 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
       })
       .catch(err => {
         dispatch({
-          type: ERROR,
+          type: ARTICLE_ERROR,
           payload: err.message
         });
       });
@@ -131,7 +131,7 @@ export function publishArticle(id) {
       .then(response => {
         if (response.data.error) {
           dispatch({
-            type: ERROR,
+            type: ARTICLE_ERROR,
             payload: response.data.error
           });
         }else {
@@ -143,7 +143,7 @@ export function publishArticle(id) {
       })
       .catch(err => {
         dispatch({
-          type: ERROR,
+          type: ARTICLE_ERROR,
           payload: err.message
         });
       });
@@ -156,7 +156,7 @@ export function deleteArticle(id) {
       .then(response => {
         if (response.data.error) {
           dispatch({
-            type: ERROR,
+            type: ARTICLE_ERROR,
             payload: response.data.error
           });
         }else {
@@ -173,7 +173,7 @@ export function deleteArticle(id) {
       })
       .catch(err => {
         dispatch({
-          type: ERROR,
+          type: ARTICLE_ERROR,
           payload: err.message
         });
       });
@@ -186,7 +186,7 @@ export function updateArticle({ id, type, title, content, category, keywordArray
     .then(response => {
       if (response.data.error) {
         dispatch({
-          type: ERROR,
+          type: ARTICLE_ERROR,
           payload: response.data.error
         });
       }else {
@@ -203,7 +203,7 @@ export function updateArticle({ id, type, title, content, category, keywordArray
     })
     .catch(err => {
       dispatch({
-        type: ERROR,
+        type: ARTICLE_ERROR,
         payload: err.message
       });
     });

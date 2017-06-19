@@ -10,21 +10,26 @@
     padding: 0;
   }
   .navbar-nav {
-    padding-left: 50px;
+    padding-left: 20px;
     li {
+      padding: 10px 30px 0 30px;
       a {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
         flex-direction: column;
-        padding: 10px 30px 0 30px;
         color: $white;
+        padding: 0;
 
         &:hover,
         &.active,
         &:focus,
         &.active:focus,
         &.active:focus {
-          color: $yellow;
+          color: $orange;
         }
         span:first-of-type {
           margin-top: 10px;

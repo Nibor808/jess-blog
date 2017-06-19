@@ -8,8 +8,8 @@ export default class SearchPage extends Component {
 
   render() {
     return (
-      <div className='col-md-12 page'>
-        <div className='col-md-8 page_list'>
+      <div className='row'>
+        <div className='col-sm-8  page_list'>
           <div className='page_header_content'>
             <div className='row'>
               <div className='page_header_title'><h1>Search</h1></div>
@@ -18,7 +18,7 @@ export default class SearchPage extends Component {
           <hr className='color_bar' />
           <SearchForm />
         </div>
-        <div className='col-md-4 side_bar'>
+        <div className='col-sm-4 side_bar'>
           <PostSidebar />
           <ReviewSidebar />
           <QuestionSideBar />

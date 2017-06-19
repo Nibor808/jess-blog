@@ -39,7 +39,7 @@ class DeleteModal extends Component {
       <Modal
         isOpen={this.props.modalOpen}
         contentLabel='Delete'
-        className='col-md-4 delete_modal modal_box'
+        className='col-xs-6 delete_modal modal_box'
         shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <label>Are you sure you want to delete this article?</label>

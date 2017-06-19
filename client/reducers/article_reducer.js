@@ -1,6 +1,6 @@
 import { GET_ARTICLE, SAVE_ARTICLE, DELETE_ARTICLE, RESET_ARTICLE_STATE,
   GET_POSTS, GET_QUESTIONS, GET_REVIEWS, IS_REVIEW, PUBLISH_ARTICLE,
-  CLOSE_MODAL, OPEN_MODAL, ERROR, CLEAR_ERROR } from '../actions/types';
+  CLOSE_MODAL, OPEN_MODAL, ARTICLE_ERROR, CLEAR_ERROR } from '../actions/types';
 
 const INITIAL_STATE = {
   allPosts: [],
@@ -33,7 +33,7 @@ export default function (state = INITIAL_STATE, action) {
     return { ...state, modalOpen: false }
   case OPEN_MODAL:
     return { ...state, modalOpen: true }
-  case ERROR:
+  case ARTICLE_ERROR:
     return { ...state, error: action.payload }
   case CLEAR_ERROR:
     return { ...state, error: '', success: '' }

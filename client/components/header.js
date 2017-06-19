@@ -18,7 +18,7 @@ class Header extends Component {
     if (this.props.authenticated && user === `${ADMIN_USER}` || this.props.authenticated && this.props.user === `${ADMIN_USER}`) {
       return (
         <div className='signout_div'>
-          <small>signed in as: { user ? user: this.props.user }</small>
+          <small>signed in as: { user ? user : this.props.user }</small>
           <Link className='signout_btn' onClick={this.props.signoutUser}><small>sign out</small></Link>
           <Link to='/admin'><small>admin</small></Link>
         </div>
@@ -26,7 +26,7 @@ class Header extends Component {
     }else if (this.props.authenticated) {
       return (
         <div className='signout_div'>
-          signed in as: { user ? user: this.props.user }
+          signed in as: { user ? user : this.props.user }
           <Link className='signout_btn' onClick={this.props.signoutUser}><small>sign out</small></Link>
         </div>
       );
@@ -40,58 +40,58 @@ class Header extends Component {
           <h2 className='logo'>JessTech</h2>
         </div>
         <div className='nav_box'>
-        <div className='row'>
-          <i className='fa fa-linkedin-square fa-2x pull-right' aria-hidden='true'></i>
-          <i className='fa fa-youtube-square fa-2x pull-right' aria-hidden='true'></i>
-          <i className='fa fa-twitter-square fa-2x pull-right' aria-hidden='true'></i>
-        </div>
-        <nav className='navbar navbar-default'>
-          <div className='navbar-header'>
-            <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#main_nav' aria-expanded='false'>
-              <span className='sr-only'>Toggle navigation</span>
-              <span className='icon-bar'></span>
-              <span className='icon-bar'></span>
-              <span className='icon-bar'></span>
-            </button>
+          <div className='row'>
+            <i className='fa fa-linkedin-square fa-2x pull-right' aria-hidden='true'></i>
+            <i className='fa fa-youtube-square fa-2x pull-right' aria-hidden='true'></i>
+            <i className='fa fa-twitter-square fa-2x pull-right' aria-hidden='true'></i>
           </div>
-          <div className='collapse navbar-collapse' id='main_nav'>
-            <ul className='nav navbar-nav'>
-              <li>
-                <Link to='/'>
-                <i className='fa fa-clipboard fa-2x' aria-hidden='true'></i>
-                  <span>Posts</span>
-                </Link>
-              </li>
-              <li>
-                <Link to='/reviews'>
-                <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>
-                  <span>Reviews</span>
-                </Link>
-              </li>
-              <li>
-                <Link to='/questions'>
-                <i className='fa fa-question fa-2x' aria-hidden='true'></i>
-                  <span>Q&A</span>
-                </Link>
-              </li>
-              <li>
-                <Link to='/'>
-                <i className='fa fa-female fa-2x' aria-hidden='true'></i>
-                  <span>About Me</span>
-                </Link>
-              </li>
-              <li>
-                <Link to='/search'>
-                <i className='fa fa-search fa-2x' aria-hidden='true'></i>
-                  <span>Search</span>
-                </Link>
-              </li>
-            </ul>
-            <div className='nav navbar-nav navbar-right'>
-              {this.renderNavRight()}
+          <nav className='navbar navbar-default'>
+            <div className='navbar-header'>
+              <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#main_nav' aria-expanded='false'>
+                <span className='sr-only'>Toggle navigation</span>
+                <span className='icon-bar'></span>
+                <span className='icon-bar'></span>
+                <span className='icon-bar'></span>
+              </button>
             </div>
-          </div>
-        </nav>
+            <div className='collapse navbar-collapse' id='main_nav'>
+              <ul className='nav navbar-nav'>
+                <li>
+                  <Link to='/' data-toggle="collapse" data-target=".navbar-collapse.in">
+                  <i className='fa fa-clipboard fa-2x' aria-hidden='true'></i>
+                    <span>Posts</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to='/reviews' data-toggle="collapse" data-target=".navbar-collapse.in">
+                  <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>
+                    <span>Reviews</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to='/questions' data-toggle="collapse" data-target=".navbar-collapse.in">
+                  <i className='fa fa-question fa-2x' aria-hidden='true'></i>
+                    <span>Q&A</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to='/' data-toggle="collapse" data-target=".navbar-collapse.in">
+                  <i className='fa fa-female fa-2x' aria-hidden='true'></i>
+                    <span>About Me</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to='/search' data-toggle="collapse" data-target=".navbar-collapse.in">
+                  <i className='fa fa-search fa-2x' aria-hidden='true'></i>
+                    <span>Search</span>
+                  </Link>
+                </li>
+              </ul>
+              <div className='nav navbar-nav navbar-right'>
+                {this.renderNavRight()}
+              </div>
+            </div>
+          </nav>
         </div>
       </div>
     );

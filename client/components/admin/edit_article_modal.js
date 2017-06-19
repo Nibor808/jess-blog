@@ -110,12 +110,12 @@ class EditArticleModal extends Component {
       <Modal
         isOpen={this.props.modalOpen}
         contentLabel='EditArticle'
-        className='col-md-6 modal_box'
+        className='col-xs-10 col-md-8 col-lg-6 modal_box'
         shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='edit_article_form'>
           <h3>Edit Article</h3>
-          <div className='form-group col-md-6'>
+          <div className='form-group col-sm-6'>
             <label htmlFor='type'>Type:</label>
             <Field name='type' component='select' type='text' className='form-control' id='typeSelect'>
               <option></option>
@@ -123,19 +123,19 @@ class EditArticleModal extends Component {
               <option value='2'>review</option>
             </Field>
           </div>
-          <div className='form-group col-md-6'>
+          <div className='form-group col-sm-6'>
             <label htmlFor='title'>Title:</label>
             <Field name='title' component='input' type='text' className='form-control'/>
           </div>
-          <div className='form-group col-md-12'>
+          <div className='form-group col-sm-12'>
             <label htmlFor='content'>Content:</label>
             <Field name='content' component='textarea' type='textarea' className='form-control'/>
           </div>
-          <div className='form-group col-md-6'>
+          <div className='form-group col-sm-6'>
             <label htmlFor='cover_img'>Cover Image:</label>
             <Field name='cover_img' component='input' type='text' className='form-control'/>
           </div>
-          <div className='form-group col-md-6'>
+          <div className='form-group col-sm-6'>
             <label htmlFor='category'>Category:</label>
             <Field name='category' component='select' className='form-control'>
               <option></option>
@@ -151,10 +151,10 @@ class EditArticleModal extends Component {
               <option value='gaming'>gaming</option>
             </Field>
           </div>
-          <div className='col-md-12 form-group'>
+          <div className='col-sm-12 form-group'>
             <label>Keywords:</label>
           </div>
-          <ul className='form-group col-md-12 keywords_list'>
+          <ul className='form-group col-sm-12 keywords_list'>
             {keywords.map((name, index) => {
               return (
                 <li key={index}>
@@ -165,19 +165,19 @@ class EditArticleModal extends Component {
             })}
           </ul>
           <h4 className='text-center'>For Reviews Only</h4>
-          <div className='form-group col-md-6'>
+          <div className='form-group col-sm-6'>
             <label htmlFor='pros'>Pros: (csv)</label>
             <Field name='pros' component='input' type='text' className='form-control'/>
           </div>
-          <div className='form-group col-md-6'>
+          <div className='form-group col-sm-6'>
             <label htmlFor='cons'>Cons: (csv)</label>
             <Field name='cons' component='input' type='text' className='form-control'/>
           </div>
-          <div className='form-group col-md-12'>
+          <div className='form-group col-sm-12'>
             <label htmlFor='specs'>Specs:</label>
             <Field name='specs' component='textarea' type='textarea' className='form-control'/>
           </div>
-          <button className='btn btn-default' type='button' onClick={() => this.closeModal()}>close</button>
+          <button className='btn btn-default' type='button' onClick={() => this.closeModal()}>cancel</button>
           <button className='btn btn-default pull-right' type='submit'>save</button>
         </form>
         {this.renderAlert()}

@@ -11,7 +11,7 @@ class Carousel extends Component {
     Due to this the carousel component throws a warning about changing state when it
     switches slides.
     Choosing to ignore this warning.
-   */
+  */
 
   static propTypes = {
     getArticles: PropTypes.func,

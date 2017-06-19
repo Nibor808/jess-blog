@@ -62,7 +62,7 @@ class Article extends Component {
       return (
         <div>
           <h3>Specs</h3>
-          <ul className='col-md-12 specs_list'>
+          <ul className='col-sm-12 specs_list'>
             {specsList.map((spec, index) => <li key={index}>{spec}</li>)}
           </ul>
         </div>
@@ -74,11 +74,11 @@ class Article extends Component {
     if (this.props.article.pros || this.props.article.cons) {
       return (
         <div className='row proscons'>
-          <div className='col-md-6'>
+          <div className='col-sm-6'>
             <h3>Pros</h3>
             <p>{this.props.article.pros}</p>
           </div>
-          <div className='col-md-6'>
+          <div className='col-sm-6'>
             <h3>Cons</h3>
             <p>{this.props.article.cons}</p>
           </div>
@@ -102,7 +102,7 @@ class Article extends Component {
     if (this.props.article.cover_img) {
       return (
         <div className='row'>
-          <img src={`../../images/${this.props.article.cover_img}`} height='400px' width='400px' />
+          <img src={`../../images/${this.props.article.cover_img}`} height='400px' width='400px' className='img-responsive' />
         </div>
       )
     }
@@ -110,7 +110,7 @@ class Article extends Component {
 
   hasComments() {
     if (!this.props.commentArray.length > 0 || this.props.article.preview === true) {
-      return <p className='col-md-6'>Be the first to comment.</p>
+      return <p className='col-sm-6'>Be the first to comment.</p>
     }else {
       return (
         <ul className='comments_list'>
@@ -168,7 +168,7 @@ class Article extends Component {
     return (
       <div>
         <div
-        className='article col-md-12'>
+        className='article col-sm-12'>
           <div className='row'>
             <h1>{this.props.article.title}</h1>
           </div>
@@ -181,19 +181,19 @@ class Article extends Component {
           {this.renderSpecs(this.props.article.specs)}
           {this.renderAnswer()}
         </div>
-        <div className='col-md-12 color_bar_div'>
+        <div className='col-sm-12 color_bar_div'>
           <hr className='color_bar' />
         </div>
         {this.isPreview()}
         {this.renderAlert()}
-        <div className='comments_section col-md-6'>
+        <div className='comments_section col-sm-7'>
           <div className='row'>
-            <div className='col-md-6'><h2>Comments:</h2></div>
+            <div className='col-xs-6'><h2>Comments:</h2></div>
             {renderSigninButton(this.props.authenticated)}
           </div>
           {this.hasComments()}
         </div>
-        <div className='col-md-5 col-md-offset-1 auth_children'>
+        <div className='col-sm-4 col-sm-offset-1 auth_children'>
           {this.props.children}
           {renderSignupPrompt(this.props.authenticated, this.props.form)}
         </div>

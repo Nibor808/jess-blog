@@ -14,11 +14,11 @@ export function renderArticleListItem(article, isAdmin) {
       <li
       key={article.id}
       className='list-group-item'>
-        <div className='col-md-7'>
-          <img src={`../../images/${article.cover_img}`} height='40px' width='40px'/>
+        <div className='col-sm-7'>
+          <img src={`../../images/${article.cover_img}`} height='40px' width='40px' className='img-responsive' />
           <Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
         </div>
-        <div className='col-md-5'>
+        <div className='col-sm-5'>
           <small className='pull-right'>{date}</small>
         </div>
       </li>
@@ -28,10 +28,10 @@ export function renderArticleListItem(article, isAdmin) {
       <li
       key={article.id}
       className='list-group-item'>
-        <div className='col-md-5'>
+        <div className='col-sm-5'>
           <Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
         </div>
-        <div className='col-md-7'>
+        <div className='col-sm-7'>
           <small>{date}</small>
           <Link className='pull-right' to={`/deletearticle/${article.id}`}>delete</Link>
         </div>

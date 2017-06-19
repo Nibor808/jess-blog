@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 export function renderSigninButton(authenticated) {
   if (!authenticated) {
     return (
-      <div className='col-md-6'>
+      <div className='col-xs-6'>
         <Link to='/signin' className='pull-right login'>
           <button className='btn btn-default'>sign in to comment</button>
         </Link>
@@ -12,7 +12,7 @@ export function renderSigninButton(authenticated) {
     );
   }else {
     return (
-      <div className='col-md-6'>
+      <div className='col-xs-6'>
         <Link to='/addcomment' className='pull-right login'>
           <button className='btn btn-default'>add a comment</button>
         </Link>

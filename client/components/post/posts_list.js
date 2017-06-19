@@ -22,7 +22,7 @@ class PostList extends Component {
     }
 
     return (
-      <div className='article_list'>
+      <div className="article_list">
         {this.props.allPosts.map(post => renderArticleItem(post))}
       </div>
     );

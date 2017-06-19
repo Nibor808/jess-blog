@@ -1,4 +1,6 @@
 import './styles/styles.scss';
+import './node_modules/jquery/dist/jquery.slim.min';
+import './node_modules/bootstrap-sass/assets/javascripts/bootstrap.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

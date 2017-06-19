@@ -48,28 +48,30 @@ class QuestionsPage extends Component {
 
   render() {
     return (
-      <div className='col-md-12 page'>
-        <div className='col-md-8 page_list'>
-          <div className='page_header_content'>
-            <div className='row'>
-              <div className='col-md-8 page_header_title'><h1>Q&A</h1></div>
-              <div className='col-md-4 page_header_title'>{this.renderSignin()}</div>
+      <div>
+        <div className='row'>
+          <div className='col-sm-8 page_list'>
+            <div className='page_header_content'>
+              <div className='row'>
+                <div className='col-sm-8 page_header_title'><h1>Q&A</h1></div>
+                <div className='col-sm-4 page_header_title'>{this.renderSignin()}</div>
+              </div>
+              <div className='row'>
+                <p>Have a question you would like answered?</p>
+                <p>Sign in and I will try to get to it as soon as possible.</p>
+              </div>
             </div>
-            <div className='row'>
-              <p>Have a question you would like answered?</p>
-              <p>Sign in and I will try to get to it as soon as possible.</p>
-            </div>
+            <hr className='color_bar' />
+            <QuestionList />
           </div>
-          <hr className='color_bar' />
-          <QuestionList />
-        </div>
-        <div className='col-md-4 auth_children'>
-          {this.props.children}
-          {this.renderSignup()}
-        </div>
-        <div className='col-md-4 side_bar'>
-          <PostSidebar />
-          <ReviewSidebar />
+          <div className='col-sm-4 auth_children'>
+            {this.props.children}
+            {this.renderSignup()}
+          </div>
+          <div className='col-sm-4 side_bar'>
+            <PostSidebar />
+            <ReviewSidebar />
+          </div>
         </div>
       </div>
     );

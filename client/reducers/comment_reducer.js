@@ -1,5 +1,5 @@
 import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE,
-  GET_A_COMMENT, GET_COMMENT_REPLIES, DELETE_COMMENT, ERROR, CLEAR_ERROR } from '../actions/types';
+  GET_A_COMMENT, GET_COMMENT_REPLIES, DELETE_COMMENT, COMMENT_ERROR, CLEAR_ERROR } from '../actions/types';
 
 export default function(state = {}, action) {
   switch(action.type) {
@@ -15,7 +15,7 @@ export default function(state = {}, action) {
     return { ...state, repliesArray: action.payload, error: '' }
   case DELETE_COMMENT:
     return { ...state, commentDeleted: true, error: '' }
-  case ERROR:
+  case COMMENT_ERROR:
     return { ...state, commentSaved: false, error: action.payload };
   case CLEAR_ERROR:
     return { ...state, error: '' }

@@ -23,5 +23,6 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const SEARCH_RESULT = 'SEARCH_RESULT';
 export const RESET_SEARCH_RESULT = 'RESET_SEARCH_RESULT';
 export const IS_REVIEW = 'IS_REVIEW';
-export const ERROR = 'ERROR';
+export const ARTICLE_ERROR = 'ARTICLE_ERROR';
+export const COMMENT_ERROR = 'COMMENT_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';

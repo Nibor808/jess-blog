@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { SAVE_COMMENT, GET_COMMENTS, RESET_COMMENT_STATE,
-  GET_A_COMMENT, GET_COMMENT_REPLIES, DELETE_COMMENT, ERROR } from './types';
+  GET_A_COMMENT, GET_COMMENT_REPLIES, DELETE_COMMENT, COMMENT_ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function saveComment({ type, id, user, title, content }) {
@@ -10,7 +10,7 @@ export function saveComment({ type, id, user, title, content }) {
       .then(response => {
         if (response.data.error) {
           dispatch({
-            type: ERROR,
+            type: COMMENT_ERROR,
             payload: response.data.error
           })
         }else {
@@ -26,7 +26,7 @@ export function saveComment({ type, id, user, title, content }) {
       })
       .catch(({ response }) => {
         dispatch({
-          type: ERROR,
+          type: COMMENT_ERROR,
           payload: response.data.error
         })
       });
@@ -39,7 +39,7 @@ export function getComments(type, id) {
     .then(response =>{
       if (response.data.error) {
         dispatch({
-          type: ERROR,
+          type: COMMENT_ERROR,
           payload: response.data.error
         })
       }else {
@@ -51,7 +51,7 @@ export function getComments(type, id) {
     })
     .catch(err => {
       dispatch({
-        type: ERROR,
+        type: COMMENT_ERROR,
         payload: err.message
       });
     });
@@ -64,7 +64,7 @@ export function getCommentReplies(type, id) {
     .then(response =>{
       if (response.data.error) {
         dispatch({
-          type: ERROR,
+          type: COMMENT_ERROR,
           payload: response.data.error
         })
       }else {
@@ -76,7 +76,7 @@ export function getCommentReplies(type, id) {
     })
     .catch(err => {
       dispatch({
-        type: ERROR,
+        type: COMMENT_ERROR,
         payload: err.message
       });
     });
@@ -89,7 +89,7 @@ export function getAComment(id) {
     .then(response => {
       if (response.data.error) {
         dispatch({
-          type: ERROR,
+          type: COMMENT_ERROR,
           payload: response.data.error
         })
       }else {
@@ -101,7 +101,7 @@ export function getAComment(id) {
     })
     .catch(err => {
       dispatch({
-        type: ERROR,
+        type: COMMENT_ERROR,
         payload: err.message
       });
     });
@@ -114,7 +114,7 @@ export function updateComment({ id, title, content }) {
     .then(response => {
       if (response.data.error) {
         dispatch({
-          type: ERROR,
+          type: COMMENT_ERROR,
           payload: response.data.error
         })
       }else {
@@ -130,7 +130,7 @@ export function updateComment({ id, title, content }) {
     })
     .catch(err => {
       dispatch({
-        type: ERROR,
+        type: COMMENT_ERROR,
         payload: err.message
       });
     });
@@ -143,7 +143,7 @@ export function deleteComment(id) {
       .then(response => {
         if (response.data.error) {
           dispatch({
-            type: ERROR,
+            type: COMMENT_ERROR,
             payload: response.data.error
           })
         }else {
@@ -159,7 +159,7 @@ export function deleteComment(id) {
       })
       .catch(err => {
         dispatch({
-          type: ERROR,
+          type: COMMENT_ERROR,
           payload: err.message
         });
       });

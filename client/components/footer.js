@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 export default class Footer extends Component {
   render() {
     return (
-      <div className='col-md-12 footer'>
+      <div className='col-xs-12 footer'>
       <hr className='color_bar' />
         <div className='col-md-4'>
           <Link to='/'>posts</Link>
