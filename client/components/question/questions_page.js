@@ -34,7 +34,7 @@ class QuestionsPage extends Component {
   }
 
   renderSignup() {
-    if (!this.props.authenticated && Object.keys(this.props.form).length == 0) {
+    if (!this.props.authenticated && Object.keys(this.props.form).length === 1) {
       return (
         <div className='signup_prompt text-center'>
           <h2>Not already part of the converstation?</h2>
@@ -64,13 +64,13 @@ class QuestionsPage extends Component {
             <hr className='color_bar' />
             <QuestionList />
           </div>
-          <div className='col-sm-4 auth_children'>
-            {this.props.children}
-            {this.renderSignup()}
-          </div>
           <div className='col-sm-4 side_bar'>
             <PostSidebar />
             <ReviewSidebar />
+          </div>
+          <div className='col-sm-4 auth_children'>
+            {this.props.children}
+            {this.renderSignup()}
           </div>
         </div>
       </div>

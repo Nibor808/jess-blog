@@ -47,19 +47,20 @@ const articleChildren = [
   <Route path='/deletecomment/:id' component={DeleteCommentModal} />,
   <Route path='/editarticle/:id' component={EditArticleModal} />,
   <Route path='/deletearticle/:id' component={DeleteArticleModal} />
-]
+];
 
 const questionChildren = [
   <Route path='/signin_question' component={Signin} />,
   <Route path='/signup_question' component={Signup} />,
   <Route path='/askquestion' component={requireAuth(AskQuestion)} />
-]
+];
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={PostsPage} />
+        <Route path='/signup' component={Signup} />
         <Route path='/article/:id' component={Article} children={articleChildren} />
         <Route path='/reviews' component={ReviewsPage} />
         <Route path='/questions' component={QuestionsPage} children={questionChildren}/>

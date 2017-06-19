@@ -4,6 +4,9 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { signinUser } from '../../actions/user_actions';
 import { CLEAR_ERROR } from '../../actions/types';
+import Modal from 'react-modal';
+import { toggleModal } from '../../actions/article_actions';
+import { customStyles } from '../../utils/modal_style';
 
 class Signin extends Component {
 
@@ -18,6 +21,10 @@ class Signin extends Component {
 
   static contextTypes = {
     router: PropTypes.object
+  }
+
+  componentWillMount() {
+    this.props.toggleModal(false);
   }
 
   handleFormSubmit({ email, password }) {
@@ -40,8 +47,9 @@ class Signin extends Component {
     }
   }
 
-  closeForm() {
+  closeModal() {
     this.props.dispatch({ type: CLEAR_ERROR });
+    this.props.toggleModal(true);
     this.context.router.goBack();
   }
 
@@ -49,27 +57,35 @@ class Signin extends Component {
     const { handleSubmit, submitting } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signin_form'>
-        <div className='form-group'>
-          <label htmlFor='email'>Email</label>
-          <Field name='email' component='input' type='email' className='form-control'/>
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password:</label>
-          <Field name='password' component='input' type='password' className='form-control' />
-        </div>
-        {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={() => this.closeForm()}>cancel</button>
-        <button type='submit' className='btn btn-default pull-right' disabled={submitting}>sign in</button>
-      </form>
+      <Modal
+        isOpen={this.props.modalOpen}
+        contentLabel='Comment'
+        className='col-xs-10 col-sm-6 col-md-4 modal_box'
+        shouldCloseOnOverlayClick={false}
+        style={customStyles}>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signin_form'>
+          <div className='form-group'>
+            <label htmlFor='email'>Email</label>
+            <Field name='email' component='input' type='email' className='form-control'/>
+          </div>
+          <div className='form-group'>
+            <label htmlFor='password'>Password:</label>
+            <Field name='password' component='input' type='password' className='form-control' />
+          </div>
+          {this.renderAlert()}
+          <button type='button' className='btn btn-default' onClick={() => this.closeModal()}>cancel</button>
+          <button type='submit' className='btn btn-default pull-right' disabled={submitting}>sign in</button>
+        </form>
+      </Modal>
     );
   }
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps({ auth, article }) {
   return {
     errorMessage: auth.error,
-    authenticated: auth.authenticated
+    authenticated: auth.authenticated,
+    modalOpen: article.modalOpen
   };
 }
 
@@ -77,4 +93,4 @@ Signin = reduxForm({
   form: 'sign in'
 })(Signin);
 
-export default connect(mapStateToProps, { signinUser })(Signin);
+export default connect(mapStateToProps, { signinUser, toggleModal })(Signin);

@@ -12,13 +12,17 @@ class Header extends Component {
     signoutUser: PropTypes.func
   }
 
-  renderNavRight() {
-    const user = localStorage.getItem('user');
 
-    if (this.props.authenticated && user === `${ADMIN_USER}` || this.props.authenticated && this.props.user === `${ADMIN_USER}`) {
+  renderNavRight() {
+    const user = this.props.user ? this.props.user : localStorage.getItem('user');
+    const btnStyle = {
+      margin: -10
+    }
+
+    if (this.props.authenticated && user === `${ADMIN_USER}`) {
       return (
         <div className='signout_div'>
-          <small>signed in as: { user ? user : this.props.user }</small>
+          <small>signed in as: { user }</small>
           <Link className='signout_btn' onClick={this.props.signoutUser}><small>sign out</small></Link>
           <Link to='/admin'><small>admin</small></Link>
         </div>
@@ -26,10 +30,16 @@ class Header extends Component {
     }else if (this.props.authenticated) {
       return (
         <div className='signout_div'>
-          signed in as: { user ? user : this.props.user }
+          signed in as: { user }
           <Link className='signout_btn' onClick={this.props.signoutUser}><small>sign out</small></Link>
         </div>
       );
+    }else {
+      return (
+        <div className='signout_div' style={ btnStyle }>
+          <Link to='/signup'><button className='btn btn-default nav_signup'>Join The Conversation</button></Link>
+        </div>
+      )
     }
   }
 

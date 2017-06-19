@@ -3,6 +3,9 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signupUser } from '../../actions/user_actions';
 import { CLEAR_ERROR } from '../../actions/types';
+import Modal from 'react-modal';
+import { toggleModal } from '../../actions/article_actions';
+import { customStyles } from '../../utils/modal_style';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => {
   return (
@@ -37,6 +40,10 @@ class Signup extends Component {
     handleSubmit: PropTypes.func
   }
 
+  componentWillMount() {
+    this.props.toggleModal(false);
+  }
+
   handleFormSubmit(values) {
     this.props.signupUser(values);
   }
@@ -51,23 +58,31 @@ class Signup extends Component {
     }
   }
 
-  closeForm() {
+  closeModal() {
     this.props.dispatch({ type: CLEAR_ERROR });
+    this.props.toggleModal(true);
     this.context.router.goBack();
   }
 
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signup_form'>
-        <Field name='email' type='email' component={renderField} label='Email:' />
-        <Field name='username' type='text' component={renderField} label='Username: (for display only)' />
-        <Field name='password' type='password' component={renderField} label='Password:' />
-        <Field name='passwordConfirm' type='password' component={renderField} label='Confirm Password:' />
-        {this.renderAlert()}
-        <button type='button' className='btn btn-default' onClick={() => this.closeForm()}>cancel</button>
-        <button className='btn btn-default pull-right' type='submit' disabled={submitting}>sign up</button>
-      </form>
+      <Modal
+        isOpen={this.props.modalOpen}
+        contentLabel='Comment'
+        className='col-xs-10 col-sm-6 col-md-4 modal_box'
+        shouldCloseOnOverlayClick={false}
+        style={customStyles}>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signup_form'>
+          <Field name='email' type='email' component={renderField} label='Email:' />
+          <Field name='username' type='text' component={renderField} label='Username: (for display only)' />
+          <Field name='password' type='password' component={renderField} label='Password:' />
+          <Field name='passwordConfirm' type='password' component={renderField} label='Confirm Password:' />
+          {this.renderAlert()}
+          <button type='button' className='btn btn-default' onClick={() => this.closeModal()}>cancel</button>
+          <button className='btn btn-default pull-right' type='submit' disabled={submitting}>sign up</button>
+        </form>
+      </Modal>
     );
   }
 }
@@ -96,8 +111,9 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps({ auth, article }) {
   return {
+    modalOpen: article.modalOpen,
     errorMessage: auth.error
   }
 }
@@ -107,4 +123,4 @@ Signup = reduxForm({
   validate
 })(Signup);
 
-export default connect(mapStateToProps, { signupUser })(Signup);
+export default connect(mapStateToProps, { signupUser, toggleModal })(Signup);
