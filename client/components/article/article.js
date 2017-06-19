@@ -60,11 +60,15 @@ class Article extends Component {
         }
       }
       return (
-        <div>
-          <h3>Specs</h3>
-          <ul className='col-sm-12 specs_list'>
-            {specsList.map((spec, index) => <li key={index}>{spec}</li>)}
-          </ul>
+        <div className='row'>
+          <div className='col-sm-12'>
+            <h3>Specs</h3>
+          </div>
+          <div className='col-sm-12'>
+            <ul className='specs_list'>
+              {specsList.map((spec, index) => <li key={index}>{spec}</li>)}
+            </ul>
+          </div>
         </div>
       )
     }
@@ -90,9 +94,13 @@ class Article extends Component {
   renderAnswer() {
     if (this.props.article.answer) {
       return (
-        <div>
-          <h2>Answer:</h2>
-          <p>{this.props.article.answer}</p>
+        <div className='row'>
+          <div className='col-sm-12'>
+            <h2>Answer:</h2>
+          </div>
+          <div className='col-sm-12'>
+            <p>{this.props.article.answer}</p>
+          </div>
         </div>
       )
     }
@@ -170,14 +178,22 @@ class Article extends Component {
         <div
         className='article col-sm-12'>
           <div className='row'>
-            <h1>{this.props.article.title}</h1>
+            <div className='col-sm-12'>
+              <h1>{this.props.article.title}</h1>
+            </div>
           </div>
           <div className='row date'>
-            <small>posted: {date}</small>
+            <div className='col-sm-12'>
+              <small>posted: {date}</small>
+            </div>
           </div>
           {this.renderImage()}
           {this.renderProsCons()}
-          <p dangerouslySetInnerHTML={{__html: this.props.article.content}}></p>
+          <div className='row'>
+            <div className='col-sm-12'>
+              <p dangerouslySetInnerHTML={{__html: this.props.article.content}}></p>
+            </div>
+          </div>
           {this.renderSpecs(this.props.article.specs)}
           {this.renderAnswer()}
         </div>

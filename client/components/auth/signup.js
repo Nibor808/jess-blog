@@ -69,7 +69,7 @@ class Signup extends Component {
     return (
       <Modal
         isOpen={this.props.modalOpen}
-        contentLabel='Comment'
+        contentLabel='Signup'
         className='col-xs-10 col-sm-6 col-md-4 modal_box'
         shouldCloseOnOverlayClick={false}
         style={customStyles}>

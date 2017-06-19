@@ -43,7 +43,7 @@ export function renderComments(commentArray, repliesArray) {
           replyList.push(<li
                         key={Math.random()}>
                           <h4>{reply.title}</h4>
-                          <p>{reply.content}</p>
+                          <p className='comment_content'>{reply.content}</p>
                           <small>posted: {replyDate} by: {reply.username}</small>
                           <div className='pull-right'>{editDiv}</div>
                           <hr />
@@ -59,7 +59,7 @@ export function renderComments(commentArray, repliesArray) {
                   key={comment.id}
                   className='comment_item'>
                     <h4>{comment.title}</h4>
-                    <p>{comment.content}</p>
+                    <p className='comment_content'>{comment.content}</p>
                     <small>posted: {commentDate} by: {comment.username}</small>
                     <p className='pull-right'>{editDiv}</p>
                     <hr />

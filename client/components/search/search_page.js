@@ -12,7 +12,9 @@ export default class SearchPage extends Component {
         <div className='col-sm-8  page_list'>
           <div className='page_header_content'>
             <div className='row'>
-              <div className='page_header_title'><h1>Search</h1></div>
+              <div className='col-sm-12'>
+                <div className='page_header_title'><h1>Search</h1></div>
+              </div>
             </div>
           </div>
           <hr className='color_bar' />

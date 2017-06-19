@@ -105,12 +105,8 @@ ul {
   padding-left: 0;
   .page_header_content {
     margin-bottom: 0;
-    padding: 17px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    .page_header_title {
-      padding: 0;
-    }
   }
 }
 
@@ -202,6 +198,15 @@ ul {
   }
 }
 
+.about {
+  padding: 10px;
+  img {
+    height: 370px;
+    width: 277px;
+    padding-top: 3px;
+  }
+}
+
 .color_bar {
   margin-top: 0;
 }
@@ -264,11 +269,12 @@ ul {
   columns: 2;
   -webkit-columns: 2;
   -moz-columns: 2;
+  font-size: 1.1em;
+  margin-bottom: 20px;
 }
 
 .addSpecs_list > li {
   padding: 10px;
-
   .spec_title {
     text-decoration: underline;
   }
@@ -296,7 +302,6 @@ ul {
 }
 
 .modal_box {
-  position: relative;
   z-index: 2;
 }
 
@@ -335,6 +340,7 @@ body,
   }
 }
 
+.about,
 .article,
 .article_item,
 .comments_section,
@@ -466,14 +472,13 @@ body {
   font-size: 32px;
 }
 
-p {
-  font-size: 15px;
+p:not(.comment_content) {
+  font-size: 1.2em;
   font-family: Lato, sans-serif;
 }
 
 /* ------------------------------- MEDIA QUERIES ------------------------------- */
 
-/*NAVBAR*/
 @media (min-width : 320px) and (max-width : 767px) {
   .navbar-default {
     .navbar-header {
@@ -550,8 +555,11 @@ p {
       }
     }
     .nav.navbar-nav.navbar-right {
-      padding-left: 65px;
       margin: 0;
+      .nav_signup {
+        margin-top: 30px;
+        margin-right: 15px;
+      }
     }
     .signout_div {
       display: -webkit-box;
@@ -565,7 +573,6 @@ p {
       justify-content: space-between;
       flex-direction: column;
       padding: 5px;
-
       .signout_btn {
         margin: 0 0 10px 0;
       }

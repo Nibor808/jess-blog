@@ -13,6 +13,8 @@ import App from './components/app';
 import PostsPage from './components/post/posts_page';
 import ReviewsPage from './components/review/reviews_page';
 import QuestionsPage from './components/question/questions_page';
+import SearchPage from './components/search/search_page';
+import About from './components/about/about_page';
 import AdminPage from './components/admin/admin_page';
 import EditArticleModal from './components/admin/edit_article_modal';
 import DeleteArticleModal from './components/admin/delete_article_modal';
@@ -23,7 +25,6 @@ import CommentModal from './components/comment/comment_modal';
 import EditModal from './components/comment/edit_modal';
 import DeleteCommentModal from './components/comment/delete_comment_modal';
 import AskQuestion from './components/question/ask_question';
-import SearchPage from './components/search/search_page'
 import requireAuth from './components/auth/requireAuth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
@@ -66,6 +67,7 @@ ReactDOM.render(
         <Route path='/questions' component={QuestionsPage} children={questionChildren}/>
         <Route path='/admin' component={requireAuth(AdminPage)} />
         <Route path='/search' component={SearchPage} />
+        <Route path='/about' component={About} />
       </Route>
     </Router>
   </Provider>

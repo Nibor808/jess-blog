@@ -85,7 +85,7 @@ class Header extends Component {
                   </Link>
                 </li>
                 <li>
-                  <Link to='/' data-toggle="collapse" data-target=".navbar-collapse.in">
+                  <Link to='/about' data-toggle="collapse" data-target=".navbar-collapse.in">
                   <i className='fa fa-female fa-2x' aria-hidden='true'></i>
                     <span>About Me</span>
                   </Link>

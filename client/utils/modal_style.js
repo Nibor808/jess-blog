@@ -7,7 +7,8 @@ export const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    outline: 'none'
+    outline: 'none',
+    position: 'absolute'
   },
   overlay: {
     backgroundColor: 'rgba(100,100,100,0.75)'

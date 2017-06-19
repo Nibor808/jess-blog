@@ -57,8 +57,12 @@ class QuestionsPage extends Component {
                 <div className='col-sm-4 page_header_title'>{this.renderSignin()}</div>
               </div>
               <div className='row'>
-                <p>Have a question you would like answered?</p>
-                <p>Sign in and I will try to get to it as soon as possible.</p>
+                <div className='col-sm-12'>
+                  <p>Have a question you would like answered?</p>
+                </div>
+                <div className='col-sm-12'>
+                  <p>Sign in and I will try to get to it as soon as possible.</p>
+                </div>
               </div>
             </div>
             <hr className='color_bar' />

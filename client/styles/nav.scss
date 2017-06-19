@@ -49,6 +49,14 @@
       background: $orange;
       color: $white;
       text-shadow: 1px 1px 1px $blue-black;
+      &:hover {
+        background: $blue !important;
+      }
+      &:focus,
+      &.active:focus,
+      &.active:focus {
+        outline: none;
+      }
     }
   }
 }
