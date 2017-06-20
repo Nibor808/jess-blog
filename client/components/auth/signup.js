@@ -7,18 +7,6 @@ import Modal from 'react-modal';
 import { toggleModal } from '../../actions/article_actions';
 import { customStyles } from '../../utils/modal_style';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => {
-  return (
-    <div className='form-group'>
-      <label>{label}</label>
-      <div>
-        <input {...input} type={type} className='form-control' />
-        {touched && error ? <span className='text-danger'><strong>{error}</strong></span>: ''}
-      </div>
-    </div>
-  );
-}
-
 class Signup extends Component {
 
   static propTypes = {
@@ -64,6 +52,18 @@ class Signup extends Component {
     this.context.router.goBack();
   }
 
+  renderField({ input, label, type, meta: { touched, error } }) {
+    return (
+      <div className='form-group'>
+        <label>{label}</label>
+        <div>
+          <input {...input} type={type} className='form-control' />
+          {touched && error ? <span className='text-danger'><strong>{error}</strong></span>: ''}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
@@ -74,10 +74,10 @@ class Signup extends Component {
         shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signup_form'>
-          <Field name='email' type='email' component={renderField} label='Email:' />
-          <Field name='username' type='text' component={renderField} label='Username: (for display only)' />
-          <Field name='password' type='password' component={renderField} label='Password:' />
-          <Field name='passwordConfirm' type='password' component={renderField} label='Confirm Password:' />
+          <Field name='email' type='email' component={this.renderField} label='Email:' />
+          <Field name='username' type='text' component={this.renderField} label='Username: (for display only)' />
+          <Field name='password' type='password' component={this.renderField} label='Password:' />
+          <Field name='passwordConfirm' type='password' component={this.renderField} label='Confirm Password:' />
           {this.renderAlert()}
           <button type='button' className='btn btn-default' onClick={() => this.closeModal()}>cancel</button>
           <button className='btn btn-default pull-right' type='submit' disabled={submitting}>sign up</button>
