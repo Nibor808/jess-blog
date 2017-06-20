@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SEARCH_RESULT, RESET_SEARCH_RESULT, ERROR } from './types';
+import { SEARCH_RESULT, RESET_SEARCH_RESULT, SEARCH_ERROR } from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function search({ keywordArray }) {
@@ -8,7 +8,7 @@ export function search({ keywordArray }) {
       .then(response => {
         if (response.data.error) {
           dispatch({
-            type: ERROR,
+            type: SEARCH_ERROR,
             payload: response.data.error
           });
         }else {
@@ -20,7 +20,7 @@ export function search({ keywordArray }) {
       })
       .catch(err => {
         dispatch({
-          type: ERROR,
+          type: SEARCH_ERROR,
           payload: err.message
         });
       });

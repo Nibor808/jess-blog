@@ -25,4 +25,5 @@ export const RESET_SEARCH_RESULT = 'RESET_SEARCH_RESULT';
 export const IS_REVIEW = 'IS_REVIEW';
 export const ARTICLE_ERROR = 'ARTICLE_ERROR';
 export const COMMENT_ERROR = 'COMMENT_ERROR';
+export const SEARCH_ERROR = 'SEARCH_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
