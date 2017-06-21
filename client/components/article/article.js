@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/date_format';
 import { getArticle, publishArticle } from '../../actions/article_actions';
 import { getComments, getCommentReplies } from '../../actions/comment_actions';
@@ -34,8 +34,8 @@ class Article extends Component {
   }
 
   componentWillMount() {
-    this.props.getArticle(this.props.params.id);
-    this.props.getComments('article_id', this.props.params.id);
+    this.props.getArticle(this.props.match.params.id);
+    this.props.getComments('article_id', this.props.match.params.id);
     this.props.getCommentReplies('parent_comment_id', null);
   }
 
@@ -45,7 +45,7 @@ class Article extends Component {
       this.props.getCommentReplies('parent_comment_id', null);
     }
     if (nextProps.articleSaved) {
-      this.props.getArticle(this.props.params.id);
+      this.props.getArticle(this.props.match.params.id);
     }
   }
 
@@ -210,7 +210,6 @@ class Article extends Component {
           {this.hasComments()}
         </div>
         <div className='col-sm-4 col-sm-offset-1 auth_children'>
-          {this.props.children}
           {renderSignupPrompt(this.props.authenticated, this.props.form)}
         </div>
       </div>

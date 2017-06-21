@@ -22,18 +22,14 @@ class EditComment extends Component {
     initialize: PropTypes.func
   }
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   componentWillMount() {
     this.props.toggleModal(false);
-    this.props.getAComment(this.props.params.id)
+    this.props.getAComment(this.props.match.params.id)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didSave) {
-      this.context.router.goBack();
+      this.props.history.goBack();
     }
 
     if (nextProps.comment !== this.props.comment) {
@@ -67,7 +63,7 @@ class EditComment extends Component {
 
   closeModal() {
     this.props.toggleModal(true);
-    this.context.router.goBack()
+    this.props.history.goBack()
   }
 
   handleFormSubmit({ title, content }) {
@@ -116,8 +112,6 @@ function mapStatetoProps({ article, comment }) {
   }
 }
 
-EditComment = reduxForm({
+export default reduxForm({
   form: 'editcomment',
-})(EditComment);
-
-export default connect(mapStatetoProps, { getAComment, updateComment, toggleModal })(EditComment);
+})(connect(mapStatetoProps, { getAComment, updateComment, toggleModal })(EditComment));

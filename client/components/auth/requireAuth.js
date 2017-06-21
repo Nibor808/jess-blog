@@ -8,19 +8,15 @@ export default function(ComposedComponent) {
       authenticated: PropTypes.bool
     }
 
-    static contextTypes = {
-      router: PropTypes.object
-    }
-
     componentWillMount() {
       if (!this.props.authenticated) {
-        this.context.router.push('/');
+        this.props.history.push('/');
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.authenticated) {
-        this.context.router.push('/');
+        this.props.history.push('/');
       }
     }
 

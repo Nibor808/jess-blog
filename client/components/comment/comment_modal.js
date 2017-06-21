@@ -22,17 +22,13 @@ class CommentModal extends Component {
     dispatch: PropTypes.func
   }
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   componentWillMount() {
     this.props.toggleModal(false);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.commentSaved) {
-      this.context.router.goBack()
+      this.props.history.goBack()
     }
   }
 
@@ -40,12 +36,12 @@ class CommentModal extends Component {
     const user = localStorage.getItem('user');
     let type;
     let id;
-    if (!this.props.params.id) {
+    if (!this.props.match.params.id) {
       type = 'article_id';
       id = this.props.article_id;
     }else {
       type = 'parent_comment_id';
-      id = this.props.params.id;
+      id = this.props.match.params.id;
     }
     this.props.saveComment({ type, id, user, title, content });
   }
@@ -63,7 +59,7 @@ class CommentModal extends Component {
   closeModal() {
     this.props.dispatch({ type: CLEAR_ERROR });
     this.props.toggleModal(true);
-    this.context.router.goBack();
+    this.props.history.goBack();
   }
 
   render() {
@@ -103,8 +99,6 @@ function mapStateToProps({ article, comment }) {
   }
 }
 
-CommentModal = reduxForm({
+export default reduxForm({
   form: 'add comment'
-})(CommentModal);
-
-export default connect(mapStateToProps, { toggleModal, saveComment })(CommentModal);
+})(connect(mapStateToProps, { toggleModal, saveComment })(CommentModal));

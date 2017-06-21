@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { signoutUser } from '../actions/user_actions';
 import { ADMIN_USER } from '../config/config.json';
 
@@ -15,15 +15,12 @@ class Header extends Component {
 
   renderNavRight() {
     const user = this.props.user ? this.props.user : localStorage.getItem('user');
-    const btnStyle = {
-      margin: -10
-    }
 
     if (this.props.authenticated && user === `${ADMIN_USER}`) {
       return (
         <div className='signout_div'>
           <small>signed in as: { user }</small>
-          <Link className='signout_btn' onClick={this.props.signoutUser}><small>sign out</small></Link>
+          <Link className='signout_btn' to='/' onClick={this.props.signoutUser}><small>sign out</small></Link>
           <Link to='/admin'><small>admin</small></Link>
         </div>
       );
@@ -31,12 +28,12 @@ class Header extends Component {
       return (
         <div className='signout_div'>
           signed in as: { user }
-          <Link className='signout_btn' onClick={this.props.signoutUser}><small>sign out</small></Link>
+          <Link className='signout_btn' to='/' onClick={this.props.signoutUser}><small>sign out</small></Link>
         </div>
       );
     }else {
       return (
-        <div className='signout_div' style={ btnStyle }>
+        <div className='signout_div' style={{ margin: -10 }}>
           <Link to='/signup'><button className='btn btn-default nav_signup'>Join The Conversation</button></Link>
         </div>
       )

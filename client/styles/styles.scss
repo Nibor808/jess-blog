@@ -422,6 +422,7 @@ a {
   a {
     color: $white;
     &:hover,
+    &:focus,
     &.active,
     &:active,
     &.active:focus,
@@ -432,7 +433,18 @@ a {
   }
 }
 
-.btn {
+.btn.btn-default.nav_signup {
+  &:hover,
+  &:focus,
+  &.active,
+  &:active,
+  &.active:focus,
+  &.active.focus {
+    color: $white;
+  }
+}
+
+.btn.btn-default {
   color: $font-color;
   border: none;
   &:hover,
@@ -441,6 +453,12 @@ a {
   &.active:focus,
   &.active.focus {
     color: $blue;
+    background: $white !important;
+    outline: none !important;
+    box-shadow: none;
+  }
+  &:focus {
+    color: $font-color;
     background: $white !important;
     outline: none !important;
     box-shadow: none;

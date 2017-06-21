@@ -3,7 +3,7 @@ import QuestionList from './question_list';
 import PostSidebar from '../post/post_sidebar';
 import ReviewSidebar from '../review/review_sidebar';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 class QuestionsPage extends Component {
 
@@ -17,7 +17,7 @@ class QuestionsPage extends Component {
     if (!this.props.authenticated) {
       return (
         <div>
-          <Link to='/signin_question' className='pull-right login'>
+          <Link to='/signin' className='pull-right login'>
             <button className='btn btn-default'>sign in to ask a question</button>
           </Link>
         </div>
@@ -38,7 +38,7 @@ class QuestionsPage extends Component {
       return (
         <div className='signup_prompt text-center'>
           <h2>Not already part of the converstation?</h2>
-          <Link to='/signup_question'>
+          <Link to='/signup'>
             <button type='button' className='btn btn-default'>sign up</button>
           </Link>
         </div>
@@ -73,7 +73,6 @@ class QuestionsPage extends Component {
             <ReviewSidebar />
           </div>
           <div className='col-sm-4 auth_children'>
-            {this.props.children}
             {this.renderSignup()}
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/date_format';
 
 export function renderArticleListItem(article, isAdmin) {

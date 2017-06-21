@@ -21,17 +21,13 @@ class AskQuestion extends Component {
     dispatch: PropTypes.func
   }
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   componentWillMount() {
     this.props.toggleModal(false);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didSave) {
-      this.context.router.goBack()
+      this.props.history.goBack();
     }
   }
 
@@ -48,7 +44,7 @@ class AskQuestion extends Component {
   closeModal() {
     this.props.dispatch({ type: CLEAR_ERROR });
     this.props.toggleModal(true);
-    this.context.router.goBack()
+    this.props.history.goBack();
   }
 
   handleFormSubmit({ title, content, category, keywords }) {
@@ -128,8 +124,6 @@ function mapStateToProps({ article }) {
   }
 }
 
-AskQuestion = reduxForm({
+export default reduxForm({
   form: 'question_form'
-})(AskQuestion);
-
-export default connect(mapStateToProps, { saveArticle, toggleModal })(AskQuestion);
+})(connect(mapStateToProps, { saveArticle, toggleModal })(AskQuestion));

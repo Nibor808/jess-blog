@@ -18,10 +18,6 @@ class Signup extends Component {
     dispatch: PropTypes.func
   }
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   static propTypes = {
     signupUser: PropTypes.func,
     errorMessage: PropTypes.string,
@@ -49,7 +45,7 @@ class Signup extends Component {
   closeModal() {
     this.props.dispatch({ type: CLEAR_ERROR });
     this.props.toggleModal(true);
-    this.context.router.goBack();
+    this.props.history.goBack();
   }
 
   renderField({ input, label, type, meta: { touched, error } }) {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/date_format';
+import { ADMIN_USER } from '../../config/config.json';
 
 export function renderComments(commentArray, repliesArray) {
   const listElement = [];
@@ -12,7 +13,7 @@ export function renderComments(commentArray, repliesArray) {
 
     let editDiv;
 
-    if (user && user === comment.username) {
+    if (user && user === comment.username || user === ADMIN_USER) {
       editDiv = <small>
                   <Link to={`/deletecomment/${comment.id}`} className='edit_link'>delete</Link>
                   <Link to={`/editcomment/${comment.id}`} className='edit_link'>edit</Link>
@@ -32,7 +33,7 @@ export function renderComments(commentArray, repliesArray) {
 
         let editDiv;
 
-        if (user && user === reply.username) {
+        if (user && user === reply.username || user === ADMIN_USER) {
           editDiv = <small>
                       <Link to={`/deletecomment/${reply.id}`} className='edit_link'>delete</Link>
                       <Link to={`/editcomment/${reply.id}`} className='edit_link'>edit</Link>

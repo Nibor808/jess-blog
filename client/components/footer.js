@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default class Footer extends Component {
   render() {
@@ -10,7 +10,7 @@ export default class Footer extends Component {
           <Link to='/'>posts</Link>
           <Link to='/reviews'>reviews</Link>
           <Link to='/questions'>questions</Link>
-          <Link to='/'>about</Link>
+          <Link to='/about'>about</Link>
         </div>
       </div>
     )

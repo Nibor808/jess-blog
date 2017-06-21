@@ -19,10 +19,6 @@ class SearchForm extends Component {
     search: PropTypes.func
   }
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   componentWillMount() {
     this.props.resetSearch();
   }
@@ -88,10 +84,6 @@ class SearchForm extends Component {
   }
 }
 
-SearchForm = reduxForm({
-  form: 'search_form'
-})(SearchForm);
-
 function mapStateToProps({ search }) {
   return {
     searchResult: search.searchResult,
@@ -99,4 +91,6 @@ function mapStateToProps({ search }) {
   }
 }
 
-export default connect(mapStateToProps, { search, resetSearch })(SearchForm);
+export default reduxForm({
+  form: 'search_form'
+})(connect(mapStateToProps, { search, resetSearch })(SearchForm));

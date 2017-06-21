@@ -16,23 +16,19 @@ class DeleteModal extends Component {
     modalOpen: PropTypes.bool
   }
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   componentWillMount() {
     this.props.toggleModal(false);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didDelete) {
-      this.context.router.goBack()
+      this.props.history.goBack()
     }
   }
 
   closeModal() {
     this.props.toggleModal(true);
-    this.context.router.goBack()
+    this.props.history.goBack()
   }
 
   render() {

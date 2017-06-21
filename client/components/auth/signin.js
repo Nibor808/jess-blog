@@ -18,10 +18,6 @@ class Signin extends Component {
     dispatch: PropTypes.func
   }
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   componentWillMount() {
     this.props.toggleModal(false);
   }
@@ -42,14 +38,14 @@ class Signin extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.authenticated) {
-      this.context.router.goBack();
+      this.props.history.goBack();
     }
   }
 
   closeModal() {
     this.props.dispatch({ type: CLEAR_ERROR });
     this.props.toggleModal(true);
-    this.context.router.goBack();
+    this.props.history.goBack();
   }
 
   render() {
@@ -88,8 +84,6 @@ function mapStateToProps({ auth, article }) {
   };
 }
 
-Signin = reduxForm({
+export default reduxForm({
   form: 'sign in'
-})(Signin);
-
-export default connect(mapStateToProps, { signinUser, toggleModal })(Signin);
+})(connect(mapStateToProps, { signinUser, toggleModal })(Signin));

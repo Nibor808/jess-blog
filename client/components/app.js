@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Parallax } from 'react-parallax';
 import Header from './header';
 import Footer from './footer';
 
