@@ -118,9 +118,9 @@ function mapStateToProps({ auth, article }) {
   }
 }
 
-Signup = reduxForm({
+export default reduxForm({
   form: 'sign up',
   validate
-})(Signup);
+})(connect(mapStateToProps, { signupUser, toggleModal })(Signup));
 
-export default connect(mapStateToProps, { signupUser, toggleModal })(Signup);
+

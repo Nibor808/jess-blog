@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { signinUser } from '../../actions/user_actions';
 import { CLEAR_ERROR } from '../../actions/types';
