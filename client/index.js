@@ -5,10 +5,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import reduxThunk from 'redux-thunk';
-// import { persistStore, autoRehydrate } from 'redux-persist';
 
 import App from './components/app';
 import PostsPage from './components/post/posts_page';
@@ -32,7 +31,6 @@ import { AUTH_USER } from './actions/types';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
-// persistStore(store);
 
 const history = createBrowserHistory();
 
@@ -44,7 +42,7 @@ if (token) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter history={history}>
+    <HashRouter history={history}>
       <App>
         <Switch>
           <Route path='/article/:id' component={Article} />
@@ -65,6 +63,6 @@ ReactDOM.render(
           <Route path='/' component={PostsPage} />
         </Switch>
       </App>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 , document.querySelector('.main'));
