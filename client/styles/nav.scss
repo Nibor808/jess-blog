@@ -28,7 +28,7 @@
         &.active,
         &:focus,
         &.active:focus,
-        &.active:focus {
+        &.active.focus {
           color: $white;
         }
         span:first-of-type {
@@ -53,9 +53,11 @@
         background: $blue !important;
       }
       &:focus,
+      &.active,
       &.active:focus,
-      &.active:focus {
+      &.active.focus {
         outline: none;
+        background: $orange !important;
       }
     }
   }

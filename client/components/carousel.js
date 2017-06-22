@@ -2,15 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getArticles } from '../actions/article_actions';
 import { renderArticleItem } from '../components/article/render_article_item';
-import { React_Bootstrap_Carousel } from 'react-bootstrap-carousel';
 
 class Carousel extends Component {
 
   /*
-    For simplicity renderArticleItem() is not a connected componentent.
-    Due to this the carousel component throws a warning about changing state when it
-    switches slides.
-    Choosing to ignore this warning.
+    The carousel will only trigger it's active state on the first rendering
+    once Boostrap-React gets to v1.0 we will swap it in
   */
 
   static propTypes = {
@@ -22,17 +19,35 @@ class Carousel extends Component {
     this.props.getArticles(1);
   }
 
+  renderCarouselInner(post) {
+    if (post.id === this.props.allPosts[0].id) {
+      return (
+        <div className='item active' key={post.id}>
+          {renderArticleItem(post)}
+        </div>
+      )
+    }
+    return (
+      <div className='item' key={post.id}>
+        {renderArticleItem(post)}
+      </div>
+    )
+  }
+
   render() {
     return (
-      <React_Bootstrap_Carousel
-        animation={true}
-        className='carousel'
-        indicators={false}
-        slideshowSpeed={8000}
-        leftImage='../images/arrow-left.png'
-        rightImage='../images/arrow-right.png'>
-        {this.props.allPosts.map(post => renderArticleItem(post))}
-      </React_Bootstrap_Carousel>
+      <div id='postCarousel' className='carousel slide' data-ride='carousel'>
+
+        <ol className='carousel-indicators'>
+          <li data-target='#postCarousel' data-slide-to='0' className='active'></li>
+          <li data-target='#postCarousel' data-slide-to='1'></li>
+          <li data-target='#postCarousel' data-slide-to='2'></li>
+        </ol>
+
+        <div className='carousel-inner'>
+          {this.props.allPosts.map(post => this.renderCarouselInner(post))}
+        </div>
+      </div>
     );
   }
 }

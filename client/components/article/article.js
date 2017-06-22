@@ -47,6 +47,7 @@ class Article extends Component {
     if (nextProps.articleSaved) {
       this.props.getArticle(this.props.match.params.id);
     }
+    this.props.getArticle(this.props.match.params.id);
   }
 
   renderSpecs(specs) {

@@ -1,7 +1,6 @@
 $bootstrap-sass-asset-helper: true;
 $fa-font-path: '../node_modules/font-awesome/fonts';
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
-@import '../node_modules/react-bootstrap-carousel/dist/react-bootstrap-carousel.css';
 @import '../node_modules/font-awesome/scss/font-awesome';
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css?family=Pavanam|Gruppo|Roboto|Muli|PT+Sans:400i|Open+Sans|Lato:300');
@@ -137,26 +136,28 @@ ul {
   padding: 10px;
 }
 
-.carousel {
+#postCarousel {
   padding: 0;
   margin: 0;
   margin-bottom: 20px;
   border-bottom: 20px solid $blue;
   border-top: 5px solid $blue;
-  .carousel-inner {
-    background: $white;
+  .carousel-indicators {
+     margin-bottom: 0 !important;
+    li {
+      background: $bg-color;
+    }
   }
   .article_item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     height: 280px;
-    width: 100%;
-    padding: 40px 50px 40px 50px;
+    padding: 10px;
     border: 0;
-  }
-  .carousel-control {
-    background-image: none;
-    img {
-      margin-top: 35px;
-    }
   }
 }
 

@@ -8,7 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import reduxThunk from 'redux-thunk';
-import { persistStore, autoRehydrate } from 'redux-persist';
+// import { persistStore, autoRehydrate } from 'redux-persist';
 
 import App from './components/app';
 import PostsPage from './components/post/posts_page';
@@ -31,8 +31,8 @@ import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers, autoRehydrate());
-persistStore(store);
+const store = createStoreWithMiddleware(reducers);
+// persistStore(store);
 
 const history = createBrowserHistory();
 
