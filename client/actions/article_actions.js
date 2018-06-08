@@ -1,20 +1,22 @@
 import axios from 'axios';
-import { GET_POSTS, GET_REVIEWS, GET_QUESTIONS,
+import {
+  GET_POSTS, GET_REVIEWS, GET_QUESTIONS,
   GET_ARTICLE, GET_ALL_ARTICLES, GET_ALL_PREVIEWS,
   SAVE_ARTICLE, RESET_ARTICLE_STATE, PUBLISH_ARTICLE,
-  DELETE_ARTICLE, EDIT_ARTICLE, CLOSE_MODAL, OPEN_MODAL, IS_REVIEW, ARTICLE_ERROR } from './types';
+  DELETE_ARTICLE, EDIT_ARTICLE, CLOSE_MODAL, OPEN_MODAL, IS_REVIEW, ARTICLE_ERROR
+} from './types';
 import { ROOT_URL } from '../config/config.json';
 
 export function getAllArticles(isPreview) {
-  return function(dispatch) {
-    return axios.get(`${ROOT_URL}/allarticles/${isPreview}`,)
+  return function (dispatch) {
+    return axios.get(`${ROOT_URL}/allarticles/${isPreview}`, )
       .then(response => {
         if (isPreview === 0) {
           dispatch({
             type: GET_ALL_ARTICLES,
             payload: response.data.ok
           });
-        }else {
+        } else {
           dispatch({
             type: GET_ALL_PREVIEWS,
             payload: response.data.ok
@@ -33,7 +35,7 @@ export function getAllArticles(isPreview) {
 
 // get post, review, or question articles based on type (post = 1, review = 2, question = 3)
 export function getArticles(type) {
-  return function(dispatch) {
+  return function (dispatch) {
     return axios.get(`${ROOT_URL}/articles/${type}`)
       .then(response => {
         if (response.data.error) {
@@ -41,18 +43,18 @@ export function getArticles(type) {
             type: ARTICLE_ERROR,
             payload: response.data.error
           });
-        }else {
+        } else {
           if (type === 1) {
             dispatch({
               type: GET_POSTS,
               payload: response.data.ok
             });
-          }else if (type === 2) {
+          } else if (type === 2) {
             dispatch({
               type: GET_REVIEWS,
               payload: response.data.ok
             });
-          }else if (type === 3) {
+          } else if (type === 3) {
             dispatch({
               type: GET_QUESTIONS,
               payload: response.data.ok
@@ -70,7 +72,7 @@ export function getArticles(type) {
 }
 
 export function getArticle(id) {
-  return function(dispatch) {
+  return function (dispatch) {
     return axios.get(`${ROOT_URL}/article/${id}`)
       .then(response => {
         if (response.data.error) {
@@ -78,7 +80,7 @@ export function getArticle(id) {
             type: ARTICLE_ERROR,
             payload: response.data.error
           })
-        }else {
+        } else {
           dispatch({
             type: GET_ARTICLE,
             payload: response.data.ok
@@ -95,7 +97,7 @@ export function getArticle(id) {
 }
 
 export function saveArticle({ type, title, content, category, keywordArray, cover_img, specs, pros, cons }) {
-  return function(dispatch) {
+  return function (dispatch) {
     return axios.post(`${ROOT_URL}/savearticle`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
       .then(response => {
         if (response.data.error) {
@@ -103,7 +105,7 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
             type: ARTICLE_ERROR,
             payload: response.data.error
           });
-        }else {
+        } else {
           dispatch({
             type: SAVE_ARTICLE,
             payload: response.data.ok
@@ -125,7 +127,7 @@ export function saveArticle({ type, title, content, category, keywordArray, cove
 }
 
 export function publishArticle(id) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.defaults.headers['authorization'] = localStorage.getItem('token');
     return axios.post(`${ROOT_URL}/publisharticle/${id}`)
       .then(response => {
@@ -134,7 +136,7 @@ export function publishArticle(id) {
             type: ARTICLE_ERROR,
             payload: response.data.error
           });
-        }else {
+        } else {
           dispatch({
             type: PUBLISH_ARTICLE,
             payload: response.data.ok
@@ -151,7 +153,7 @@ export function publishArticle(id) {
 }
 
 export function deleteArticle(id) {
-  return function(dispatch) {
+  return function (dispatch) {
     return axios.post(`${ROOT_URL}/deletearticle/${id}`)
       .then(response => {
         if (response.data.error) {
@@ -159,7 +161,7 @@ export function deleteArticle(id) {
             type: ARTICLE_ERROR,
             payload: response.data.error
           });
-        }else {
+        } else {
           dispatch({
             type: DELETE_ARTICLE,
             payload: response.data.ok
@@ -181,43 +183,43 @@ export function deleteArticle(id) {
 }
 
 export function updateArticle({ id, type, title, content, category, keywordArray, cover_img, specs, pros, cons }) {
-  return function(dispatch) {
+  return function (dispatch) {
     return axios.post(`${ROOT_URL}/updatearticle/${id}`, { type, title, content, category, keywordArray, cover_img, specs, pros, cons })
-    .then(response => {
-      if (response.data.error) {
+      .then(response => {
+        if (response.data.error) {
+          dispatch({
+            type: ARTICLE_ERROR,
+            payload: response.data.error
+          });
+        } else {
+          dispatch({
+            type: SAVE_ARTICLE,
+            payload: response.data.ok
+          });
+        }
+      })
+      .then(() => {
+        dispatch({
+          type: RESET_ARTICLE_STATE
+        });
+      })
+      .catch(err => {
         dispatch({
           type: ARTICLE_ERROR,
-          payload: response.data.error
+          payload: err.message
         });
-      }else {
-        dispatch({
-          type: SAVE_ARTICLE,
-          payload: response.data.ok
-        });
-      }
-    })
-    .then(() => {
-      dispatch({
-        type: RESET_ARTICLE_STATE
       });
-    })
-    .catch(err => {
-      dispatch({
-        type: ARTICLE_ERROR,
-        payload: err.message
-      });
-    });
   }
 }
 
 
 export function toggleModal(modalOpen) {
-  return function(dispatch) {
+  return function (dispatch) {
     if (modalOpen) {
       dispatch({
         type: CLOSE_MODAL
       })
-    }else {
+    } else {
       dispatch({
         type: OPEN_MODAL
       })
@@ -226,13 +228,13 @@ export function toggleModal(modalOpen) {
 }
 
 export function toggleReview(isReview) {
-  return function(dispatch) {
+  return function (dispatch) {
     if (isReview) {
       dispatch({
         type: IS_REVIEW,
         payload: true
       });
-    }else {
+    } else {
       dispatch({
         type: IS_REVIEW,
         payload: false

@@ -16,22 +16,22 @@ class Header extends Component {
   renderNavRight() {
     const user = this.props.user ? this.props.user : localStorage.getItem('user');
 
-    if (this.props.authenticated && user === `${ADMIN_USER}`) {
+    if (this.props.authenticated && user === 'Admin') {
       return (
         <div className='signout_div'>
-          <small>signed in as: { user }</small>
+          <small>signed in as: {user}</small>
           <Link className='signout_btn' to='/' onClick={this.props.signoutUser}><small>sign out</small></Link>
           <Link to='/admin'><small>admin</small></Link>
         </div>
       );
-    }else if (this.props.authenticated) {
+    } else if (this.props.authenticated) {
       return (
         <div className='signout_div'>
-          signed in as: { user }
+          signed in as: {user}
           <Link className='signout_btn' to='/' onClick={this.props.signoutUser}><small>sign out</small></Link>
         </div>
       );
-    }else {
+    } else {
       return (
         <div className='signout_div' style={{ margin: -10 }}>
           <Link to='/signup'><button className='btn btn-default nav_signup'>Join The Conversation</button></Link>
@@ -65,31 +65,31 @@ class Header extends Component {
               <ul className='nav navbar-nav'>
                 <li>
                   <Link to='/' data-toggle="collapse" data-target=".navbar-collapse.in">
-                  <i className='fa fa-clipboard fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-clipboard fa-2x' aria-hidden='true'></i>
                     <span>Posts</span>
                   </Link>
                 </li>
                 <li>
                   <Link to='/reviews' data-toggle="collapse" data-target=".navbar-collapse.in">
-                  <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>
                     <span>Reviews</span>
                   </Link>
                 </li>
                 <li>
                   <Link to='/questions' data-toggle="collapse" data-target=".navbar-collapse.in">
-                  <i className='fa fa-question fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-question fa-2x' aria-hidden='true'></i>
                     <span>Q&A</span>
                   </Link>
                 </li>
                 <li>
                   <Link to='/about' data-toggle="collapse" data-target=".navbar-collapse.in">
-                  <i className='fa fa-female fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-female fa-2x' aria-hidden='true'></i>
                     <span>About Me</span>
                   </Link>
                 </li>
                 <li>
                   <Link to='/search' data-toggle="collapse" data-target=".navbar-collapse.in">
-                  <i className='fa fa-search fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-search fa-2x' aria-hidden='true'></i>
                     <span>Search</span>
                   </Link>
                 </li>

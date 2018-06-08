@@ -4,10 +4,10 @@ export default class About extends Component {
   render() {
     return (
       <div className='row about'>
-        <div className='col-sm-4'>
+        <div className='col-md-4 col-sm-12'>
           <img src='../../images/jess_about_img.jpg' alt='Jessica Austen' />
         </div>
-        <div className='col-sm-8'>
+        <div className='col-md-8 col-sm-12'>
           <p>
             I love that tech presents troubleshooting challenges that are fun and exciting to solve.
           </p>

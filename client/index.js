@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import reduxThunk from 'redux-thunk';
 
@@ -42,7 +42,7 @@ if (token) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter history={history}>
+    <BrowserRouter history={history}>
       <App>
         <Switch>
           <Route path='/article/:id' component={Article} />
@@ -63,6 +63,6 @@ ReactDOM.render(
           <Route path='/' component={PostsPage} />
         </Switch>
       </App>
-    </HashRouter>
+    </BrowserRouter>
   </Provider>
 , document.querySelector('.main'));

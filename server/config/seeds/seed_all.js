@@ -1,21 +1,21 @@
 const moment = require('moment');
 const knex = require('../../utils/db');
 
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   return seedUsers()
-    .then(function() {
+    .then(function () {
       return seedArticleTypes();
     })
-    .then(function() {
+    .then(function () {
       return seedArticles();
     })
-    .then(function() {
+    .then(function () {
       return seedAdditionalInfo();
     })
-    .then(function() {
+    .then(function () {
       return seedComments();
     })
-    .then(function() {
+    .then(function () {
       return seedImages();
     });
 };
@@ -39,7 +39,7 @@ const spec_data = JSON.stringify({
   "Width": "28.9 inches",
   "Depth": "9.4 inches",
   "Warranty_Parts": "36 months",
-  "Warranty_Labor": "36 months"
+  "Warranty_Labor": "12 months"
 });
 
 function seedUsers() {
@@ -47,9 +47,9 @@ function seedUsers() {
   return knex('Users').del()
     .then(function () {
       return knex('Users').insert([
-        {email: 'user1@test.com', username: 'User1', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
-        {email: 'admin@test.com', username: 'Admin', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
-        {email: 'user2@test.com', username: 'User2', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa'},
+        { email: 'user1@test.com', username: 'User1', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa' },
+        { email: 'admin@test.com', username: 'Admin', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa' },
+        { email: 'user2@test.com', username: 'User2', password: '$2a$10$q6TjuJWtfZDAj4E7I9Ngx.XvmkUG5jzZR/M4fpUOWjrbV0lQplCWa' },
       ]);
     });
 };
@@ -57,11 +57,11 @@ function seedUsers() {
 function seedArticleTypes() {
   console.log('Seeding Types...');
   return knex('ArticleTypes').del()
-    .then(function() {
+    .then(function () {
       return knex('ArticleTypes').insert([
-        {type: 'post'},
-        {type: 'review'},
-        {type: 'question'}
+        { type: 'post' },
+        { type: 'review' },
+        { type: 'question' }
       ]);
     });
 }
@@ -195,7 +195,7 @@ function seedArticles() {
 function seedAdditionalInfo() {
   console.log('Seeding additional info...');
   return knex('AdditionalInfo').del()
-    .then(function() {
+    .then(function () {
       return knex('AdditionalInfo').insert([
         {
           article_id: 7,
@@ -267,7 +267,7 @@ function seedComments() {
         },
         {
           title: 'This Is Awesome!',
-          content: 'I can\'t belive I didn\'t know about this before!' ,
+          content: 'I can\'t belive I didn\'t know about this before!',
           article_id: 2,
           user_id: 2,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
@@ -281,7 +281,7 @@ function seedComments() {
         },
         {
           title: 'Great Review!',
-          content: 'This is a great review.' ,
+          content: 'This is a great review.',
           article_id: 8,
           user_id: 2,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
@@ -295,7 +295,7 @@ function seedComments() {
         },
         {
           title: 'Sounds Good!',
-          content: 'This sounds like a very good buy.' ,
+          content: 'This sounds like a very good buy.',
           article_id: 5,
           user_id: 3,
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
@@ -377,7 +377,7 @@ function seedComments() {
 function seedImages() {
   console.log('Seeding images...');
   return knex('Images').del()
-    .then(function() {
+    .then(function () {
       return knex('Images').insert([
         {
           article_id: 1,
