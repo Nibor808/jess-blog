@@ -1,9 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import  { Link } from 'react-router-dom';
 import { getArticles } from '../../actions/article_actions';
 import { renderArticleItem } from '../article/render_article_item';
-import { formatDate } from '../../utils/date_format';
 
 class PostList extends Component {
 

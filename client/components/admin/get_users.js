@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { getUsers } from '../../actions/user_actions';
 
@@ -16,7 +17,7 @@ class Users extends Component {
   renderUsers(user) {
     return (
       <li key={user.id}
-      className='list-group-item'>
+        className='list-group-item'>
         <div>email: {user.email}</div>
         <div>user: {user.username}</div>
       </li>

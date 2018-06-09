@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import QuestionList from './question_list';
 import PostSidebar from '../post/post_sidebar';
 import ReviewSidebar from '../review/review_sidebar';
@@ -22,7 +23,7 @@ class QuestionsPage extends Component {
           </Link>
         </div>
       );
-    }else {
+    } else {
       return (
         <div>
           <Link to='/askquestion' className='pull-right login'>

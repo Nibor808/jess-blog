@@ -1,17 +1,16 @@
 import axios from 'axios';
 import { SEARCH_RESULT, RESET_SEARCH_RESULT, SEARCH_ERROR } from './types';
-import { ROOT_URL } from '../config/config.json';
 
 export function search({ keywordArray }) {
-  return function(dispatch) {
-    return axios.post(`${ROOT_URL}/search`, { keywordArray })
+  return function (dispatch) {
+    return axios.post(`${urls.SERVER_URL}/search`, { keywordArray })
       .then(response => {
         if (response.data.error) {
           dispatch({
             type: SEARCH_ERROR,
             payload: response.data.error
           });
-        }else {
+        } else {
           dispatch({
             type: SEARCH_RESULT,
             payload: response.data.ok
@@ -28,7 +27,7 @@ export function search({ keywordArray }) {
 }
 
 export function resetSearch() {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({
       type: RESET_SEARCH_RESULT
     });

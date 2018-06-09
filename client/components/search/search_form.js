@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { reduxForm, Field, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import { search, resetSearch } from '../../actions/search_actions';
@@ -72,7 +73,7 @@ class SearchForm extends Component {
             <p>Enter keywords or a product name.</p>
           </div>
           <div className='form-group'>
-            <Field type='text' component='input' name='keywords' disabled={this.props.searchResult.length > 0}/>
+            <Field type='text' component='input' name='keywords' disabled={this.props.searchResult.length > 0} />
           </div>
           <button className='btn btn-default' type='button' onClick={() => this.clearResults()}>clear search</button>
           {this.renderSearchBtn(submitting)}

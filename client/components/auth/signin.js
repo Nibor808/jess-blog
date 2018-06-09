@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signinUser } from '../../actions/user_actions';
@@ -61,7 +62,7 @@ class Signin extends Component {
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='signin_form'>
           <div className='form-group'>
             <label htmlFor='email'>Email</label>
-            <Field name='email' component='input' type='email' className='form-control'/>
+            <Field name='email' component='input' type='email' className='form-control' />
           </div>
           <div className='form-group'>
             <label htmlFor='password'>Password:</label>

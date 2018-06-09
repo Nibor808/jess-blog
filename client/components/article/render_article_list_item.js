@@ -12,8 +12,8 @@ export function renderArticleListItem(article, isAdmin) {
   if (article.cover_img && !isAdmin) {
     return (
       <li
-      key={article.id}
-      className='list-group-item'>
+        key={article.id}
+        className='list-group-item'>
         <div className='col-sm-7'>
           <img src={`../../images/${article.cover_img}`} height='40px' width='40px' className='img-responsive' />
           <Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
@@ -23,11 +23,11 @@ export function renderArticleListItem(article, isAdmin) {
         </div>
       </li>
     );
-  }else if (isAdmin) {
+  } else if (isAdmin) {
     return (
       <li
-      key={article.id}
-      className='list-group-item'>
+        key={article.id}
+        className='list-group-item'>
         <div className='col-sm-5'>
           <Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
         </div>
@@ -37,11 +37,11 @@ export function renderArticleListItem(article, isAdmin) {
         </div>
       </li>
     );
-  }else {
+  } else {
     return (
       <li
-      key={article.id}
-      className='list-group-item'>
+        key={article.id}
+        className='list-group-item'>
         <Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
         <small className='pull-right'>{date}</small>
       </li>

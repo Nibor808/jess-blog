@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { toggleModal } from '../../actions/article_actions';
@@ -45,7 +46,7 @@ class DeleteModal extends Component {
         <label>Are you sure you want to delete this article?</label>
         <button className='btn btn-default' type='submit' onClick={() => this.props.deleteArticle(this.props.params.id)}>yes</button>
         <button className='btn btn-default' type='button' onClick={() => this.closeModal()}>cancel</button>
-    </Modal>
+      </Modal>
     )
   }
 }

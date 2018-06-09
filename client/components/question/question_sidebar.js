@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getArticles } from '../../actions/article_actions';
-import { formatDate } from '../../utils/date_format';
 import { renderArticleListItem } from '../article/render_article_list_item';
 
 class QuestionSidebar extends Component {
@@ -25,7 +24,7 @@ class QuestionSidebar extends Component {
 
     return (
       <ul
-      className='list-group'>
+        className='list-group'>
         <li className='list-group-item'><h3 className='list_group_title'>Recent Questions</h3></li>
         {this.props.allQuestions.map(question => renderArticleListItem(question))}
       </ul>

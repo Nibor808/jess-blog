@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import Modal from 'react-modal';
@@ -39,7 +40,7 @@ class CommentModal extends Component {
     if (!this.props.match.params.id) {
       type = 'article_id';
       id = this.props.article_id;
-    }else {
+    } else {
       type = 'parent_comment_id';
       id = this.props.match.params.id;
     }
@@ -75,7 +76,7 @@ class CommentModal extends Component {
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='comment_form'>
           <div className='form-group'>
             <label htmlFor='title'>Title:</label>
-            <Field name='title' component='input' type='text' className='form-control' placeholder='Optional'/>
+            <Field name='title' component='input' type='text' className='form-control' placeholder='Optional' />
           </div>
           <div className='form-group'>
             <label htmlFor='content'>Comment:</label>

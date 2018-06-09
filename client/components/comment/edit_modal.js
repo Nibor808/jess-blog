@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { Field, reduxForm, initialize } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import Modal from 'react-modal';
 import { toggleModal } from '../../actions/article_actions';
 import { getAComment, updateComment } from '../../actions/comment_actions';

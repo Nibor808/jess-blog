@@ -1,18 +1,17 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, GET_USERS } from './types';
-import { ROOT_URL } from '../config/config.json';
 
 export function signupUser({ email, password, username }) {
-  return function(dispatch) {
-    return axios.post(`${ROOT_URL}/signup`, { email, password, username })
+  return function (dispatch) {
+    return axios.post(`${urls.SERVER_URL}/signup`, { email, password, username })
       .then((response) => {
         if (response.data.error) {
           dispatch({
             type: AUTH_ERROR,
             payload: response.data.error
           })
-        }else {
+        } else {
           dispatch({
             type: AUTH_USER,
             payload: response.data.username
@@ -32,8 +31,8 @@ export function signupUser({ email, password, username }) {
 }
 
 export function signinUser({ email, password }) {
-  return function(dispatch) {
-    return axios.post(`${ROOT_URL}/signin`, { email, password })
+  return function (dispatch) {
+    return axios.post(`${urls.SERVER_URL}/signin`, { email, password })
       .then(response => {
         dispatch({
           type: AUTH_USER,
@@ -61,8 +60,8 @@ export function signoutUser() {
 }
 
 export function getUsers() {
-  return function(dispatch) {
-    return axios.get(`${ROOT_URL}/users`)
+  return function (dispatch) {
+    return axios.get(`${urls.SERVER_URL}/users`)
       .then(response => {
         dispatch({
           type: GET_USERS,

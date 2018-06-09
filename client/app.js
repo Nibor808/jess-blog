@@ -1,8 +1,12 @@
 // copy to dist
 const express = require('express');
 const path = require('path');
+import logger from './utils/logger';
+
+global.logger = logger;
 
 const app = express();
+app.use(morgan('dev'));
 
 app.use(express.static(__dirname));
 

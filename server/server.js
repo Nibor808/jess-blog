@@ -10,7 +10,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(morgan('short'));
+app.use(morgan('dev'));
 app.use(cors());
 
 routes(app);

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import SearchForm from './search_form';
 import ReviewSidebar from '../review/review_sidebar';
 import QuestionSideBar from '../question/question_sidebar';

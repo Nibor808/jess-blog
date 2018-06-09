@@ -16,7 +16,7 @@ export default class AdminPage extends Component {
           <Users />
           <Previews />
           <Articles />
-       </div>
+        </div>
       </div>
     )
   }

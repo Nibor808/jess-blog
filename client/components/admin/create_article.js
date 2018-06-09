@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field, initialize, FieldArray, reset } from 'redux-form';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { reduxForm, Field, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
 import { saveArticle, toggleReview } from '../../actions/article_actions';
 import { keywords } from '../../config/keywords';
@@ -10,22 +11,22 @@ const renderSpecs = ({ fields }) => {
     <div>
       <button type='button' className='btn btn-default' onClick={() => fields.push({})}>Add A Spec</button>
       <ul className='addSpecs_list'>
-          {fields.map((spec, index) =>
-            <li key={index}>
-              <button type='button' className='btn btn-default pull-right' onClick={() => fields.remove(index)}>Remove Spec</button>
-              <label className='spec_title' htmlFor={`${spec}.key`}>Spec #{index + 1}</label>
-              <div className='row'>
-                <div className='col-md-4'>
-                  <label>Name</label>
-                  <Field name={`${spec}.key`} type='text' component='input' />
-                </div>
-                <div className='col-md-4 pull-right'>
-                  <label>Value</label>
-                  <Field name={`${spec}.value`} type='text' component='input' />
-                </div>
+        {fields.map((spec, index) =>
+          <li key={index}>
+            <button type='button' className='btn btn-default pull-right' onClick={() => fields.remove(index)}>Remove Spec</button>
+            <label className='spec_title' htmlFor={`${spec}.key`}>Spec #{index + 1}</label>
+            <div className='row'>
+              <div className='col-md-4'>
+                <label>Name</label>
+                <Field name={`${spec}.key`} type='text' component='input' />
               </div>
-            </li>
-          )}
+              <div className='col-md-4 pull-right'>
+                <label>Value</label>
+                <Field name={`${spec}.value`} type='text' component='input' />
+              </div>
+            </div>
+          </li>
+        )}
       </ul>
     </div>
   )
@@ -83,7 +84,7 @@ class CreateArticle extends Component {
   reviewOpts(value) {
     if (value == 2) {
       this.props.toggleReview(true);
-    }else if (value == 1) {
+    } else if (value == 1) {
       this.props.toggleReview(false);
     }
   }
@@ -94,11 +95,11 @@ class CreateArticle extends Component {
         <div>
           <div className='form-group col-md-6'>
             <label htmlFor='pros'>Pros: (csv)</label>
-            <Field name='pros' component='input' type='text' className='form-control'/>
+            <Field name='pros' component='input' type='text' className='form-control' />
           </div>
           <div className='form-group col-md-6'>
             <label htmlFor='cons'>Cons: (csv)</label>
-            <Field name='cons' component='input' type='text' className='form-control'/>
+            <Field name='cons' component='input' type='text' className='form-control' />
           </div>
           <div className='form-group col-md-12'>
             <label htmlFor='specs'>Specs:</label>
@@ -106,7 +107,7 @@ class CreateArticle extends Component {
           </div>
         </div>
       )
-    }else {
+    } else {
       return;
     }
   }
@@ -123,7 +124,7 @@ class CreateArticle extends Component {
 
     if (additionalKeywords) {
       keywordArray = tempKeywords.concat(additionalKeywords.split(','));
-    }else {
+    } else {
       keywordArray = tempKeywords;
     }
 
@@ -141,12 +142,12 @@ class CreateArticle extends Component {
           <div className='form-group col-md-6'>
             <label htmlFor='type'>Type:</label>
             <Field
-            name='type'
-            component='select'
-            type='text'
-            className='form-control'
-            id='typeSelect'
-            onChange={(ev) => this.reviewOpts(ev.target.value)}>
+              name='type'
+              component='select'
+              type='text'
+              className='form-control'
+              id='typeSelect'
+              onChange={(ev) => this.reviewOpts(ev.target.value)}>
               <option></option>
               <option value='1'>post</option>
               <option value='2'>review</option>
@@ -154,15 +155,15 @@ class CreateArticle extends Component {
           </div>
           <div className='form-group col-md-6'>
             <label htmlFor='title'>Title:</label>
-            <Field name='title' component='input' type='text' className='form-control'/>
+            <Field name='title' component='input' type='text' className='form-control' />
           </div>
           <div className='form-group col-md-12'>
             <label htmlFor='content'>Content:</label>
-            <Field name='content' component='textarea' type='textarea' className='form-control'/>
+            <Field name='content' component='textarea' type='textarea' className='form-control' />
           </div>
           <div className='form-group col-md-6'>
             <label htmlFor='cover_img'>Cover Image:</label>
-            <Field name='cover_img' component='input' type='text' className='form-control'/>
+            <Field name='cover_img' component='input' type='text' className='form-control' />
           </div>
           <div className='form-group col-md-6'>
             <label htmlFor='category'>Category:</label>

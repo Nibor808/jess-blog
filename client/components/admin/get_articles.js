@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllArticles } from '../../actions/article_actions';
 import { renderArticleListItem } from '../article/render_article_list_item';
@@ -14,7 +15,7 @@ class GetArticles extends Component {
   }
 
   componentWillMount() {
-    // where isPreview = false(0)
+    // get articles that are not previews (0)
     this.props.getAllArticles(0)
   }
 

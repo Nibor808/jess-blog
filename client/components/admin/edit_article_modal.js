@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field, initialize } from 'redux-form';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { reduxForm, Field } from 'redux-form';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { toggleModal } from '../../actions/article_actions';
@@ -72,7 +73,7 @@ class EditArticleModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.articleSaved) {
+    if (nextProps.articleSaved) {
       this.context.router.goBack()
     }
   }
@@ -125,15 +126,15 @@ class EditArticleModal extends Component {
           </div>
           <div className='form-group col-sm-6'>
             <label htmlFor='title'>Title:</label>
-            <Field name='title' component='input' type='text' className='form-control'/>
+            <Field name='title' component='input' type='text' className='form-control' />
           </div>
           <div className='form-group col-sm-12'>
             <label htmlFor='content'>Content:</label>
-            <Field name='content' component='textarea' type='textarea' className='form-control'/>
+            <Field name='content' component='textarea' type='textarea' className='form-control' />
           </div>
           <div className='form-group col-sm-6'>
             <label htmlFor='cover_img'>Cover Image:</label>
-            <Field name='cover_img' component='input' type='text' className='form-control'/>
+            <Field name='cover_img' component='input' type='text' className='form-control' />
           </div>
           <div className='form-group col-sm-6'>
             <label htmlFor='category'>Category:</label>
@@ -167,15 +168,15 @@ class EditArticleModal extends Component {
           <h4 className='text-center'>For Reviews Only</h4>
           <div className='form-group col-sm-6'>
             <label htmlFor='pros'>Pros: (csv)</label>
-            <Field name='pros' component='input' type='text' className='form-control'/>
+            <Field name='pros' component='input' type='text' className='form-control' />
           </div>
           <div className='form-group col-sm-6'>
             <label htmlFor='cons'>Cons: (csv)</label>
-            <Field name='cons' component='input' type='text' className='form-control'/>
+            <Field name='cons' component='input' type='text' className='form-control' />
           </div>
           <div className='form-group col-sm-12'>
             <label htmlFor='specs'>Specs:</label>
-            <Field name='specs' component='textarea' type='textarea' className='form-control'/>
+            <Field name='specs' component='textarea' type='textarea' className='form-control' />
           </div>
           <button className='btn btn-default' type='button' onClick={() => this.closeModal()}>cancel</button>
           <button className='btn btn-default pull-right' type='submit'>save</button>

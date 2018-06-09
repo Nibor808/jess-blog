@@ -10,7 +10,7 @@ export function renderSigninButton(authenticated) {
         </Link>
       </div>
     );
-  }else {
+  } else {
     return (
       <div className='col-xs-6'>
         <Link to='/addcomment' className='pull-right login'>

@@ -4,10 +4,10 @@ import './node_modules/bootstrap-sass/assets/javascripts/bootstrap.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { compose, createStore, applyMiddleware } from 'redux';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
-import reduxThunk from 'redux-thunk';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
 import App from './components/app';
 import PostsPage from './components/post/posts_page';
@@ -29,10 +29,22 @@ import requireAuth from './components/auth/requireAuth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+const middleWares = [thunk];
 
-const history = createBrowserHistory();
+if (process.env.NODE_ENV === 'development') {
+  const reduxLogger = createLogger({
+    collapsed: true,
+    timestamp: false
+  });
+  middleWares.push(reduxLogger);
+}
+
+const store = createStore(
+  reducers,
+  compose(
+    applyMiddleware(...middleWares)
+  )
+);
 
 const token = localStorage.getItem('token');
 
@@ -42,7 +54,7 @@ if (token) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter history={history}>
+    <BrowserRouter>
       <App>
         <Switch>
           <Route path='/article/:id' component={Article} />
@@ -65,4 +77,4 @@ ReactDOM.render(
       </App>
     </BrowserRouter>
   </Provider>
-, document.querySelector('.main'));
+  , document.querySelector('.main'));

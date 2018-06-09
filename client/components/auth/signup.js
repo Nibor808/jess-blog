@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signupUser } from '../../actions/user_actions';
@@ -54,7 +55,7 @@ class Signup extends Component {
         <label>{label}</label>
         <div>
           <input {...input} type={type} className='form-control' />
-          {touched && error ? <span className='text-danger'><strong>{error}</strong></span>: ''}
+          {touched && error ? <span className='text-danger'><strong>{error}</strong></span> : ''}
         </div>
       </div>
     );
@@ -88,7 +89,7 @@ function validate(values) {
 
   if (!values.email) {
     errors.email = 'Required'
-  }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
   if (!values.username) {

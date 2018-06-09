@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/date_format';
@@ -7,8 +8,6 @@ import { getComments, getCommentReplies } from '../../actions/comment_actions';
 import { renderComments } from '../comment/comments_list';
 import { renderSigninButton } from '../auth/render_signin_button';
 import { renderSignupPrompt } from '../auth/render_signup_prompt';
-import { ADMIN_USER } from '../../config/config.json';
-import { CLEAR_COMMENTS } from '../../actions/types';
 
 class Article extends Component {
 
@@ -119,7 +118,7 @@ class Article extends Component {
   hasComments() {
     if (!this.props.commentArray.length > 0 || this.props.article.preview === true) {
       return <p className='col-sm-6'>Be the first to comment.</p>
-    }else {
+    } else {
       return (
         <ul className='comments_list'>
           {renderComments(this.props.commentArray, this.props.repliesArray)}
@@ -131,7 +130,7 @@ class Article extends Component {
   isPreview() {
     const user = this.props.user ? this.props.user : localStorage.getItem('user');
 
-    if (this.props.article.preview === 1 && user === ADMIN_USER) {
+    if (this.props.article.preview === 1 && user === 'Admin') {
       return (
         <div className='publish_div pull-right'>
           <button type='button' className='btn btn-default pull-right' onClick={() => this.props.publishArticle(this.props.article.id)}>
@@ -140,7 +139,7 @@ class Article extends Component {
           <Link to={`/editarticle/${this.props.article.id}`} className='btn btn-default edit_link'>edit article</Link>
         </div>
       )
-    }else if (user === ADMIN_USER && this.props.article.type !== 3) {
+    } else if (user === 'Admin' && this.props.article.type !== 3) {
       return (
         <div className='publish_div pull-right'>
           <Link to={`/editarticle/${this.props.article.id}`} className='btn btn-default edit_link'>edit article</Link>
@@ -176,7 +175,7 @@ class Article extends Component {
     return (
       <div>
         <div
-        className='article col-sm-12'>
+          className='article col-sm-12'>
           <div className='row'>
             <div className='col-sm-12'>
               <h1>{this.props.article.title}</h1>
@@ -191,7 +190,7 @@ class Article extends Component {
           {this.renderProsCons()}
           <div className='row'>
             <div className='col-sm-12'>
-              <p dangerouslySetInnerHTML={{__html: this.props.article.content}}></p>
+              <p dangerouslySetInnerHTML={{ __html: this.props.article.content }}></p>
             </div>
           </div>
           {this.renderSpecs(this.props.article.specs)}

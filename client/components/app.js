@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import Header from './header';
 import Footer from './footer';
 
@@ -10,10 +11,10 @@ export default class App extends Component {
   render() {
     return (
       <div className='container'>
-          <Header/>
-          {this.props.children}
-          <Footer />
-        </div>
+        <Header />
+        {this.props.children}
+        <Footer />
+      </div>
     )
   }
 }
