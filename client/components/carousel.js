@@ -16,10 +16,6 @@ class Carousel extends Component {
     allPosts: PropTypes.array
   }
 
-  componentWillMount() {
-    this.props.getArticles(1);
-  }
-
   renderCarouselInner(post) {
     if (post.id === this.props.allPosts[0].id) {
       return (

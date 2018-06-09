@@ -7,3 +7,4 @@ node_modules
 dist/
 aws-deployment/
 build-prod/
+webpack-assets.json
