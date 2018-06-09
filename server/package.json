@@ -35,7 +35,9 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "dotenv-webpack": "^1.5.7",
     "eslint": "^3.17.1",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }

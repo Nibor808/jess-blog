@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getArticles } from '../../actions/article_actions';
-import { formatDate } from '../../utils/date_format';
 import { renderArticleListItem } from '../article/render_article_list_item';
 
 class ReviewSidebar extends Component {

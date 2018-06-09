@@ -1,0 +1,15 @@
+{
+  "bundle": {
+    "js": "bundle.553e6644bc873fd4980a.js",
+    "css": "styles.css"
+  },
+  "vendor": {
+    "js": "vendor.e20f1fa827334f4ebe98.js"
+  },
+  "vendors~bundle": {
+    "js": "vendors~bundle.dcd9db704430547ec35c.js"
+  },
+  "vendors~bundle~vendor": {
+    "js": "vendors~bundle~vendor.8592715a0e475d02f451.js"
+  }
+}

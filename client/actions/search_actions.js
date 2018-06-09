@@ -3,7 +3,7 @@ import { SEARCH_RESULT, RESET_SEARCH_RESULT, SEARCH_ERROR } from './types';
 
 export function search({ keywordArray }) {
   return function (dispatch) {
-    return axios.post(`${urls.SERVER_URL}/search`, { keywordArray })
+    return axios.post(`${SERVER_URL}/search`, { keywordArray })
       .then(response => {
         if (response.data.error) {
           dispatch({
