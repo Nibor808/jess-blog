@@ -66,6 +66,15 @@ ul {
     border-radius: 2px;
     position: relative;
     z-index: 1;
+    a {
+      text-decoration: none;
+      &:active,
+      &:hover,
+      &.active,
+      &.active.hover {
+        text-decoration: none;
+      }
+    }
     .logo {
       margin: 0;
     }

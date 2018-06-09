@@ -44,7 +44,9 @@ class Header extends Component {
     return (
       <div className='row header_box'>
         <div className='logo_box'>
-          <h2 className='logo'>JessTech</h2>
+          <Link to='/'>
+            <h2 className='logo'>JessTech</h2>
+          </Link>
         </div>
         <div className='nav_box'>
           <div className='row'>
