@@ -7,7 +7,7 @@
     "knex:migrate": "knex migrate:latest --knexfile config/knexfile.js",
     "knex:seed": "knex seed:run --knexfile config/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile config/knexfile.js",
-    "dev": "NODE_ENV=development && webpack --config webpack.config.js && npm run knex:migrate && nodemon dist/server.js",
+    "dev": "NODE_ENV=development webpack --config webpack.config.js && npm run knex:migrate && nodemon dist/server.js",
     "production": "NODE_ENV=production webpack --optimize-minimize --config webpack.config.js && cp package.json build-prod/",
     "lint": "eslint --color --config ./config/.eslintrc.json ./",
     "start": "node server.js"
