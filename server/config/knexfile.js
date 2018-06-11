@@ -1,11 +1,11 @@
-const { DB_HOST, DB_USER, DB_PASS, DB_NAME } = require('./config.json');
+const { DB_HOST, DB_NAME, DB_USER, DB_PASS } = require('./db_config.json');
 
 module.exports = {
   client: 'mysql',
   connection: {
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASS,
-    database: DB_NAME
+    host: process.env.DB_HOST || DB_HOST,
+    user: process.env.DB_USER || DB_USER,
+    password: process.env.DB_PASS || DB_PASS,
+    database: process.env.DB_NAME || DB_NAME
   }
 };

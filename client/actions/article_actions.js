@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   GET_POSTS, GET_REVIEWS, GET_QUESTIONS,
-  GET_ARTICLE, GET_ALL_ARTICLES, GET_ALL_PREVIEWS,
+  GET_ARTICLE, GET_ADMIN_ARTICLES, GET_ADMIN_PREVIEWS,
   SAVE_ARTICLE, RESET_ARTICLE_STATE, PUBLISH_ARTICLE,
   DELETE_ARTICLE, EDIT_ARTICLE, CLOSE_MODAL, OPEN_MODAL, IS_REVIEW, ARTICLE_ERROR
 } from './types';
@@ -12,12 +12,12 @@ export function getAllArticles(isPreview) {
       .then(response => {
         if (isPreview === 0) {
           dispatch({
-            type: GET_ALL_ARTICLES,
+            type: GET_ADMIN_ARTICLES,
             payload: response.data.ok
           });
         } else {
           dispatch({
-            type: GET_ALL_PREVIEWS,
+            type: GET_ADMIN_PREVIEWS,
             payload: response.data.ok
           });
         }

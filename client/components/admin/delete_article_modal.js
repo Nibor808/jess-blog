@@ -32,7 +32,6 @@ class DeleteModal extends Component {
 
   closeModal() {
     this.props.toggleModal(true);
-    this.context.router.goBack()
   }
 
   render() {
@@ -44,7 +43,7 @@ class DeleteModal extends Component {
         shouldCloseOnOverlayClick={false}
         style={customStyles}>
         <label>Are you sure you want to delete this article?</label>
-        <button className='btn btn-default' type='submit' onClick={() => this.props.deleteArticle(this.props.params.id)}>yes</button>
+        <button className='btn btn-default' type='submit' onClick={() => this.props.deleteArticle(this.props.match.params.id)}>yes</button>
         <button className='btn btn-default' type='button' onClick={() => this.closeModal()}>cancel</button>
       </Modal>
     )

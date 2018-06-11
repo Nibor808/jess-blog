@@ -9,7 +9,7 @@ const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignin = passport.authenticate('local', { session: false });
 
-module.exports = function(app) {
+module.exports = function (app) {
   //articles
   app.get('/articles/:type', ArticleController.getAllArticlesOfType);
   app.get('/article/:id', ArticleController.getArticle);

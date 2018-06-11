@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { renderRoutes } from 'react-router-config';
+import { connect } from 'react-redux';
 import Header from './header';
 import Footer from './footer';
 
-export default class App extends Component {
-  static propTypes = {
-    children: PropTypes.any
-  }
-
+class App extends Component {
   render() {
+    const { routes } = this.props.route;
+
     return (
       <div className='container'>
         <Header />
-        {this.props.children}
+        {renderRoutes(routes)}
         <Footer />
       </div>
     )
   }
 }
+
+export default connect(null)(App);

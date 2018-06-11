@@ -1,9 +1,0 @@
-{
-  "DB_HOST": "127.0.0.1",
-  "DB_USER": "root",
-  "DB_PASS": "",
-  "DB_NAME": "jesstech",
-  "JWT_SECRET": "kwCOHWE893OIooewc",
-  "MAIL_PASS": "Austen90",
-  "MAIL_USER": "jessica.e.austen@gmail.com"
-}

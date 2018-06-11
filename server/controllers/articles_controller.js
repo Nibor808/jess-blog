@@ -65,7 +65,7 @@ module.exports = {
             .catch(err => {
               res.send({ error: err.message });
             });
-        }else {
+        } else {
           res.send({ ok: article });
         }
       })
@@ -89,20 +89,20 @@ module.exports = {
     if (req.body.type === 1 || req.body.type === 2) {
       if (!req.body.cover_img) {
         return res.send({ error: 'Missing cover image' })
-      }else if (req.body.cover_img.indexOf('.png') == -1 &&
+      } else if (req.body.cover_img.indexOf('.png') == -1 &&
         req.body.cover_img.indexOf('.jpg') == -1 &&
         req.body.cover_img.indexOf('.jpeg') == -1 &&
         req.body.cover_img.indexOf('.gif') == -1
-        ) {
-          return res.send({ error: 'Invalid cover_img' })
-        }
+      ) {
+        return res.send({ error: 'Invalid cover_img' })
+      }
     }
 
     // if post or review put in pre publish state (publish will update preview state)
     let preview;
     if (req.body.type === 1 || req.body.type === 2) {
       preview = true
-    }else {
+    } else {
       preview = false
     }
 
@@ -118,41 +118,41 @@ module.exports = {
       preview: preview,
       createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
     })
-    .then(data => {
-      if (!data[0] > 0) {
-        return res.send({ error: 'Article not saved' });
-      }
-      const specsObj = {};
-
-      if (req.body.specs) {
-        req.body.specs.map((spec) => {
-          specsObj[spec.key] = spec.value;
-        });
-      }
-
-      knex('AdditionalInfo').insert({
-        article_id: data[0],
-        pros: req.body.pros,
-        cons: req.body.cons,
-        specs: JSON.stringify(specsObj),
-        answer: req.body.answer
-      })
       .then(data => {
         if (!data[0] > 0) {
-          return res.send({ error: 'Additional Info not saved' });
+          return res.send({ error: 'Article not saved' });
         }
-        res.send({ ok: 'Article saved' });
+        const specsObj = {};
+
+        if (req.body.specs) {
+          req.body.specs.map((spec) => {
+            specsObj[spec.key] = spec.value;
+          });
+        }
+
+        knex('AdditionalInfo').insert({
+          article_id: data[0],
+          pros: req.body.pros,
+          cons: req.body.cons,
+          specs: JSON.stringify(specsObj),
+          answer: req.body.answer
+        })
+          .then(data => {
+            if (!data[0] > 0) {
+              return res.send({ error: 'Additional Info not saved' });
+            }
+            res.send({ ok: 'Article saved' });
+          })
+          .catch(err => {
+            res.send({ error: err.message });
+          });
       })
       .catch(err => {
         res.send({ error: err.message });
       });
-    })
-    .catch(err => {
-      res.send({ error: err.message });
-    });
   },
 
-   //update article
+  //update article
   updateArticle(req, res) {
     if (!req.body.type || !req.body.title || !req.body.content || !req.body.keywordArray.length > 0 || !req.body.category || !req.body.cover_img) {
       return res.send({ error: 'Missing Data' });
@@ -174,39 +174,39 @@ module.exports = {
       category: req.body.category,
       cover_img: req.body.cover_img,
     })
-    .then(data => {
-      if (!data == 1) {
-        res.send({ error: 'Article does not exist.' });
-      }else {
-        const specsObj = {};
+      .then(data => {
+        if (!data == 1) {
+          res.send({ error: 'Article does not exist.' });
+        } else {
+          const specsObj = {};
 
-        if (req.body.specs) {
-          req.body.specs.map((spec) => {
-            specsObj[spec.key] = spec.value;
-          });
-        }
-
-        knex('AdditionalInfo').insert({
-          article_id: data[0],
-          pros: req.body.pros,
-          cons: req.body.cons,
-          specs: JSON.stringify(specsObj),
-          answer: req.body.answer
-        })
-        .then(data => {
-          if (!data[0] > 0) {
-            return res.send({ error: 'Additional Info not updated' });
+          if (req.body.specs) {
+            req.body.specs.map((spec) => {
+              specsObj[spec.key] = spec.value;
+            });
           }
-          res.send({ ok: 'Article updated' });
-        })
-        .catch(err => {
-          res.send({ error: err.message });
-        });
+
+          knex('AdditionalInfo').insert({
+            article_id: data[0],
+            pros: req.body.pros,
+            cons: req.body.cons,
+            specs: JSON.stringify(specsObj),
+            answer: req.body.answer
+          })
+            .then(data => {
+              if (!data[0] > 0) {
+                return res.send({ error: 'Additional Info not updated' });
+              }
+              res.send({ ok: 'Article updated' });
+            })
+            .catch(err => {
+              res.send({ error: err.message });
+            });
         }
       })
-    .catch(err => {
-      res.send({ error: err.message });
-    });
+      .catch(err => {
+        res.send({ error: err.message });
+      });
   },
 
   publishArticle(req, res) {
@@ -214,7 +214,7 @@ module.exports = {
       .then(data => {
         if (!data == 1) {
           res.send({ error: 'Article does not exist' })
-        }else {
+        } else {
           res.send({ ok: 'Article published' })
         }
       })
@@ -228,7 +228,7 @@ module.exports = {
       .then(data => {
         if (!data == 1) {
           res.send({ error: 'Article does not exist' })
-        }else {
+        } else {
           res.send({ ok: 'Article deleted' })
         }
       })

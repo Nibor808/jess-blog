@@ -1,14 +1,13 @@
 'use strict'
 const nodemailer = require('nodemailer');
-const { MAIL_PASS, MAIL_USER } = require('../config/config.json');
 
 module.exports = function sendMail(mailData) {
 
   const smtpConfig = {
     service: 'gmail',
     auth: {
-      user: MAIL_USER,
-      pass: MAIL_PASS
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS
     }
   };
 

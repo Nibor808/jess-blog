@@ -5,6 +5,7 @@ node_modules
 .DS_STORE
 *.log
 dist/
+config/
 aws-deployment/
 build-prod/
 webpack-assets.json
