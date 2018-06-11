@@ -9,12 +9,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import App from './components/app';
 import routes from './routes';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
 const middleWares = [thunk];
+if (process.env.NODE_ENV !== 'production') {
+  console.log('ENV', process.env.NODE_ENV);
+}
 
 if (process.env.NODE_ENV === 'development') {
   const reduxLogger = createLogger({

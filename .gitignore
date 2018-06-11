@@ -8,4 +8,4 @@ dist/
 config/
 aws-deployment/
 build-prod/
-webpack-assets.json
+client/webpack-assets.json
