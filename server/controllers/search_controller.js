@@ -13,25 +13,26 @@ module.exports = {
     const articles = [];
     let merged;
 
-    // use a promise to avoid repetative res.sends
+    // use a promise to avoid repetitive res.sends
     const result = new Promise((resolve, reject) => {
       req.body.keywordArray.map(keyword => {
         knex('Articles').where('title', 'like', `%${keyword}%`)
           .then(data => {
             if (!data.length) {
+              reject();
               res.send({ error: 'No articles matching your search' })
             } else {
               data.map((item) => {
                 item.createdAt = moment(item.createdAt).toString();
               });
-              articles.push(data)
+              articles.push(data);
               /*
               - concat and flatten the articles array
               - .apply flattens one level of array and turns the articles array into a list of values to concat to merged
               - we pass the empty array as the this binding to insulate the global object from side effects
               - and make sure that any unexpected usage of 'this' only refers to the empty object
               */
-              merged = [].concat.apply([], articles)
+              merged = [].concat.apply([], articles);
               resolve()
             }
           })
@@ -41,11 +42,9 @@ module.exports = {
       })
     })
       .catch(err => {
-        console.log(err.message)
-        reject()
-      })
+        console.log(err.message);
+      });
 
     result.then(() => res.send({ ok: merged }))
-
   }
-}
+};

@@ -30,7 +30,7 @@ class Article extends Component {
     errorMessage: PropTypes.string,
     successMessage: PropTypes.string,
     form: PropTypes.object
-  }
+  };
 
   componentWillMount() {
     this.props.getArticle(this.props.match.params.id);
@@ -109,7 +109,7 @@ class Article extends Component {
     if (this.props.article.cover_img) {
       return (
         <div className='row'>
-          <img src={`../../images/${this.props.article.cover_img}`} height='400px' width='400px' className='img-responsive' />
+          <img src={`../../images/${this.props.article.cover_img}`} height='400px' width='400px' className='img-responsive' alt='article cover' />
         </div>
       )
     }
@@ -167,7 +167,7 @@ class Article extends Component {
 
   render() {
     if (!this.props.article || !this.props.commentArray) {
-      return <div><i className='fa fa-spinner' aria-hidden='true'></i></div>;
+      return <div><i className='fa fa-spinner' aria-hidden='true' /></div>;
     }
 
     const date = formatDate(this.props.article.createdAt);
@@ -190,7 +190,7 @@ class Article extends Component {
           {this.renderProsCons()}
           <div className='row'>
             <div className='col-sm-12'>
-              <p dangerouslySetInnerHTML={{ __html: this.props.article.content }}></p>
+              <p dangerouslySetInnerHTML={{ __html: this.props.article.content }} />
             </div>
           </div>
           {this.renderSpecs(this.props.article.specs)}

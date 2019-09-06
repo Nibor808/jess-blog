@@ -12,7 +12,7 @@ class QuestionsPage extends Component {
     authenticated: PropTypes.bool,
     children: PropTypes.object,
     form: PropTypes.object
-  }
+  };
 
   renderSignin() {
     if (!this.props.authenticated) {

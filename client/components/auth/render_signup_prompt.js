@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export function renderSignupPrompt(authenticated, form) {
-  if (!authenticated || authenticated === undefined && Object.keys(form).length == 0) {
+  if (!authenticated || !Object.keys(form).length) {
     return (
       <div className='signup_prompt text-center'>
         <h2>Not already part of the converstation?</h2>

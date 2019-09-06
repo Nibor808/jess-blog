@@ -12,7 +12,7 @@ class GetPreviews extends Component {
     errorMessage: PropTypes.string,
     didSave: PropTypes.bool,
     didDelete: PropTypes.bool
-  }
+  };
 
   componentWillMount() {
     // where isPreview = true(1)
@@ -27,7 +27,7 @@ class GetPreviews extends Component {
 
   render() {
     if (!this.props.allPreviews) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     return (

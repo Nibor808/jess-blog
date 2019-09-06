@@ -14,11 +14,11 @@ class DeleteModal extends Component {
     deleteArticle: PropTypes.func,
     modalOpen: PropTypes.bool,
     params: PropTypes.object
-  }
+  };
 
   static contextTypes = {
     router: PropTypes.object
-  }
+  };
 
   componentWillMount() {
     this.props.toggleModal(false);

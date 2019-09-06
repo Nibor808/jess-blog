@@ -7,7 +7,7 @@ export default function (ComposedComponent) {
 
     static propTypes = {
       authenticated: PropTypes.bool
-    }
+    };
 
     componentWillMount() {
       if (!this.props.authenticated) {

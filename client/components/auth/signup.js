@@ -11,19 +11,16 @@ import { customStyles } from '../../utils/modal_style';
 class Signup extends Component {
 
   static propTypes = {
+    signupUser: PropTypes.func,
+    errorMessage: PropTypes.string,
+    handleSubmit: PropTypes.func,
     input: PropTypes.element,
     label: PropTypes.string,
     type: PropTypes.string,
     meta: PropTypes.object,
     submitting: PropTypes.bool,
     dispatch: PropTypes.func
-  }
-
-  static propTypes = {
-    signupUser: PropTypes.func,
-    errorMessage: PropTypes.string,
-    handleSubmit: PropTypes.func
-  }
+  };
 
   componentWillMount() {
     this.props.toggleModal(false);

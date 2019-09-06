@@ -20,7 +20,7 @@ class AskQuestion extends Component {
     errorMessage: PropTypes.string,
     modalOpen: PropTypes.bool,
     dispatch: PropTypes.func
-  }
+  };
 
   componentWillMount() {
     this.props.toggleModal(false);
@@ -77,7 +77,7 @@ class AskQuestion extends Component {
           <div className='form-group'>
             <label htmlFor='category'>Category:</label>
             <Field name='category' component='select' className='form-control'>
-              <option></option>
+              <option />
               <option>monitor</option>
               <option>keyboard</option>
               <option>mouse</option>

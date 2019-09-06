@@ -3,6 +3,7 @@ node_modules
 .eslintcache
 .eslintignore
 .DS_STORE
+.idea/
 *.log
 dist/
 config/

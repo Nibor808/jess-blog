@@ -14,7 +14,7 @@ class Carousel extends Component {
   static propTypes = {
     getArticles: PropTypes.func,
     allPosts: PropTypes.array
-  }
+  };
 
   renderCarouselInner(post) {
     if (post.id === this.props.allPosts[0].id) {
@@ -36,9 +36,9 @@ class Carousel extends Component {
       <div id='postCarousel' className='carousel slide' data-ride='carousel'>
 
         <ol className='carousel-indicators'>
-          <li data-target='#postCarousel' data-slide-to='0' className='active'></li>
-          <li data-target='#postCarousel' data-slide-to='1'></li>
-          <li data-target='#postCarousel' data-slide-to='2'></li>
+          <li data-target='#postCarousel' data-slide-to='0' className='active' />
+          <li data-target='#postCarousel' data-slide-to='1' />
+          <li data-target='#postCarousel' data-slide-to='2' />
         </ol>
 
         <div className='carousel-inner'>

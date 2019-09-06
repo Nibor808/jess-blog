@@ -17,7 +17,7 @@ class Signin extends Component {
     handleSubmit: PropTypes.func,
     submitting: PropTypes.bool,
     dispatch: PropTypes.func
-  }
+  };
 
   componentWillMount() {
     this.props.toggleModal(false);

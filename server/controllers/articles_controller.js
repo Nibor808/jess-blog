@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const knex = require('../utils/db');
 const moment = require('moment');
 
@@ -89,10 +89,10 @@ module.exports = {
     if (req.body.type === 1 || req.body.type === 2) {
       if (!req.body.cover_img) {
         return res.send({ error: 'Missing cover image' })
-      } else if (req.body.cover_img.indexOf('.png') == -1 &&
-        req.body.cover_img.indexOf('.jpg') == -1 &&
-        req.body.cover_img.indexOf('.jpeg') == -1 &&
-        req.body.cover_img.indexOf('.gif') == -1
+      } else if (req.body.cover_img.indexOf('.png') === -1 &&
+        req.body.cover_img.indexOf('.jpg') === -1 &&
+        req.body.cover_img.indexOf('.jpeg') === -1 &&
+        req.body.cover_img.indexOf('.gif') === -1
       ) {
         return res.send({ error: 'Invalid cover_img' })
       }
@@ -100,11 +100,7 @@ module.exports = {
 
     // if post or review put in pre publish state (publish will update preview state)
     let preview;
-    if (req.body.type === 1 || req.body.type === 2) {
-      preview = true
-    } else {
-      preview = false
-    }
+    preview = req.body.type === 1 || req.body.type === 2;
 
     const keywords = req.body.keywordArray.join();
 
@@ -175,7 +171,7 @@ module.exports = {
       cover_img: req.body.cover_img,
     })
       .then(data => {
-        if (!data == 1) {
+        if (data !== 1) {
           res.send({ error: 'Article does not exist.' });
         } else {
           const specsObj = {};
@@ -212,7 +208,7 @@ module.exports = {
   publishArticle(req, res) {
     knex('Articles').where('id', req.params.id).update('preview', 0)
       .then(data => {
-        if (!data == 1) {
+        if (data !== 1) {
           res.send({ error: 'Article does not exist' })
         } else {
           res.send({ ok: 'Article published' })
@@ -226,7 +222,7 @@ module.exports = {
   deleteArticle(req, res) {
     knex('Articles').where('id', req.params.id).del()
       .then(data => {
-        if (!data == 1) {
+        if (data !== 1) {
           res.send({ error: 'Article does not exist' })
         } else {
           res.send({ ok: 'Article deleted' })

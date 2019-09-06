@@ -9,7 +9,7 @@ class PostSidebar extends Component {
   static propTypes = {
     getArticles: PropTypes.func,
     allPosts: PropTypes.array
-  }
+  };
 
   componentWillMount() {
     this.props.getArticles(1);
@@ -17,7 +17,7 @@ class PostSidebar extends Component {
 
   render() {
     if (!this.props.allPosts) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     return (

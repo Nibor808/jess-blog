@@ -4,6 +4,7 @@ import { formatDate } from '../../utils/date_format';
 
 export function renderArticleItem(article) {
   let content;
+
   if (article.content.length > 250) {
     content = article.content.substring(0, 250) + '...';
   } else {
@@ -18,12 +19,12 @@ export function renderArticleItem(article) {
         key={article.id}
         className='article_item row'>
         <div className='col-sm-4'>
-          <img src={`../../images/${article.cover_img}`} height='200px' width='200px' className='img-responsive' />
+          <img src={`../../images/${article.cover_img}`} height='200px' width='200px' className='img-responsive' alt='article cover' />
         </div>
         <div className='col-sm-8 article_info'>
           <Link to={`article/${article.id}`}><h2 className='list_title'>{article.title}</h2></Link>
           <small className='date'>{date}</small>
-          <p className='article_content' dangerouslySetInnerHTML={{ __html: content }}></p>
+          <p className='article_content' dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       </div>
     );

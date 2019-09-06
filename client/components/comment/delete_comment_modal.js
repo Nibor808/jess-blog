@@ -15,7 +15,7 @@ class DeleteModal extends Component {
     deleteComment: PropTypes.func,
     errorMessage: PropTypes.string,
     modalOpen: PropTypes.bool
-  }
+  };
 
   componentWillMount() {
     this.props.toggleModal(false);

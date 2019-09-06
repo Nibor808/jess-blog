@@ -12,7 +12,7 @@ class GetArticles extends Component {
     errorMessage: PropTypes.string,
     didSave: PropTypes.bool,
     didDelete: PropTypes.bool
-  }
+  };
 
   componentWillMount() {
     // get articles that are not previews (0)
@@ -27,7 +27,7 @@ class GetArticles extends Component {
 
   render() {
     if (!this.props.allArticles) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     return (

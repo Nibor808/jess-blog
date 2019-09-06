@@ -8,7 +8,7 @@ class ReviewList extends Component {
   static propTypes = {
     allReviews: PropTypes.array,
     getArticles: PropTypes.func
-  }
+  };
 
   componentWillMount() {
     this.props.getArticles(2);
@@ -16,7 +16,7 @@ class ReviewList extends Component {
 
   render() {
     if (!this.props.allReviews) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     return (

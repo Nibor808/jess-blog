@@ -21,7 +21,7 @@ class CommentModal extends Component {
     submitting: PropTypes.bool,
     modalOpen: PropTypes.bool,
     dispatch: PropTypes.func
-  }
+  };
 
   componentWillMount() {
     this.props.toggleModal(false);

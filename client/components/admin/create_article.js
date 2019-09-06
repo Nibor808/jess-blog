@@ -30,7 +30,7 @@ const renderSpecs = ({ fields }) => {
       </ul>
     </div>
   )
-}
+};
 
 class CreateArticle extends Component {
 
@@ -46,7 +46,7 @@ class CreateArticle extends Component {
     didSave: PropTypes.bool,
     toggleReview: PropTypes.func,
     isReview: PropTypes.bool
-  }
+  };
 
   componentWillMount() {
     this.props.toggleReview(false);
@@ -82,9 +82,9 @@ class CreateArticle extends Component {
   }
 
   reviewOpts(value) {
-    if (value == 2) {
+    if (value === 2) {
       this.props.toggleReview(true);
-    } else if (value == 1) {
+    } else if (value === 1) {
       this.props.toggleReview(false);
     }
   }
@@ -107,8 +107,6 @@ class CreateArticle extends Component {
           </div>
         </div>
       )
-    } else {
-      return;
     }
   }
 
@@ -117,7 +115,7 @@ class CreateArticle extends Component {
     let keywordArray;
 
     for (let key in keywords) {
-      if (keywords.hasOwnProperty(key) && keywords[key] == true) {
+      if (keywords.hasOwnProperty(key) && keywords[key] === true) {
         tempKeywords.push(key);
       }
     }
@@ -148,7 +146,7 @@ class CreateArticle extends Component {
               className='form-control'
               id='typeSelect'
               onChange={(ev) => this.reviewOpts(ev.target.value)}>
-              <option></option>
+              <option />
               <option value='1'>post</option>
               <option value='2'>review</option>
             </Field>
@@ -168,7 +166,7 @@ class CreateArticle extends Component {
           <div className='form-group col-md-6'>
             <label htmlFor='category'>Category:</label>
             <Field name='category' component='select' className='form-control'>
-              <option></option>
+              <option />
               <option value='monitors'>monitors</option>
               <option value='keyboards'>keyboards</option>
               <option value='mouse'>mouse</option>

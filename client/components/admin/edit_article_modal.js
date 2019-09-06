@@ -17,19 +17,17 @@ class EditArticleModal extends Component {
     toggleModal: PropTypes.func,
     updateArticle: PropTypes.func,
     handleSubmit: PropTypes.func,
-    submitting: PropTypes.bool,
     article: PropTypes.object,
     keywords: PropTypes.array,
     articleSaved: PropTypes.bool,
     modalOpen: PropTypes.bool,
     initialize: PropTypes.func,
     dispatch: PropTypes.func,
-    reset: PropTypes.func
-  }
+  };
 
   static contextTypes = {
     router: PropTypes.object
-  }
+  };
 
   renderAlert() {
     if (this.props.errorMessage) {
@@ -68,7 +66,8 @@ class EditArticleModal extends Component {
       pros: this.props.article.pros,
       cons: this.props.article.cons,
       specs: JSON.stringify(this.props.article.specs)
-    }
+    };
+
     this.props.initialize(initData);
   }
 
@@ -90,22 +89,22 @@ class EditArticleModal extends Component {
   handleFormSubmit({ type, title, content, category, keywords, cover_img, specs, pros, cons }) {
     const keywordArray = [];
     for (let key in keywords) {
-      if (keywords.hasOwnProperty(key) && keywords[key] == true) {
+      if (keywords.hasOwnProperty(key) && keywords[key] === true) {
         keywordArray.push(key);
       }
     }
 
-    type = parseInt(type)
+    type = parseInt(type);
     const id = this.props.article.id;
     this.props.updateArticle({ id, type, title, content, category, keywordArray, cover_img, specs, pros, cons })
   }
 
   render() {
     if (!this.props.article) {
-      return <div><i className='fa fa-spinner' aria-hidden='true'></i></div>;
+      return <div><i className='fa fa-spinner' aria-hidden='true' /></div>;
     }
 
-    const { handleSubmit, submitting, reset } = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <Modal
@@ -119,7 +118,7 @@ class EditArticleModal extends Component {
           <div className='form-group col-sm-6'>
             <label htmlFor='type'>Type:</label>
             <Field name='type' component='select' type='text' className='form-control' id='typeSelect'>
-              <option></option>
+              <option />
               <option value='1'>post</option>
               <option value='2'>review</option>
             </Field>
@@ -139,7 +138,7 @@ class EditArticleModal extends Component {
           <div className='form-group col-sm-6'>
             <label htmlFor='category'>Category:</label>
             <Field name='category' component='select' className='form-control'>
-              <option></option>
+              <option />
               <option value='monitors'>monitors</option>
               <option value='keyboards'>keyboards</option>
               <option value='mouse'>mouse</option>

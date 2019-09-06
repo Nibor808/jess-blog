@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const knex = require('../utils/db');
 const moment = require('moment');
 
@@ -98,7 +98,7 @@ module.exports = {
   deleteComment(req, res) {
     knex('Comments').where('id', req.params.id).del()
       .then(data => {
-        if (!data == 1) {
+        if (data !== 1) {
           res.send({ error: 'Comment does not exist.' });
         } else {
           knex('Comments').where('parent_comment_id', req.params.id).del()
@@ -126,7 +126,7 @@ module.exports = {
       content: req.body.content
     })
       .then(data => {
-        if (!data == 1) {
+        if (data !== 1) {
           res.status(204).send({ error: 'Comment could not be found' });
         } else {
           res.send({ ok: 'Comment updated' });

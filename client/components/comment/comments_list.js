@@ -67,7 +67,7 @@ export function renderComments(commentArray, repliesArray) {
           {replyList}
         </ul>
       </li>
-    )
+    );
 
     replyList = [];
   });

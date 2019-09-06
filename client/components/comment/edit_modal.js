@@ -21,7 +21,7 @@ class EditComment extends Component {
     modalOpen: PropTypes.bool,
     comment: PropTypes.object,
     initialize: PropTypes.func
-  }
+  };
 
   componentWillMount() {
     this.props.toggleModal(false);
@@ -74,7 +74,7 @@ class EditComment extends Component {
 
   render() {
     if (!this.props.comment) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     const { handleSubmit, submitting } = this.props;

@@ -19,7 +19,7 @@ class QuestionSidebar extends Component {
 
   render() {
     if (!this.props.allQuestions) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     return (

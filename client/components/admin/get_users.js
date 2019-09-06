@@ -8,7 +8,7 @@ class Users extends Component {
   static propTypes = {
     getUsers: PropTypes.func,
     users: PropTypes.array
-  }
+  };
 
   componentWillMount() {
     this.props.getUsers()
@@ -26,7 +26,7 @@ class Users extends Component {
 
   render() {
     if (!this.props.users) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     return (

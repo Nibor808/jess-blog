@@ -10,7 +10,7 @@ class Header extends Component {
     authenticated: PropTypes.bool,
     user: PropTypes.string,
     signoutUser: PropTypes.func
-  }
+  };
 
 
   renderNavRight() {
@@ -50,48 +50,48 @@ class Header extends Component {
         </div>
         <div className='nav_box'>
           <div className='row'>
-            <i className='fa fa-linkedin-square fa-2x pull-right' aria-hidden='true'></i>
-            <i className='fa fa-youtube-square fa-2x pull-right' aria-hidden='true'></i>
-            <i className='fa fa-twitter-square fa-2x pull-right' aria-hidden='true'></i>
+            <i className='fa fa-linkedin-square fa-2x pull-right' aria-hidden='true' />
+            <i className='fa fa-youtube-square fa-2x pull-right' aria-hidden='true' />
+            <i className='fa fa-twitter-square fa-2x pull-right' aria-hidden='true' />
           </div>
           <nav className='navbar navbar-default'>
             <div className='navbar-header'>
               <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#main_nav' aria-expanded='false'>
                 <span className='sr-only'>Toggle navigation</span>
-                <span className='icon-bar'></span>
-                <span className='icon-bar'></span>
-                <span className='icon-bar'></span>
+                <span className='icon-bar' />
+                <span className='icon-bar' />
+                <span className='icon-bar' />
               </button>
             </div>
             <div className='collapse navbar-collapse' id='main_nav'>
               <ul className='nav navbar-nav'>
                 <li>
                   <Link to='/' data-toggle="collapse" data-target=".navbar-collapse.in">
-                    <i className='fa fa-clipboard fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-clipboard fa-2x' aria-hidden='true' />
                     <span>Posts</span>
                   </Link>
                 </li>
                 <li>
                   <Link to='/reviews' data-toggle="collapse" data-target=".navbar-collapse.in">
-                    <i className='fa fa-thumb-tack fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-thumb-tack fa-2x' aria-hidden='true' />
                     <span>Reviews</span>
                   </Link>
                 </li>
                 <li>
                   <Link to='/questions' data-toggle="collapse" data-target=".navbar-collapse.in">
-                    <i className='fa fa-question fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-question fa-2x' aria-hidden='true' />
                     <span>Q&A</span>
                   </Link>
                 </li>
                 <li>
                   <Link to='/about' data-toggle="collapse" data-target=".navbar-collapse.in">
-                    <i className='fa fa-female fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-female fa-2x' aria-hidden='true' />
                     <span>About Me</span>
                   </Link>
                 </li>
                 <li>
                   <Link to='/search' data-toggle="collapse" data-target=".navbar-collapse.in">
-                    <i className='fa fa-search fa-2x' aria-hidden='true'></i>
+                    <i className='fa fa-search fa-2x' aria-hidden='true' />
                     <span>Search</span>
                   </Link>
                 </li>

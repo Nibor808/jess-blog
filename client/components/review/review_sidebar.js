@@ -9,7 +9,7 @@ class ReviewSidebar extends Component {
   static propTypes = {
     getArticles: PropTypes.func,
     allReviews: PropTypes.array
-  }
+  };
 
   componentWillMount() {
     this.props.getArticles(2);
@@ -17,7 +17,7 @@ class ReviewSidebar extends Component {
 
   render() {
     if (!this.props.allReviews) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     return (

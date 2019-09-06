@@ -15,7 +15,7 @@ export function renderArticleListItem(article, isAdmin) {
         key={article.id}
         className='list-group-item'>
         <div className='col-sm-7'>
-          <img src={`../../images/${article.cover_img}`} height='40px' width='40px' className='img-responsive' />
+          <img src={`../../images/${article.cover_img}`} height='40px' width='40px' className='img-responsive' alt='article cover' />
           <Link className='article_link' to={`/article/${article.id}`}>{article.title}</Link>
         </div>
         <div className='col-sm-5'>

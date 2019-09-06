@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const knex = require('../utils/db');
 const bcrypt = require('bcrypt-nodejs');
 const JWT = require('jwt-simple');
@@ -84,7 +84,7 @@ module.exports = {
 
     knex('Users').where('id', req.params.id).del()
       .then(data => {
-        if (!data == 1) {
+        if (data !== 1) {
           res.send({ error: 'User doesn\'t exist.' });
         } else {
           res.send({ ok: 'User deleted.' });
@@ -116,7 +116,7 @@ module.exports = {
           passResetToken
         })
           .then(data => {
-            if (!data == 1) {
+            if (data !== 1) {
               res.send({ error: 'User with this email not found.' });
             } else {
               res.send({ ok: 'Email sent.' });
@@ -128,7 +128,7 @@ module.exports = {
       });
   },
 
-  // recieve request for password reset
+  // receive request for password reset
   // reset passResetToken to null
   passResetLink(req, res) {
     knex('Users').where('email', req.params.user).select()

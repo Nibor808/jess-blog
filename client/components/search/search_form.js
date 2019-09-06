@@ -3,8 +3,7 @@ import { PropTypes } from 'prop-types';
 import { reduxForm, Field, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import { search, resetSearch } from '../../actions/search_actions';
-import { keywords } from '../../config/keywords';
-import { renderArticleItem } from '../article//render_article_item';
+import { renderArticleItem } from '../article/render_article_item';
 import { CLEAR_ERROR } from '../../actions/types';
 
 class SearchForm extends Component {
@@ -12,13 +11,12 @@ class SearchForm extends Component {
   static propTypes = {
     errorMessage: PropTypes.string,
     searchResult: PropTypes.array,
-    reset: PropTypes.func,
     resetSearch: PropTypes.func,
     dispatch: PropTypes.func,
     handleSubmit: PropTypes.func,
     submitting: PropTypes.bool,
     search: PropTypes.func
-  }
+  };
 
   componentWillMount() {
     this.props.resetSearch();
@@ -45,7 +43,7 @@ class SearchForm extends Component {
   }
 
   clearResults() {
-    this.props.reset('search_article');
+    reset('search_article');
     this.props.resetSearch();
     this.props.dispatch({ type: CLEAR_ERROR });
   }
@@ -64,7 +62,7 @@ class SearchForm extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, reset } = this.props;
+    const { handleSubmit, submitting } = this.props;
 
     return (
       <div>

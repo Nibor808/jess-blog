@@ -9,7 +9,7 @@ class QuestionList extends Component {
     allQuestions: PropTypes.array,
     getArticles: PropTypes.func,
     didSave: PropTypes.bool
-  }
+  };
 
   componentWillMount() {
     this.props.getArticles(3)
@@ -23,7 +23,7 @@ class QuestionList extends Component {
 
   render() {
     if (!this.props.allQuestions) {
-      return <div><i className="fa fa-spinner" aria-hidden="true"></i></div>;
+      return <div><i className="fa fa-spinner" aria-hidden="true" /></div>;
     }
 
     return (
